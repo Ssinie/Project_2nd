@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="test.model.bean.memberDAO" %>
@@ -15,3 +15,5 @@ for(int i = 0; i < list.size(); i++){
 	<h1>name = <%=dto.getName() %></h1>
 	<h1>reg_date = <%=dto.getReg_date() %></h1>
 <%}%>
+
+<h1>GIT 사용</h1>
