@@ -20,8 +20,8 @@
         destroy-method="close"
         p:driverClassName="oracle.jdbc.driver.OracleDriver"
         p:url="jdbc:oracle:thin:@masternull.iptime.org:1521:orcl"
-        p:username="java12"
-        p:password="java">
+        p:username="final01"
+        p:password="final">
   </bean>
    
    <!-- cp -->
