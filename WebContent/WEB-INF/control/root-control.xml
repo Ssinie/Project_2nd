@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+   <!-- 접두 접미를 붙여 리턴 주소를 간략화 시킴 -->
+  <bean id="viewResolver" 
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/view/" />
+      <property name="suffix" value=".jsp" />
+  </bean>
+   
+   <bean id="dataSource" 
+        class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource" 
+        destroy-method="close"
+        p:driverClassName="oracle.jdbc.driver.OracleDriver"
+        p:url="jdbc:oracle:thin:@masternull.iptime.org:1521:orcl"
+        p:username="java12"
+        p:password="java">
+  </bean>
+   
+   <!-- cp -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  		<property name="dataSource" ref="dataSource" />
+  		<property name="configLocation" value="/WEB-INF/mybatis/config.xml" />
+  </bean>
+  
+  <!-- 사용자객체 -->
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+  		<constructor-arg ref="sqlSessionFactory" />
+  </bean>
+  
+</beans>

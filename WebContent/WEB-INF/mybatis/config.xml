@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 해당경로의 클래스를 'alias' 정의로 사용하겠다. -->
+	<typeAliases>
+		<!-- <typeAlias type="test.spring.bean.day3.TestDTO" alias="testDTO" /> -->
+		
+	</typeAliases>
+	
+	<!-- SQL작성하는 공간(파일) mybatis에서 사용하는 sql파일은 모두 나열한다. -->
+	<mappers>
+		<!-- <mapper resource="/sql/testSQL.xml" /> -->
+
+	</mappers>
+</configuration>
