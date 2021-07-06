@@ -2,9 +2,11 @@ package bean.question;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/question/")
 public class qBean {
 	// DI
 	@Autowired
@@ -12,7 +14,11 @@ public class qBean {
 	
 	@RequestMapping("qForm.do")
 	public String qForm() {
-		System.out.println(qDTO.nick()) ;
-		return "/WEB-INF/view/question/qForm.jsp" ;
+		return "/question/qForm" ;
+	}
+	
+	@RequestMapping("qPro.do")
+	public String qPro() {
+		return "/question/qForm" ;
 	}
 }

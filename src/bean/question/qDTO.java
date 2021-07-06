@@ -9,7 +9,9 @@ public class qDTO {
 	private int weight ;
 	private int height ;
 	private String gender ;
-	private Date date ;
+	private Date dates ;
+	private int qcount ;
+	private int ref ;
 	
 	public void setNick(String nick) {
 		this.nick = nick ;
@@ -26,8 +28,14 @@ public class qDTO {
 	public void setGender(String gender) {
 		this.gender = gender ;
 	}
-	public void setDate(Date date) {
-		this.date = date ;
+	public void setDates(Date dates) {
+		this.dates = dates ;
+	}
+	public void setQcount(int qcount ) {
+		this.qcount = qcount ;
+	}
+	public void setRef(int ref) {
+		this.ref = ref ;
 	}
 	
 	public String nick() {
@@ -45,7 +53,13 @@ public class qDTO {
 	public String gender() {
 		return gender ;
 	}
-	public Date date() {
-		return date ;
+	public Date dates() {
+		return dates ;
+	}
+	public int qcount() {
+		return qcount ;
+	}
+	public int ref() {
+		return ref ;
 	}
 }
