@@ -8,8 +8,8 @@
 	<typeAliases>
 		<!-- <typeAlias type="test.spring.bean.day3.TestDTO" alias="testDTO" /> -->
 		<typeAlias type = "bean.question.qDTO" alias = "qDTO"/>
-		<typeAlias type = "bean.question.itemValueDTO" alias = "IVDTO"/>
-		<typeAlias type = "bean.question.itemNameDTO" alias = "INDTO"/>
+		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
+		<typeAlias type = "bean.item.value.ItemNameDTO" alias = "INDTO"/>
 	</typeAliases>
 	
 	<!-- SQL작성하는 공간(파일) mybatis에서 사용하는 sql파일은 모두 나열한다. -->

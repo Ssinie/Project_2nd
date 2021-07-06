@@ -13,11 +13,12 @@ public class ItemValueCheck {
 	@Autowired
 	private SqlSessionTemplate dao = null;
 	
+	@RequestMapping("itemcheck.go")
 	public String ItemValueCheck() {
 		
 		List member = dao.selectList("Item_value.getItemName");
 		
 		
-		return "master/ItemValueCheck";
+		return "/master/ItemValueCheck";
 	}
 }
