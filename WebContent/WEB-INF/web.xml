@@ -29,5 +29,6 @@
   <servlet-mapping>
     <servlet-name>spring</servlet-name>
     <url-pattern>*.go</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 </web-app>
