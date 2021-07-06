@@ -9,8 +9,10 @@
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
    
    <!-- 패키지 @Controller, @Service, @Repository 어노테이션 클래스를 스캔한다. -->
-   <context:component-scan base-package="bean.main" />
+   <context:component-scan base-package="bean.main"/>
+   <!--bean 으로 시작하는 패키지 스캔.-->
+   <context:component-scan base-package="bean"/>
    
-   
+   <bean id = "qDTO" class = "bean.question.qDTO"/> <!--설문조사 DTO-->
    
 </beans>
