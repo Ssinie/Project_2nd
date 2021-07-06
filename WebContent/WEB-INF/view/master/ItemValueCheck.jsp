@@ -14,7 +14,7 @@
 ${list}<br />
 
 <c:forEach var="dto" items="${list}">
-	${dto.num}<br />
+	${dto.num} 
 	${dto.name}<br />
 </c:forEach>
 
