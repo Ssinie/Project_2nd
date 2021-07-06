@@ -14,5 +14,7 @@
    <context:component-scan base-package="bean"/>
    
    <bean id = "qDTO" class = "bean.question.qDTO"/> <!--설문조사 DTO-->
+   <bean id = "IVDTO" class = "bean.item.value.itemValueDTO" /> <!-- 상품가격을 담을 DTO -->
+   <bean id = "INDTO" class = "bean.item.value.itemNameDTO" /> <!-- 상품이름을 담을 DTO -->
    
 </beans>
