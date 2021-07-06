@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Item_value">
-	<select id="getItemName" resultType="">
+	<select id="getItemName" resultType="ItemValueDTO">
 		select * from item_name
 	</select>
 </mapper>
