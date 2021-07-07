@@ -6,7 +6,7 @@
 
 <h1>question Form.</h1>
 
-<form action = "/Project_2nd/question/qPro.do" method = "post">
+<form action = "/Project_2nd/question/qInsert.do" method = "post">
 	닉네임: <input type = "text" name = "nick"/><br/>
 	나이: <input type = "text" name = "age"/><br/>
 	몸무게: <input type = "text" name = "weight"/><br/>

@@ -38,28 +38,28 @@ public class qDTO {
 		this.ref = ref ;
 	}
 	
-	public String nick() {
+	public String getNick() {
 		return nick ;
 	}
-	public int age() {
+	public int getAge() {
 		return age ;
 	}
-	public int weight() {
+	public int getWeight() {
 		return weight ;
 	}
-	public int height() {
+	public int getHeight() {
 		return height ;
 	}
-	public String gender() {
+	public String getGender() {
 		return gender ;
 	}
-	public Date dates() {
+	public Date getDates() {
 		return dates ;
 	}
-	public int qcount() {
+	public int getQcount() {
 		return qcount ;
 	}
-	public int ref() {
+	public int getRef() {
 		return ref ;
 	}
 }

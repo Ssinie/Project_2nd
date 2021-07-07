@@ -5,16 +5,16 @@
 
 <!-- 정보 압력 insert. -->
 <mapper namespace = "question">
-	<insert id="join" parameterType = "bean.question.qDTO">
+	<insert id = "insert" parameterType = "bean.question.qDTO">
 		insert into question values(
-		#{nick},
+		#{nick, jdbcType = VARCHAR},
 		#{age},
 		#{weight},
 		#{height},
-		#{gender},
-		#{dates},
+		#{gender, jdbcType = VARCHAR},
+		#{dates, jdbcType = VARCHAR},
 		#{qcount},
 		#{ref}
 		)
-	</insert> 
+	</insert>
 </mapper>

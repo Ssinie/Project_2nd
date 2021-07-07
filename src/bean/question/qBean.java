@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/question/")
 public class qBean {
-	// DI
 	@Autowired
-	// private qDTO qDTO = null ;
+	// 다형성.
+	private qBeanInter qImp = null ;
 	
 	@RequestMapping("qForm.do")
-	public String qForm() {
+	public String qForm() throws Exception{
 		return "/question/qForm" ;
 	}
 	
-	@RequestMapping("qPro.do")
-	public String qPro(qDTO qDTO) {
-		return "/question/qForm" ;
+	@RequestMapping("qInsert.do")
+	public String qInsert(qDTO dto) throws Exception{
+		qImp.qInsert(dto) ;
+		return "/question/qPro" ;
 	}
 }

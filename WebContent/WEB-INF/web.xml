@@ -30,5 +30,6 @@
     <servlet-name>spring</servlet-name>
     <url-pattern>*.go</url-pattern>
     <url-pattern>*.do</url-pattern>
+    <url-pattern>*.ns</url-pattern>
   </servlet-mapping>
 </web-app>
