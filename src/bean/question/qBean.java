@@ -2,7 +2,7 @@ package bean.question;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import bean.question.qDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class qBean {
 	// DI
 	@Autowired
-	private qDTO qDTO = null ;
+	// private qDTO qDTO = null ;
 	
 	@RequestMapping("qForm.do")
 	public String qForm() {
@@ -18,7 +18,7 @@ public class qBean {
 	}
 	
 	@RequestMapping("qPro.do")
-	public String qPro() {
+	public String qPro(qDTO qDTO) {
 		return "/question/qForm" ;
 	}
 }
