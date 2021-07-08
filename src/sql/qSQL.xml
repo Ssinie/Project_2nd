@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 정보 압력 insert. -->
+<!--정보 압력 insert.-->
+<!--파라미터 받을 시 오류날 때, jdbcType = VARCHAR 추가.-->
 <mapper namespace = "question">
 	<insert id = "insert" parameterType = "bean.question.qDTO">
 		insert into question values(
@@ -12,7 +13,7 @@
 		#{weight},
 		#{height},
 		#{gender, jdbcType = VARCHAR},
-		#{dates, jdbcType = VARCHAR},
+		sysdate,
 		#{qcount},
 		#{ref}
 		)
