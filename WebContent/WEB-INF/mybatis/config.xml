@@ -16,5 +16,6 @@
 	<mappers>
 		<mapper resource="/sql/item_value.xml" />
 		<mapper resource="/sql/qSQL.xml" />
+		<mapper resource="/sql/loginApiSQL.xml"/>
 	</mappers>
 </configuration>
