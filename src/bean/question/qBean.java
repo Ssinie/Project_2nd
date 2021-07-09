@@ -2,7 +2,6 @@ package bean.question;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import bean.question.qDTO;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,9 +25,9 @@ public class qBean {
 	}
 	
 	@RequestMapping("qInsert02.do")
-	public String qInsert02(qDTO dto) throws Exception{
-		qImp.qInsert02(dto) ;
+	public String qInsert02(q2DTO dto2) throws Exception{
+		qImp.qInsert02(dto2) ;
 		return "/question/qPro" ;
 	}
-	
+
 }

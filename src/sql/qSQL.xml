@@ -18,9 +18,10 @@
 		#{ref}
 		)
 	</insert>
-	<insert id = "insert02" parameterType = "bean.question.qDTO">
+	<insert id = "insert02" parameterType = "bean.question.q2DTO">
 		insert into question02 values(
 		#{intr, jdbcType = INTEGER},
+		sysdate,
 		#{ref}
 		)
 	</insert>

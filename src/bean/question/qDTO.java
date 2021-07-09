@@ -12,7 +12,6 @@ public class qDTO {
 	private Date dates ;
 	private int qcount ;
 	private int ref ;
-	private String intr ;
 	
 	public void setNick(String nick) {
 		this.nick = nick ;
@@ -38,9 +37,6 @@ public class qDTO {
 	public void setRef(int ref) {
 		this.ref = ref ;
 	}
-	public void setIntr(String intr) {
-		this.intr = intr ;
-	}
 	
 	public String getNick() {
 		return nick ;
@@ -65,8 +61,5 @@ public class qDTO {
 	}
 	public int getRef() {
 		return ref ;
-	}
-	public String getIntr() {
-		return intr ;
 	}
 }

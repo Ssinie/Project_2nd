@@ -5,3 +5,6 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <h1>혈액순환.</h1>
+
+<form action = "/Project_2nd/question/qInsert02.do" method = "post">
+</form>
