@@ -15,4 +15,9 @@ public class qBeanImp implements qBeanInter{
 	public void qInsert(qDTO dto) throws Exception {
 		mybatis.insert("question.insert", dto) ;
 	}
+	
+	@Override
+	public void qInsert02(qDTO dto) throws Exception {
+		mybatis.insert("question.insert02", dto) ;
+	}
 }

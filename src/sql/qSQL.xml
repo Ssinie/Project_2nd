@@ -18,4 +18,10 @@
 		#{ref}
 		)
 	</insert>
+	<insert id = "insert02" parameterType = "bean.question.qDTO">
+		insert into question02 values(
+		#{intr, jdbcType = INTEGER},
+		#{ref}
+		)
+	</insert>
 </mapper>
