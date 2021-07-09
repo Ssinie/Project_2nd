@@ -20,4 +20,5 @@
    <bean id = "q2DTO" class = "bean.question.q2DTO"/> <!--설문조사 DTO-->
    <bean id = "IVDTO" class = "bean.item.value.ItemValueDTO" /> <!-- 상품가격을 담을 DTO -->
    <bean id = "INDTO" class = "bean.item.value.ItemNameDTO" /> <!-- 상품이름을 담을 DTO -->
+   <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
 </beans>
