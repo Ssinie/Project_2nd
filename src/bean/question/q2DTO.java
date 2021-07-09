@@ -6,6 +6,7 @@ public class q2DTO {
 	private String intr ;
 	private Date dates ;
 	private int ref ;
+	private String bld ;
 	
 	public void setIntr(String intr) {
 		this.intr = intr ;
@@ -16,6 +17,9 @@ public class q2DTO {
 	public void setRef(int ref) {
 		this.ref = ref ;
 	}
+	public void setbld(String bld) {
+		this.bld = bld ;
+	}
 	
 	public String getIntr() {
 		return intr ;
@@ -25,5 +29,8 @@ public class q2DTO {
 	}
 	public int getRef() {
 		return ref ;
+	}
+	public String getbld() {
+		return bld ;
 	}
 }

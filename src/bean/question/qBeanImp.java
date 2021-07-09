@@ -18,17 +18,14 @@ public class qBeanImp implements qBeanInter{
 	}
 	
 	// 세션.
-	@Autowired
-    private HttpSession session;
+	// @Autowired
+    // private HttpSession session;
 	
 	// 2번째 질문 부터 세션 저장.
 	@Override
-	public void qInsert02(q2DTO dto2) throws Exception {
-		// session.setAttribute("question02", dto2);
-		mybatis.insert("question02.insert02", dto2) ;
-		System.out.println(session) ;
+	public void qInsert2(q2DTO dto2) throws Exception {
+		// session.setAttribute("question2", dto2);
+		mybatis.insert("question.insert2", dto2) ;
+		// System.out.println(dto2.getIntr()) ;
 	}
-	
-	
-
 }
