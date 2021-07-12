@@ -22,36 +22,28 @@ h3 {
 }
 </style>
 <script type="text/javascript">
-
-/* var naver_id_login = new naver_id_login("YOUR_CLIENT_ID", "YOUR_CALLBACK_URL");
-// 접근 토큰 값 출력
-alert(naver_id_login.oauthParams.access_token);
-// 네이버 사용자 프로필 조회
-naver_id_login.get_naver_userprofile("naverSignInCallback()");
-// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-function naverSignInCallback() {
-  alert(naver_id_login.getProfileData('email'));
-  alert(naver_id_login.getProfileData('nickname'));
-  alert(naver_id_login.getProfileData('age'));
-} */
-
     $(document).ready(function() {
         var name = ${result}.response.name;
         var email = ${result}.response.email;
+        
         $("#name").html("환영합니다. "+name+"님");
         $("#email").html(email);
+        
       });
 </script>
  
 </head>
 <body>
-    <div
-        style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
-        <h3>SIST Naver_Login Success</h3>
-    </div>
+	
+	${result}.response.age; <br>
+	${result}.response.gender; <br>
+	${result}.response.email; <br>
+	${result}.response.mobile; <br>
+	${result}.response.name; <br>
+	${result}.response.birthday; <br>
+	${result}.response.birthyear; <br>
     <br>
     <h2 style="text-align: center" id="name"></h2>
     <h4 style="text-align: center" id="email"></h4>
- 
 </body>
 </html>
