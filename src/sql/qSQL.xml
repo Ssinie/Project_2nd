@@ -6,7 +6,7 @@
 <!--정보 압력 insert.-->
 <!--파라미터 받을 시 오류날 때, jdbcType = VARCHAR 추가.-->
 <mapper namespace = "question">
-	<insert id = "insert" parameterType = "bean.question.qDTO">
+	<insert id = "qInsert" parameterType = "bean.question.qDTO">
 		insert into question values(
 		#{nick, jdbcType = VARCHAR},
 		#{age},
@@ -18,12 +18,20 @@
 		#{ref}
 		)
 	</insert>
-	<insert id = "insert2" parameterType = "bean.question.q2DTO">
+	<!--<insert id = "insert2" parameterType = "bean.question.q2DTO">
 		insert into question2 values(
 		#{intr, jdbcType = VARCHAR},
 		sysdate,
 		#{ref},
 		#{bld, jdbcType = VARCHAR}
+		)
+	</insert>-->
+	<insert id = "qcInsert" parameterType = "bean.question.qcDTO">
+		insert into question2 values(
+		#{title, jdbcType = VARCHAR},
+		#{contents, jdbcType = VARCHAR},
+		sysdate,
+		#{ref}
 		)
 	</insert>
 </mapper>

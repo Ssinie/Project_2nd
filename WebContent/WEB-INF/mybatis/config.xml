@@ -8,7 +8,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="test.spring.bean.day3.TestDTO" alias="testDTO" /> -->
 		<typeAlias type = "bean.question.qDTO" alias = "qDTO"/>
-		<typeAlias type = "bean.question.q2DTO" alias = "q2DTO"/>
+		<typeAlias type = "bean.question.qcDTO" alias = "qcDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.value.ItemNameDTO" alias = "INDTO"/>
 	</typeAliases>

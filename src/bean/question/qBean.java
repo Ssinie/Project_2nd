@@ -23,9 +23,9 @@ public class qBean {
 	@RequestMapping("qInsert.do")
 	public String qInsert(qDTO dto) throws Exception{
 		qImp.qInsert(dto) ;
-		return "/question/qForm2" ;
+		return "/question/qpro" ;
 	}
-	
+	/*
 	@RequestMapping("qForm2.do")
 	public String qForm2(q2DTO dto2, HttpSession session) throws Exception{
 		session.setAttribute("qForm2", dto2);
@@ -33,8 +33,15 @@ public class qBean {
 	}
 	@RequestMapping("qInsert2.do")
 	public String qInsert2(q2DTO dto2, HttpSession session) throws Exception{
-		session.getAttribute("qForm2") ;
+		// session.getAttribute("qForm2") ;
+		// session.setAttribute("qForm2", dto2);
 		qImp.qInsert2(dto2) ;
+		return "/question/qPro" ;
+	}
+	*/
+	@RequestMapping("qConfig.do")
+	public String qcInsert(qcDTO dto) throws Exception{
+		qImp.qcInsert(dto) ;
 		return "/question/qPro" ;
 	}
 }
