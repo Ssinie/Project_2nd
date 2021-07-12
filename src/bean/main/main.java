@@ -11,4 +11,12 @@ public class main {
 	public String front() {
 		return "/main/main";
 	}
+	
+	@RequestMapping("main.ns")
+	public String main() {
+		
+		return "/main/main";
+	}
 }
+
+
