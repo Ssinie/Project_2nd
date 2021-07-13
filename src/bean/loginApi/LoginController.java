@@ -55,7 +55,7 @@ public class LoginController {
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println("네이버:" + naverAuthUrl);
+        //////System.out.println("네이버:" + naverAuthUrl);
         
         //네이버 
         model.addAttribute("url", naverAuthUrl);
@@ -68,7 +68,7 @@ public class LoginController {
     @RequestMapping(value = "/callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws IOException, ParseException {
-        System.out.println("여기는 callback");
+        //////System.out.println("여기는 callback");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
         
@@ -87,9 +87,35 @@ public class LoginController {
         //3. 데이터 파싱
         //Top레벨 단계 _response 파싱
         JSONObject response_obj = (JSONObject)jsonObj.get("response");
+        
+        System.out.println(response_obj);
+        
         //response의 nickname값 파싱
         String nickname = (String)response_obj.get("nickname");
+        
+        //추가
+        String id = (String)response_obj.get("id");
+        //String nickname = (String)response_obj.get("nickname");
+        String age = (String)response_obj.get("age");
+        String gender = (String)response_obj.get("gender");
+        String email = (String)response_obj.get("email");
+        String name = (String)response_obj.get("name");
+        String birthday = (String)response_obj.get("birthday");
+        String birthyear = (String)response_obj.get("birthyear");
+        String profile_image = (String)response_obj.get("profile_image");
+        String mobile = (String)response_obj.get("mobile");
+               
+        System.out.println(id);
         System.out.println(nickname);
+        System.out.println(age);
+        System.out.println(gender);
+        System.out.println(email);
+        System.out.println(name);
+        System.out.println(birthday);
+        System.out.println(birthyear);
+        System.out.println(profile_image);        
+        System.out.println(mobile); 
+        
         //4.파싱 닉네임 세션으로 저장
         session.setAttribute("sessionId",nickname); //세션 생성
         model.addAttribute("result", apiResult);
@@ -114,6 +140,7 @@ public class LoginController {
 //        System.out.println("*** age_range : " + userInfo.get("age_range"));
 //        System.out.println("*** birthday : " + userInfo.get("birthday"));
         
+        model.addAttribute("id", userInfo.get("id"));
         model.addAttribute("nickname", userInfo.get("nickname"));
         model.addAttribute("email", userInfo.get("email"));
         model.addAttribute("profile_image", userInfo.get("profile_image"));

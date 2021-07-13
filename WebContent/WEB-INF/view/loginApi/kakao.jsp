@@ -10,6 +10,7 @@
 </head>
 
 <body>
+	${id}
 	${nickname}
 	${email}
 	${profile_image}
