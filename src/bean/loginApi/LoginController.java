@@ -107,12 +107,12 @@ public class LoginController {
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
         
         //////System.out.println("###access_Token#### : " + access_Token);
-        System.out.println("*** nickname : " + userInfo.get("nickname"));
-        System.out.println("*** email : " + userInfo.get("email"));
-        System.out.println("*** profile_image : " + userInfo.get("profile_image"));
-        System.out.println("*** gender : " + userInfo.get("gender"));
-        System.out.println("*** age_range : " + userInfo.get("age_range"));
-        System.out.println("*** birthday : " + userInfo.get("birthday"));
+//        System.out.println("*** nickname : " + userInfo.get("nickname"));
+//        System.out.println("*** email : " + userInfo.get("email"));
+//        System.out.println("*** profile_image : " + userInfo.get("profile_image"));
+//        System.out.println("*** gender : " + userInfo.get("gender"));
+//        System.out.println("*** age_range : " + userInfo.get("age_range"));
+//        System.out.println("*** birthday : " + userInfo.get("birthday"));
         
         model.addAttribute("nickname", userInfo.get("nickname"));
         model.addAttribute("email", userInfo.get("email"));
@@ -120,8 +120,6 @@ public class LoginController {
         model.addAttribute("gender", userInfo.get("gender"));
         model.addAttribute("age_range", userInfo.get("age_range"));
         model.addAttribute("birthday", userInfo.get("birthday"));
-        
-        
         
         return "/loginApi/kakao";
     }
