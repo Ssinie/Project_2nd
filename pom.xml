@@ -136,6 +136,19 @@
 		<artifactId>spring-beans</artifactId> 
 		<version>4.3.7.RELEASE</version> 
 	</dependency> 
+	
+   <!-- https://mvnrepository.com/artifact/net.rforge/Rserve -->
+	<dependency>
+    	<groupId>net.rforge</groupId>
+    	<artifactId>Rserve</artifactId>
+    	<version>0.6-8.1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.github.lucarosellini.rJava/JRIEngine -->
+	<dependency>
+    	<groupId>com.github.lucarosellini.rJava</groupId>
+    	<artifactId>JRIEngine</artifactId>
+    	<version>0.9-7</version>
+	</dependency>
 
 	</dependencies>
 	
