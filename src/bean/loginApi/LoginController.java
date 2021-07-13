@@ -1,6 +1,11 @@
 package bean.loginApi;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
  
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
  
 /**
  * Handles requests for the application home page.
@@ -34,10 +42,13 @@ public class LoginController {
     private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
         this.naverLoginBO = naverLoginBO;
     }
+    
+    @Autowired
+    private KakaoService kakaoService;
  
     //로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/login.ns", method = { RequestMethod.GET, RequestMethod.POST })
-    public String login(Model model, HttpSession session) {
+    public String login(Model model, HttpSession session) throws Exception{
         
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -53,7 +64,7 @@ public class LoginController {
         return "/loginApi/login";
     }
  
-    //네이버 로그인 성공시 callback호출 메소드
+    //네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "/callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws IOException, ParseException {
@@ -85,6 +96,34 @@ public class LoginController {
  
         /* 네이버 로그인 성공 페이지 View 호출 */
         return "/loginApi/callback";
+    }
+    
+    @RequestMapping("/kakao.ns")
+    public String kakao(Model model, @RequestParam(value = "code", required = false) String code) throws Exception{
+    	
+        //System.out.println("#########" + code);
+        
+        String access_Token = kakaoService.getAccessToken(code);
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+        
+        //////System.out.println("###access_Token#### : " + access_Token);
+        System.out.println("*** nickname : " + userInfo.get("nickname"));
+        System.out.println("*** email : " + userInfo.get("email"));
+        System.out.println("*** profile_image : " + userInfo.get("profile_image"));
+        System.out.println("*** gender : " + userInfo.get("gender"));
+        System.out.println("*** age_range : " + userInfo.get("age_range"));
+        System.out.println("*** birthday : " + userInfo.get("birthday"));
+        
+        model.addAttribute("nickname", userInfo.get("nickname"));
+        model.addAttribute("email", userInfo.get("email"));
+        model.addAttribute("profile_image", userInfo.get("profile_image"));
+        model.addAttribute("gender", userInfo.get("gender"));
+        model.addAttribute("age_range", userInfo.get("age_range"));
+        model.addAttribute("birthday", userInfo.get("birthday"));
+        
+        
+        
+        return "/loginApi/kakao";
     }
     
 }
