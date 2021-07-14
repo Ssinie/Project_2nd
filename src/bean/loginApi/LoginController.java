@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.social.google.connect.GoogleConnectionFactory;
-//import org.springframework.social.oauth2.GrantType;
-//import org.springframework.social.oauth2.OAuth2Operations;
-//import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +24,18 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import bean.member.MemberDAOImpl;
+import bean.member.MemberDTO;
  
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private MemberDAOImpl memberDAO = null;
+	
+	@Autowired
+	private SqlSessionTemplate dao = null; 
  
     /* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
@@ -55,7 +58,7 @@ public class LoginController {
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        //////System.out.println("네이버:" + naverAuthUrl);
+        //System.out.println("네이버:" + naverAuthUrl);
         
         //네이버 
         model.addAttribute("url", naverAuthUrl);
@@ -66,8 +69,8 @@ public class LoginController {
  
     //네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "/callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-            throws IOException, ParseException {
+    public String callback(MemberDTO dto, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+            throws Exception, ParseException {
         //////System.out.println("여기는 callback");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
@@ -90,31 +93,25 @@ public class LoginController {
         
         System.out.println(response_obj);
         
-        //response의 nickname값 파싱
-        String nickname = (String)response_obj.get("nickname");
-        
-        //추가
+        //response 값 파싱
         String id = (String)response_obj.get("id");
-        //String nickname = (String)response_obj.get("nickname");
-        String age = (String)response_obj.get("age");
-        String gender = (String)response_obj.get("gender");
-        String email = (String)response_obj.get("email");
-        String name = (String)response_obj.get("name");
-        String birthday = (String)response_obj.get("birthday");
-        String birthyear = (String)response_obj.get("birthyear");
+        String nickname = (String)response_obj.get("nickname");
         String profile_image = (String)response_obj.get("profile_image");
-        String mobile = (String)response_obj.get("mobile");
-               
-        System.out.println(id);
-        System.out.println(nickname);
-        System.out.println(age);
-        System.out.println(gender);
-        System.out.println(email);
-        System.out.println(name);
-        System.out.println(birthday);
-        System.out.println(birthyear);
-        System.out.println(profile_image);        
-        System.out.println(mobile); 
+        String email = (String)response_obj.get("email");
+        String gender = (String)response_obj.get("gender");
+        String age = (String)response_obj.get("age");
+        String birthday = (String)response_obj.get("birthday");
+        
+        //dto에 넣기
+        dto.setId(id);
+        dto.setNickname(nickname);
+        dto.setProfile_image(profile_image);
+        dto.setEmail(email);
+        dto.setGender(gender);
+        dto.setAge(age);
+        dto.setBirthday(birthday);
+        
+        memberDAO.insert(dto);
         
         //4.파싱 닉네임 세션으로 저장
         session.setAttribute("sessionId",nickname); //세션 생성
@@ -126,19 +123,9 @@ public class LoginController {
     
     @RequestMapping("/kakao.ns")
     public String kakao(Model model, @RequestParam(value = "code", required = false) String code) throws Exception{
-    	
-        //System.out.println("#########" + code);
         
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
-        
-        //////System.out.println("###access_Token#### : " + access_Token);
-//        System.out.println("*** nickname : " + userInfo.get("nickname"));
-//        System.out.println("*** email : " + userInfo.get("email"));
-//        System.out.println("*** profile_image : " + userInfo.get("profile_image"));
-//        System.out.println("*** gender : " + userInfo.get("gender"));
-//        System.out.println("*** age_range : " + userInfo.get("age_range"));
-//        System.out.println("*** birthday : " + userInfo.get("birthday"));
         
         model.addAttribute("id", userInfo.get("id"));
         model.addAttribute("nickname", userInfo.get("nickname"));
@@ -152,4 +139,3 @@ public class LoginController {
     }
     
 }
-

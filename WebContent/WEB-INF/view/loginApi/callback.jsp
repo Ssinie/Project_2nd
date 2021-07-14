@@ -26,8 +26,10 @@ h3 {
         var name = ${result}.response.name;
         var email = ${result}.response.email;
         
-        $("#name").html("환영합니다. "+name+"님");
-        $("#email").html(email);
+        //$("#name").html("환영합니다. "+name+"님");
+        //$("#email").html(email);
+        
+        
         
       });
 </script>

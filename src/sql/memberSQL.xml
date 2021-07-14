@@ -5,7 +5,7 @@
   
 <mapper namespace="member">
 
-	<insert id="insert">
+	<insert id="insert" parameterType="memberDTO">
 		insert into member(id, nickname, profile_image, email, gender, age, birthday, signup) values(#{id}, #{nickname}, #{profile_image}, #{email}, #{gender}, #{age}, #{birthday}, sysdate)
 	</insert>
 	

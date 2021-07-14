@@ -22,4 +22,5 @@
    <bean id = "INDTO" class = "bean.item.value.ItemNameDTO" /> <!-- 상품이름을 담을 DTO -->
    <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
    <bean id = "memberDTO" class = "bean.member.MemberDTO" /> <!-- 회원정보 DTO -->
+   <bean id = "memberDAOImpl" class="bean.member.MemberDAOImpl" /> <!-- 회원정보 DAO -->
 </beans>
