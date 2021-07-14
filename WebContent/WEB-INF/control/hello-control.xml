@@ -13,6 +13,7 @@
    <context:component-scan base-package = "bean.main" />
    <context:component-scan base-package = "bean.question" />
    <context:component-scan base-package = "bean.loginApi" />
+   <context:component-scan base-package = "bean.member" />   
    <!--bean 으로 시작하는 패키지 스캔.-->
    
    <bean id="qDTO" class="bean.question.qDTO"/><!-- 설문조사 DTO -->
@@ -20,4 +21,5 @@
    <bean id = "IVDTO" class = "bean.item.value.ItemValueDTO" /> <!-- 상품가격을 담을 DTO -->
    <bean id = "INDTO" class = "bean.item.value.ItemNameDTO" /> <!-- 상품이름을 담을 DTO -->
    <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
+   <bean id = "memberDTO" class = "bean.member.MemberDTO" /> <!-- 회원정보 DTO -->
 </beans>

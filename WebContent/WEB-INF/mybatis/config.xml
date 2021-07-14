@@ -11,12 +11,13 @@
 		<typeAlias type = "bean.question.pDTO" alias = "pDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.value.ItemNameDTO" alias = "INDTO"/>
+		<typeAlias type = "bean.member.MemberDTO" alias = "memberDTO"/>
 	</typeAliases>
 	
 	<!-- SQL작성하는 공간(파일) mybatis에서 사용하는 sql파일은 모두 나열한다. -->
 	<mappers>
 		<mapper resource="/sql/item_value.xml" />
 		<mapper resource="/sql/qSQL.xml" />
-		<!-- <mapper resource="/sql/loginApiSQL.xml"/> -->
+		<mapper resource="/sql/memberSQL.xml"/>
 	</mappers>
 </configuration>
