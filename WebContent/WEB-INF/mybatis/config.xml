@@ -7,6 +7,8 @@
 	<!-- 해당경로의 클래스를 'alias' 정의로 사용하겠다. -->
 	<typeAliases>
 		<!-- <typeAlias type="test.spring.bean.day3.TestDTO" alias="testDTO" /> -->
+		<typeAlias type = "bean.question.qDTO" alias = "qDTO"/>
+		<typeAlias type = "bean.question.pDTO" alias = "pDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.value.ItemNameDTO" alias = "INDTO"/>
 	</typeAliases>
