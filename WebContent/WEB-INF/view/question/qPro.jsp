@@ -4,6 +4,4 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<h1>q pro</h1>
-
-<h1>title -> ${title}</h1>
+<h1>qpro</h1>

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 @Repository
 public class qBeanImp implements qBeanInter{
 	
+	@Autowired
+	private SqlSessionTemplate mybatis = null ;
 	// DAO 지정.
 	@Resource(name = "qBean")
     private qBean qBean ;
@@ -23,5 +25,10 @@ public class qBeanImp implements qBeanInter{
 	@Override
     public List<qDTO> qSelect() throws Exception{
         return qBean.qSelect();
+    }
+    
+    @Override
+    public void pInsert(pDTO dto) throws Exception{
+    	mybatis.insert("question.pInsert", dto) ;
     }
 }

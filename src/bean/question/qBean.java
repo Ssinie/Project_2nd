@@ -29,7 +29,8 @@ public class qBean {
 	}
 	
 	@Resource(name = "qBeanInter")
-    private qBeanInter service ;
+    private qBeanInter service = null;
+	
 	// DB를 qSelect랑 연결.
     @RequestMapping("qForm01.do")
     public String qSelect(Model model) throws Exception{
@@ -38,5 +39,24 @@ public class qBean {
         model.addAttribute("qSelect", qSelect) ;
  
         return "/question/qForm01" ;
+    }
+    
+    // qPro 페이지.
+    @RequestMapping("qPro.do")
+	public String qPro() throws Exception{
+		return "/question/qPro" ;
+	}
+    
+    // pForm 페이지.
+    @RequestMapping("pForm.do")
+    public String pForm() throws Exception{
+    	return "/question/pForm" ;
+    }
+    
+    // pinfo DB에 개인정보 삽입.
+    @RequestMapping("pInsert.do")
+    public String pInsert(pDTO dto) throws Exception{
+    	service.pInsert(dto) ;
+    	return "/question/qForm01" ;
     }
 }
