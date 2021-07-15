@@ -28,7 +28,12 @@ public class qBeanImp implements qBeanInter{
     }
     
     @Override
+    public List<qDTO> qSelect02() throws Exception{
+        return qBean.qSelect();
+    }
+    
+    @Override
     public void pInsert(pDTO dto) throws Exception{
-    	mybatis.insert("question.pInsert", dto) ;
+    	mybatis.insert("question.pInsert", dto) ;	
     }
 }

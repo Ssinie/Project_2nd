@@ -41,6 +41,15 @@ public class qBean {
         return "/question/qForm01" ;
     }
     
+    @RequestMapping("qForm02.do")
+    public String qSelect02(Model model) throws Exception{
+
+        List<qDTO> qSelect02 = service.qSelect02() ;
+        model.addAttribute("qSelect02", qSelect02) ;
+ 
+        return "/question/qForm02" ;
+    }
+    
     // qPro 페이지.
     @RequestMapping("qPro.do")
 	public String qPro() throws Exception{
@@ -57,6 +66,6 @@ public class qBean {
     @RequestMapping("pInsert.do")
     public String pInsert(pDTO dto) throws Exception{
     	service.pInsert(dto) ;
-    	return "/question/qForm01" ;
+    	return "redirect: http://localhost:8080/Project_2nd/question/qForm01.do" ;
     }
 }

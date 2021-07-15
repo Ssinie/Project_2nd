@@ -7,8 +7,8 @@
 <h1>qform02</h1>
 <h3>qform01 -> 혈액순환.</h3>
 
-<form action = "/Project_2nd/question/qForm03.do" method ="post">
-	<c:forEach var = "question" items = "${qSelect}">
+<form action = "/Project_2nd/question/qPro.do" method ="post">
+	<c:forEach var = "question" items = "${qSelect02}">
 		${question.title}<br/>
 		<c:if test = "${question != null}">
 			<input type = "radio" name = "contents" value = "${question.contents01}">${question.contents01}<br/>

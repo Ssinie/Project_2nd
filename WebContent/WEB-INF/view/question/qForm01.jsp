@@ -6,7 +6,7 @@
 
 <h1>qform01</h1>
 
-<form action = "/Project_2nd/question/qPro.do" method = "post">
+<form action = "/Project_2nd/question/qForm02.do" method = "post">
 	<c:forEach var = "question" items = "${qSelect}">
 		${question.title}<br/>
 		<c:if test = "${question != null}">
