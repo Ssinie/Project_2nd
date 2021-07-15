@@ -1,10 +1,10 @@
 package bean.loginApi;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.mybatis.spring.SqlSessionTemplate;
+//import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
  
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonObject;
+//import com.google.gson.JsonParser;
 
 import bean.member.MemberDAOImpl;
 import bean.member.MemberDTO;
@@ -33,9 +33,6 @@ public class LoginController {
 	
 	@Autowired
 	private MemberDAOImpl memberDAO = null;
-	
-	@Autowired
-	private SqlSessionTemplate dao = null; 
  
     /* NaverLoginBO */
     private NaverLoginBO naverLoginBO;
@@ -91,8 +88,6 @@ public class LoginController {
         //Top레벨 단계 _response 파싱
         JSONObject response_obj = (JSONObject)jsonObj.get("response");
         
-        System.out.println(response_obj);
-        
         //response 값 파싱
         String id = (String)response_obj.get("id");
         String nickname = (String)response_obj.get("nickname");
@@ -111,11 +106,22 @@ public class LoginController {
         dto.setAge(age);
         dto.setBirthday(birthday);
         
-        memberDAO.insert(dto);
+        //아이디 검색 기존 회원인지 확인
+        int checkId = memberDAO.checkId(dto);
+        System.out.println(checkId);
+        
+        if(checkId == 1) {
+        	session.setAttribute("sessionId", dto.getEmail());
+        }else {
+        	memberDAO.insert(dto);
+        	session.setAttribute("sessionId", dto.getNickname());
+        }
+        
+        System.out.println(session.getAttribute("sessionId"));
         
         //4.파싱 닉네임 세션으로 저장
-        session.setAttribute("sessionId",nickname); //세션 생성
-        model.addAttribute("result", apiResult);
+        //session.setAttribute("sessionId",nickname); //세션 생성
+        //model.addAttribute("result", apiResult);
  
         /* 네이버 로그인 성공 페이지 View 호출 */
         return "/loginApi/callback";

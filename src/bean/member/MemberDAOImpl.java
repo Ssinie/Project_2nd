@@ -11,8 +11,12 @@ public class MemberDAOImpl implements MemberDAOInter {
 	private SqlSessionTemplate dao = null;
 	
 	@Override
-	public void insert(MemberDTO dto) throws Exception {
-		
+	public int checkId(MemberDTO dto) throws Exception {
+		return dao.selectOne("member.checkId", dto);
+	}
+	
+	@Override
+	public void insert(MemberDTO dto) throws Exception {	
 		dao.insert("member.insert", dto);
 	}
 }

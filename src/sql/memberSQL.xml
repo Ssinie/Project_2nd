@@ -5,6 +5,10 @@
   
 <mapper namespace="member">
 
+	<select id="checkId" resultType="int" parameterType="memberDTO">
+		select count(*) from member where id=#{id}
+	</select>
+
 	<insert id="insert" parameterType="memberDTO">
 		insert into member(id, nickname, profile_image, email, gender, age, birthday, signup) values(#{id}, #{nickname}, #{profile_image}, #{email}, #{gender}, #{age}, #{birthday}, sysdate)
 	</insert>
