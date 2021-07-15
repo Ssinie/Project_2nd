@@ -9,7 +9,7 @@
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
    
    <!-- 패키지 @Controller, @Service, @Repository 어노테이션 클래스를 스캔한다. -->
-   <context:component-scan base-package = "bean.item" />
+   <context:component-scan base-package = "bean.item.*" />
    <context:component-scan base-package = "bean.main" />
    <context:component-scan base-package = "bean.question" />
    <context:component-scan base-package = "bean.loginApi" />

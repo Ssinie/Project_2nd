@@ -16,8 +16,8 @@ public class ItemValueCheck {
 	private SqlSessionTemplate dao = null;
 	
 	
-	// ¿Á¼Ç search URL : https://www.coupang.com/np/search?component=&q=¸ó½ºÅÍ¸Ó½½WPH-2kg+Çï½ºº¸ÃæÁ¦+¼ø¼ö±ÙÀ°/¼ø¼ö´Ü¹éÁú
-	// ÄíÆÎ search URL : https://browse.auction.co.kr/search?keyword=¸ó½ºÅÍ¸Ó½½WPH-2kg+Çï½ºº¸ÃæÁ¦
+	// ï¿½ï¿½ï¿½ï¿½ search URL : https://www.coupang.com/np/search?component=&q=ï¿½ï¿½ï¿½Í¸Ó½ï¿½WPH-2kg+ï¿½ï½ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ search URL : https://browse.auction.co.kr/search?keyword=ï¿½ï¿½ï¿½Í¸Ó½ï¿½WPH-2kg+ï¿½ï½ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	
 	
@@ -37,7 +37,7 @@ public class ItemValueCheck {
 	}
 	
 	
-	// ¿Á¼Ç, ÄíÆÎ¿¡¼­ 'item_name'¿¡¼­ °¡Á®¿Â ÀÌ¸§À» ÀÌ¿ëÇØ °Ë»ö ÈÄ ÃÖÀú°¡ 5°³ÀÇ °¡°Ý Á¤º¸¸¦ °¡Á®¿Â´Ù..
+	// ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ 'item_name'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½..
 	public void ItemValueSearch() {
 		String aucpath = "https://www.coupang.com/np/search?component=&q=";
 		String coupath = "https://browse.auction.co.kr/search?keyword=";

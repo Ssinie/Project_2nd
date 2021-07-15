@@ -10,13 +10,15 @@ import org.rosuda.REngine.RList;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ItemNameCheck {
-	
+	/*
 	@Autowired
 	private SqlSessionTemplate dao = null;
+	*/
 	
 	// path1과 2 사이엔 상품탭 id값을 연결
 	// path2와 3 사이엔 페이지 번호 연결
@@ -25,29 +27,10 @@ public class ItemNameCheck {
 	public static String urlpath3 = "&pagingSize=20&productSet=total&query&sort=rel&timestamp=&viewType=thumb";
 	public static RConnection conn= null;
 	
-	public static void main(String[] args) throws Exception{
+	@RequestMapping("/Insert.do")
+	public String itemInsert() throws Exception {
 		ItemNameCheck check = new ItemNameCheck();
-		check.itemInsert();
-	}
 		/*
-		 
-		System.out.println("처리시작");
-		RList list = check.itemreward(catId);
-		
-		if(list != null) {
-			for(int i = 0; i < list.size(); i++) {
-				String [] val = list.at(i).asStrings();
-				for(String v : val) {
-					System.out.println(v + " ");
-				}
-			}
-		}
-		
-		System.out.println("처리종료");
-		*/
-	@RequestMapping
-	public void itemInsert() throws Exception {
-		ItemNameCheck check = new ItemNameCheck();
 		ItemNameDTO dto = null;
 		int [] catIds = check.marketnum();
 		
@@ -65,6 +48,7 @@ public class ItemNameCheck {
 					dto.setUrl(val[1]);
 					dto.setMaintag(maintag);
 					dto.setSubtag(subtag);
+					dto.setImgurl("a");
 					System.out.println(dto.getName());
 					System.out.println(dto.getUrl());
 					System.out.println(dto.getMaintag());
@@ -74,6 +58,8 @@ public class ItemNameCheck {
 				}
 			}
 		}
+		*/
+		return "/main/main";
 	}
 	
 	
@@ -91,7 +77,7 @@ public class ItemNameCheck {
 			conn.eval("pageNum<-"+pagenum+"");
 			conn.assign("pageurl",pageurl);
 			conn.assign("urlpath3",urlpath3);
-			conn.eval("for(i in 1:2){ "
+			conn.eval("for(i in 1:1){ "
 					+ "  url <- paste(pageurl,i,urlpath3, sep=\"\");"
 					+ "  for(j in 1:5){"
 					+ "    path <- paste(\"ul:nth-child(2) > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\",sep=\"\");"
