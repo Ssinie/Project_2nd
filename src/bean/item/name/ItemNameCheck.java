@@ -4,11 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.RList;
 import org.rosuda.REngine.Rserve.RConnection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
 public class ItemNameCheck {
+	
+	@Autowired
+	private SqlSessionTemplate dao = null;
 	
 	// path1과 2 사이엔 상품탭 id값을 연결
 	// path2와 3 사이엔 페이지 번호 연결
@@ -18,6 +26,27 @@ public class ItemNameCheck {
 	public static RConnection conn= null;
 	
 	public static void main(String[] args) throws Exception{
+		ItemNameCheck check = new ItemNameCheck();
+		check.itemInsert();
+	}
+		/*
+		 
+		System.out.println("처리시작");
+		RList list = check.itemreward(catId);
+		
+		if(list != null) {
+			for(int i = 0; i < list.size(); i++) {
+				String [] val = list.at(i).asStrings();
+				for(String v : val) {
+					System.out.println(v + " ");
+				}
+			}
+		}
+		
+		System.out.println("처리종료");
+		*/
+	@RequestMapping
+	public void itemInsert() throws Exception {
 		ItemNameCheck check = new ItemNameCheck();
 		ItemNameDTO dto = null;
 		int [] catIds = check.marketnum();
@@ -36,26 +65,17 @@ public class ItemNameCheck {
 					dto.setUrl(val[1]);
 					dto.setMaintag(maintag);
 					dto.setSubtag(subtag);
+					System.out.println(dto.getName());
+					System.out.println(dto.getUrl());
+					System.out.println(dto.getMaintag());
+					System.out.println(dto.getSubtag());
+					dao.insert("setItem_name",dto);
+					System.out.println("삽입완료");
 				}
 			}
 		}
-		/*
-		 
-		System.out.println("처리시작");
-		RList list = check.itemreward(catId);
-		
-		if(list != null) {
-			for(int i = 0; i < list.size(); i++) {
-				String [] val = list.at(i).asStrings();
-				for(String v : val) {
-					System.out.println(v + " ");
-				}
-			}
-		}
-		
-		System.out.println("처리종료");
-		*/
 	}
+	
 	
 	// 상품의 catId와 상품명의 갯수를 이용한 상품의 상품명, URL을 가져오는 메서드
 	public RList itemreward(long catId) {
@@ -71,7 +91,7 @@ public class ItemNameCheck {
 			conn.eval("pageNum<-"+pagenum+"");
 			conn.assign("pageurl",pageurl);
 			conn.assign("urlpath3",urlpath3);
-			conn.eval("for(i in 1:5){ "
+			conn.eval("for(i in 1:2){ "
 					+ "  url <- paste(pageurl,i,urlpath3, sep=\"\");"
 					+ "  for(j in 1:5){"
 					+ "    path <- paste(\"ul:nth-child(2) > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\",sep=\"\");"

@@ -10,7 +10,7 @@
 		<typeAlias type = "bean.question.qDTO" alias = "qDTO"/>
 		<typeAlias type = "bean.question.pDTO" alias = "pDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
-		<typeAlias type = "bean.item.value.ItemNameDTO" alias = "INDTO"/>
+		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
 		<typeAlias type = "bean.member.MemberDTO" alias = "memberDTO"/>
 	</typeAliases>
 	
@@ -19,5 +19,6 @@
 		<mapper resource="/sql/item_value.xml" />
 		<mapper resource="/sql/qSQL.xml" />
 		<mapper resource="/sql/memberSQL.xml"/>
+		<mapper resource="/sql/item_name.xml"/>
 	</mappers>
 </configuration>
