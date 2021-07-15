@@ -6,7 +6,7 @@
 <!--정보 압력 insert.-->
 <!--파라미터 받을 시 오류날 때, jdbcType = VARCHAR 추가.-->
 <mapper namespace = "question">
-	<select id="qSelect" resultType="qDTO" parameterType="qDTO">
-		select * from question
+	<select id = "qSelect" resultType = "qDTO" parameterType = "qDTO">
+		select * from question where num = 1
 	</select>
 </mapper>

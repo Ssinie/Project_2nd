@@ -30,12 +30,12 @@ public class qBean {
 	
 	@Resource(name = "qBeanInter")
     private qBeanInter service ;
-	
+	// DB를 qSelect랑 연결.
     @RequestMapping("qForm01.do")
     public String qSelect(Model model) throws Exception{
 
         List<qDTO> qSelect = service.qSelect() ;
-        model.addAttribute("question", qSelect) ;
+        model.addAttribute("qSelect", qSelect) ;
  
         return "/question/qForm01" ;
     }
