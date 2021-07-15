@@ -12,6 +12,7 @@
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
 		<typeAlias type = "bean.member.MemberDTO" alias = "memberDTO"/>
+		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 	</typeAliases>
 	
 	<!-- SQL작성하는 공간(파일) mybatis에서 사용하는 sql파일은 모두 나열한다. -->
@@ -20,5 +21,6 @@
 		<mapper resource="/sql/qSQL.xml" />
 		<mapper resource="/sql/memberSQL.xml"/>
 		<mapper resource="/sql/item_name.xml"/>
+		<mapper resource="/sql/healthySQL.xml" />
 	</mappers>
 </configuration>

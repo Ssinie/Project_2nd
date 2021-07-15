@@ -24,4 +24,6 @@
    <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
    <bean id = "memberDTO" class = "bean.member.MemberDTO" /> <!-- 회원정보 DTO -->
    <bean id = "memberDAOImpl" class="bean.member.MemberDAOImpl" /> <!-- 회원정보 DAO -->
+   <bean id = "HealthyDTO" class = "bean.healthy.HealthyDTO" /> <!-- 건강TIP DTO -->
+   <bean id = "HealthyDAO" class = "bean.healthy.HealthyDAO" /> <!-- 건강TIP DAO -->
 </beans>
