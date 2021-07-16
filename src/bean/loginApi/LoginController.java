@@ -111,10 +111,10 @@ public class LoginController {
         System.out.println(checkId);
         
         if(checkId == 1) {
-        	session.setAttribute("sessionId", dto.getEmail());
+        	session.setAttribute("sessionId", dto.getId());
         }else {
         	memberDAO.insert(dto);
-        	session.setAttribute("sessionId", dto.getNickname());
+        	session.setAttribute("sessionId", dto.getId());
         }
         
         System.out.println(session.getAttribute("sessionId"));
@@ -128,7 +128,7 @@ public class LoginController {
     }
     
     @RequestMapping("/kakao.ns")
-    public String kakao(Model model, @RequestParam(value = "code", required = false) String code) throws Exception{
+    public String kakao(Model model, @RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception{
         
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
