@@ -6,12 +6,6 @@
 <!--정보 압력 insert.-->
 <!--파라미터 받을 시 오류날 때, jdbcType = VARCHAR 추가.-->
 <mapper namespace = "question">
-	<select id = "qSelect" resultType = "qDTO" parameterType = "qDTO">
-		select * from question where num = 1
-	</select>
-	<select id = "qSelect02" resultType = "qDTO" parameterType = "qDTO">
-		select * from question where num = 2
-	</select>
 	<insert id = "pInsert" parameterType = "pDTO">
 		insert into pinfo values(
 			#{nick, jdbcType = VARCHAR},
@@ -24,4 +18,25 @@
 			#{ref}
 		)
 	</insert>
+	<select id = "qSelect" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 1</select>
+	<select id = "qSelect02" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 2</select>
+	<select id = "qSelect03" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 3</select>
+	<select id = "qSelect04" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 4</select>
+	<select id = "qSelect05" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 5</select>
+	<select id = "qSelect06" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 6</select>
+	<select id = "qSelect07" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 7</select>
+	<select id = "qSelect08" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 8</select>
+	<select id = "qSelect09" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 9</select>
+	<select id = "qSelect10" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 10</select>
+	<select id = "qSelect11" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 11</select>
+	<select id = "qSelect12" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 12</select>
+	<select id = "qSelect13" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 13</select>
+	<select id = "qSelect14" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 14</select>
+	<select id = "qSelect15" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 15</select>
+	<select id = "qSelect16" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 16</select>
+	<select id = "qSelect17" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 17</select>
+	<select id = "qSelect18" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 18</select>
+	<select id = "qSelect19" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 19</select>
+	<select id = "qSelect20" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 20</select>
+	<select id = "qSelect21" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 21</select>
 </mapper>

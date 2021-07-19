@@ -4,11 +4,11 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<h1>qform02</h1>
-<h3>qform01 -> 혈액순환.</h3>
+<h1>qForm10</h1>
+<h3>qform01 -> 모발.</h3>
 
 <form action = "/Project_2nd/question/qForm12.do" method ="post">
-	<c:forEach var = "question" items = "${qSelect02}">
+	<c:forEach var = "question" items = "${qSelect10}">
 		${question.title}<br/>
 		<c:if test = "${question != null}">
 			<input type = "radio" name = "contents" value = "1">${question.contents01}<br/>
