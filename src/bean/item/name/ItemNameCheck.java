@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ItemNameCheck {
-	/*
+	
 	@Autowired
 	private SqlSessionTemplate dao = null;
-	*/
 	
 	// path1과 2 사이엔 상품탭 id값을 연결
 	// path2와 3 사이엔 페이지 번호 연결
@@ -30,7 +29,6 @@ public class ItemNameCheck {
 	@RequestMapping("/Insert.do")
 	public String itemInsert() throws Exception {
 		ItemNameCheck check = new ItemNameCheck();
-		/*
 		ItemNameDTO dto = null;
 		int [] catIds = check.marketnum();
 		
@@ -40,65 +38,106 @@ public class ItemNameCheck {
 			String subtag = (String)markettag.get("subtag");
 			long catId = 50000000 + v;
 			RList list = check.itemreward(catId);
+			ArrayList nametag = new ArrayList();
+			ArrayList urltag = new ArrayList();
 			if(list != null) {
 				for(int i = 0; i < list.size(); i++) {
 					String [] val = list.at(i).asStrings();
+					if(i == 0) {
+						for(String c : val) {
+								nametag.add(c);
+							}
+						}			
+					if(i == 1) {
+						for(String c : val) {
+								urltag.add(c);
+							}
+						}
+				}
+				for(int i = 0; i < nametag.size(); i++) {
 					dto = new ItemNameDTO();
-					dto.setName(val[0]);
-					dto.setUrl(val[1]);
+					dto.setName((String)nametag.get(i));
+					dto.setUrl((String)urltag.get(i));
 					dto.setMaintag(maintag);
 					dto.setSubtag(subtag);
 					dto.setImgurl("a");
-					System.out.println(dto.getName());
-					System.out.println(dto.getUrl());
-					System.out.println(dto.getMaintag());
-					System.out.println(dto.getSubtag());
+					System.out.println("0번"+nametag.get(i));
+					System.out.println("1번"+urltag.get(i));
 					dao.insert("setItem_name",dto);
 					System.out.println("삽입완료");
 				}
 			}
 		}
-		*/
 		return "/main/main";
 	}
-	
+	/*
+	public static void main(String[] args) throws Exception{
+		ItemNameCheck check = new ItemNameCheck();
+		RList list = check.itemreward(50002425);
+		ArrayList<String> nametag = new ArrayList();
+		ArrayList urltag = new ArrayList();
+		if(list != null) {
+			for(int i = 0; i < list.size(); i++) {
+				String [] val = list.at(i).asStrings();
+				if(i == 0) {
+					for(String v : val) {
+							nametag.add(v);
+						}
+					}			
+				if(i == 1) {
+					for(String v : val) {
+							urltag.add(v);
+						}
+					}
+				}
+			}
+		for(int c = 0; c < nametag.size(); c++) {
+			System.out.println(nametag.get(c));
+			System.out.println(urltag.get(c));
+			System.out.println();
+		}
+		
+	}
+	*/
 	
 	// 상품의 catId와 상품명의 갯수를 이용한 상품의 상품명, URL을 가져오는 메서드
 	public RList itemreward(long catId) {
 		RList item = null;
 		long pagenum = pageNumCheck(catId);
-		String pageurl = urlpath1+catId+urlpath2;
-		System.out.println("try문 진입");
-		try {
-			conn = new RConnection();
-			
-			conn.eval("library(rvest)"); 
-			conn.eval("item_url <- c(); item_name <- c()");
-			conn.eval("pageNum<-"+pagenum+"");
-			conn.assign("pageurl",pageurl);
-			conn.assign("urlpath3",urlpath3);
-			conn.eval("for(i in 1:1){ "
-					+ "  url <- paste(pageurl,i,urlpath3, sep=\"\");"
-					+ "  for(j in 1:5){"
-					+ "    path <- paste(\"ul:nth-child(2) > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\",sep=\"\");"
-					+ "    html <- read_html(url);"
-					+ "    nodes <- html_nodes(html,path);"
-					+ "    text <- html_text(nodes);"
-					+ "    link <- html_attr(nodes,'href');"
-					+ "    item_url <- c(item_url, link);"
-					+ "    item_name <- c(item_name, text);"
-					+ "    print(paste(i,\"번째 페이지의 \",j));"
-					+ "  }"
-					+ "}");
-			conn.eval("item <- data.frame(item_name, item_url)");
-			conn.eval("print(str(item))");
-			item = conn.eval("item").asList();
-			System.out.println("try문 종료");
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			conn.close();
+		if(pagenum!= 0) {
+			String pageurl = urlpath1+catId+urlpath2;
+			System.out.println("try문 진입");
+			try {
+				conn = new RConnection();
+				
+				conn.eval("library(rvest)"); 
+				conn.eval("item_url <- c(); item_name <- c()");
+				conn.eval("pageNum<-"+pagenum+"");
+				conn.assign("pageurl",pageurl);
+				conn.assign("urlpath3",urlpath3);
+				conn.eval("for(i in 1:5){ "
+						+ "  url <- paste(pageurl,i,urlpath3, sep=\"\");"
+						+ "  for(j in 1:5){"
+						+ "    path <- paste(\"ul:nth-child(2) > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\",sep=\"\");"
+						+ "    html <- read_html(url);"
+						+ "    nodes <- html_nodes(html,path);"
+						+ "    text <- html_text(nodes);"
+						+ "    link <- html_attr(nodes,'href');"
+						+ "    item_url <- c(item_url, link);"
+						+ "    item_name <- c(item_name, text);"
+						+ "    print(paste(i,\"번째 페이지의 \",j));"
+						+ "  }"
+						+ "}");
+				conn.eval("item <- data.frame(item_name, item_url)");
+				conn.eval("print(str(item))");
+				item = conn.eval("item").asList();
+				System.out.println("try문 종료");
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				conn.close();
+			}
 		}
 		return item;
 	}
