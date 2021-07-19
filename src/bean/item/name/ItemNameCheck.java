@@ -37,6 +37,7 @@ public class ItemNameCheck {
 			String maintag = (String)markettag.get("maintag");
 			String subtag = (String)markettag.get("subtag");
 			long catId = 50000000 + v;
+			System.out.println(catId);
 			RList list = check.itemreward(catId);
 			ArrayList nametag = new ArrayList();
 			ArrayList urltag = new ArrayList();
@@ -61,11 +62,11 @@ public class ItemNameCheck {
 					dto.setMaintag(maintag);
 					dto.setSubtag(subtag);
 					dto.setImgurl("a");
-					System.out.println("0번"+nametag.get(i));
-					System.out.println("1번"+urltag.get(i));
+					System.out.print(i);
 					dao.insert("setItem_name",dto);
-					System.out.println("삽입완료");
 				}
+				System.out.println();
+				Thread.sleep(1000);
 			}
 		}
 		return "/main/main";
@@ -101,9 +102,11 @@ public class ItemNameCheck {
 	*/
 	
 	// 상품의 catId와 상품명의 갯수를 이용한 상품의 상품명, URL을 가져오는 메서드
-	public RList itemreward(long catId) {
+	public RList itemreward(long catId) throws Exception{
 		RList item = null;
-		long pagenum = pageNumCheck(catId);
+		int pagenum = pageNumCheck(catId);
+		Thread.sleep(1000);
+		System.out.println("페이지 숫자: "+pagenum);
 		if(pagenum!= 0) {
 			String pageurl = urlpath1+catId+urlpath2;
 			System.out.println("try문 진입");
@@ -115,7 +118,7 @@ public class ItemNameCheck {
 				conn.eval("pageNum<-"+pagenum+"");
 				conn.assign("pageurl",pageurl);
 				conn.assign("urlpath3",urlpath3);
-				conn.eval("for(i in 1:5){ "
+				conn.eval("for(i in 1:pageNum){ "
 						+ "  url <- paste(pageurl,i,urlpath3, sep=\"\");"
 						+ "  for(j in 1:5){"
 						+ "    path <- paste(\"ul:nth-child(2) > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\",sep=\"\");"
@@ -145,25 +148,32 @@ public class ItemNameCheck {
 	
 	
 	// 상품명을 찾을 때 사용할 페이지 갯수를 구할 메서드
+	// 페이지 URL을 찾아 상품갯수를 구한 뒤 (상품 갯수 / 20) 반올림 하여 페이지 수 를 구함.
+	// 간혹 크롤링 중 정보를 가져오지 못하는 경우가 있어, while문을 사용하여 반복하도록 함.
 	public static int pageNumCheck(long catId) {
 		int pageNum = 0;
+		System.out.println("페이지 체크 ID :"+catId);
 		String pageurl = urlpath1+catId+urlpath2+1+urlpath3;
 		try {
-		conn = new RConnection();
-		
-		// 완성한 String 문자 URL로 전달
-		conn.assign("url", pageurl);
-		conn.eval("library(rvest)"); 
-		conn.eval("i<-2; j<-1; item_url <- c(); item_name <- c()");
-		conn.eval("html <- read_html(url)");
-		conn.eval("nodes <- html_nodes(html, \"div.seller_filter_area > ul > li:nth-child(1) > a > span\")");
-		conn.eval("text <- html_text(nodes)");
-		conn.eval("text <- gsub(\",\",\"\",text)");
-		conn.eval("pageNum <- ceiling(as.numeric(text)/20)");
-		
-		// 페이지번호 갯수를 가져와 리턴에 사용 될 변수에 대입
-		pageNum = conn.eval("pageNum").asInteger();
-		
+			conn = new RConnection();
+			// 완성한 String 문자 URL로 전달
+			conn.assign("url", pageurl);
+			conn.eval("library(rvest)"); 
+			conn.eval("pageNum <- 0");
+			conn.eval("while(pageNum == 0){ "
+					 +"html <- read_html(url);"
+					 +"nodes <- html_nodes(html, \"div.seller_filter_area > ul > li:nth-child(1) > a > span\");"
+				 	 +"text <- html_text(nodes);"
+					 +"text <- gsub(\",\",\"\",text);"
+					 +"pageNum <- ceiling(as.numeric(text)/20);"
+					 +"if(length(pageNum) == 0){"
+					 +"pageNum <- 0;"
+					 +"Sys.sleep(0.5);"
+					 +"}"
+					 +"}");
+				// 페이지번호 갯수를 가져와 리턴에 사용 될 변수에 대입
+			pageNum = conn.eval("pageNum").asInteger();
+			System.out.print(pageNum);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -174,8 +184,8 @@ public class ItemNameCheck {
 	
 	// 마켓 카테고리를 list로 리턴해줌..
 	public int [] marketnum() {
-		int [] listnum = {2425, 2426, 2427, 2428, 2429, 7042, 7043, 7044, 2440, 2441, 2442, 
-							2443, 2444, 2445, 2446, 2447, 2448, 2608, 2609, 2610, 2612};			
+		int [] listnum = {2446, 2447, 2448, 2608, 2426, 2428, 2429, 2425, 2427, 7042, 7043, 7044, 2440, 2441, 2442, 
+							2443, 2444, 2445, 2609, 2610, 2612};			
 		return listnum;
 	}
 	
