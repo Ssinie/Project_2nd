@@ -24,6 +24,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 //import com.google.gson.JsonElement;
 //import com.google.gson.JsonObject;
 //import com.google.gson.JsonParser;
+//import com.google.gson.JsonObject;
 
 import bean.member.MemberDAOImpl;
 import bean.member.MemberDTO;
@@ -83,28 +84,41 @@ public class LoginController {
         //2. String형식인 apiResult를 json형태로 바꿈
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(apiResult);
-        JSONObject jsonObj = (JSONObject) obj;
+        JSONObject jsonObj = (JSONObject)obj;
         //3. 데이터 파싱
         //Top레벨 단계 _response 파싱
         JSONObject response_obj = (JSONObject)jsonObj.get("response");
         
+        System.out.println(response_obj);
+
         //response 값 파싱
         String id = (String)response_obj.get("id");
-        String nickname = (String)response_obj.get("nickname");
-        String profile_image = (String)response_obj.get("profile_image");
+        String name = (String)response_obj.get("name");
         String email = (String)response_obj.get("email");
         String gender = (String)response_obj.get("gender");
         String age = (String)response_obj.get("age");
         String birthday = (String)response_obj.get("birthday");
         
+        String profile_image = "";
+        String nickname = "";
+        
+        if(response_obj.get("profile_image") != null) {
+        	profile_image = (String)response_obj.get("profile_image");
+        }
+        if(response_obj.get("nickname") != null) {
+        	nickname = (String)response_obj.get("nickname");
+        }
+        
         //dto에 넣기
         dto.setId(id);
-        dto.setNickname(nickname);
-        dto.setProfile_image(profile_image);
+        dto.setName(name);
         dto.setEmail(email);
         dto.setGender(gender);
         dto.setAge(age);
         dto.setBirthday(birthday);
+        
+        dto.setNickname(nickname);
+        dto.setProfile_image(profile_image);
         
         //아이디 검색 기존 회원인지 확인
         int checkId = memberDAO.checkId(dto);
@@ -113,6 +127,9 @@ public class LoginController {
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());
         }else {
+        	dto.setJoin_from(1);
+        	dto.setStatus(1);
+        	
         	memberDAO.insert(dto);
         	session.setAttribute("sessionId", dto.getId());
         }
@@ -128,18 +145,44 @@ public class LoginController {
     }
     
     @RequestMapping("/kakao.ns")
-    public String kakao(Model model, @RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception{
+    public String kakao(MemberDTO dto, Model model, @RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception{
         
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
         
-        model.addAttribute("id", userInfo.get("id"));
-        model.addAttribute("nickname", userInfo.get("nickname"));
-        model.addAttribute("email", userInfo.get("email"));
-        model.addAttribute("profile_image", userInfo.get("profile_image"));
-        model.addAttribute("gender", userInfo.get("gender"));
-        model.addAttribute("age_range", userInfo.get("age_range"));
-        model.addAttribute("birthday", userInfo.get("birthday"));
+        String id = (String)userInfo.get("id");
+        String nickname = (String)userInfo.get("nickname");
+        String profile_image = (String)userInfo.get("profile_image");
+        String email = (String)userInfo.get("email");
+        String gender = (String)userInfo.get("gender");
+        String age = (String)userInfo.get("age_range");
+        String birthday = (String)userInfo.get("birthday");
+        
+        dto.setId(id);
+        dto.setNickname(nickname);
+        dto.setProfile_image(profile_image);
+        dto.setEmail(email);
+        dto.setGender(gender);
+        dto.setAge(age);
+        dto.setBirthday(birthday);
+        
+        //아이디 검색 기존 회원인지 확인
+        int checkId = memberDAO.checkId(dto);
+        System.out.println(checkId);
+        
+        if(checkId == 1) {
+        	session.setAttribute("sessionId", dto.getId());
+        	
+        }else {
+        	dto.setName("");
+        	dto.setJoin_from(2);
+        	dto.setStatus(1);
+        	
+        	memberDAO.insert(dto);
+        	session.setAttribute("sessionId", dto.getId());
+        }
+        
+        System.out.println(session.getAttribute("sessionId"));
         
         return "/loginApi/kakao";
     }

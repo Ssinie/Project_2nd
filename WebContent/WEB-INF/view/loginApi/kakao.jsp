@@ -13,6 +13,6 @@
 </head>
 
 <body>
-	여기는 kakao
+
 </body>
 </html>

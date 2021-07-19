@@ -5,22 +5,29 @@ import java.util.Date;
 public class MemberDTO {
 
 	private String id;
+	private String name;
 	private String nickname;
 	private String profile_image;
 	private String email;
 	private String gender;
 	private String age;
 	private String birthday;
-	private String type;
-	private Date signup;
-	private Date last_login;
-	private String status;
 	
+	private int join_from;
+	private Date join_date;
+	private Date last_login;
+	private int status;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getNickname() {
 		return nickname;
@@ -58,17 +65,17 @@ public class MemberDTO {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
-	public String getType() {
-		return type;
+	public int getJoin_from() {
+		return join_from;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setJoin_from(int join_from) {
+		this.join_from = join_from;
 	}
-	public Date getSignup() {
-		return signup;
+	public Date getJoin_date() {
+		return join_date;
 	}
-	public void setSignup(Date signup) {
-		this.signup = signup;
+	public void setJoin_date(Date join_date) {
+		this.join_date = join_date;
 	}
 	public Date getLast_login() {
 		return last_login;
@@ -76,10 +83,10 @@ public class MemberDTO {
 	public void setLast_login(Date last_login) {
 		this.last_login = last_login;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	

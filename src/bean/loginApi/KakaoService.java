@@ -108,30 +108,43 @@ public class KakaoService {
                 JsonParser parser = new JsonParser();
                 JsonElement element = parser.parse(result);
 
-                //JsonObject idJson = element.getAsJsonObject().get("id").getAsJsonObject();
                 JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
                 JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-                //String id = idJson.getAsJsonObject().get("id").getAsString();
+                String id = element.getAsJsonObject().get("id").getAsString();
                 String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-                String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
-                String email = kakao_account.getAsJsonObject().get("email").getAsString();
                 
-                //추가
-                String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
-                String age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
-                String birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
-                                
-                //userInfo.put("id", id);
+                String profile_image = "";
+                String email = "";
+                String gender = "";
+                String age_range = "";
+                String birthday = "";
+                
+                if(properties.getAsJsonObject().has("profile_image")) {
+                	profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
+                }
+                if(kakao_account.getAsJsonObject().has("email")) {
+                	email = kakao_account.getAsJsonObject().get("email").getAsString();
+                }
+                if(kakao_account.getAsJsonObject().has("gender")) {
+                	gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+                }
+                if(kakao_account.getAsJsonObject().has("age_range")) {
+                	age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
+                }
+                if(kakao_account.getAsJsonObject().has("birthday")) {
+                	birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
+                }
+                
+                System.out.println(userInfo.put("profile_image", profile_image));
+                userInfo.put("id", id);
                 userInfo.put("nickname", nickname);
-                userInfo.put("email", email);
                 userInfo.put("profile_image", profile_image);
-                
-                //추가
+                userInfo.put("email", email);
                 userInfo.put("gender", gender);
                 userInfo.put("age_range", age_range);
                 userInfo.put("birthday", birthday);
-
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
