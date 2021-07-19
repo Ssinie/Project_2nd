@@ -5,12 +5,47 @@
   
  
 <mapper namespace="healthy" >
-	<insert id="insertBoard" parameterType="HealthyDTO"> 
-		insert into t_healthy_board(title, content, writer, regdate) values(#{title}, #{content}, #{writer}, sysdate)
+	<resultMap id="HealthyDTOResult" type="HealthyDTO">
+		<id property="num" column="NUM" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="writer" column="WRITER" />
+		<result property="regdate" column="REGDATE" />
+		<result property="updateDate" column="UPDATEDATE" />	
+	</resultMap>
+	
+	
+	<insert id="insertBoard"> 
+		INSERT INTO T_HEALTHY_BOARD(NUM, TITLE, CONTENT, WRITER)
+		VALUES((SELECT NVL(MAX(NUM), 0) + 1 FROM T_HEALTHY_BOARD),
+		#{title}, #{content}, #{writer})
 	</insert>
 	
-	<select id="selectBoard" resultType="String">
-		select * from t_healthy_board
+	
+	<update id="updateBoard">
+		UPDATE T_HEALTHY_BOARD SET
+			TITLE = #{title},
+			CONTENT =#{content}
+		WHERE NUM = #{num}
+	</update>
+	
+	
+	<delete id="deleteBoard">
+		DELETE T_HEALTHY_BOARD
+		WHERE NUM = #{num}
+	</delete>
+	
+	
+	<select id="getBoard" resultType="HealthyDTO">
+		SELECT *
+		FROM T_HEALTHY_BOARD
+		WHERE NUM = #{num}	
 	</select>
 	
+	
+	<select id="getBoardList" resultMap="HealthyDTOResult">
+		SELECT * 
+		FROM T_HEALTHY_BOARD
+		ORDER BY NUM ASC
+	</select>	
 </mapper>
