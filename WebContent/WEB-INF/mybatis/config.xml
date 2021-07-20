@@ -13,6 +13,7 @@
 		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
+		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO2" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
 		<!-- <typeAlias type = "bean.userManager.UserManagerDTO" alias = "UserManagerDTO" /> -->
 		
