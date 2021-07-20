@@ -3,15 +3,20 @@ package bean.question;
 import java.util.Date;
 
 public class pDTO {
+	private int pnum ;
 	private String nick ;
 	private int age ;
 	private int weight ;
 	private int height ;
 	private String gender ;
 	private Date dates ;
-	private int qcount ;
-	private int ref ;
 	
+	public int getPnum() {
+		return pnum;
+	}
+	public void setPnum(int pnum) {
+		this.pnum = pnum;
+	}
 	public String getNick() {
 		return nick;
 	}
@@ -47,17 +52,5 @@ public class pDTO {
 	}
 	public void setDates(Date dates) {
 		this.dates = dates;
-	}
-	public int getQcount() {
-		return qcount;
-	}
-	public void setQcount(int qcount) {
-		this.qcount = qcount;
-	}
-	public int getRef() {
-		return ref;
-	}
-	public void setRef(int ref) {
-		this.ref = ref;
 	}
 }

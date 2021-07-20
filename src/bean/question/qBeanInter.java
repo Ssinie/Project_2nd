@@ -30,4 +30,6 @@ public interface qBeanInter {
 	public List<qDTO> qSelect19() throws Exception ;
 	public List<qDTO> qSelect20() throws Exception ;
 	public List<qDTO> qSelect21() throws Exception ;
+	
+	public void result(qDTO dto) throws Exception ;
 }

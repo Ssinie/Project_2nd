@@ -8,14 +8,13 @@
 <mapper namespace = "question">
 	<insert id = "pInsert" parameterType = "pDTO">
 		insert into pinfo values(
+			#{pnum},
 			#{nick, jdbcType = VARCHAR},
 			#{age},
 			#{weight},
 			#{height},
 			#{gender, jdbcType = VARCHAR},
-			sysdate,
-			#{qcount},
-			#{ref}
+			sysdate
 		)
 	</insert>
 	<select id = "qSelect" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 1</select>
