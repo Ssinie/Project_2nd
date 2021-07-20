@@ -12,7 +12,7 @@ public class MainController {
 	@RequestMapping("main.ns")
 	public String main() {
 		
-		return "/main/main";
+		return "/main/index";
 	}
 	
 	@RequestMapping("mypage.ns")
