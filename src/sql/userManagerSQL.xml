@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manager" >
+	<resultMap id="UserManagerDTOResult" type="UserManagerDTO">
+		<!-- <id property="num" column="NUM" /> -->
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="writer" column="WRITER" />
+		<result property="regdate" column="REGDATE" />
+		<result property="updateDate" column="UPDATEDATE" />	
+	</resultMap>
+	
+	
+	<insert id="register">
+		INSERT INTO T_USERMANAGER_BOARD(ID, PASSWORD, NAME, DEPARTMENT, MAIL, PHONE, ADDRESS, REGDATE)
+		VALUES(#{id}, #{password}, #{name}, #{department}, #{mail}, #{phone}, #{address}, #{regdate})
+	</insert>  
+	
+	
+	<update id="updateBoard">
+		UPDATE T_HEALTHY_BOARD SET
+			TITLE = #{title},
+			WRITER = #{writer},
+			CONTENT = #{content},
+			UPDATEDATE = sysdate
+		WHERE NUM = #{num}
+	</update>
+	
+	
+	<delete id="deleteBoard">
+		DELETE T_HEALTHY_BOARD
+		WHERE NUM = #{num}
+	</delete>
+	
+	
+	<select id="getBoard" resultType="HealthyDTO">
+		SELECT *
+		FROM T_HEALTHY_BOARD
+		WHERE NUM = #{num}	
+	</select>
+	
+	
+	<select id="getBoardList" resultMap="HealthyDTOResult">
+		SELECT * 
+		FROM T_USERMANAGER_BOARD
+		ORDER BY NUM DESC
+	</select>	
+</mapper>
