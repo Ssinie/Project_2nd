@@ -11,7 +11,7 @@
 <body>
 <center>
 <h1>게시글 목록</h1>
-<a href="insertBoard.ns">새글 등록</a>
+<a href="insertBoardV.ns">새글 등록</a>
 <a href="crawling.ns">크롤링 하기</a>
 <br>
 <table border="1" cellpadding="0" cellspacing="0" width="1050">
@@ -26,7 +26,12 @@
 <c:forEach items="${boardList }" var="board">
 <tr>
 	<td align="center">${board.num }</td>
-	<td align="left"><a href="${board.content }">${board.title }</a></td>
+	<c:if test="${board.writer eq 'naver' }"> 
+		<td align="left"><a href="${board.content }">${board.title }</a></td>
+	</c:if>
+	<c:if test="${board.writer ne 'naver' }"> 
+		<td align="left"><a href="getBoard.ns?num=${board.num }">${board.title }</a></td>
+	</c:if>
 	<td align="center">${board.writer }</td>
 	<td align="center">${board.regdate }</td>
 	<td align="center">${board.updateDate }</td>

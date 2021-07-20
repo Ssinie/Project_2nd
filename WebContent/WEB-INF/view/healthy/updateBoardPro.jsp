@@ -10,22 +10,26 @@
 </head>
 <body>
 <center>
-<h1>글 상세</h1>
+<h1>글 수정</h1>
 <hr>
-<form action="updateBoardV.ns" method="post">
+<form action="updateBoard.ns" method="post">
 <input name="num" type="hidden" value="${board.num }" />
 <table border="1" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center" bgcolor="orange" width="70">번호</td>
+		<td align="left">${board.num }</td>
+	</tr>
 	<tr>
 		<td align="center" bgcolor="orange" width="70">제목</td>
 		<td align="left"><input name="title" type="text" value="${board.title }" /></td>
 	</tr>
 	<tr>
 		<td align="center" bgcolor="orange">작성자</td>
-		<td align="left">${board.writer }</td>
+		<td align="left"><input name="writer" type="text" value="${board.writer }" /></td>
 	</tr>
 	<tr>
 		<td align="center" bgcolor="orange">내용</td>
-		<td align="left">${board.content }</td>
+		<td align="left"><input name="content" type="text" value="${board.content }" /></td>
 	</tr>
 	<tr>
 		<td align="center" bgcolor="orange">등록일</td>
@@ -37,13 +41,12 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="글수정">
+			<input type="submit" value="글 수정완료">
 		</td>
 	</tr>		
 </table>
 </form>
 <hr>
-<a href="deleteBoard.ns?num=${board.num }">글삭제</a>
 <a href="getBoardList.ns">글목록</a>
 </center>
 </body>

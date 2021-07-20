@@ -16,16 +16,17 @@
 	
 	
 	<insert id="insertBoard"> 
-		INSERT INTO T_HEALTHY_BOARD(NUM, TITLE, CONTENT, WRITER)
-		VALUES((SELECT NVL(MAX(NUM), 0) + 1 FROM T_HEALTHY_BOARD),
-		#{title}, #{content}, #{writer})
+		INSERT INTO T_HEALTHY_BOARD(NUM, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE)
+		VALUES(SEQ_HEALTHY_BOARD.nextval, #{title}, #{content}, #{writer}, sysdate, sysdate)
 	</insert>
 	
 	
 	<update id="updateBoard">
 		UPDATE T_HEALTHY_BOARD SET
 			TITLE = #{title},
-			CONTENT =#{content}
+			WRITER = #{writer},
+			CONTENT = #{content},
+			UPDATEDATE = sysdate
 		WHERE NUM = #{num}
 	</update>
 	
@@ -46,6 +47,6 @@
 	<select id="getBoardList" resultMap="HealthyDTOResult">
 		SELECT * 
 		FROM T_HEALTHY_BOARD
-		ORDER BY NUM ASC
+		ORDER BY NUM DESC
 	</select>	
 </mapper>

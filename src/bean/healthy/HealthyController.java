@@ -25,22 +25,37 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 		return "/healthy/home";
 	}
 	
+	@RequestMapping("insertBoardV.ns")
+	public String insertBoardView() {
+		//System.out.println("main()");
+		return "/healthy/insertBoardPro";
+	}
+	
 	@RequestMapping("insertBoard.ns")
 	public String insertBoard(HealthyDTO dto) {
 		boardService.insertBoard(dto);
-		return "getBoardList.ns";
+		//return "/healthy/getBoardList";
+		return "redirect:/getBoardList.ns"; 
 	}
+	
+	
+	@RequestMapping("updateBoardV.ns")
+	public String updateBoardView(HealthyDTO dto) {
+		return "/healthy/updateBoardPro";
+	}
+	
 	
 	@RequestMapping("updateBoard.ns")
 	public String updateBoard(HealthyDTO dto) {
 		boardService.updateBoard(dto);
-		return "getBoardList.ns";
+		//return "getBoardList.ns";
+		return "redirect:/getBoardList.ns";
 	}
 	
 	@RequestMapping("deleteBoard.ns")
 	public String deleteBoard(HealthyDTO dto) {
 		boardService.deleteBoard(dto);
-		return "getBoardList.ns";
+		return "redirect:/getBoardList.ns";
 	}
 	
 	@RequestMapping("getBoard.ns")

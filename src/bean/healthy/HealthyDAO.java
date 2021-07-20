@@ -5,19 +5,31 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class HealthyDAO implements HealthyDAOInter{
+
+
+public class HealthyDAO {
 	
 	@Autowired
-	private SqlSessionTemplate dao = null;
+	private SqlSessionTemplate mybatis;
 
-	@Override
 	public void insertBoard(HealthyDTO dto) {
-		dao.insert("healthy.insertBoard", dto);
+		mybatis.insert("healthy.insertBoard", dto);
 	}
 	
-	@Override
-	public String selectBoard(){
-		return dao.selectOne("healthy.selectBoard");	
+	public void updateBoard(HealthyDTO dto) {
+		mybatis.update("healthy.updateBoard", dto);
 	}
 	
+	public void deleteBoard(HealthyDTO dto) {
+		mybatis.delete("healthy.deleteBoard", dto);
+	}
+	
+	public HealthyDTO getBoard(HealthyDTO dto) {
+		return (HealthyDTO) mybatis.selectOne("healthy.getBoard", dto);
+	}
+	
+	public List<HealthyDTO> getBoardList(HealthyDTO dto) {
+		return mybatis.selectList("healthy.getBoardList", dto);
+	}
+
 }
