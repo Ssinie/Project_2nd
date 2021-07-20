@@ -11,7 +11,7 @@
 		<typeAlias type = "bean.question.pDTO" alias = "pDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
-		<typeAlias type = "bean.member.MemberDTO" alias = "memberDTO"/>
+		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
 		<typeAlias type = "bean.userManager.UserManagerDTO" alias = "UserManagerDTO" />

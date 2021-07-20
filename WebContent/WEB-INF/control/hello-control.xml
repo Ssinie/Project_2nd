@@ -13,7 +13,7 @@
    <context:component-scan base-package = "bean.main" />
    <context:component-scan base-package = "bean.question" />
    <context:component-scan base-package = "bean.loginApi" />
-   <context:component-scan base-package = "bean.member" />
+   <context:component-scan base-package = "bean.main" />
    <context:component-scan base-package = "bean.healthy" />
    <context:component-scan base-package = "bean.userManager" />
    
@@ -23,8 +23,8 @@
    <bean id = "IVDTO" class = "bean.item.value.ItemValueDTO" /> <!-- 상품가격을 담을 DTO -->
    <bean id = "ItemNameDTO" class = "bean.item.name.ItemNameDTO" /> <!-- 상품이름을 담을 DTO -->
    <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
-   <bean id = "memberDTO" class = "bean.member.MemberDTO" /> <!-- 회원정보 DTO -->
-   <bean id = "memberDAOImpl" class="bean.member.MemberDAOImpl" /> <!-- 회원정보 DAO -->
+   <bean id = "memberDTO" class = "bean.main.MemberDTO" /> <!-- 회원정보 DTO -->
+   <bean id = "memberDAOImpl" class="bean.main.MemberDAOImpl" /> <!-- 회원정보 DAO -->
    <bean id = "HealthyDTO" class = "bean.healthy.HealthyDTO" /> <!-- 건강TIP DTO -->
    <bean id = "HealthyDAOMybatis" class = "bean.healthy.HealthyDAOMybatis" /> <!-- 건강TIP DAO -->
    <bean id = "userManagerDTO" class = "bean.userMager.userManagerDTO" /> <!-- 관리자 DTO -->

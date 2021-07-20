@@ -26,8 +26,8 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 //import com.google.gson.JsonParser;
 //import com.google.gson.JsonObject;
 
-import bean.member.MemberDAOImpl;
-import bean.member.MemberDTO;
+import bean.main.MemberDAOImpl;
+import bean.main.MemberDTO;
  
 @Controller
 public class LoginController {
@@ -47,7 +47,7 @@ public class LoginController {
     @Autowired
     private KakaoService kakaoService;
  
-    //로그인 첫 화면 요청 메소드
+    // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/login.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) throws Exception{
         
@@ -65,11 +65,10 @@ public class LoginController {
         return "/loginApi/login";
     }
  
-    //네이버 로그인 성공 시 callback 호출 메소드
+    // 네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "/callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(MemberDTO dto, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws Exception, ParseException {
-        //////System.out.println("여기는 callback");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
         
@@ -85,13 +84,10 @@ public class LoginController {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(apiResult);
         JSONObject jsonObj = (JSONObject)obj;
-        //3. 데이터 파싱
-        //Top레벨 단계 _response 파싱
         JSONObject response_obj = (JSONObject)jsonObj.get("response");
         
         System.out.println(response_obj);
 
-        //response 값 파싱
         String id = (String)response_obj.get("id");
         String name = (String)response_obj.get("name");
         String email = (String)response_obj.get("email");
@@ -109,7 +105,6 @@ public class LoginController {
         	nickname = (String)response_obj.get("nickname");
         }
         
-        //dto에 넣기
         dto.setId(id);
         dto.setName(name);
         dto.setEmail(email);
@@ -120,27 +115,20 @@ public class LoginController {
         dto.setNickname(nickname);
         dto.setProfile_image(profile_image);
         
-        //아이디 검색 기존 회원인지 확인
         int checkId = memberDAO.checkId(dto);
         System.out.println(checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());
+        	memberDAO.loginLog(dto);
         }else {
         	dto.setJoin_from(1);
         	dto.setStatus(1);
         	
-        	memberDAO.insert(dto);
+        	memberDAO.join(dto);
         	session.setAttribute("sessionId", dto.getId());
         }
         
-        System.out.println(session.getAttribute("sessionId"));
-        
-        //4.파싱 닉네임 세션으로 저장
-        //session.setAttribute("sessionId",nickname); //세션 생성
-        //model.addAttribute("result", apiResult);
- 
-        /* 네이버 로그인 성공 페이지 View 호출 */
         return "/loginApi/callback";
     }
     
@@ -166,23 +154,21 @@ public class LoginController {
         dto.setAge(age);
         dto.setBirthday(birthday);
         
-        //아이디 검색 기존 회원인지 확인
         int checkId = memberDAO.checkId(dto);
         System.out.println(checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());
+        	memberDAO.loginLog(dto);
         	
         }else {
         	dto.setName("");
         	dto.setJoin_from(2);
         	dto.setStatus(1);
         	
-        	memberDAO.insert(dto);
+        	memberDAO.join(dto);
         	session.setAttribute("sessionId", dto.getId());
         }
-        
-        System.out.println(session.getAttribute("sessionId"));
         
         return "/loginApi/kakao";
     }

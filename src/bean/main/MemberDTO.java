@@ -1,4 +1,4 @@
-package bean.member;
+package bean.main;
 
 import java.util.Date;
 
