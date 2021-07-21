@@ -24,9 +24,9 @@
 	c07: ${param.contents07}<br/>
 	c08: ${param.contents08}<br/>
 	c09: ${param.contents09}<br/>
-	c10: ${param.contents10}<br/>
-	c11: ${param.contents11}<br/>
-	c12: ${param.contents12}<br/>
+	<!--c10: ${param.contents10}<br/>-->
+	<!--c11: ${param.contents11}<br/>-->
+	<!--c10: ${param.contents12}<br/>-->
 	
 	<div>
 		${param.nick}님이 제일 필요한 영양소는 ${param.contents01} 입니다.
