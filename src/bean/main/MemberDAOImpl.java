@@ -26,9 +26,9 @@ public class MemberDAOImpl implements MemberDAOInter {
 		
 	}
 
-	@Override
-	public void deleteInfo(MemberDTO dto) throws Exception {
-		dao.update("member.deleteInfo", dto);
-		
-	}
+//	@Override
+//	public void deleteInfo(MemberDTO dto) throws Exception {
+//		dao.update("member.deleteInfo", dto);
+//		
+//	}
 }

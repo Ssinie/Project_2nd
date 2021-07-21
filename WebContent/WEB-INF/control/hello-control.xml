@@ -15,6 +15,7 @@
    <context:component-scan base-package = "bean.loginApi" />
    <context:component-scan base-package = "bean.main" />
    <context:component-scan base-package = "bean.healthy" />
+   <context:component-scan base-package = "bean.myPage" />
    <!-- <context:component-scan base-package = "bean.userManager" /> -->
    
    <!--bean 으로 시작하는 패키지 스캔.-->   
@@ -27,6 +28,7 @@
    <bean id = "memberDAOImpl" class="bean.main.MemberDAOImpl" /> <!-- 회원정보 DAO -->
    <bean id = "HealthyDTO" class = "bean.healthy.HealthyDTO" /> <!-- 건강TIP DTO -->
    <bean id = "HealthyDAOMybatis" class = "bean.healthy.HealthyDAOMybatis" /> <!-- 건강TIP DAO -->
+   <bean id = "wishlistDTO" class = "bean.myPage.WishlistDTO" /> <!-- 관심상품 DTO -->
    <!-- <bean id = "UserManagerDTO" class = "bean.userManager.UserManagerDTO" />  -->
    <!--   <bean id = "UserManagerDAOMybatis" class = "bean.userMager.UserManagerDAOMybatis" />  -->
 </beans>

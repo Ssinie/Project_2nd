@@ -11,6 +11,6 @@ public interface MemberDAOInter {
 	// 마지막 로그인 날짜 update
 	public void loginLog(MemberDTO dto) throws Exception;
 	
-	// 회원탈퇴 update - status 1 --> 10
-	public void deleteInfo(MemberDTO dto) throws Exception;
+//	// 회원탈퇴 update - status 1 --> 10
+//	public void deleteInfo(MemberDTO dto) throws Exception;
 }

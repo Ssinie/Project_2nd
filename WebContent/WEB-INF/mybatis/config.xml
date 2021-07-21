@@ -14,6 +14,7 @@
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
+		<typeAlias type = "bean.myPage.WishlistDTO" alias = "wishlistDTO" />
 		<!-- <typeAlias type = "bean.userManager.UserManagerDTO" alias = "UserManagerDTO" /> -->
 		
 	</typeAliases>
@@ -26,6 +27,7 @@
 		<mapper resource="/sql/item_name.xml"/>
 		<mapper resource="/sql/healthySQL.xml" />
 		<mapper resource="/sql/crawlingSQL.xml" />
+		<mapper resource="/sql/mainSQL.xml" />
 		<!-- <mapper resource="/sql/userManagerSQL.xml" /> -->
 	</mappers>
 </configuration>

@@ -17,6 +17,8 @@ public class MemberDTO {
 	private Date join_date;
 	private Date last_login;
 	private int status;
+	
+	
 	public String getId() {
 		return id;
 	}
