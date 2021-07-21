@@ -8,7 +8,7 @@
 <mapper namespace = "question">
 	<insert id = "pInsert" parameterType = "pDTO">
 		insert into pinfo values(
-			#{pnum},
+			q_seq.NEXTVAL,
 			#{nick, jdbcType = VARCHAR},
 			#{age},
 			#{weight},

@@ -7,6 +7,7 @@ import bean.question.qBeanInter;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,19 +62,15 @@ public class qBean {
     	return "/question/pForm" ;
     }
     
-    // pinfo DB에 개인정보 삽입.
-    @RequestMapping("pInsert.do")
-    public String pInsert(pDTO dto) throws Exception{
-    	service.pInsert(dto) ;
-    	return "redirect: http://localhost:8080/Project_2nd/question/qForm01.do" ;
-    }
-    
-    // qResult 페이지.
+    // 신상정보 DB입력.
+    // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public void qResult(pDTO dto) throws Exception{
+    public void qResult(pDTO dto,HttpServletRequest request, Model model) throws Exception{
+    	String [] pValue = request.getParameterValues("contents") ;
+    	System.out.println(pValue) ;
     	service.pInsert(dto) ;
     }
-    
+
     @RequestMapping("form.do")
 	public String form(Model model) throws Exception{
     	// 01
