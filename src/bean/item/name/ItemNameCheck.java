@@ -109,6 +109,9 @@ public class ItemNameCheck {
 		System.out.println("페이지 숫자: "+pagenum);
 		if(pagenum!= 0) {
 			String pageurl = urlpath1+catId+urlpath2;
+			if(pagenum > 100) {
+				pagenum = 100;
+			}
 			System.out.println("try문 진입");
 			try {
 				conn = new RConnection();
@@ -184,8 +187,8 @@ public class ItemNameCheck {
 	
 	// 마켓 카테고리를 list로 리턴해줌..
 	public int [] marketnum() {
-		int [] listnum = {2446, 2447, 2448, 2608, 2426, 2428, 2429, 2425, 2427, 7042, 7043, 7044, 2440, 2441, 2442, 
-							2443, 2444, 2445, 2609, 2610, 2612};			
+		int [] listnum = {2425, 2427, 7042, 7043, 7044, 2440, 2441, 2442, 
+							2443, 2444, 2445, 2609, 2610, 2612, 2428, 2446, 2447, 2448, 2608, 2426, 2429};
 		return listnum;
 	}
 	
