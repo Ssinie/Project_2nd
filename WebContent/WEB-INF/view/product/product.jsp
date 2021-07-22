@@ -10,6 +10,7 @@
 <body>
 
 <h1>상품정보 페이지</h1>
+<button id="btn_wish">관심상품</button>
 
 
 </body>

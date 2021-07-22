@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import bean.myPage.WishlistDTO;
-
 @Controller
 public class MainController {
 	
@@ -16,7 +14,7 @@ public class MainController {
 	
 	@RequestMapping("main.ns")
 	public String main() {
-		return "/main/index";
+		return "/main/main";
 	}
 	
 	@RequestMapping("product.ns")
@@ -24,12 +22,24 @@ public class MainController {
 		
 		int num = 721;
 		
-		String id = session.getId();
+		String id = (String)session.getAttribute("sessionId");
 		
-		dto.setId(id);
-		dto.setNum(num);
 		
-		mainDAO.wishInsert(dto);
+		if(id == null) {
+			System.out.println("로그인이 필요합니다.");
+		}else {
+			
+			
+			
+		}
+		
+		
+//		dto.setId(id);
+//		dto.setNum(num);
+//		
+//		mainDAO.wishInsert(dto);
+		
+		
 		
 		return "/product/product";
 	}

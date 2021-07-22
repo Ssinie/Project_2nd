@@ -33,7 +33,7 @@
 			<div class="item_list">
 				<div class="item">
 					<a href="#"><img src=""/></a> <!-- 상품 상세 페이지 href 입력 필요 -->
-					<a href="#">영양제 판매순 1위 이름</a>
+					<a href="http://localhost:8080/Project_2nd/product.ns">영양제 판매순 1위 이름</a>
 				</div>
 				<div class="item">
 					<a href="#"><img src=""/></a> <!-- 상품 상세 페이지 href 입력 필요 -->

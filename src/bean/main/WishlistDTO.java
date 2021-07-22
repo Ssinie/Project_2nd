@@ -1,4 +1,4 @@
-package bean.myPage;
+package bean.main;
 
 public class WishlistDTO {
 

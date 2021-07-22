@@ -12,9 +12,9 @@
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
+		<typeAlias type = "bean.main.ProductDTO" alias = "productDTO" />
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
-		<typeAlias type = "bean.myPage.WishlistDTO" alias = "wishlistDTO" />
 		<!-- <typeAlias type = "bean.userManager.UserManagerDTO" alias = "UserManagerDTO" /> -->
 		
 	</typeAliases>
