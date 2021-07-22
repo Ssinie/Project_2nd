@@ -11,6 +11,7 @@
 		<typeAlias type = "bean.question.pDTO" alias = "pDTO"/>
 		<typeAlias type = "bean.item.value.ItemValueDTO" alias = "IVDTO"/>
 		<typeAlias type = "bean.item.name.ItemNameDTO" alias = "ItemNameDTO"/>
+		<typeAlias type = "bean.item.name.ItemTypeDTO" alias = "ItemTypeDTO"/>
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.main.ProductDTO" alias = "productDTO" />
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
@@ -25,6 +26,7 @@
 		<mapper resource="/sql/qSQL.xml" />
 		<mapper resource="/sql/memberSQL.xml"/>
 		<mapper resource="/sql/item_name.xml"/>
+		<mapper resource="/sql/item_type.xml"/>
 		<mapper resource="/sql/healthySQL.xml" />
 		<mapper resource="/sql/crawlingSQL.xml" />
 		<mapper resource="/sql/mainSQL.xml" />

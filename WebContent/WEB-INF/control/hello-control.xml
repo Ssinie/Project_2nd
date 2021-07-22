@@ -23,6 +23,7 @@
    <bean id="pDTO" class="bean.question.pDTO"/><!-- 설문조사 신상정보 DTO -->
    <bean id = "IVDTO" class = "bean.item.value.ItemValueDTO" /> <!-- 상품가격을 담을 DTO -->
    <bean id = "ItemNameDTO" class = "bean.item.name.ItemNameDTO" /> <!-- 상품이름을 담을 DTO -->
+   <bean id = "ItemTypeDTO" class = "bean.item.name.ItemTypeDTO" /> <!-- 제품정보를 담을 DTO -->
    <bean id = "naverLoginBO" class = "bean.loginApi.NaverLoginBO" /> <!-- NaverLoginBO -->
    <bean id = "memberDTO" class = "bean.main.MemberDTO" /> <!-- 회원정보 DTO -->
    <bean id = "memberDAOImpl" class="bean.main.MemberDAOImpl" /> <!-- 회원정보 DAO -->
