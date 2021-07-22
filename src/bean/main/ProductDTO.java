@@ -1,6 +1,6 @@
 package bean.main;
 
-public class WishlistDTO {
+public class ProductDTO {
 
 	private String id;
 	private int num;

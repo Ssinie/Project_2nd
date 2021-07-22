@@ -13,25 +13,30 @@ public class MainController {
 	private MainDAOImpl mainDAO = null;
 	
 	@RequestMapping("main.ns")
-	public String main() {
+	public String main(HttpSession session) {
+		
+		session.getAttribute("sessionId");
+		
 		return "/main/main";
 	}
 	
 	@RequestMapping("product.ns")
-	public String product(WishlistDTO dto, HttpSession session) throws Exception{
+	public String product(ProductDTO dto, HttpSession session) throws Exception{
 		
-		int num = 721;
+		int num = 722;
 		
 		String id = (String)session.getAttribute("sessionId");
 		
+		System.out.println(id);
 		
-		if(id == null) {
-			System.out.println("로그인이 필요합니다.");
-		}else {
-			
-			
-			
-		}
+//		dto.setId(id);
+//		dto.setNum(num);
+//		
+//		if(id == null) {
+//			System.out.println("로그인이 필요합니다.");
+//		}else {
+//			
+//		}
 		
 		
 //		dto.setId(id);
