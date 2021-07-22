@@ -9,7 +9,7 @@
 		select clicked from wishlist where id=#{id}, num=#{num}
 	</select>
 	
-	<insert id="wishInsert" parameterType="wishlistDTO">
+	<insert id="wishInsert" parameterType="productDTO">
 		insert into wishlist(id, num) values(#{id}, #{num})
 	</insert>
 	
