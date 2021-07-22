@@ -3,4 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="item_type">
+	<insert id = "insert" parameterType = "ItemTypeDTO">
+		insert into ITEM_TYPE values(
+		#{LCNS_NO},
+		#{PRMS_DT},
+		#{PRDLST_REPORT_NO},
+		#{CRET_DTM},
+		#{LAST_UPDT_DTM},
+		#{BSSH_NM},
+		#{PRDLST_NM},
+		#{NTK_MTHD},
+		#{RAWMTRL_NM},
+		#{POG_DAYCNT},
+		#{PRIMARY_FNCLTY},
+		#{CSTDY_MTHD},
+		#{IFTKN_ATNT_MATR_CN},
+		#{STDR_STND},
+		#{DISPOS},
+		#{SHAP}
+		)
+	</insert>
 </mapper>

@@ -22,11 +22,11 @@ public class ItemTypeDTO {
 	 * SHAP	형태
 	 */
 	
-	private int LCNS_NO;
-	private int PRMS_DT;
-	private int PRDLST_REPORT_NO;
-	private int CRET_DTM;
-	private int LAST_UPDT_DTM;
+	private String LCNS_NO;
+	private String PRMS_DT;
+	private String PRDLST_REPORT_NO;
+	private String CRET_DTM;
+	private String LAST_UPDT_DTM;
 	private String BSSH_NM;
 	private String PRDLST_NM;
 	private String NTK_MTHD;
@@ -39,34 +39,34 @@ public class ItemTypeDTO {
 	private String DISPOS;
 	private String SHAP;
 	
-	public int getLCNS_NO() {
+	public String getLCNS_NO() {
 		return LCNS_NO;
 	}
-	public void setLCNS_NO(int lCNS_NO) {
+	public void setLCNS_NO(String lCNS_NO) {
 		LCNS_NO = lCNS_NO;
 	}
-	public int getPRMS_DT() {
+	public String getPRMS_DT() {
 		return PRMS_DT;
 	}
-	public void setPRMS_DT(int pRMS_DT) {
+	public void setPRMS_DT(String pRMS_DT) {
 		PRMS_DT = pRMS_DT;
 	}
-	public int getPRDLST_REPORT_NO() {
+	public String getPRDLST_REPORT_NO() {
 		return PRDLST_REPORT_NO;
 	}
-	public void setPRDLST_REPORT_NO(int pRDLST_REPORT_NO) {
+	public void setPRDLST_REPORT_NO(String pRDLST_REPORT_NO) {
 		PRDLST_REPORT_NO = pRDLST_REPORT_NO;
 	}
-	public int getCRET_DTM() {
+	public String getCRET_DTM() {
 		return CRET_DTM;
 	}
-	public void setCRET_DTM(int cRET_DTM) {
+	public void setCRET_DTM(String cRET_DTM) {
 		CRET_DTM = cRET_DTM;
 	}
-	public int getLAST_UPDT_DTM() {
+	public String getLAST_UPDT_DTM() {
 		return LAST_UPDT_DTM;
 	}
-	public void setLAST_UPDT_DTM(int lAST_UPDT_DTM) {
+	public void setLAST_UPDT_DTM(String lAST_UPDT_DTM) {
 		LAST_UPDT_DTM = lAST_UPDT_DTM;
 	}
 	public String getBSSH_NM() {

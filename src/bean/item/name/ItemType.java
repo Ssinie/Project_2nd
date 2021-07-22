@@ -54,29 +54,31 @@ public class ItemType {
 			JSONArray itemArray = (JSONArray)itemTypeResult.get("row");
 			System.out.println("itemResult = "+itemArray);		
 	
-			for(int i =0; i <= itemArray.size(); i++) {
+			for(int i =0; i < itemArray.size(); i++) {
 				JSONObject itemInfo = (JSONObject)itemArray.get(i);
 				dto = new ItemTypeDTO();
-				dto.setLCNS_NO((int)itemInfo.get("LCNS_NO"));
-				dto.setPRMS_DT((int)itemInfo.get("PRMS_DT"));
-				dto.setPRDLST_REPORT_NO((int)itemInfo.get("PRDLST_REPORT_NO"));
-				dto.setCRET_DTM((int)itemInfo.get("CRET_DTM"));
-				dto.setLAST_UPDT_DTM((int)itemInfo.get("LAST_UPDT_DTM"));
-				dto.setBSSH_NM((String)itemInfo.get("BSSH_NM"));
-				dto.setPRDLST_NM((String)itemInfo.get("PRDLST_NM"));
-				dto.setNTK_MTHD((String)itemInfo.get("NTK_MTHD"));
-				dto.setRAWMTRL_NM((String)itemInfo.get("RAWMTRL_NM"));
-				dto.setPOG_DAYCNT((String)itemInfo.get("POG_DAYCNT"));
-				dto.setPRIMARY_FNCLTY((String)itemInfo.get("PRIMARY_FNCLTY"));
-				dto.setCSTDY_MTHD((String)itemInfo.get("CSTDY_MTHD"));
-				dto.setIFTKN_ATNT_MATR_CN((String)itemInfo.get("IFTKN_ATNT_MATR_CN"));
-				dto.setSTDR_STND((String)itemInfo.get("STDR_STND"));
-				dto.setDISPOS((String)itemInfo.get("DISPOS"));
-				dto.setSHAP((String)itemInfo.get("SHAP"));
-				}
+				dto.setLCNS_NO(itemInfo.get("LCNS_NO").toString());
+				dto.setPRMS_DT(itemInfo.get("PRMS_DT").toString());
+				dto.setPRDLST_REPORT_NO(itemInfo.get("PRDLST_REPORT_NO").toString());
+				dto.setCRET_DTM(itemInfo.get("CRET_DTM").toString());
+				dto.setLAST_UPDT_DTM(itemInfo.get("LAST_UPDT_DTM").toString());
+				dto.setBSSH_NM(itemInfo.get("BSSH_NM").toString());
+				dto.setPRDLST_NM(itemInfo.get("PRDLST_NM").toString());
+				dto.setNTK_MTHD(itemInfo.get("NTK_MTHD").toString());
+				dto.setRAWMTRL_NM(itemInfo.get("RAWMTRL_NM").toString());
+				dto.setPOG_DAYCNT(itemInfo.get("POG_DAYCNT").toString());
+				dto.setPRIMARY_FNCLTY(itemInfo.get("PRIMARY_FNCLTY").toString());
+				dto.setCSTDY_MTHD(itemInfo.get("CSTDY_MTHD").toString());
+				dto.setIFTKN_ATNT_MATR_CN(itemInfo.get("IFTKN_ATNT_MATR_CN").toString());
+				dto.setSTDR_STND(itemInfo.get("STDR_STND").toString());
+				dto.setDISPOS(itemInfo.get("DISPOS").toString());
+				dto.setSHAP(itemInfo.get("SHAP").toString());
+				dao.insert("item_type.insert",dto);
+				System.out.println(i+"번째 입력종료");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return "item/insert";
+		return "/main/main";
 	}
 }
