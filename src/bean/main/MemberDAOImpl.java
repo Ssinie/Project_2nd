@@ -17,7 +17,7 @@ public class MemberDAOImpl implements MemberDAOInter {
 	
 	@Override
 	public void join(MemberDTO dto) throws Exception {	
-		dao.insert("member.insert", dto);
+		dao.insert("member.join", dto);
 	}
 
 	@Override
