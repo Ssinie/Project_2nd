@@ -1,10 +1,16 @@
 package bean.main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -14,52 +20,63 @@ public class MainController {
 	
 	@RequestMapping("main.ns")
 	public String main(HttpSession session) {
-		
-		session.getAttribute("sessionId");
+		System.out.println("sessionId = "+session.getAttribute("sessionId"));
 		
 		return "/main/main";
 	}
 	
 	@RequestMapping("product.ns")
-	public String product(ProductDTO dto, HttpSession session) throws Exception{
+	public String product(ProductDTO dto, HttpSession session, Model model) throws Exception{
 		
-		int num = 722;
+		int num = 723;
 		
 		String id = (String)session.getAttribute("sessionId");
 		
-		System.out.println(id);
 		
-//		dto.setId(id);
-//		dto.setNum(num);
-//		
-//		if(id == null) {
-//			System.out.println("로그인이 필요합니다.");
-//		}else {
-//			
-//		}
+		dto.setId(id);
+		dto.setNum(num);
 		
+		String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
+			
+		System.out.println("상품 페이지 wishCheck = "+wishCheck);
 		
-//		dto.setId(id);
-//		dto.setNum(num);
-//		
-//		mainDAO.wishInsert(dto);
-		
-		
+		model.addAttribute("id", id);
+		model.addAttribute("num", num);
+			
+		if(wishCheck == "null") { // 관심상품 클릭 안 했으면
+			model.addAttribute("wishCheck", "0");
+		}
+		if(wishCheck == "1"){
+			model.addAttribute("wishCheck", "1");
+		}
 		
 		return "/product/product";
 	}
 	
 	@RequestMapping("wishlistPro.ns")
-	public String wishlistPro() {
-		return "/product/wishlistPro";
+	public @ResponseBody String wishlistPro(ProductDTO dto, String id, int num, String wishCheck) throws Exception{
+		String result = null;
+		
+		dto.setId(id);
+		dto.setNum(num);
+		
+		wishCheck = String.valueOf(mainDAO.wishCheck(dto));
+		
+		System.out.println("클릭했을 때 wishCheck = "+wishCheck);
+		
+		if(wishCheck.equals("0") || wishCheck.equals("null")) {
+			System.out.println("insert");
+			mainDAO.wishInsert(dto);
+			result = "1";
+		}
+		if(wishCheck.equals("1")) {
+			System.out.println("delete");
+			mainDAO.wishDelete(dto);
+			result = "0";
+		}
+		
+		return result;
 	}
 
-	// 회원탈퇴 페이지
-//	@RequestMapping("signout.ns")
-//	public String signout(MemberDTO dto, @RequestParam String pw) {
-//		
-//		String id = dto.getId();
-//		
-//		return "/main/myPage/deleteForm";
-//	}
+	
 }

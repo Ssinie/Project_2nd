@@ -136,7 +136,7 @@ public class KakaoService {
                 	birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
                 }
                 
-                System.out.println(userInfo.put("profile_image", profile_image));
+                userInfo.put("profile_image", profile_image);
                 userInfo.put("id", id);
                 userInfo.put("nickname", nickname);
                 userInfo.put("profile_image", profile_image);

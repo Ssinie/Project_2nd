@@ -11,7 +11,7 @@ public class MainDAOImpl implements MainDAOInter {
 	private SqlSessionTemplate dao = null;
 	
 	@Override
-	public int wishCheck(ProductDTO dto) throws Exception {
+	public Integer wishCheck(ProductDTO dto) throws Exception {
 		return dao.selectOne("main.wishCheck", dto);
 	}
 	
@@ -20,6 +20,10 @@ public class MainDAOImpl implements MainDAOInter {
 		dao.insert("main.wishInsert", dto);
 	}
 
-
+	@Override
+	public void wishDelete(ProductDTO dto) throws Exception {
+		dao.delete("main.wishDelete", dto);
+		
+	}
 	
 }

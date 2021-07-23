@@ -116,7 +116,7 @@ public class LoginController {
         dto.setProfile_image(profile_image);
         
         int checkId = memberDAO.checkId(dto);
-        System.out.println(checkId);
+        System.out.println("checkId naver = "+checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());
@@ -155,7 +155,7 @@ public class LoginController {
         dto.setBirthday(birthday);
         
         int checkId = memberDAO.checkId(dto);
-        System.out.println(checkId);
+        System.out.println("checkId (기존 회원인가) = "+checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());

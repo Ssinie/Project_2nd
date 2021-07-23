@@ -5,12 +5,16 @@
   
 <mapper namespace="main">
 	
-	<select id="wishCheck" parameterType="productDTO" resultType="int">
-		select clicked from wishlist where id=#{id}, num=#{num}
+	<select id="wishCheck" parameterType="productDTO" resultType="Integer">
+		select avg(clicked) as clicked from wishlist where id=#{id} and num=#{num}
 	</select>
 	
 	<insert id="wishInsert" parameterType="productDTO">
-		insert into wishlist(id, num) values(#{id}, #{num})
+		insert into wishlist(id, num, clicked) values(#{id}, #{num}, 1)
 	</insert>
+	
+	<delete id="wishDelete">
+		delete from wishlist where id=#{id} and num=#{num}
+	</delete>
 	
 </mapper>
