@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <input type="button" value="제품정보 입력" onClick="location.href='http://localhost:8080/Project_2nd/master/Insert.do'"><br />
-<input type="button" value="CSV파일 출력" onClick="location.href='http://localhost:8080/Project_2nd/master/itemTypeCSVWrite.do'">
+<input type="button" value="CSV파일 출력" onClick="location.href='http://localhost:8080/Project_2nd/master/itemTypeCSVWrite.do'"><br />
+<input type="button" value="제품키값 입력" onClick="location.href='http://localhost:8080/Project_2nd/master/ItemTypeKeyInsert.do'">
 <br />
 <br />
 <% int i = 1; %>

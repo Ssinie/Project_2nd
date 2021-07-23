@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -106,7 +107,7 @@ public class ItemType {
 	@RequestMapping("/itemTypeCSVWrite.do")
 	public String ItemTypeCSVWrite() {
 		
-		String filePath = "C:/Users/Yoo/Desktop/BIG_DATA/10. 문서/csv_demo.csv";
+		String filePath = "C:/Users/Yoo/Desktop/BIG_DATA/10. 문서/Table/csv_demo.csv";
 		
 		File file = null;
 		BufferedWriter bw = null;
@@ -117,16 +118,34 @@ public class ItemType {
 			file = new File(filePath);
 			bw = new BufferedWriter(new FileWriter(file));
 			ItemTypeDTO dto = new ItemTypeDTO();
+			
+			String [] splitText;
+			ArrayList<String> arr = new ArrayList<String>();
+			List<String> result = new ArrayList<String>();
+			
+			
+			// DB에서 제품정보를 가져와서 텍스트를 split하여 arr에 하나씩 List로 담음
 			list = dao.selectList("item_type.selectType");
 			for(int i =0; i < list.size(); i++) {
 				dto = (ItemTypeDTO)list.get(i);
-				String [] data = dto.getRAWMTRL_NM().split(",");
-				for(String v : data) {
-					bw.write(v);
-					bw.write(NEWLINE);
+				splitText = dto.getRAWMTRL_NM().split(",");
+				for(String v : splitText) {
+					arr.add(v);
+					}
 				}
-				
+			// arr에 있는 하나씩담긴 내용을 중복검사하여 하나씩 다시 담음
+			for(String v : arr) {
+				if(!result.contains(v)) {
+					result.add(v);
+				}
 			}
+			// 하나씩 담은 내용을 csv파일에 하나씩 입력함
+			for(int i=0; i < result.size(); i++) {
+				String v = result.get(i);
+				bw.write(v);
+				bw.write(NEWLINE);
+			}
+			
 			
 			
 			bw.flush();
@@ -136,6 +155,53 @@ public class ItemType {
 			e.printStackTrace();
 		}
 		
+		return "/master/ItemTypeCheck";
+	}
+	
+	/* 제품정보의 성분이 겹치지 않는 항목을 'ITEM_TYPE_KEY' 테이블에 추가하는 메서드 
+	 * 
+	 * 
+	 */
+	@RequestMapping("/ItemTypeKeyInsert.do")
+	public String ItemTypeKeyInsert() {
+		
+		List list = null;
+		ArrayList<String> arr = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
+		HashMap hash = new HashMap();
+		String [] splitText;
+		
+		try {
+			ItemTypeDTO dto = new ItemTypeDTO();
+			
+			// DB에서 제품정보를 가져와서 텍스트를 split하여 arr에 하나씩 List로 담음
+			list = dao.selectList("item_type.selectType");
+			for(int i =0; i < list.size(); i++) {
+				dto = (ItemTypeDTO)list.get(i);
+				splitText = dto.getRAWMTRL_NM().split(",");
+				for(String v : splitText) {
+					arr.add(v);
+					}
+				}
+			// arr에 있는 하나씩담긴 내용을 중복검사하여 하나씩 다시 담음
+			for(String v : arr) {
+				if(!result.contains(v)) {
+					result.add(v);
+				}
+			}
+			// 하나씩 담은 내용을 csv파일에 하나씩 입력함
+			for(int i=0; i < result.size(); i++) {
+				String v = result.get(i);
+				hash.put("num", i+1);
+				hash.put("element", v);
+				dao.insert("item_type.type_insert", hash);
+				System.out.println(i+1+"번째 삽입 완료");
+			}
+		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "/master/ItemTypeCheck";
 	}
 }

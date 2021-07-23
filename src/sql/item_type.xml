@@ -5,22 +5,15 @@
 <mapper namespace="item_type">
 	<insert id = "insert" parameterType = "ItemTypeDTO">
 		insert into ITEM_TYPE values(
-		#{LCNS_NO},
-		#{PRMS_DT},
-		#{PRDLST_REPORT_NO},
-		#{CRET_DTM},
-		#{LAST_UPDT_DTM},
-		#{BSSH_NM},
-		#{PRDLST_NM},
-		#{NTK_MTHD},
-		#{RAWMTRL_NM},
-		#{POG_DAYCNT},
-		#{PRIMARY_FNCLTY},
-		#{CSTDY_MTHD},
-		#{IFTKN_ATNT_MATR_CN},
-		#{STDR_STND},
-		#{DISPOS},
-		#{SHAP}
+		#{LCNS_NO},#{PRMS_DT},#{PRDLST_REPORT_NO},#{CRET_DTM},
+		#{LAST_UPDT_DTM},#{BSSH_NM},#{PRDLST_NM},#{NTK_MTHD},
+		#{RAWMTRL_NM},#{POG_DAYCNT},#{PRIMARY_FNCLTY},
+		#{CSTDY_MTHD},#{IFTKN_ATNT_MATR_CN},
+		#{STDR_STND},#{DISPOS},#{SHAP})
+	</insert>
+	<insert id = "type_insert" parameterType="HashMap">
+		insert into ITEM_TYPE_KEY (num,element) values(
+		#{num},#{element}
 		)
 	</insert>
 	<select id = "selectType" resultType="ItemTypeDTO">
