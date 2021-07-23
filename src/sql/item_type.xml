@@ -23,4 +23,7 @@
 		#{SHAP}
 		)
 	</insert>
+	<select id = "selectType" resultType="ItemTypeDTO">
+		select * from ITEM_TYPE order by to_number(PRDLST_REPORT_NO)
+	</select>
 </mapper>

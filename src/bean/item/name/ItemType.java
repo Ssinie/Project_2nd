@@ -1,8 +1,14 @@
 package bean.item.name;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,9 +16,11 @@ import org.json.simple.parser.JSONParser;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/master")
 public class ItemType {
 
 	@Autowired
@@ -79,6 +87,55 @@ public class ItemType {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return "/main/main";
+		return "/master/ItemTypeCheck";
+	}
+	@RequestMapping("/itemtype.do")
+	public String ItemTypeSelect(Model model) {
+		List list = null;
+		list = dao.selectList("item_type.selectType");
+		
+		model.addAttribute("list",list);
+		return "/master/ItemTypeCheck";
+	}
+	
+	/* 
+	 * 제품정보의 성분이 겹치지 않는 항목이 몇종류인지를 파악하기 위해 만든
+	 * ITEM_TYPE 테이블의 RAWMTRL_NA의 정보를 CSV파일로 변환해주는 메서드
+	 * System.lineSeparator(); > 줄바꿈(\n)
+	 */	
+	@RequestMapping("/itemTypeCSVWrite.do")
+	public String ItemTypeCSVWrite() {
+		
+		String filePath = "C:/Users/Yoo/Desktop/BIG_DATA/10. 문서/csv_demo.csv";
+		
+		File file = null;
+		BufferedWriter bw = null;
+		List list = null;
+		String NEWLINE = System.lineSeparator();
+		
+		try {
+			file = new File(filePath);
+			bw = new BufferedWriter(new FileWriter(file));
+			ItemTypeDTO dto = new ItemTypeDTO();
+			list = dao.selectList("item_type.selectType");
+			for(int i =0; i < list.size(); i++) {
+				dto = (ItemTypeDTO)list.get(i);
+				String [] data = dto.getRAWMTRL_NM().split(",");
+				for(String v : data) {
+					bw.write(v);
+					bw.write(NEWLINE);
+				}
+				
+			}
+			
+			
+			bw.flush();
+			bw.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/master/ItemTypeCheck";
 	}
 }
