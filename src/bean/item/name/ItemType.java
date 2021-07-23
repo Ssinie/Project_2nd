@@ -48,7 +48,7 @@ public class ItemType {
 		try {
 			
 			System.out.println("URL 입력 시작");
-			URL url = new URL("https://openapi.foodsafetykorea.go.kr/api/"+key+"/C003/json/1/100");
+			URL url = new URL("https://openapi.foodsafetykorea.go.kr/api/"+key+"/C003/json/51/100");
 			
 			BufferedReader bf;
 			System.out.println("bf에 담음");
@@ -57,14 +57,14 @@ public class ItemType {
 			result = bf.readLine();
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-			System.out.println("jsonObject = "+jsonObject);
 			JSONObject itemTypeResult = (JSONObject)jsonObject.get("C003");
-			System.out.println("itemTypeResult = "+itemTypeResult);
 			JSONArray itemArray = (JSONArray)itemTypeResult.get("row");
-			System.out.println("itemResult = "+itemArray);		
-	
+			String [] count;
+			List arr;
+			
 			for(int i =0; i < itemArray.size(); i++) {
 				JSONObject itemInfo = (JSONObject)itemArray.get(i);
+				arr = new ArrayList();
 				dto = new ItemTypeDTO();
 				dto.setLCNS_NO(itemInfo.get("LCNS_NO").toString());
 				dto.setPRMS_DT(itemInfo.get("PRMS_DT").toString());
@@ -82,6 +82,12 @@ public class ItemType {
 				dto.setSTDR_STND(itemInfo.get("STDR_STND").toString());
 				dto.setDISPOS(itemInfo.get("DISPOS").toString());
 				dto.setSHAP(itemInfo.get("SHAP").toString());
+				
+				count = dto.getRAWMTRL_NM().split(",");
+				for(String v : count) {
+					arr.add(v);
+				}
+				dto.setELE_COUNT(arr.size());
 				dao.insert("item_type.insert",dto);
 				System.out.println(i+"번째 입력종료");
 			}

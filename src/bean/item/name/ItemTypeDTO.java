@@ -13,6 +13,7 @@ public class ItemTypeDTO {
 	 * PRDLST_NM	품목명
 	 * NTK_MTHD	섭취방법
 	 * RAWMTRL_NM	원재료
+	 * ELE_COUNT 원재료의 갯수
 	 * POG_DAYCNT	유통기한
 	 * PRIMARY_FNCLTY	주된기능성
 	 * CSTDY_MTHD	보관방법
@@ -38,6 +39,14 @@ public class ItemTypeDTO {
 	private String STDR_STND;
 	private String DISPOS;
 	private String SHAP;
+	private int ELE_COUNT;
+	
+	public int getELE_COUNT() {
+		return ELE_COUNT;
+	}
+	public void setELE_COUNT(int eLE_COUNT) {
+		ELE_COUNT = eLE_COUNT;
+	}
 	
 	public String getLCNS_NO() {
 		return LCNS_NO;

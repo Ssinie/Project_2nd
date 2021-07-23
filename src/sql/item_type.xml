@@ -9,7 +9,7 @@
 		#{LAST_UPDT_DTM},#{BSSH_NM},#{PRDLST_NM},#{NTK_MTHD},
 		#{RAWMTRL_NM},#{POG_DAYCNT},#{PRIMARY_FNCLTY},
 		#{CSTDY_MTHD},#{IFTKN_ATNT_MATR_CN},
-		#{STDR_STND},#{DISPOS},#{SHAP})
+		#{STDR_STND},#{DISPOS},#{SHAP},#{ELE_COUNT})
 	</insert>
 	<insert id = "type_insert" parameterType="HashMap">
 		insert into ITEM_TYPE_KEY (num,element) values(
