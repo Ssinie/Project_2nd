@@ -7,11 +7,12 @@
 <h1>신상정보.</h1>
 
 <form action = "/Project_2nd/question/pInsert.do" method = "post">
-	nick: <input type = "text" name = "nick"><br/>
-	age: <input type = "text" name = "age"><br/>
-	weight: <input type = "text" name = "weight"><br/>
-	height: <input type = "text" name = "height"><br/>
-	gender: m<input type = "radio" name = "gender" value = "male">
-	w<input type = "radio" name = "gender" value = "female"><br/>
+	nick: <input type = "text" name = "nick" required><br/>
+	age: <input type = "number" min = "10" max = "120" name = "age" required><br/>
+	height: <input type = "number" min = "100" max = "250" name = "height" value = "h" required><br/>
+	weight: <input type = "number" min = "30" max = "300" name = "weight" value = "w" required><br/>
+	gender: m<input type = "radio" name = "gender" value = "male" required>
+	w<input type = "radio" name = "gender" value = "female" required><br/>
+	<br/>
 	<input type = "submit" value = "다음">
 </form>

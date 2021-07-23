@@ -72,9 +72,4 @@ public class qBeanImp implements qBeanInter{
     public void pInsert(pDTO dto) throws Exception{
     	mybatis.insert("question.pInsert", dto) ;	
     }
-    
-    // 결과도출.
-    @Override
-    public void result(qDTO dto) throws Exception{
-    }
 }

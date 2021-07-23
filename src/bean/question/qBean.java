@@ -4,6 +4,7 @@ import bean.question.pDTO;
 import bean.question.qDTO;
 import bean.question.qBeanInter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,17 +59,28 @@ public class qBean {
     
     // pForm 페이지.
     @RequestMapping("pForm.do")
-    public String pForm() throws Exception{
-    	return "/question/pForm" ;
-    }
+	public String pForm() throws Exception{
+		return "/question/pForm" ;
+	}
     
-    // 신상정보 DB입력.
+    @RequestMapping("pInsert.do")
+	public String pInsert(pDTO dto) throws Exception{
+    	// 신상정보 DB입력.
+    	service.pInsert(dto) ;
+		return "/question/form" ;
+	}
+    
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public void qResult(pDTO dto,HttpServletRequest request, Model model) throws Exception{
+    public List qResult(HttpServletRequest request) throws Exception{
     	String [] pValue = request.getParameterValues("contents") ;
-    	System.out.println(pValue) ;
-    	service.pInsert(dto) ;
+    	List list = new ArrayList() ;
+    	for(String v : pValue) {
+    		list.add(v) ;
+    	}
+    	System.out.println(list) ;
+    	
+    	return list ;
     }
 
     @RequestMapping("form.do")
