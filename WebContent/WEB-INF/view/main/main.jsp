@@ -20,7 +20,16 @@
 		<div class="btn">Nutrient Sunday</div>
 		<div class="search">검색</div>
 		<div class="btn"><a href="#"></a>고객센터</div> <!-- 고객센터 페이지 href 입력 필-->
-		<div class="btn"><a href="http://localhost:8080/Project_2nd/login.ns">로그인</a></div>
+		
+		<c:choose>
+			<c:when test="${sessionId == null}">
+				<div class="btn"><a href="http://localhost:8080/Project_2nd/login.ns">로그인</a></div>
+			</c:when>
+			<c:otherwise>
+				<div class="btn"><a href="http://localhost:8080/Project_2nd/logout.ns">로그아웃</a></div>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 	
 	<!-- 메인 -->

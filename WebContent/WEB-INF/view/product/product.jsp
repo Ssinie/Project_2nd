@@ -10,19 +10,27 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	var id = '${id}'
+	
 	$("#wish").click(function() {
-		$.ajax({
-			url: "/Project_2nd/wishlistPro.ns",
-			data: { id:'${id}', num:'${num}', wishCheck:'${wishCheck}' },
-			success: function(result){
-				if(result == "1"){
-					alert("관심상품 등록 완료");
+		if(id == ""){
+			alert("로그인이 필요합니다.");
+			//document.location.href="http://localhost:8080/Project_2nd/login.ns";
+		}else{
+			$.ajax({
+				url: "/Project_2nd/wishlistPro.ns",
+				data: { id:'${id}', num:'${num}', wishCheck:'${wishCheck}' },
+				success: function(result){
+					if(result == "1"){
+						alert("관심상품 등록 완료");
+					}
+					if(result == "0"){
+						alert("관심상품 삭제 완료");
+					}
 				}
-				if(result == "0"){
-					alert("관심상품 삭제 완료");
-				}
-			}
-		});
+			});
+		}
+		
 	});
 });
 
@@ -33,10 +41,6 @@ $(document).ready(function() {
 
 <h1>상품정보 페이지</h1>
 <button id="wish">관심상품</button>
-
-<input type="text" name="id" id="id" class="a" /> <input type="button" value="로그인" id="btn" /> <label id="result"></label>
- 
-
 
 </body>
 </html>

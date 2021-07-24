@@ -1,18 +1,16 @@
 package bean.loginApi;
 
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+
+
 
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-//import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
  
 import com.github.scribejava.core.model.OAuth2AccessToken;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonObject;
-//import com.google.gson.JsonParser;
-//import com.google.gson.JsonObject;
 
 import bean.main.MemberDAOImpl;
 import bean.main.MemberDTO;
@@ -48,7 +42,7 @@ public class LoginController {
     private KakaoService kakaoService;
  
     // 로그인 첫 화면 요청 메소드
-    @RequestMapping(value = "/login.ns", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "login.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) throws Exception{
         
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -66,7 +60,7 @@ public class LoginController {
     }
  
     // 네이버 로그인 성공 시 callback 호출 메소드
-    @RequestMapping(value = "/callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(MemberDTO dto, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws Exception, ParseException {
         OAuth2AccessToken oauthToken;
@@ -132,7 +126,7 @@ public class LoginController {
         return "/loginApi/callback";
     }
     
-    @RequestMapping("/kakao.ns")
+    @RequestMapping("kakao.ns")
     public String kakao(MemberDTO dto, Model model, @RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception{
         
         String access_Token = kakaoService.getAccessToken(code);
@@ -171,6 +165,14 @@ public class LoginController {
         }
         
         return "/loginApi/kakao";
+    }
+
+    @RequestMapping("logout.ns")
+    public String logout(HttpSession session) throws Exception{
+    	
+    	session.invalidate();
+    	
+    	return "/loginApi/logout";
     }
     
 }

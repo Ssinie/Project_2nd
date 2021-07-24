@@ -20,7 +20,7 @@ public class MainController {
 	
 	@RequestMapping("main.ns")
 	public String main(HttpSession session) {
-		System.out.println("sessionId = "+session.getAttribute("sessionId"));
+		System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
 		
 		return "/main/main";
 	}
@@ -29,25 +29,26 @@ public class MainController {
 	public String product(ProductDTO dto, HttpSession session, Model model) throws Exception{
 		
 		int num = 723;
+		model.addAttribute("num", num);
 		
 		String id = (String)session.getAttribute("sessionId");
-		
+		System.out.println("product_sessionId = "+id);
+		model.addAttribute("id", id);
 		
 		dto.setId(id);
 		dto.setNum(num);
 		
-		String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
-			
-		System.out.println("상품 페이지 wishCheck = "+wishCheck);
-		
-		model.addAttribute("id", id);
-		model.addAttribute("num", num);
-			
-		if(wishCheck == "null") { // 관심상품 클릭 안 했으면
-			model.addAttribute("wishCheck", "0");
-		}
-		if(wishCheck == "1"){
-			model.addAttribute("wishCheck", "1");
+		if(id != null) {
+			String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
+				
+			System.out.println("상품 페이지 wishCheck = "+wishCheck);
+				
+			if(wishCheck == "null") { // 관심상품 클릭 안 했으면
+				model.addAttribute("wishCheck", "0");
+			}
+			if(wishCheck == "1"){
+				model.addAttribute("wishCheck", "1");
+			}
 		}
 		
 		return "/product/product";
