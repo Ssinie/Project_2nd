@@ -210,4 +210,46 @@ public class ItemType {
 		}
 		return "/master/ItemTypeCheck";
 	}
+	
+	/*
+	 * ITEM_TYPE 테이블의 정보를 가져와, 원재료 성분의 갯수를 확인하고, 갯수에 따른 가중치를 ITEM_TYPE_VALUECHECK 를 참고하여
+	 * ITEM_TYPE_VALUE 테이블에 가중치 별 테이블 정보를 기재한다.
+	 * ITEM_TYPE 테이블의 유니크 값의 컬럼명은 'PRDLST_REPORT_NO' 이다. 
+	 * 
+	 * 작업순서...
+	 * 1. 'ITEM_TYPE' 테이블의 내용을 DTO에 담은 LIST를 받는다.
+	 * 2. LIST에서 하나씩 빼서 dto를 가지고 원재료 갯수를 가져온다.
+	 * 3. dto에서 원재료를 split해서 배열로 담는다.
+	 * 4. 원재료 갯수가 10개초과일 경우 값을 10으로 대입
+	 * 5. 원재료 갯수로 'ITEM_TYPE_VALUECHECK' 테이블에서 select 한다.
+	 * 6. split 한 배열을 반복하되
+	 * 6-1. 'ITEM_TYPE_KEY' 테이블에서 key 값을 찾고,
+	 * 6-2. 'ITEM_TYPE_VALUECHECK' 테이블에서 배열 위치에 따라 val값을 찾는다.
+	 * 6-3. 찾은 key, value값을 테이블에 insert해준다.
+	 * 6-4. 반복...
+	 */
+	@RequestMapping("/ItemTypeValueInsert.do")
+	public String ItemTypeValueInsert() {
+		List list = new ArrayList();
+		System.out.println(1);
+		ItemTypeDTO dto;
+		ItemTypeValueCheckDTO vcdto;
+		list = dao.selectList("item_type.selectType");
+		System.out.println(2);
+		for(int i = 0; i < list.size(); i++) {
+			dto = (ItemTypeDTO)list.get(i);
+			String [] ele = dto.getRAWMTRL_NM().split(",");
+			System.out.println(3);
+			if(dto.getELE_COUNT() > 10) {
+				dto.setELE_COUNT(10);
+				System.out.println(4);
+				vcdto = dao.selectOne("item_type.selectVC",dto.getELE_COUNT());
+				System.out.println("succes");
+			}
+			
+		}
+		
+		
+		return "/master/ItemTypeCheck";
+	}
 }
