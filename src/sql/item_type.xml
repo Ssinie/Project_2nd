@@ -11,6 +11,13 @@
 		#{CSTDY_MTHD},#{IFTKN_ATNT_MATR_CN},
 		#{STDR_STND},#{DISPOS},#{SHAP},#{ELE_COUNT})
 	</insert>
+	<insert id = "insertValue" parameterType = "ItemTypeValueCheckDTO">
+		insert into ITEM_TYPE_VALUE values(
+		#{PRDLST_REPORT_NO},#{Key_1},#{Value_1},#{Key_2},#{Value_2},
+		#{Key_3},#{Value_3},#{Key_4},#{Value_4},#{Key_5},#{Value_5},
+		#{Key_6},#{Value_6},#{Key_7},#{Value_7},#{Key_8},#{Value_8},
+		#{Key_9},#{Value_9},#{Key_10},#{Value_10})
+	</insert>
 	<insert id = "type_insert" parameterType="HashMap">
 		insert into ITEM_TYPE_KEY (num,element) values(
 		#{num},#{element}
@@ -21,5 +28,8 @@
 	</select>
 	<select id = "selectVC" resultType="ItemTypeValueCheckDTO" parameterType="int">
 		select * from ITEM_TYPE_VALUECHECK where MAINTYPE = #{ELE_COUNT}
+	</select>
+	<select id = "" resultType="int" parameterType="String">
+		select NUM from ITEM_TYPE_KEY where ELEMENT = #{element}
 	</select>
 </mapper>

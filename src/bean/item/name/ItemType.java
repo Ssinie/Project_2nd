@@ -231,22 +231,42 @@ public class ItemType {
 	@RequestMapping("/ItemTypeValueInsert.do")
 	public String ItemTypeValueInsert() {
 		List list = new ArrayList();
-		System.out.println(1);
 		ItemTypeDTO dto;
 		ItemTypeValueCheckDTO vcdto;
+		ItemTypeValueDTO vdto;
+		String [] ele;
+		String element;
+		int itemNum;
 		list = dao.selectList("item_type.selectType");
-		System.out.println(2);
 		for(int i = 0; i < list.size(); i++) {
+			vcdto = new ItemTypeValueCheckDTO();
 			dto = (ItemTypeDTO)list.get(i);
-			String [] ele = dto.getRAWMTRL_NM().split(",");
-			System.out.println(3);
+			ele = dto.getRAWMTRL_NM().split(",");
 			if(dto.getELE_COUNT() > 10) {
 				dto.setELE_COUNT(10);
-				System.out.println(4);
-				vcdto = dao.selectOne("item_type.selectVC",dto.getELE_COUNT());
-				System.out.println("succes");
+				}
+			vcdto = dao.selectOne("item_type.selectVC",dto.getELE_COUNT());
+			vdto = new ItemTypeValueDTO();
+			vdto.setPRDLST_REPORT_NO(dto.getPRDLST_REPORT_NO());
+			for(int v = 0; v < dto.getELE_COUNT(); v++) {
+				element = ele[v];
+				itemNum = dao.selectOne("item_type.", element);
+				switch(v) {
+					case 0: vdto.setKey_1(itemNum);vdto.setValue_1(vcdto.getVal1());break;
+					case 1: vdto.setKey_2(itemNum);vdto.setValue_2(vcdto.getVal2());break;
+					case 2: vdto.setKey_3(itemNum);vdto.setValue_1(vcdto.getVal3());break;
+					case 3: vdto.setKey_4(itemNum);vdto.setValue_1(vcdto.getVal4());break;
+					case 4: vdto.setKey_5(itemNum);vdto.setValue_1(vcdto.getVal5());break;
+					case 5: vdto.setKey_6(itemNum);vdto.setValue_1(vcdto.getVal6());break;
+					case 6: vdto.setKey_7(itemNum);vdto.setValue_1(vcdto.getVal7());break;
+					case 7: vdto.setKey_8(itemNum);vdto.setValue_1(vcdto.getVal8());break;
+					case 8: vdto.setKey_9(itemNum);vdto.setValue_1(vcdto.getVal9());break;
+					case 9: vdto.setKey_10(itemNum);vdto.setValue_1(vcdto.getVal10());break;
+				}
 			}
-			
+			dao.insert("item_type.insertValue",vdto);
+			System.out.println(vdto.getKey_1()+"1번 키, "+vdto.getValue_1());
+			System.out.println(i+" 번째 Susses");
 		}
 		
 		
