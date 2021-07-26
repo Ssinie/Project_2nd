@@ -38,4 +38,6 @@
 	<select id = "qSelect19" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 19</select>
 	<select id = "qSelect20" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 20</select>
 	<select id = "qSelect21" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 21</select>
+	
+	<select id = "qValue" resultType = "vDTO" parameterType = "vDTO"></select>
 </mapper>

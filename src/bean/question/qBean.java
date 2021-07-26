@@ -15,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.rosuda.REngine.REXP;
+import org.rosuda.REngine.RList;
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.Rserve.RserveException;
 
 @Controller
 @RequestMapping("/question/")
@@ -64,27 +68,10 @@ public class qBean {
 	}
     
     @RequestMapping("pInsert.do")
-	public String pInsert(pDTO dto) throws Exception{
+	public String pInsert(pDTO dto, Model model) throws Exception{
     	// 신상정보 DB입력.
     	service.pInsert(dto) ;
-		return "/question/form" ;
-	}
-    
-    // 설문조사 값 R 로 전송.
-    @RequestMapping("qResult.do")
-    public List qResult(HttpServletRequest request) throws Exception{
-    	String [] pValue = request.getParameterValues("contents") ;
-    	List list = new ArrayList() ;
-    	for(String v : pValue) {
-    		list.add(v) ;
-    	}
-    	System.out.println(list) ;
     	
-    	return list ;
-    }
-
-    @RequestMapping("form.do")
-	public String form(Model model) throws Exception{
     	// 01
     	List<qDTO> qSelect = service.qSelect() ;
         model.addAttribute("qSelect", qSelect) ;
@@ -148,6 +135,40 @@ public class qBean {
         // 21
         List<qDTO> qSelect21 = service.qSelect21() ;
         model.addAttribute("qSelect21", qSelect21) ;
+        
 		return "/question/form" ;
 	}
+    
+    // 설문조사 값 R 로 전송.
+    @RequestMapping("qResult.do")
+    public List qResult(HttpServletRequest request) throws Exception{
+    	String [] pValue = request.getParameterValues("contents") ;
+    	List<Object> pList = new ArrayList<Object>() ;
+    	for(String v : pValue) {
+    		pList.add(v) ;
+    	}
+    	System.out.println(pList) ;
+    	
+    	RConnection conn ;
+    	try {
+			conn = new RConnection() ;
+			REXP x = conn.eval("R.version.string") ;
+	    	System.out.println("R version : " + x.asString()) ;
+	    	
+	    	//, length(pValue)
+	    	// + "assign(pValue[i],i)"
+	    	conn.assign("pValue", pValue) ;
+	    	conn.eval("library('stringr')") ;
+	    	conn.eval("print(pValue)") ;
+	    	conn.eval("pList <- strsplit(pValue, split = '#')") ;
+	    	conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
+	    	conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
+	    	conn.eval("print(pList)") ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return pList ;
+    }
 }
