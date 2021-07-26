@@ -141,14 +141,23 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public List qResult(HttpServletRequest request) throws Exception{
+    public List<vDTO> qResult(HttpServletRequest request, vDTO dto) throws Exception{
     	String [] pValue = request.getParameterValues("contents") ;
+    	List<vDTO> vList =  new ArrayList<vDTO>() ;
+    	for(String v : pValue) {
+    		System.out.println(v) ;
+    		vDTO dto02 = session.selectOne("question.qValue", v) ;
+    		vList.add(dto02) ;
+    	}
+    	System.out.println(vList) ;
+    	/*
     	List<Object> pList = new ArrayList<Object>() ;
     	for(String v : pValue) {
     		pList.add(v) ;
     	}
     	System.out.println(pList) ;
-    	
+    	*/
+    	/*
     	RConnection conn ;
     	try {
 			conn = new RConnection() ;
@@ -168,7 +177,7 @@ public class qBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	return pList ;
+    	*/
+    	return vList ;
     }
 }
