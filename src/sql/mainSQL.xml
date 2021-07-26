@@ -5,16 +5,24 @@
   
 <mapper namespace="main">
 	
+	<!-- 관심상품 등록 확인 -->
 	<select id="wishCheck" parameterType="productDTO" resultType="Integer">
 		select avg(clicked) as clicked from wishlist where id=#{id} and num=#{num}
 	</select>
 	
+	<!-- 관심상품 등록 -->
 	<insert id="wishInsert" parameterType="productDTO">
 		insert into wishlist(id, num, clicked) values(#{id}, #{num}, 1)
 	</insert>
 	
+	<!-- 관심상품 삭제 -->
 	<delete id="wishDelete">
 		delete from wishlist where id=#{id} and num=#{num}
 	</delete>
+	
+	<!-- 상품정보 imgurl 꺼내기 -->
+	<select id="getPdImg" resultType="String">
+		<![CDATA[select imgurl from (select * from test_item order by view_count desc) where rownum <= 6]]>
+	</select>
 	
 </mapper>
