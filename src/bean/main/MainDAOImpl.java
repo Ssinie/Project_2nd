@@ -1,5 +1,7 @@
 package bean.main;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,11 @@ public class MainDAOImpl implements MainDAOInter {
 	public void wishDelete(ProductDTO dto) throws Exception {
 		dao.delete("main.wishDelete", dto);
 		
+	}
+
+	@Override
+	public List getPdList() throws Exception {
+		return dao.selectList("main.getPdList");
 	}
 	
 }

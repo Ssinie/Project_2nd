@@ -1,6 +1,9 @@
 package bean.main;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +24,8 @@ public class MainController {
 	@RequestMapping("main.ns")
 	public String main(HttpSession session) {
 		System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
+		
+		
 		
 		return "/main/main";
 	}
@@ -77,6 +82,16 @@ public class MainController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("productlist.ns")
+	public String productList(ProductDTO dto, Model model) throws Exception {
+		
+		List productList = mainDAO.getPdList();
+		
+		model.addAttribute("productList", productList);
+		
+		return "/product/productList";
 	}
 
 	
