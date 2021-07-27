@@ -13,10 +13,10 @@ public class vDTO {
 	public void setQnum(String qnum) {
 		this.qnum = qnum;
 	}
-	public String getNuri01() {
+	public String getNutri01() {
 		return nuri01;
 	}
-	public void setNuri01(String nuri01) {
+	public void setNutri01(String nuri01) {
 		this.nuri01 = nuri01;
 	}
 	public int getVal01() {

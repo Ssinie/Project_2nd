@@ -5,6 +5,7 @@ import bean.question.qDTO;
 import bean.question.qBeanInter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -149,7 +150,39 @@ public class qBean {
     		vDTO dto02 = session.selectOne("question.qValue", v) ;
     		vList.add(dto02) ;
     	}
-    	System.out.println(vList) ;
+    	
+    	HashMap<String, Integer> vMap = new HashMap() ;
+    	for(int i = 0 ; i < vList.size() ; i++){
+    		dto = vList.get(i) ;
+	    	if(vMap.containsKey(dto.getNutri01())) {
+	    		dto.setVal01(dto.getVal01() + dto.getVal01());
+	    		vMap.put(dto.getNutri01(), dto.getVal01()) ;
+	    	} else if (dto.getNutri01() != null) {
+	    		dto.setVal01(dto.getVal01());
+	    		vMap.put(dto.getNutri01(), dto.getVal01()) ;
+	    	}
+	    	if(vMap.containsKey(dto.getNutri02()) || dto.getNutri02() != null) {
+	    		dto.setVal02(dto.getVal02() + dto.getVal02());
+	    		vMap.put(dto.getNutri02(), dto.getVal02()) ;
+	    	} else if (dto.getNutri02() != null) {
+	    		dto.setVal02(dto.getVal02());
+	    		vMap.put(dto.getNutri02(), dto.getVal02()) ;
+	    	}
+	    	/*
+	    	vMap.put(dto.getNutri01(), dto.getVal01()) ;
+	    	if(dto.getNutri02() != null) {
+	    	vMap.put(dto.getNutri02(), dto.getVal02()) ;
+	    	}
+	    	*/
+    	}
+    	System.out.println(vMap) ;
+    	/*
+    	Integer vitaminA = vMap.get(1) ;
+    	String vita = getKey(vMap,1) ;
+    	if(vita == null) {
+    		
+    	}
+    	*/
     	/*
     	List<Object> pList = new ArrayList<Object>() ;
     	for(String v : pValue) {
@@ -157,6 +190,7 @@ public class qBean {
     	}
     	System.out.println(pList) ;
     	*/
+    	
     	/*
     	RConnection conn ;
     	try {
