@@ -236,7 +236,7 @@ public class ItemType {
 		ItemTypeValueDTO vdto;
 		String [] ele;
 		String element;
-		int itemNum;
+		Integer itemNum;
 		list = dao.selectList("item_type.selectType");
 		for(int i = 0; i < list.size(); i++) {
 			vcdto = new ItemTypeValueCheckDTO();
@@ -251,21 +251,24 @@ public class ItemType {
 			for(int v = 0; v < dto.getELE_COUNT(); v++) {
 				element = ele[v];
 				itemNum = dao.selectOne("item_type.", element);
+				if(itemNum == null) {
+					v = 100;
+				}
 				switch(v) {
 					case 0: vdto.setKey_1(itemNum);vdto.setValue_1(vcdto.getVal1());break;
 					case 1: vdto.setKey_2(itemNum);vdto.setValue_2(vcdto.getVal2());break;
-					case 2: vdto.setKey_3(itemNum);vdto.setValue_1(vcdto.getVal3());break;
-					case 3: vdto.setKey_4(itemNum);vdto.setValue_1(vcdto.getVal4());break;
-					case 4: vdto.setKey_5(itemNum);vdto.setValue_1(vcdto.getVal5());break;
-					case 5: vdto.setKey_6(itemNum);vdto.setValue_1(vcdto.getVal6());break;
-					case 6: vdto.setKey_7(itemNum);vdto.setValue_1(vcdto.getVal7());break;
-					case 7: vdto.setKey_8(itemNum);vdto.setValue_1(vcdto.getVal8());break;
-					case 8: vdto.setKey_9(itemNum);vdto.setValue_1(vcdto.getVal9());break;
-					case 9: vdto.setKey_10(itemNum);vdto.setValue_1(vcdto.getVal10());break;
+					case 2: vdto.setKey_3(itemNum);vdto.setValue_3(vcdto.getVal3());break;
+					case 3: vdto.setKey_4(itemNum);vdto.setValue_4(vcdto.getVal4());break;
+					case 4: vdto.setKey_5(itemNum);vdto.setValue_5(vcdto.getVal5());break;
+					case 5: vdto.setKey_6(itemNum);vdto.setValue_6(vcdto.getVal6());break;
+					case 6: vdto.setKey_7(itemNum);vdto.setValue_7(vcdto.getVal7());break;
+					case 7: vdto.setKey_8(itemNum);vdto.setValue_8(vcdto.getVal8());break;
+					case 8: vdto.setKey_9(itemNum);vdto.setValue_9(vcdto.getVal9());break;
+					case 9: vdto.setKey_10(itemNum);vdto.setValue_10(vcdto.getVal10());break;
+					case 100: break;
 				}
 			}
 			dao.insert("item_type.insertValue",vdto);
-			System.out.println(vdto.getKey_1()+"1번 키, "+vdto.getValue_1());
 			System.out.println(i+" 번째 Susses");
 		}
 		
