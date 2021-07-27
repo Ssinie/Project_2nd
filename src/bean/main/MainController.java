@@ -1,7 +1,6 @@
 package bean.main;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -21,9 +20,9 @@ public class MainController {
 	
 	@RequestMapping("main.ns")
 	public String main(HttpSession session) {
-		//System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
+		System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
 		
-		return "/main/mainTest";
+		return "/main/main";
 	}
 	
 	@RequestMapping("product.ns")
@@ -44,7 +43,7 @@ public class MainController {
 				
 			System.out.println("상품 페이지 wishCheck = "+wishCheck);
 				
-			if(wishCheck == "null") {
+			if(wishCheck == "null") { // 관심상품 클릭 안 했으면
 				model.addAttribute("wishCheck", "0");
 			}
 			if(wishCheck == "1"){
@@ -78,30 +77,6 @@ public class MainController {
 		}
 		
 		return result;
-	}
-	
-	@RequestMapping("productlist.ns")
-	public String productList(HttpSession session, Model model) throws Exception {
-		
-		List imgList = mainDAO.getPdImg();
-		String img = "";
-		
-		System.out.println("imgList = "+imgList);
-		
-		model.addAttribute("imgList", imgList);
-
-		
-//		String id = (String)session.getAttribute("sessionId");
-//		
-//		if(id != null) {
-//			
-//			// 적합순으로 DB에서 꺼내기
-//			
-//		}else {
-//			// 조회순으로 DB에서 꺼내기
-//		}
-		
-		return "/product/productList";
 	}
 
 	
