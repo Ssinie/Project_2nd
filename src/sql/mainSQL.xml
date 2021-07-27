@@ -17,8 +17,17 @@
 		delete from wishlist where id=#{id} and num=#{num}
 	</delete>
 	
-	<select id="getPdList" resultType="productDTO">
-		<![CDATA[select name, imgurl from (select name, imgurl from test_item order by view_count desc) where rownum <= 6]]>
+	<select id="getMainPd" resultType="productDTO">
+		<![CDATA[select name, imgurl from (select name, imgurl from test_item order by view_count desc) where rownum <= 20]]>
+	</select>
+	
+	<select id="getCategory" resultType="String">
+		select distinct subtag from test_nutrient
+	</select>
+	
+	<select id="getCatePd" parameterType="String" resultType="productDTO">
+		<![CDATA[select name, imgurl from (select name, imgurl, subtag from item_name order by view_count desc) where rownum <=20 and subtag=#{category}]]>
 	</select>
 	
 </mapper>
+

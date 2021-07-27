@@ -22,12 +22,16 @@ public class MainController {
 	private MainDAOImpl mainDAO = null;
 	
 	@RequestMapping("main.ns")
-	public String main(HttpSession session) {
+	public String main(HttpSession session, Model model) throws Exception {
 		System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
 		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
 		
+		List mainList = mainDAO.getMainPd();
+		model.addAttribute("mainList", mainList);
 		
-		return "/main/main";
+		return "/main/index";
 	}
 	
 	@RequestMapping("product.ns")
@@ -84,15 +88,28 @@ public class MainController {
 		return result;
 	}
 	
+	/* 카테고리별 상품목록 */
 	@RequestMapping("productlist.ns")
-	public String productList(ProductDTO dto, Model model) throws Exception {
+	public String productList(@RequestParam("category") String category, Model model) throws Exception {
 		
-		List productList = mainDAO.getPdList();
+		model.addAttribute("category", category);
 		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
+		List productList = mainDAO.getCatePd(category);
 		model.addAttribute("productList", productList);
 		
 		return "/product/productList";
 	}
+	
+	@RequestMapping("search.ns")
+	public String search(Model model) throws Exception {
+		
+		return "/product/search";
+	}
 
 	
 }
+
+

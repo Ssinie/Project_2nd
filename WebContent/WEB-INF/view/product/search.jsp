@@ -11,7 +11,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>productList</title>
+    <title>search</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -183,9 +183,17 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?${category}">${category}</a></li>
-                            </c:forEach>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
                         </ul>
                     </div>
                 </div>
@@ -223,9 +231,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Nutrient Sunday</h2>
+                        <h2>Organi Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="main.ns">Home</a>
+                            <a href="./index.html">Home</a>
                             <span>Shop</span>
                         </div>
                     </div>
@@ -240,18 +248,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
-                    <div class="sidebar">
+                    <!-- <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>Department</h4>
                             <ul>
-                            
-                            <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
-                            </c:forEach>
-                            
+                                <li><a href="#">Fresh Meat</a></li>
+                                <li><a href="#">Vegetables</a></li>
+                                <li><a href="#">Fruit & Nut Gifts</a></li>
+                                <li><a href="#">Fresh Berries</a></li>
+                                <li><a href="#">Ocean Foods</a></li>
+                                <li><a href="#">Butter & Eggs</a></li>
+                                <li><a href="#">Fastfood</a></li>
+                                <li><a href="#">Fresh Onion</a></li>
+                                <li><a href="#">Papayaya & Crisps</a></li>
+                                <li><a href="#">Oatmeal</a></li>
                             </ul>
                         </div>
-                        <!-- <div class="sidebar__item">
+                        <div class="sidebar__item">
                             <h4>Price</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -398,14 +411,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
-                    </div>
+                        </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-9 col-md-7">
-                   <div class="product__discount">
+                    <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>${category}</h2>
-                        <!-- </div>
+                            <h2>Sale Off</h2>
+                        </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
                                 <div class="col-lg-4">
@@ -518,9 +531,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                   
-                   <!-- <div class="filter__item">
+                    </div>
+                    <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
@@ -543,10 +555,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    
+                    <!-- 표현언어 c:for 써서 for문 돌리기 -->
+                    
                     
                     <div class="row">
-                    
                         <c:forEach var="dto" items="${productList}" varStatus="status">
 	                    	<div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
@@ -663,4 +677,3 @@
 </body>
 
 </html>
-
