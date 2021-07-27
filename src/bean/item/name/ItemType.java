@@ -275,4 +275,47 @@ public class ItemType {
 		
 		return "/master/ItemTypeCheck";
 	}
+	
+	/*
+	 * 1. 'ITEM_TYPE_VALUE' 테이블을 참조하되,
+	 * 2. 호재님에게 받은 nutrist.csv 파일의 영양성분 컬럼명을 'ITEM_TYPE_KEY'에서 고유명사의 문구를 찾는다...
+	 * 3. 메서드를 작성하여 고유명사를 이용해서 key를 찾도록 하고, 그에 맞는 'ITEM_TYPE_VALUE' 테이블의 값을 가져와, 표 형식의 LIST를 만든다.
+	 * 4. 이 때 표에는 유니크 제조번호 값, 영양성분 24개의 컬럼이 있어야한다.
+	 * 
+	 * 1. 'ITEM_TYPE_VALUE' 테이블 값을 LIST로 가져온다.
+	 * 2. 
+	 */
+	@RequestMapping("/RetrunValueList.do")
+	public String RetrunValueList() {
+		ItemTypeValueDTO itvdto;
+		ItemKeyValueDTO ikvdto;
+		List list = dao.selectList("item_type.selectTypeValue");
+		for(int i = 0; i < list.size(); i++) {
+			itvdto = (ItemTypeValueDTO)list.get(i);
+			if(itvdto.getKey_1()!= 0) {
+				
+			}
+				
+		}
+		
+		
+		return "/master/ItemTypeCheck";
+	}
+	
+	// dto 받아와서 key검사해서 참조테이블로 확인해야함.. 
+	public void KeyCheck(ItemTypeValueDTO dto) {
+		if(dto.getKey_1() != 0) {
+			dto.getKey_1();
+		}
+	}
+	
+	// int 받아서 Item_Type_Key 테이블에서 관련 num 이있는지 체크해야됨.
+	public void KeyNumberCheck(int num) {
+		String [] arr = {"비타민A", "비타민 A", "비타민B", "비타민 B", "비타민C", "비타민C",
+						"비타민D", "비타민 D", "비타민E", "비타민 E", "비타민K", "비타민 K",
+						"정제어", "루테인", "칼슘", "바이오틱스", "콜라겐", "홍삼", "마그네슘",
+						"미네랄", "아연", "비오틴", "밀크씨슬", "철(고시형)", "프로폴리스",
+						"아미노산", ""};
+		dao.selectOne(null);
+	}
 }

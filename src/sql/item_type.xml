@@ -26,6 +26,9 @@
 	<select id = "selectType" resultType="ItemTypeDTO">
 		select * from ITEM_TYPE order by to_number(PRDLST_REPORT_NO)
 	</select>
+	<select id = "selectTypeValue" resultType="ItemTypeValueDTO">
+		select * from ITEM_TYPE_VALUE
+	</select>
 	<select id = "selectVC" resultType="ItemTypeValueCheckDTO" parameterType="int">
 		select * from ITEM_TYPE_VALUECHECK where MAINTYPE = #{ELE_COUNT}
 	</select>
