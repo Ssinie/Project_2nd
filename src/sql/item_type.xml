@@ -23,6 +23,11 @@
 		#{num},#{element}
 		)
 	</insert>
+	<insert id = "InsertItem_Search_Keys">
+		insert into ITEM_SEARCH_KEYS (INDEXED,SEARCHSTRING,KEY) values(
+		#{INDEXED},#{ELEMENT},#{NUM}
+		)
+	</insert>
 	<select id = "selectType" resultType="ItemTypeDTO">
 		select * from ITEM_TYPE order by to_number(PRDLST_REPORT_NO)
 	</select>
@@ -35,4 +40,24 @@
 	<select id = "" resultType="int" parameterType="String">
 		select NUM from ITEM_TYPE_KEY where ELEMENT = #{element}
 	</select>
+	<!-- ITEM_SEARCH_KEY 테이블에서 컬럼정보를 가져오기 위함 -->
+	<select id = "SearchKeyFind" resultType="HashMap">
+		select indexed, searchstring from item_search_key
+	</select>
+	<!-- ITEM_SEARCH_KEYS 테이블에서 key값이 x 인 INDEX를 찾기위함 -->
+	<select id = "SearchKeysFindIndex" resultType="int">
+		select INDEXED from item_search_keys where key=#{key};
+	</select>
+	<!-- ITEM_TYPE_KEY 테이블에서 전달받은 내용의 갯수를 찾기위함.(selectList, selectOne 분별위해..) -->
+	<select id = "SearchKeyCount" resultType="int" parameterType="String">
+		select count(*) from item_type_key where element like '%'||#{SEARCHSTRING}||'%'
+	</select>
+	<!-- ITEM_TYPE_KEY 테이블에서 관련 원재료의 key를 찾기위함 -->
+	<select id = "SearchKeyLike" resultType="HashMap" parameterType="String">
+		select * from item_type_key where element like '%'||#{SEARCHSTRING}||'%'
+	</select>
+	<!-- 테이블 정보 삽입 시 기존의 정보를 초기화 하기 위함 -->
+	<delete id = "deleteSearchKeys">
+		delete from ITEM_SEARCH_KEYS
+	</delete>
 </mapper>

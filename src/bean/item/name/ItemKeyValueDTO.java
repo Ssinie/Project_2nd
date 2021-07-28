@@ -28,6 +28,35 @@ public class ItemKeyValueDTO {
 	 * gammalinolenic : INDEX 22 : 감마 리놀레산
 	 */
 	
+	
+	// 기본값을 넣어주기 위한 기본 생성자
+	public ItemKeyValueDTO() {
+		this.vitaA = 0;
+		this.vitaB = 0;
+		this.vitaC = 0;
+		this.vitaD = 0;
+		this.vitaE = 0;
+		this.vitaK = 0;
+		this.omega3 = 0;
+		this.lutein = 0;
+		this.probiotics = 0;
+		this.calcium = 0;
+		this.collagen = 0;
+		this.redGinseng = 0;
+		this.magnesium = 0;
+		this.mineral = 0;
+		this.zinc = 0;
+		this.biotin = 0;
+		this.milkthistle = 0;
+		this.irom = 0;
+		this.propolis = 0;
+		this.amino = 0;
+		this.dietryfiber = 0;
+		this.gammalinolenic = 0;
+		
+	}
+	
+	
 	private double vitaA;
 	private double vitaB;
 	private double vitaC;
@@ -50,6 +79,29 @@ public class ItemKeyValueDTO {
 	private double amino;
 	private double dietryfiber;
 	private double gammalinolenic;
+	
+	public void addVitaA(double vitaA) {this.vitaA = this.vitaA + vitaA;}
+	public void addVitaB(double vitaB) {this.vitaB = this.vitaB + vitaB;}
+	public void addvitaC(double vitaC) {this.vitaC = this.vitaC + vitaC;}
+	public void addvitaD(double vitaD) {this.vitaD = this.vitaD + vitaD;}
+	public void addvitaE(double vitaE) {this.vitaE = this.vitaE + vitaE;}
+	public void addvitaK(double vitaK) {this.vitaK = this.vitaK + vitaK;}
+	public void addomega3(double omega3) {this.omega3 = this.omega3 + omega3;}
+	public void addlutein(double lutein) {this.lutein = this.lutein + lutein;}
+	public void addprobiotics(double probiotics) {this.probiotics = this.probiotics + probiotics;}
+	public void addcalcium(double calcium) {this.calcium = this.calcium + calcium;}
+	public void addcollagen(double collagen) {this.collagen = this.collagen + collagen;}
+	public void addredGinseng(double redGinseng) {this.redGinseng = this.redGinseng + redGinseng;}
+	public void addmagnesium(double magnesium) {this.magnesium = this.magnesium + magnesium;}
+	public void addmineral(double mineral) {this.mineral = this.mineral + mineral;}
+	public void addzinc(double zinc) {this.zinc = this.zinc + zinc;}
+	public void addbiotin(double biotin) {this.biotin = this.biotin + biotin;}
+	public void addmilkthistle(double milkthistle) {this.milkthistle = this.milkthistle + milkthistle;}
+	public void addirom(double irom) {this.irom = this.irom + irom;}
+	public void addpropolis(double propolis) {this.propolis = this.propolis + propolis;}
+	public void addamino(double amino) {this.amino = this.amino + amino;}
+	public void adddietryfiber(double dietryfiber) {this.dietryfiber = this.dietryfiber + dietryfiber;}
+	public void addgammalinolenic(double gammalinolenic) {this.gammalinolenic = this.gammalinolenic + gammalinolenic;}
 	
 	public double getVitaA() {
 		return vitaA;
