@@ -72,4 +72,17 @@ public class qBeanImp implements qBeanInter{
     public void pInsert(pDTO dto) throws Exception{
     	mybatis.insert("question.pInsert", dto) ;	
     }
+    
+    public List<qDTO> getBoardList(qDTO dto) {
+    	return mybatis.selectList("question.getBoardList", dto);
+    }
+    
+    public qDTO getBoard(qDTO dto) {
+    	return mybatis.selectOne("question.getBoard", dto);
+    }
+	
+	public void updateBoard(qDTO dto) {
+		mybatis.update("question.updateBoard", dto);
+		
+	}
 }

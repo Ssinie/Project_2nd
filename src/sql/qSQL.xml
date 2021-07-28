@@ -40,4 +40,45 @@
 	<select id = "qSelect21" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 21</select>
 	
 	<select id = "qValue" resultType = "vDTO" parameterType = "String">select nutri01, val01, nutri02, val02 from question_value where qnum = #{value}</select>
+
+	<resultMap id="qDTOResult" type="qDTO">
+		<result property="num" column="num" />
+		<result property="title" column="title" />
+		<result property="contents01" column="contents01" />
+		<result property="contents02" column="contents02" />
+		<result property="contents03" column="contents03" />
+		<result property="contents04" column="contents04" />
+		<result property="contents05" column="contents05" />
+		<result property="contents06" column="contents06" />	
+		<result property="contents07" column="contents07" />
+		<result property="contents08" column="contents08" />
+		<result property="contents09" column="contents09" />
+		<result property="contents10" column="contents10" />
+		<result property="dates" column="dates" />
+	</resultMap>
+
+	<select id="getBoardList" resultMap="qDTOResult">
+	select * from QUESTION order by num asc
+	</select>
+	
+	<select id="getBoard" resultType="qDTO">
+		select * from QUESTION where num = #{num}
+	</select>
+	
+	<update id="updateBoard">
+		update QUESTION set
+		title = #{title},
+		contents01 = #{contents01},
+		contents02 = #{contents02},
+		contents03 = #{contents03},
+		contents04 = #{contents04},
+		contents05 = #{contents05},
+		contents06 = #{contents06},
+		contents07 = #{contents07},
+		contents08 = #{contents08},
+		contents09 = #{contents09},
+		contents10 = #{contents10},
+		dates = sysdate
+		where num = #{num}
+	</update>
 </mapper>

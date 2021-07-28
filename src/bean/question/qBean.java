@@ -267,4 +267,33 @@ public class qBean {
 		}
     	return vList ;
     }
+    
+    //인선- 설문지 내용 리스트
+    @RequestMapping("getBoardList.do")
+    public String getBoardList(qDTO dto, Model model) {
+    	model.addAttribute("boardList", service.getBoardList(dto));
+    	return "/question/getBoardList";
+    }
+    
+    //인선- 설문지 내용 상세화면
+    @RequestMapping("getBoard.do")
+    public String getBoard(qDTO dto, Model model) {
+    	model.addAttribute("board", service.getBoard(dto));
+    	return "/question/getBoard";
+    }
+    
+    //인선- 설문지 내용 수정화면
+    @RequestMapping("updateBoard.do")
+    public String updateBoardView(qDTO dto, Model model) {
+    	model.addAttribute("board", service.getBoard(dto));
+    	return "/question/updateBoard";
+    }
+    
+    //인선- 설문지 내용 수정Pro
+    @RequestMapping("updateBoardPro.do")
+    public String updateBoard(qDTO dto) {
+    	service.updateBoard(dto);
+    	return "redirect:/question/getBoardList.do";
+    }
+    
 }
