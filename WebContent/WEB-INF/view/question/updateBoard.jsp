@@ -62,11 +62,6 @@
 		<td bgcolor="lightblue" align="center">Contents10</td>
 		<td><input style="width:700px;" type="text" id="contents10" name="contents10" value="${board.contents10 }"/></td>
 	</tr>
-		<tr>
-		<td bgcolor="lightblue" align="center">등록날짜</td>
-		<td><input style="width:700px;" type="text" id="dates" name="dates" 
-					value="<fmt:formatDate value="${board.dates }" pattern="yyyy-MM-dd" />"/></td>
-	</tr>
 	<tr>
 		<td colspan="2" align="center">
 			<input type="submit" value="수정">
