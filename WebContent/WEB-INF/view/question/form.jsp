@@ -47,7 +47,7 @@
 			<input type = "checkbox" name = "contents" value = "1-7" onclick = "c02_6_show();">${question.contents07}<br/>
 			<input type = "checkbox" name = "contents" value = "1-8" onclick = "c02_7_show();">${question.contents08}<br/>
 			<input type = "checkbox" name = "contents" value = "1-9" onclick = "c02_8_show();">${question.contents09}<br/>
-			<input type = "checkbox" name = "contents" value = null>${question.contents10}<br/>
+			<input type = "checkbox" name = "contents" value = "5-1">${question.contents10}<br/>
 		</c:if>
 	</c:forEach>
 	<br/>
@@ -187,7 +187,7 @@
 	<c:forEach var = "question" items = "${qSelect13}">
 		03. ${question.title}<br/>
 		<c:if test = "${question != null}">
-			<input type = "checkbox" name = "contents" value = null>${question.contents01}<br/>
+			<input type = "checkbox" name = "contents" value = "5-1">${question.contents01}<br/>
 			<input type = "checkbox" name = "contents" value = "3-1">${question.contents02}<br/>
 			<input type = "checkbox" name = "contents" value = "3-2">${question.contents03}<br/>
 		</c:if>
@@ -210,7 +210,7 @@
 			<input type = "checkbox" name = "contents" value = "5-1">${question.contents01}<br/>
 			<input type = "checkbox" name = "contents" value = "5-2">${question.contents02}<br/>
 			<input type = "checkbox" name = "contents" value = "5-3">${question.contents03}<br/>
-			<input type = "checkbox" name = "contents" value = null>${question.contents05}<br/>
+			<input type = "checkbox" name = "contents" value = "5-1">${question.contents05}<br/>
 		</c:if>
 	</c:forEach>
 	<br/>
@@ -223,7 +223,7 @@
 			<input type = "checkbox" name = "contents" value = "6-3">${question.contents04}<br/>
 			<input type = "checkbox" name = "contents" value = "6-4">${question.contents05}<br/>
 			<input type = "checkbox" name = "contents" value = "6-5">${question.contents06}<br/>
-			<input type = "checkbox" name = "contents" value = null>${question.contents07}<br/>
+			<input type = "checkbox" name = "contents" value = "5-1">${question.contents07}<br/>
 		</c:if>
 	</c:forEach>
 	<br/>
@@ -234,7 +234,7 @@
 			<input type = "checkbox" name = "contents" value = "7-1">${question.contents01}<br/>
 			<input type = "checkbox" name = "contents" value = "7-2">${question.contents02}<br/>
 			<input type = "checkbox" name = "contents" value = "7-3">${question.contents03}<r/>
-			<input type = "checkbox" name = "contents" value = null>${question.contents04}<br/>
+			<input type = "checkbox" name = "contents" value = "5-1">${question.contents04}<br/>
 		</c:if>
 	</c:forEach>
 	<br/>
@@ -245,7 +245,7 @@
 				08. ${question.title}<br/>
 				<input type = "checkbox" name = "contents" value = "8-1">${question.contents01}<br/>
 				<input type = "checkbox" name = "contents" value = "8-2">${question.contents02}<br/>
-				<input type = "checkbox" name = "contents" value = null>${question.contents03}<br/>
+				<input type = "checkbox" name = "contents" value = "5-1">${question.contents03}<br/>
 			</c:if>
 		</c:forEach>
 		<br/>

@@ -2,7 +2,7 @@ package bean.question;
 
 public class vDTO {
 	private String qnum ;
-	private String nuri01 ;
+	private String nutri01 ;
 	private int val01 ;
 	private String nutri02 ;
 	private int val02 ;
@@ -14,10 +14,10 @@ public class vDTO {
 		this.qnum = qnum;
 	}
 	public String getNutri01() {
-		return nuri01;
+		return nutri01;
 	}
-	public void setNutri01(String nuri01) {
-		this.nuri01 = nuri01;
+	public void setNutri01(String nutri01) {
+		this.nutri01 = nutri01;
 	}
 	public int getVal01() {
 		return val01;
@@ -43,4 +43,5 @@ public class vDTO {
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
+
 }
