@@ -6,11 +6,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -289,33 +289,96 @@ public class ItemType {
 	public String RetrunValueList() {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
+		KeyNumberCheck();
 		List list = dao.selectList("item_type.selectTypeValue");
 		for(int i = 0; i < list.size(); i++) {
 			itvdto = (ItemTypeValueDTO)list.get(i);
+			ikvdto = new ItemKeyValueDTO();
+			// key1이 0이 아니면 value를 찾아서... 값을 넣어줘야함.
 			if(itvdto.getKey_1()!= 0) {
-				
+				ikvdto = dtoFactoring(itvdto);
 			}
+			
 				
 		}
 		
 		
 		return "/master/ItemTypeCheck";
 	}
+	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
+	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto) {
+		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
+		int key = itvdto.getKey_1();
+		Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+		switch(index) {
+			case 1 : ikvdto.setVitaA(itvdto.getValue_1());break;
+			case 2 : ikvdto.setVitaB(itvdto.getValue_1());break;
+			case 3 : ikvdto.setVitaC(itvdto.getValue_1());break;
+			case 4 : ikvdto.setVitaD(itvdto.getValue_1());break;
+			case 5 : ikvdto.setVitaE(itvdto.getValue_1());break;
+			case 6 : ikvdto.setVitaK(itvdto.getValue_1());break;
+			case 7 : ikvdto.setOmega3(itvdto.getValue_1());break;
+			case 8 : ikvdto.setLutein(itvdto.getValue_1());break;
+			case 9 : ikvdto.setProbiotics(itvdto.getValue_1());break;
+			case 10 : ikvdto.setCalcium(itvdto.getValue_1());break;
+			case 11 : ikvdto.setCollagen(itvdto.getValue_1());break;
+			case 12 : ikvdto.setRedGinseng(itvdto.getValue_1());break;
+			case 13 : ikvdto.setMagnesium(itvdto.getValue_1());break;
+			case 14 : ikvdto.setMineral(itvdto.getValue_1());break;
+			case 15 : ikvdto.setZinc(itvdto.getValue_1());break;
+			case 16 : ikvdto.setBiotin(itvdto.getValue_1());break;
+			case 17 : ikvdto.setMilkthistle(itvdto.getValue_1());break;
+			case 18 : ikvdto.setIrom(itvdto.getValue_1());break;
+			case 19 : ikvdto.setPropolis(itvdto.getValue_1());break;
+			case 20 : ikvdto.setAmino(itvdto.getValue_1());break;
+			case 21 : ikvdto.setDietryfiber(itvdto.getValue_1());break;
+			case 22 : ikvdto.setGammalinolenic(itvdto.getValue_1());break;
+			default : System.out.println("해당없음");
+		}
+		return ikvdto;
+	}
 	
 	// dto 받아와서 key검사해서 참조테이블로 확인해야함.. 
-	public void KeyCheck(ItemTypeValueDTO dto) {
+	// 정제작업을 마치고 return값을 ItemKeyValueDTO 로 전달해준다..
+	// key값이 0이 아니면,  
+	public ItemKeyValueDTO KeyCheck(ItemTypeValueDTO dto) {
+		ItemKeyValueDTO ikvDto = null;
 		if(dto.getKey_1() != 0) {
 			dto.getKey_1();
 		}
+		
+		return ikvDto;
 	}
 	
-	// int 받아서 Item_Type_Key 테이블에서 관련 num 이있는지 체크해야됨.
-	public void KeyNumberCheck(int num) {
-		String [] arr = {"비타민A", "비타민 A", "비타민B", "비타민 B", "비타민C", "비타민C",
-						"비타민D", "비타민 D", "비타민E", "비타민 E", "비타민K", "비타민 K",
-						"정제어", "루테인", "칼슘", "바이오틱스", "콜라겐", "홍삼", "마그네슘",
-						"미네랄", "아연", "비오틴", "밀크씨슬", "철(고시형)", "프로폴리스",
-						"아미노산", ""};
-		dao.selectOne(null);
+	// item_search_key 테이블의 key값을 넣어주는 작업...
+	public void KeyNumberCheck() {
+		HashMap searchDto;
+		Integer count;
+		List list;
+		List eleList;
+		String indexed;
+		dao.delete("item_type.deleteSearchKeys");
+		list = dao.selectList("item_type.SearchKeyFind");
+		for(int i =0; i < list.size(); i++) {
+			searchDto = (HashMap)list.get(i);
+			count = dao.selectOne("item_type.SearchKeyCount",searchDto.get("SEARCHSTRING"));
+			indexed = searchDto.get("INDEXED").toString();
+			if(count > 1) {
+				eleList = dao.selectList("item_type.SearchKeyLike",searchDto.get("SEARCHSTRING"));
+				for(int l = 0; l < eleList.size(); l++) {
+					searchDto = (HashMap)eleList.get(l);
+					searchDto.put("INDEXED", indexed);
+					dao.insert("item_type.InsertItem_Search_Keys",searchDto);
+				}
+			}else if(count == 1){
+				searchDto = dao.selectOne("item_type.SearchKeyLike",searchDto.get("SEARCHSTRING"));
+				searchDto.put("INDEXED", indexed);
+				dao.insert("item_type.InsertItem_Search_Keys",searchDto);
+			}else {
+				System.out.println("-------null-------");
+				System.out.println(searchDto);
+				System.out.println("-------null끝-------");
+			}
+		}
 	}
 }
