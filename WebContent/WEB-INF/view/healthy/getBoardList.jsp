@@ -11,6 +11,7 @@
 <body>
 <center>
 <h1>게시글 목록</h1>
+<br>
 <a href="insertBoardV.ns">새글 등록</a>
 <a href="crawling.ns">크롤링 하기</a>
 <br>
@@ -29,7 +30,7 @@
 	<c:if test="${board.writer eq 'naver' }"> 
 		<td align="left"><a href="${board.content }">${board.title }</a></td>
 	</c:if>
-	<c:if test="${board.writer ne 'naver' }"> 
+	<c:if test="${board.writer ne 'naver' }">
 		<td align="left"><a href="getBoard.ns?num=${board.num }">${board.title }</a></td>
 	</c:if>
 	<td align="center">${board.writer }</td>

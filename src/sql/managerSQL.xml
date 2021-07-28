@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manager" >
+	<resultMap id="ManagerDTOResult" type="ManagerDTO">
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
+		<result property="name" column="NAME" />
+		<result property="department" column="DEPARTMENT" />
+		<result property="gender" column="GENDER" />
+		<result property="mail" column="MAIL" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />	
+		<result property="regdate" column="REGDATE" />
+		<result property="updateDate" column="UPDATEDATE" />
+	</resultMap>
+	
+	<insert id="register">
+		INSERT INTO T_MANAGER_BOARD(ID, PASSWORD, NAME, DEPARTMENT, GENDER, MAIL, PHONE, ADDRESS, REGDATE, UPDATEDATE, VERIFY, STATUS)
+		VALUES(#{id},
+		#{password },
+		#{name},
+		#{department, jdbcType=VARCHAR},
+		#{gender},
+		#{mail, jdbcType=VARCHAR},
+		#{phone, jdbcType=VARCHAR},
+		#{address, jdbcType=VARCHAR},
+		sysdate,
+		sysdate,
+		9,
+		99)
+	</insert>
+	
+	
+	<select id="loginCheck" resultType="ManagerDTO" parameterType="ManagerDTO">
+		SELECT *
+		FROM T_MANAGER_BOARD
+		WHERE ID = #{id}
+		AND PASSWORD = #{password}   
+	</select>
+	
+	
+	<select id="getManager" resultType="ManagerDTO">
+		select * from T_MANAGER_BOARD where ID = #{id}
+	</select>
+	
+	
+	<select id="getBoardList" resultMap="ManagerDTOResult">
+		SELECT * 
+		FROM T_MANAGER_BOARD
+		ORDER BY REGDATE DESC
+	</select>
+	
+	<update id="updateManager">
+		UPDATE T_MANAGER_BOARD SET
+		NAME = #{name},
+		DEPARTMENT = #{department},
+		GENDER = #{gender},
+		MAIL = #{mail},
+		PHONE = #{phone},
+		ADDRESS = #{address},
+		UPDATEDATE = sysdate
+		where ID = #{id}
+	</update>
+	
+	<update id="exUpdate">
+		update T_MANAGER_BOARD set
+		STATUS = 90,
+		UPDATEDATE = sysdate
+		where ID = #{id}
+	</update>
+	
+	<insert id="exInsert">
+		insert into T_EXMANAGER_BOARD(id, password, name, department, gender, mail, phone, address, verify, status, exdate)
+		select id, password, name, department, gender, mail, phone, address, verify, status, sysdate from T_MANAGER_BOARD
+		where ID = #{id}
+	</insert>
+	
+	<delete id="exDelete">
+		delete T_MANAGER_BOARD
+		where ID = #{id}
+	</delete>
+	
+	<select id="idChk" resultType="int" parameterType="ManagerDTO">
+		select COUNT(*) from T_MANAGER_BOARD
+		where ID = #{id}
+	</select>
+	
+	<update id="pwUdate">
+		update T_MANAGER_BOARD set
+		PASSWORD = #{password}
+		where ID = #{id}
+	</update>
+</mapper>

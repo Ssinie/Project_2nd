@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 //http://localhost:8080/Project_2nd/healthyTip.ns
 @Controller
 @SessionAttributes("board")
-	public class HealthyController {	
+@RequestMapping("/healthy/")
+public class HealthyController {	
 	@Autowired
 	private BoardService boardService;
 	
@@ -34,8 +35,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 	@RequestMapping("insertBoard.ns")
 	public String insertBoard(HealthyDTO dto) {
 		boardService.insertBoard(dto);
+		System.out.println("입력"+ dto);
 		//return "/healthy/getBoardList";
-		return "redirect:/getBoardList.ns"; 
+		return "redirect:/healthy/getBoardList.ns"; 
 	}
 	
 	
@@ -46,21 +48,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 	
 	
 	@RequestMapping("updateBoard.ns")
-	public String updateBoard(HealthyDTO dto) {
+	public String updateBoard(@ModelAttribute("board") HealthyDTO dto) {
 		boardService.updateBoard(dto);
 		//return "getBoardList.ns";
-		return "redirect:/getBoardList.ns";
+		return "redirect:/healthy/getBoardList.ns";
 	}
 	
 	@RequestMapping("deleteBoard.ns")
 	public String deleteBoard(HealthyDTO dto) {
 		boardService.deleteBoard(dto);
-		return "redirect:/getBoardList.ns";
+		System.out.println("삭제버튼 눌름" + dto);
+		return "redirect:/healthy/getBoardList.ns";
 	}
 	
 	@RequestMapping("getBoard.ns")
 	public String getBoard(HealthyDTO dto, Model model) {
 		model.addAttribute("board", boardService.getBoard(dto));
+		System.out.println("get보드클릭" + dto);
 		return "/healthy/getBoard";
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("crawling")
+@RequestMapping("/healthy/")
 public class CrawlingController {
 	@Autowired
 	private CrawlingService crawlingService;
@@ -68,7 +69,7 @@ public class CrawlingController {
 			conn.close();
 		}
 		//return "/healthy/getBoardList";
-		return "redirect:/getBoardList.ns"; 
+		return "redirect:/healthy/getBoardList.ns"; 
 	}
 	
 	
