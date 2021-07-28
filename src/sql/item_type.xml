@@ -46,7 +46,7 @@
 	</select>
 	<!-- ITEM_SEARCH_KEYS 테이블에서 key값이 x 인 INDEX를 찾기위함 -->
 	<select id = "SearchKeysFindIndex" resultType="int">
-		select INDEXED from item_search_keys where key=#{key};
+		select INDEXED from item_search_keys where key = #{key}
 	</select>
 	<!-- ITEM_TYPE_KEY 테이블에서 전달받은 내용의 갯수를 찾기위함.(selectList, selectOne 분별위해..) -->
 	<select id = "SearchKeyCount" resultType="int" parameterType="String">

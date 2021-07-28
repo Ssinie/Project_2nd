@@ -286,56 +286,103 @@ public class ItemType {
 	 * 2. 
 	 */
 	@RequestMapping("/RetrunValueList.do")
-	public String RetrunValueList() {
+	public String RetrunValueList(Model model) {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
 		KeyNumberCheck();
 		List list = dao.selectList("item_type.selectTypeValue");
+		List result = new ArrayList();
 		for(int i = 0; i < list.size(); i++) {
 			itvdto = (ItemTypeValueDTO)list.get(i);
 			ikvdto = new ItemKeyValueDTO();
-			// key1이 0이 아니면 value를 찾아서... 값을 넣어줘야함.
-			if(itvdto.getKey_1()!= 0) {
-				ikvdto = dtoFactoring(itvdto);
-			}
 			
-				
+			ikvdto = dtoFactoring(itvdto);
+			ikvdto.setPRDLST_REPORT_NO(itvdto.getPRDLST_REPORT_NO());
+			
+			result.add(ikvdto);
 		}
-		
-		
-		return "/master/ItemTypeCheck";
+		model.addAttribute("list",list);
+		return "/master/ItemListInput";
 	}
 	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
 	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto) {
 		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
-		int key = itvdto.getKey_1();
-		Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-		switch(index) {
-			case 1 : ikvdto.setVitaA(itvdto.getValue_1());break;
-			case 2 : ikvdto.setVitaB(itvdto.getValue_1());break;
-			case 3 : ikvdto.setVitaC(itvdto.getValue_1());break;
-			case 4 : ikvdto.setVitaD(itvdto.getValue_1());break;
-			case 5 : ikvdto.setVitaE(itvdto.getValue_1());break;
-			case 6 : ikvdto.setVitaK(itvdto.getValue_1());break;
-			case 7 : ikvdto.setOmega3(itvdto.getValue_1());break;
-			case 8 : ikvdto.setLutein(itvdto.getValue_1());break;
-			case 9 : ikvdto.setProbiotics(itvdto.getValue_1());break;
-			case 10 : ikvdto.setCalcium(itvdto.getValue_1());break;
-			case 11 : ikvdto.setCollagen(itvdto.getValue_1());break;
-			case 12 : ikvdto.setRedGinseng(itvdto.getValue_1());break;
-			case 13 : ikvdto.setMagnesium(itvdto.getValue_1());break;
-			case 14 : ikvdto.setMineral(itvdto.getValue_1());break;
-			case 15 : ikvdto.setZinc(itvdto.getValue_1());break;
-			case 16 : ikvdto.setBiotin(itvdto.getValue_1());break;
-			case 17 : ikvdto.setMilkthistle(itvdto.getValue_1());break;
-			case 18 : ikvdto.setIrom(itvdto.getValue_1());break;
-			case 19 : ikvdto.setPropolis(itvdto.getValue_1());break;
-			case 20 : ikvdto.setAmino(itvdto.getValue_1());break;
-			case 21 : ikvdto.setDietryfiber(itvdto.getValue_1());break;
-			case 22 : ikvdto.setGammalinolenic(itvdto.getValue_1());break;
-			default : System.out.println("해당없음");
+		if(itvdto.getKey_1() != 0) {
+			int key = itvdto.getKey_1();
+			System.out.println(key);
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_1(), ikvdto, index);
+		}else if(itvdto.getKey_2() != 0) {
+			int key = itvdto.getKey_2();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_2(), ikvdto, index);
+		}else if(itvdto.getKey_3() != 0) {
+			int key = itvdto.getKey_3();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_3(), ikvdto, index);
+		}else if(itvdto.getKey_4() != 0) {
+			int key = itvdto.getKey_4();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_4(), ikvdto, index);
+		}else if(itvdto.getKey_5() != 0) {
+			int key = itvdto.getKey_5();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_5(), ikvdto, index);
+		}else if(itvdto.getKey_6() != 0) {
+			int key = itvdto.getKey_6();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_6(), ikvdto, index);
+		}else if(itvdto.getKey_7() != 0) {
+			int key = itvdto.getKey_7();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_7(), ikvdto, index);
+		}else if(itvdto.getKey_8() != 0) {
+			int key = itvdto.getKey_8();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_8(), ikvdto, index);
+		}else if(itvdto.getKey_9() != 0) {
+			int key = itvdto.getKey_9();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_9(), ikvdto, index);
+		}else if(itvdto.getKey_10() != 0) {
+			int key = itvdto.getKey_10();
+			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+			switchIndex(itvdto.getValue_10(), ikvdto, index);
+		}else {
+			System.out.println("잘못된 키 값");
 		}
+		
 		return ikvdto;
+	}
+	
+	public void switchIndex(double values, ItemKeyValueDTO ikvdto, Integer index) {
+		if(index != null) {
+			switch(index) {
+			case 1 : ikvdto.addVitaA(values);break;
+			case 2 : ikvdto.addVitaB(values);break;
+			case 3 : ikvdto.addVitaC(values);break;
+			case 4 : ikvdto.addVitaD(values);break;
+			case 5 : ikvdto.addVitaE(values);break;
+			case 6 : ikvdto.addVitaK(values);break;
+			case 7 : ikvdto.addOmega3(values);break;
+			case 8 : ikvdto.addLutein(values);break;
+			case 9 : ikvdto.addProbiotics(values);break;
+			case 10 : ikvdto.addCalcium(values);break;
+			case 11 : ikvdto.addCollagen(values);break;
+			case 12 : ikvdto.addRedGinseng(values);break;
+			case 13 : ikvdto.addMagnesium(values);break;
+			case 14 : ikvdto.addMineral(values);break;
+			case 15 : ikvdto.addZinc(values);break;
+			case 16 : ikvdto.addBiotin(values);break;
+			case 17 : ikvdto.addMilkthistle(values);break;
+			case 18 : ikvdto.addIrom(values);break;
+			case 19 : ikvdto.addPropolis(values);break;
+			case 20 : ikvdto.addAmino(values);break;
+			case 21 : ikvdto.addDietryfiber(values);break;
+			case 22 : ikvdto.addGammalinolenic(values);break;
+			default : System.out.println("해당없음");break;
+			}
+		}
 	}
 	
 	// dto 받아와서 key검사해서 참조테이블로 확인해야함.. 
