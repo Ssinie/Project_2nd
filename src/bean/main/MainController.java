@@ -88,18 +88,48 @@ public class MainController {
 		return result;
 	}
 	
-	/* 카테고리별 상품목록 */
+	/* 
+	 * [상품목록]
+	 * 
+	 *  
+	 */
 	@RequestMapping("productlist.ns")
-	public String productList(@RequestParam("category") String category, Model model) throws Exception {
+	public String productList(@RequestParam("category") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model) throws Exception {
 		
 		model.addAttribute("category", category);
+		model.addAttribute("pageNum", pageNum);
+		
+		dto.setCategory(category);
+		
+		int pageSize = 9;
+		if(pageNum.equals("null")) {
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		dto.setStartRow(startRow);
+		dto.setEndRow(endRow);
+		
+		int pdCount = mainDAO.getPdCount(category);
+		
+		
+		if(pdCount > 0) {
+			List productList = mainDAO.getCatePd(dto);
+			model.addAttribute("productList", productList);
+		}
 		
 		List categoryList = mainDAO.getCategory();
 		model.addAttribute("categoryList", categoryList);
 		
-		List productList = mainDAO.getCatePd(category);
-		model.addAttribute("productList", productList);
+		List productBest = mainDAO.getCateBest(category);
+		model.addAttribute("productBest", productBest);
 		
+		model.addAttribute("pdCount", pdCount);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("currentPage", currentPage);
+	
 		return "/product/productList";
 	}
 	
@@ -108,8 +138,11 @@ public class MainController {
 		
 		return "/product/search";
 	}
-
 	
+	@RequestMapping("test.ns")
+	public String test() {
+		return "/product/shop-grid";
+	}
 }
 
 

@@ -39,8 +39,18 @@ public class MainDAOImpl implements MainDAOInter {
 	}
 
 	@Override
-	public List getCatePd(String category) throws Exception {
-		return dao.selectList("main.getCatePd", category);
+	public List getCatePd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getCatePd", dto);
+	}
+
+	@Override
+	public List getCateBest(String category) throws Exception {
+		return dao.selectList("main.getCateBest", category);
+	}
+
+	@Override
+	public int getPdCount(String category) throws Exception {
+		return dao.selectOne("main.getPdCount", category);
 	}
 	
 }
