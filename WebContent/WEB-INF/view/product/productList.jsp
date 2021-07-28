@@ -222,13 +222,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Nutrient Sunday</h2>
+                    <!-- <div class="breadcrumb__text">
+                        <h2>${category}</h2>
                         <div class="breadcrumb__option">
-                            <a href="main.ns">Home</a>
-                            <span>Shop</span>
+                            <a href="#"></a>
+                            <span></span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -404,15 +404,16 @@
                 <div class="col-lg-9 col-md-7">
                    <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>${category}</h2>
-                        <!-- </div>
+                            <h2>Best</h2>
+                        </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
-                                <div class="col-lg-4">
+                            <c:forEach var="dto" items="${productBest}">
+                            	<div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
-                                            data-setbg="img/product/discount/pd-1.jpg">
-                                            <div class="product__discount__percent">-20%</div>
+                                            data-setbg="${dto.imgurl}">
+                                            <div class="product__discount__percent">HOT</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -420,13 +421,15 @@
                                             </ul>
                                         </div>
                                         <div class="product__discount__item__text">
-                                            <span>Dried Fruit</span>
-                                            <h5><a href="#">Raisin’n’nuts</a></h5>
-                                            <div class="product__item__price">$30.00 <span>$36.00</span></div>
+                                            <span></span>
+                                            <h5><a href="#">${dto.name}</a></h5>
+                                            <div class="product__item__price"><span></span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                            </c:forEach>
+                                
+                                <!-- <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
                                             data-setbg="img/product/discount/pd-2.jpg">
@@ -515,12 +518,12 @@
                                             <div class="product__item__price">$30.00 <span>$36.00</span></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                    
-                   <!-- <div class="filter__item">
+                   <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
@@ -533,7 +536,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6><span>${pdCount}</span> 개의 상품</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -543,11 +546,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     
                     <div class="row">
                     
-                        <c:forEach var="dto" items="${productList}" varStatus="status">
+                    <c:if test="${pdCount == 0}">
+                   		상품이 존재하지 않습니다.
+                    </c:if>
+                    
+                    <c:if test="${pdCount != 0}">
+                    	<c:forEach var="dto" items="${productList}" varStatus="status">
 	                    	<div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
@@ -564,15 +572,38 @@
 	                            </div>
 	                        </div>
 	                    </c:forEach>
+                    </c:if>
+                        
 
                     </div>
                     
                     <!-- 페이징 처리 -->
                     <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                    <%-- <c:forEach var="num" items=""></c:forEach>  --%>
+                    
+                    <c:if test="${pdCount > 0}">
+                    	<c:set var="pageCount" value="${pdCount / pageSize + (pdCount%pageSize == 0 ? 0:1)}" />
+                    	<c:set var="pageBlock" value="${10}" />
+                    	<fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />
+                    	<c:set var="startPage" value="${result * 10 + 1}" />
+                    	<c:set var="endPage" value="${startPage + pageBlock -1}" />
+                    	<c:if test="${endPage > pageCount}">
+                    		<c:set var="endPage" value="${pageCount}" />
+                    	</c:if>
+                    	<c:if test="${startPage > 10}">
+                    		<a href="productlist.ns?category=${category}&pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>
+                    	</c:if>
+                    	
+                    	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+                    		<a href="productlist.ns?category=${category}&pageNum=${i}">${i}</a>
+                    	</c:forEach>
+                    	
+                    	<c:if test="${endPage < pageCount}">
+                    		<a href="productlist.ns?category=${category}&pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>
+                    	</c:if>
+
+                    </c:if>
+                        
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@
 		<typeAlias type = "bean.item.name.ItemTypeValueCheckDTO" alias = "ItemTypeValueCheckDTO"/>
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.main.ProductDTO" alias = "productDTO" />
+		<typeAlias type = "bean.main.ProductListDTO" alias = "productListDTO" />
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
 		<typeAlias type = "bean.manager.ManagerDTO" alias = "ManagerDTO" />

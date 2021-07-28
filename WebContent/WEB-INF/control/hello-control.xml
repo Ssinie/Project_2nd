@@ -32,7 +32,8 @@
    <bean id = "memberDAOImpl" class="bean.main.MemberDAOImpl" /> <!-- 회원정보 DAO -->
    <bean id = "HealthyDTO" class = "bean.healthy.HealthyDTO" /> <!-- 건강TIP DTO -->
    <bean id = "HealthyDAOMybatis" class = "bean.healthy.HealthyDAOMybatis" /> <!-- 건강TIP DAO -->
-   <bean id = "productDTO" class = "bean.main.ProductDTO" /> <!-- 상품 페이지 id, num DTO -->
+   <bean id = "productDTO" class = "bean.main.ProductDTO" /> <!-- 상품 DTO -->
+   <bean id = "productListDTO" class = "bean.main.ProductListDTO" /> <!-- 상품목록 DTO -->
    <bean id = "ManagerDTO" class = "bean.manager.ManagerDTO" /> <!-- 관리자 DTO -->
    <bean id = "ManagerDAOMybatis" class = "bean.manager.ManagerDAOMybatis" /> <!-- 관리자 DAO -->
    <!-- <bean id = "UserManagerDTO" class = "bean.userManager.UserManagerDTO" />  -->
