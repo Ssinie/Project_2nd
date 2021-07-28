@@ -6,8 +6,8 @@ import bean.question.qBeanInter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -154,7 +154,51 @@ public class qBean {
     	}
     	// vList의 크기 만큼, key의 유무를 따져 중복이면 그 값만큼 더하고 집어 넣는다.
     	// 중복이 아니면 null값 체크 후 넣는다.
-    	HashMap<String, String> vMap = new HashMap() ;
+    	// TreeMap 으로 영양소 알파벳 순서대로 집어 넣는다.
+    	TreeMap<String, Integer> vMap = new TreeMap<String, Integer>() ;
+    	// 영양소 기본값 셋팅.
+    	vMap.put("vitaminA", 0) ;
+        vMap.put("vitaminB", 0) ;
+        vMap.put("vitaminC", 0) ;
+        vMap.put("vitaminD", 0) ;
+        vMap.put("vitaminE", 0) ;
+        vMap.put("vitaminK", 0) ;
+        vMap.put("omega3", 0) ;
+        vMap.put("lutein", 0) ;
+        vMap.put("probiotic", 0) ;
+        vMap.put("calcium", 0) ;
+        vMap.put("collagen", 0) ;
+        vMap.put("redginseng", 0) ;
+        vMap.put("magnesium", 0) ;
+        vMap.put("mineral", 0) ;
+        vMap.put("zinc", 0) ;
+        vMap.put("biotin", 0) ;
+        vMap.put("milkthistle", 0) ;
+        vMap.put("iron", 0) ;
+        vMap.put("phosphorus", 0) ;
+        vMap.put("propolis", 0) ;
+        vMap.put("amino", 0) ;
+        vMap.put("dietryfiber", 0) ;
+        vMap.put("gammalinolenic", 0) ;
+        vMap.put("selenium", 0) ;
+    	System.out.println(vMap) ;
+    	
+    	for(int i = 0 ; i < vList.size(); i++) {
+    		dto = vList.get(i) ;
+    		int value = vMap.get(dto.getNutri01()) ;
+	        value = value + dto.getVal01() ;
+	        vMap.put(dto.getNutri01(), value) ;
+    	}
+    	
+    	for(int i = 0 ; i < vList.size(); i++) {
+    		dto = vList.get(i) ;
+    		if(dto.getNutri02() != null) {
+	    		int value02 = vMap.get(dto.getNutri02()) ;
+		        value02 = value02 + dto.getVal02() ;
+		        vMap.put(dto.getNutri02(), value02) ;
+    		}
+    	}
+    	/* 	
     	for(int i = 0 ; i < vList.size() ; i++){
     		dto = vList.get(i) ;
 	    	if(vMap.containsKey(dto.getNutri01())) {
@@ -163,8 +207,6 @@ public class qBean {
 	    	} else if (dto.getNutri01() != null) {
 	    		dto.setVal01(dto.getVal01());
 	    		vMap.put(dto.getNutri01(), dto.getVal01() + "") ;
-	    	} else {
-	    		
 	    	}
 	    	if(vMap.containsKey(dto.getNutri02()) || dto.getNutri02() != null) {
 	    		dto.setVal02(dto.getVal02() + dto.getVal02());
@@ -174,70 +216,19 @@ public class qBean {
 	    		vMap.put(dto.getNutri02(), dto.getVal02() + "") ;
 	    	}
     	}
-    	
-    	// 훈련데이터 만들 리스트 만들기. 체크값 외 값들 '0' 입력.
-    	String vitaminA = vMap.get("vitaminA") ;
-    	String vitaminB = vMap.get("vitaminB") ;
-    	String vitaminC = vMap.get("vitaminC") ;
-    	String vitaminD = vMap.get("vitaminD") ;
-    	String vitaminE = vMap.get("vitaminE") ;
-    	String vitaminK = vMap.get("vitaminK") ;
-    	String lutein = vMap.get("lutein") ;
-    	String probiotic = vMap.get("probiotic") ;
-    	String calcium = vMap.get("calcium") ;
-    	String collagen = vMap.get("collagen") ;
-    	String redginseng = vMap.get("redginseng") ;
-    	String magnesium = vMap.get("magnesium") ;
-    	String mineral = vMap.get("mineral") ;
-    	String zinc = vMap.get("zinc") ;
-    	String biotin = vMap.get("biotin") ;
-    	String cabbage = vMap.get("cabbage") ;
-    	String milkthistle = vMap.get("milkthistle") ;
-    	String iron = vMap.get("iron") ;
-    	String phosphorus = vMap.get("phosphorus") ;
-    	String Propolis = vMap.get("Propolis") ;
-    	String amino = vMap.get("amino") ;
-    	String dietryfiber = vMap.get("dietryfiber") ;
-    	String gammalinolenic = vMap.get("gammalinolenic") ;
-    	
-    	if(vitaminA == null) {vMap.put("vitaminA", "0") ;}
-    	if (vitaminB == null){vMap.put("vitaminB", "0") ;}
-    	if (vitaminC == null) {vMap.put("vitaminC", "0") ;}
-    	if (vitaminD == null) {vMap.put("vitaminD", "0") ;}
-    	if (vitaminE == null) {vMap.put("vitaminE", "0") ;}
-    	if (vitaminK == null) {vMap.put("vitaminK", "0") ;}
-    	if (lutein == null) {vMap.put("lutein", "0") ;}
-    	if (probiotic == null) {vMap.put("probiotic", "0") ;}
-    	if (calcium == null) {vMap.put("calcium", "0") ;}
-    	if (collagen == null) {vMap.put("collagen", "0") ;}
-    	if (redginseng == null) {vMap.put("redginseng", "0") ;}
-    	if (magnesium == null) {vMap.put("magnesium", "0") ;}
-    	if (mineral == null) {vMap.put("mineral", "0") ;}
-    	if (zinc == null) {vMap.put("zinc", "0") ;}
-    	if (biotin == null) {vMap.put("biotin", "0") ;}
-    	if (cabbage == null) {vMap.put("cabbage", "0") ;}
-    	if (milkthistle == null) {vMap.put("milkthistle", "0") ;}
-    	if (iron == null) {vMap.put("iron", "0") ;}
-    	if (phosphorus == null) {vMap.put("phosphorus", "0") ;}
-    	if (Propolis == null) {vMap.put("Propolis", "0") ;}
-    	if (amino == null) {vMap.put("amino", "0") ;}
-    	if (dietryfiber == null) {vMap.put("dietryfiber", "0") ;}
-    	if (gammalinolenic == null) {vMap.put("gammalinolenic", "0") ;}
-    	
+    	*/
     	System.out.println(vMap) ;
     	
-    	// vMap을 List로 변환.
-    	List<String> nutriList = new ArrayList<>(vMap.keySet());
-    	List<String> valueList = new ArrayList<>(vMap.values());
-    	
-    	// List 한것을 다시 배열로 변환.......
-    	String[] nutriList02 = nutriList.toArray(new String[nutriList.size()]);
-    	String[] valueList02 = valueList.toArray(new String[valueList.size()]);
-    	
-    	System.out.println(Arrays.toString(nutriList02)) ;
-    	System.out.println(Arrays.toString(valueList02)) ;
-    	
-    	// R 연결 및 dataframe화.
+    	Object obj[] = vMap.keySet().toArray() ;
+        Object val[] = vMap.values().toArray() ;
+        String [] nutriList = new String[obj.length] ;
+        String [] valueList = new String[val.length] ;
+        for(int i = 0 ; i < obj.length ; i ++) {
+           nutriList[i] = (String)obj[i];
+           valueList[i] = val[i] + "";
+        }
+        // System.out.println(Arrays.toString(valueList)) ;
+    	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
 			conn = new RConnection() ;
@@ -246,19 +237,36 @@ public class qBean {
 	    	
 	    	//, length(pValue)
 	    	// + "assign(pValue[i],i)"
-	    	conn.assign("nutriList", nutriList02) ;
-	    	conn.assign("valueList", valueList02) ;
-	    	conn.eval("library('stringr')") ;
-	    	conn.eval("valueList <- as.numeric(valueList)") ;
-	    	conn.eval("nutriList <- c(nutriList)") ;
-	    	conn.eval("valueList <- c(valueList)") ;
+	    	/*
+	    	conn.assign("nutriList", nutriList) ;
+	    	conn.assign("valueList", valueList) ;
 	    	conn.eval("print(nutriList)") ;
 	    	conn.eval("str(nutriList)") ;
 	    	conn.eval("print(valueList)") ;
 	    	conn.eval("str(valueList)") ;
-	    	conn.eval("") ;
-	    	conn.eval("myList <- data.frame(nutriList = valueList)") ;
-	    	conn.eval("print(myList)") ;
+	    	conn.eval("library('stringr')") ;
+	    	conn.eval("valueList <- as.numeric(valueList)") ;
+	    	conn.eval("valueList <- c(valueList)") ;
+	    	conn.eval("print(valueList)") ;
+	    	conn.eval("str(valueList)") ;
+	    	*/
+	    	conn.eval("myList <- data.frame(amino = '"+valueList[0]+"', biotin = '"+valueList[1]+"', calcium = '"+valueList[2]+"', collagen = '"+valueList[3]+"', dietryfiber = '"+valueList[4]+"', gammalinolenic = '"+valueList[5]+"', "
+	    			+ "iron = '"+valueList[6]+"', lutein = '"+valueList[7]+"', magnesium = '"+valueList[8]+"', milkthistle = '"+valueList[9]+"', mineral = '"+valueList[10]+"', omega3 = '"+valueList[11]+"', phosphorus = '"+valueList[12]+"', "
+	    			+ "probiotic = '"+valueList[13]+"', propolis = '"+valueList[14]+"', redginseng = '"+valueList[15]+"', selenium = '"+valueList[16]+"', vitaminA = '"+valueList[17]+"', vitaminB = '"+valueList[18]+"', "
+	    			+ "vitaminC = '"+valueList[19]+"', vitaminD = '"+valueList[20]+"', vitaminE = '"+valueList[21]+"', vitaminK = '"+valueList[22]+"', zinc = '"+valueList[23]+"')") ;
+	    	conn.eval("v <- as.numeric(myList[1, 1:24])") ;
+	    	conn.eval("ml <- data.frame(amino = v[1], biotin = v[2], calcium = v[3], collagen = v[4], dietryfiber = v[5],"
+	    								+ "gammalinolenic = v[6], iron = v[7], lutein = v[8], magnesium = v[9], milkthistle = v[10],"
+	    								+ "mineral = v [11], omega3 = v[12], phosphorus = v[13], probiotic = v[14],"
+	    								+ "propolis = v[15], redginseng = v[16], selenium = v[17], vitaminA = v[18], vitaminB = v[19],"
+	    								+ "vitaminC = v[20], vitaminD = v[21], vitaminE = v[22], vitaminK = v[23], zinc = v[24])") ;
+	    	conn.eval("print(ml)") ;
+	    	conn.eval("str(ml)") ;
+	    	// conn.eval("ml <- data.frame(amino = valueList[1])") ;
+	    	// conn.eval("print(ml") ;
+	    	// conn.eval("str(ml)") ;
+	    	// conn.eval("myList <- data.frame("+nutriList+" = "+valueList+"") ;
+	    	// conn.eval("print(myList)") ;
 	    	// conn.eval("pList <- strsplit(pValue, split = '#')") ;
 	    	// conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
 	    	// conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
@@ -267,7 +275,6 @@ public class qBean {
 		}
     	return vList ;
     }
-    
     //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
     public String getBoardList(qDTO dto, Model model) {
@@ -295,5 +302,4 @@ public class qBean {
     	service.updateBoard(dto);
     	return "redirect:/question/getBoardList.do";
     }
-    
 }
