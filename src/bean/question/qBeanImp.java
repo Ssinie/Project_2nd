@@ -85,4 +85,17 @@ public class qBeanImp implements qBeanInter{
 		mybatis.update("question.updateBoard", dto);
 		
 	}
+	
+	public List<vDTO> getValueList(vDTO dto) {
+		return mybatis.selectList("question.getValueList", dto);
+	}
+	
+	public vDTO getValue(vDTO dto) {
+		return mybatis.selectOne("question.getValue", dto);
+	}
+	
+	public void updateValue(vDTO dto) {
+		mybatis.update("question.updateValue", dto);
+		
+	}
 }

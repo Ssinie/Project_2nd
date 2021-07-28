@@ -302,4 +302,33 @@ public class qBean {
     	service.updateBoard(dto);
     	return "redirect:/question/getBoardList.do";
     }
+    
+    //인선- QUESTION_VALUE 리스트
+    @RequestMapping("getValueList.do")
+    public String getValueList(vDTO dto, Model model) {
+    	model.addAttribute("boardList", service.getValueList(dto));
+    	return "/question/getValueList";
+    }
+    
+    //인선- QUESTION_VALUE 상세화면
+    @RequestMapping("getValue.do")
+    public String getValue(vDTO dto, Model model) {
+    	model.addAttribute("board", service.getValue(dto));
+    	return "question/getValue";
+    }
+    
+    //인선- QUESTION_VALUE 수정화면
+    @RequestMapping("updateValue.do")
+    public String updateValueView(vDTO dto, Model model) {
+    	model.addAttribute("board", service.getValue(dto));
+    	return "/question/updateValue";
+    }
+    
+    //인선- QUESTION_VALUE 수정Pro
+    @RequestMapping("updateValuePro.do")
+    public String updateValue(vDTO dto) {
+    	service.updateValue(dto);
+    	return "redirect:/question/getValueList.do";
+    }
+    
 }

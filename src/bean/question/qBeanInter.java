@@ -33,7 +33,13 @@ public interface qBeanInter {
 
 	List<qDTO> getBoardList(qDTO dto);
 	
+	List<vDTO> getValueList(vDTO dto);
+	
 	qDTO getBoard(qDTO dto);
 	
+	vDTO getValue(vDTO dto);
+	
 	void updateBoard(qDTO dto);
+	
+	void updateValue(vDTO dto);
 }

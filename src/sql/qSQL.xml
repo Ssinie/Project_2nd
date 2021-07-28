@@ -56,13 +56,30 @@
 		<result property="contents10" column="contents10" />
 		<result property="dates" column="dates" />
 	</resultMap>
+	
+	<resultMap id="vDTOResult" type="vDTO">
+		<result property="qnum" column="qnum" />
+		<result property="nutri01" column="nutri01" />
+		<result property="val01" column="val01" />
+		<result property="nutri02" column="nutri02" />
+		<result property="val02" column="val02" />
+		<result property="seq" column="seq" />
+	</resultMap>
 
 	<select id="getBoardList" resultMap="qDTOResult">
-	select * from QUESTION order by num asc
+		select * from QUESTION order by num asc
+	</select>
+	
+	<select id="getValueList" resultMap="vDTOResult">
+		select * from QUESTION_VALUE order by seq asc
 	</select>
 	
 	<select id="getBoard" resultType="qDTO">
 		select * from QUESTION where num = #{num}
+	</select>
+	
+	<select id="getValue" resultType="vDTO">
+		select * from QUESTION_VALUE where seq = #{seq}
 	</select>
 	
 	<update id="updateBoard">
@@ -80,5 +97,14 @@
 		contents10 = #{contents10},
 		dates = sysdate
 		where num = #{num}
+	</update>
+	
+	<update id="updateValue">
+		update QUESTION_VALUE set
+		nutri01 = #{nutri01},
+		val01 = #{val01},
+		nutri02 = #{nutri02},
+		val02 = #{val02}
+		where seq = #{seq}
 	</update>
 </mapper>
