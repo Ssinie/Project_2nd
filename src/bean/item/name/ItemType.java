@@ -48,50 +48,54 @@ public class ItemType {
 		String result = "";
 		ItemTypeDTO dto = null;
 		try {
-			
-			System.out.println("URL 입력 시작");
-			URL url = new URL("https://openapi.foodsafetykorea.go.kr/api/"+key+"/C003/json/51/100");
-			
-			BufferedReader bf;
-			System.out.println("bf에 담음");
-			bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-	
-			result = bf.readLine();
-			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-			JSONObject itemTypeResult = (JSONObject)jsonObject.get("C003");
-			JSONArray itemArray = (JSONArray)itemTypeResult.get("row");
-			String [] count;
-			List arr;
-			
-			for(int i =0; i < itemArray.size(); i++) {
-				JSONObject itemInfo = (JSONObject)itemArray.get(i);
-				arr = new ArrayList();
-				dto = new ItemTypeDTO();
-				dto.setLCNS_NO(itemInfo.get("LCNS_NO").toString());
-				dto.setPRMS_DT(itemInfo.get("PRMS_DT").toString());
-				dto.setPRDLST_REPORT_NO(itemInfo.get("PRDLST_REPORT_NO").toString());
-				dto.setCRET_DTM(itemInfo.get("CRET_DTM").toString());
-				dto.setLAST_UPDT_DTM(itemInfo.get("LAST_UPDT_DTM").toString());
-				dto.setBSSH_NM(itemInfo.get("BSSH_NM").toString());
-				dto.setPRDLST_NM(itemInfo.get("PRDLST_NM").toString());
-				dto.setNTK_MTHD(itemInfo.get("NTK_MTHD").toString());
-				dto.setRAWMTRL_NM(itemInfo.get("RAWMTRL_NM").toString());
-				dto.setPOG_DAYCNT(itemInfo.get("POG_DAYCNT").toString());
-				dto.setPRIMARY_FNCLTY(itemInfo.get("PRIMARY_FNCLTY").toString());
-				dto.setCSTDY_MTHD(itemInfo.get("CSTDY_MTHD").toString());
-				dto.setIFTKN_ATNT_MATR_CN(itemInfo.get("IFTKN_ATNT_MATR_CN").toString());
-				dto.setSTDR_STND(itemInfo.get("STDR_STND").toString());
-				dto.setDISPOS(itemInfo.get("DISPOS").toString());
-				dto.setSHAP(itemInfo.get("SHAP").toString());
+			for(int j = 1; j <= 100; j++) {
+				int StartNum = (j * 10) + 1;
+				int EndNum = (j * 10) + 10;
+				System.out.println("URL 입력 시작");
+				URL url = new URL("https://openapi.foodsafetykorea.go.kr/api/"+key+"/C003/json/"+StartNum+"/"+EndNum);
 				
-				count = dto.getRAWMTRL_NM().split(",");
-				for(String v : count) {
-					arr.add(v);
-				}
-				dto.setELE_COUNT(arr.size());
-				dao.insert("item_type.insert",dto);
-				System.out.println(i+"번째 입력종료");
+				BufferedReader bf;
+				System.out.println("bf에 담음");
+				bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+		
+				result = bf.readLine();
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
+				JSONObject itemTypeResult = (JSONObject)jsonObject.get("C003");
+				JSONArray itemArray = (JSONArray)itemTypeResult.get("row");
+				String [] count;
+				List arr;
+				
+				for(int i =0; i < itemArray.size(); i++) {
+					JSONObject itemInfo = (JSONObject)itemArray.get(i);
+					arr = new ArrayList();
+					dto = new ItemTypeDTO();
+					dto.setLCNS_NO(itemInfo.get("LCNS_NO").toString());
+					dto.setPRMS_DT(itemInfo.get("PRMS_DT").toString());
+					dto.setPRDLST_REPORT_NO(itemInfo.get("PRDLST_REPORT_NO").toString());
+					dto.setCRET_DTM(itemInfo.get("CRET_DTM").toString());
+					dto.setLAST_UPDT_DTM(itemInfo.get("LAST_UPDT_DTM").toString());
+					dto.setBSSH_NM(itemInfo.get("BSSH_NM").toString());
+					dto.setPRDLST_NM(itemInfo.get("PRDLST_NM").toString());
+					dto.setNTK_MTHD(itemInfo.get("NTK_MTHD").toString());
+					dto.setRAWMTRL_NM(itemInfo.get("RAWMTRL_NM").toString());
+					dto.setPOG_DAYCNT(itemInfo.get("POG_DAYCNT").toString());
+					dto.setPRIMARY_FNCLTY(itemInfo.get("PRIMARY_FNCLTY").toString());
+					dto.setCSTDY_MTHD(itemInfo.get("CSTDY_MTHD").toString());
+					dto.setIFTKN_ATNT_MATR_CN(itemInfo.get("IFTKN_ATNT_MATR_CN").toString());
+					dto.setSTDR_STND(itemInfo.get("STDR_STND").toString());
+					dto.setDISPOS(itemInfo.get("DISPOS").toString());
+					dto.setSHAP(itemInfo.get("SHAP").toString());
+					
+					count = dto.getRAWMTRL_NM().split(",");
+					for(String v : count) {
+						arr.add(v);
+					}
+					dto.setELE_COUNT(arr.size());
+					dao.insert("item_type.insert",dto);
+					System.out.println(i+"번째 입력종료");
+			}
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
