@@ -301,12 +301,144 @@ public class ItemType {
 			
 			result.add(ikvdto);
 		}
-		model.addAttribute("list",list);
+		model.addAttribute("result",result);
 		return "/master/ItemListInput";
 	}
 	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
 	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto) {
 		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
+		Integer count;
+		Integer index;
+		List arr;
+		for(int i = 1; i <= 10; i ++) {
+			System.out.println("품번 : "+itvdto.getPRDLST_REPORT_NO()+" "+i+"번째 값 찾는중..");
+			switch(i) {
+				case 1 : 
+					if(itvdto.getKey_1() != 0) {int key = itvdto.getKey_1();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_1(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_1(), ikvdto, index);}}break;
+						
+				case 2 : 
+					if(itvdto.getKey_2() != 0) {int key = itvdto.getKey_2();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_2(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_2(), ikvdto, index);}}break;
+						
+				case 3 : 
+					if(itvdto.getKey_3() != 0) {int key = itvdto.getKey_3();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_3(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_3(), ikvdto, index);}}break;
+						
+				case 4 : 
+					if(itvdto.getKey_4() != 0) {int key = itvdto.getKey_4();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_4(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_4(), ikvdto, index);}}break;
+						
+				case 5 : 
+					if(itvdto.getKey_5() != 0) {int key = itvdto.getKey_5();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_5(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_5(), ikvdto, index);}}break;
+						
+				case 6 : 
+					if(itvdto.getKey_6() != 0) {int key = itvdto.getKey_6();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_6(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_6(), ikvdto, index);}}break;
+						
+				case 7 : 
+					if(itvdto.getKey_7() != 0) {int key = itvdto.getKey_7();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_7(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_7(), ikvdto, index);}}break;
+						
+				case 8 : 
+					if(itvdto.getKey_8() != 0) {int key = itvdto.getKey_8();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_8(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_8(), ikvdto, index);}}break;
+						
+				case 9 : 
+					if(itvdto.getKey_9() != 0) {int key = itvdto.getKey_9();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_9(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_9(), ikvdto, index);}}break;
+						
+				case 10 : 
+					if(itvdto.getKey_10() != 0) {int key = itvdto.getKey_10();
+					count = dao.selectOne("item_type.SearchKeysFindCount", key);
+					if(count > 1) {
+						arr = dao.selectList("item_type.SearchKeysFindIndex", key);
+						for(int j = 0; j < arr.size(); j++) {
+							index = (Integer)arr.get(j);
+							switchIndex(itvdto.getValue_10(), ikvdto, index);}
+					}else {
+						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
+						switchIndex(itvdto.getValue_10(), ikvdto, index);}}break;
+						
+				default : break;
+			}
+				
+		}
+		
+		/*
 		if(itvdto.getKey_1() != 0) {
 			int key = itvdto.getKey_1();
 			System.out.println(key);
@@ -351,6 +483,7 @@ public class ItemType {
 		}else {
 			System.out.println("잘못된 키 값");
 		}
+		*/
 		
 		return ikvdto;
 	}

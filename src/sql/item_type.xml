@@ -48,6 +48,9 @@
 	<select id = "SearchKeysFindIndex" resultType="int">
 		select INDEXED from item_search_keys where key = #{key}
 	</select>
+	<select id = "SearchKeysFindCount" resultType="int">
+		select count(*) from item_search_keys where key = #{key}
+	</select>
 	<!-- ITEM_TYPE_KEY 테이블에서 전달받은 내용의 갯수를 찾기위함.(selectList, selectOne 분별위해..) -->
 	<select id = "SearchKeyCount" resultType="int" parameterType="String">
 		select count(*) from item_type_key where element like '%'||#{SEARCHSTRING}||'%'
