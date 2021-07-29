@@ -45,5 +45,9 @@
 		select count(*) from item_name where name like '%' || #{keyword} || '%'
 	</select>
 	
+	<select id="getPd" parameterType="int" resultType="productDTO">
+		select name, imgurl from item_name where num=#{num}
+	</select>
+	
 </mapper>
 

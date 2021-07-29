@@ -47,6 +47,9 @@ public class MainController {
 		String id = (String)session.getAttribute("sessionId");
 		model.addAttribute("id", id);
 		
+		List pdList = mainDAO.getPd(num);
+		model.addAttribute("pdList", pdList);
+		
 		dto.setId(id);
 		dto.setNum(num);
 		
