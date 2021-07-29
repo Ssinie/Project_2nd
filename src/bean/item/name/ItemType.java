@@ -304,7 +304,7 @@ public class ItemType {
 			itvdto = (ItemTypeValueDTO)list.get(i);
 			ikvdto = new ItemKeyValueDTO();
 			
-			ikvdto = dtoFactoring(itvdto);
+			ikvdto = dtoFactoring(itvdto, dao);
 			ikvdto.setPRDLST_REPORT_NO(itvdto.getPRDLST_REPORT_NO());
 			
 			result.add(ikvdto);
@@ -313,7 +313,7 @@ public class ItemType {
 	}
 	
 	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
-	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto) {
+	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto, SqlSessionTemplate dao) {
 		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
 		Integer count;
 		Integer index;
