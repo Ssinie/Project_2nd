@@ -21,9 +21,14 @@ public class MainController {
 	@Autowired
 	private MainDAOImpl mainDAO = null;
 	
+	@RequestMapping("index.ns")
+	public String index(Model model) throws Exception {
+		
+		return "/main/index";
+	}
+	
 	@RequestMapping("main.ns")
 	public String main(HttpSession session, Model model) throws Exception {
-		System.out.println("main_sessionId = "+session.getAttribute("sessionId"));
 		
 		List categoryList = mainDAO.getCategory();
 		model.addAttribute("categoryList", categoryList);
@@ -41,7 +46,6 @@ public class MainController {
 		model.addAttribute("num", num);
 		
 		String id = (String)session.getAttribute("sessionId");
-		System.out.println("product_sessionId = "+id);
 		model.addAttribute("id", id);
 		
 		dto.setId(id);
