@@ -3,6 +3,7 @@ package bean.question;
 import bean.question.pDTO;
 import bean.question.qDTO;
 import bean.question.qBeanInter;
+import bean.item.name.ItemType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,8 @@ public class qBean {
 	
 	@Autowired
 	private SqlSession session ;
+	@Autowired
+	private SqlSessionTemplate sessions ;
 	private String Namespace = "question" ;
 	
 	// DB에서 컬럼 지문출력.
@@ -143,12 +147,12 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public List<vDTO> qResult(HttpServletRequest request, vDTO dto) throws Exception{
+    public String qResult(HttpServletRequest request, vDTO dto) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	String [] pValue = request.getParameterValues("contents") ;
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
     	for(String v : pValue) {
-    		System.out.println(v) ;
+    		System.out.println("----------" + "질문 답변 : " + v + "----------") ;
     		vDTO dto02 = session.selectOne("question.qValue", v) ;
     		vList.add(dto02) ;
     	}
@@ -175,13 +179,13 @@ public class qBean {
         vMap.put("biotin", 0) ;
         vMap.put("milkthistle", 0) ;
         vMap.put("iron", 0) ;
-        vMap.put("phosphorus", 0) ;
+        // vMap.put("phosphorus", 0) ;
         vMap.put("propolis", 0) ;
         vMap.put("amino", 0) ;
         vMap.put("dietryfiber", 0) ;
         vMap.put("gammalinolenic", 0) ;
-        vMap.put("selenium", 0) ;
-    	System.out.println(vMap) ;
+        // vMap.put("selenium", 0) ;
+    	// System.out.println(vMap) ;
     	
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
@@ -217,7 +221,7 @@ public class qBean {
 	    	}
     	}
     	*/
-    	System.out.println(vMap) ;
+    	System.out.println("선택된 영양소 : " + vMap) ;
     	
     	Object obj[] = vMap.keySet().toArray() ;
         Object val[] = vMap.values().toArray() ;
@@ -227,13 +231,18 @@ public class qBean {
            nutriList[i] = (String)obj[i];
            valueList[i] = val[i] + "";
         }
-        // System.out.println(Arrays.toString(valueList)) ;
+        
+        // ItemType 클래스의 ReturnValueList 메소드 호출.
+        ItemType it = new ItemType() ; 
+        List result = it.ReturnValueList(sessions);
+    	System.out.println(result) ;
+        
     	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
 			conn = new RConnection() ;
 			REXP x = conn.eval("R.version.string") ;
-	    	System.out.println("R version : " + x.asString()) ;
+	    	// System.out.println("R version : " + x.asString()) ;
 	    	
 	    	//, length(pValue)
 	    	// + "assign(pValue[i],i)"
@@ -251,15 +260,15 @@ public class qBean {
 	    	conn.eval("str(valueList)") ;
 	    	*/
 	    	conn.eval("myList <- data.frame(amino = '"+valueList[0]+"', biotin = '"+valueList[1]+"', calcium = '"+valueList[2]+"', collagen = '"+valueList[3]+"', dietryfiber = '"+valueList[4]+"', gammalinolenic = '"+valueList[5]+"', "
-	    			+ "iron = '"+valueList[6]+"', lutein = '"+valueList[7]+"', magnesium = '"+valueList[8]+"', milkthistle = '"+valueList[9]+"', mineral = '"+valueList[10]+"', omega3 = '"+valueList[11]+"', phosphorus = '"+valueList[12]+"', "
-	    			+ "probiotic = '"+valueList[13]+"', propolis = '"+valueList[14]+"', redginseng = '"+valueList[15]+"', selenium = '"+valueList[16]+"', vitaminA = '"+valueList[17]+"', vitaminB = '"+valueList[18]+"', "
-	    			+ "vitaminC = '"+valueList[19]+"', vitaminD = '"+valueList[20]+"', vitaminE = '"+valueList[21]+"', vitaminK = '"+valueList[22]+"', zinc = '"+valueList[23]+"')") ;
-	    	conn.eval("v <- as.numeric(myList[1, 1:24])") ;
+	    			+ "iron = '"+valueList[6]+"', lutein = '"+valueList[7]+"', magnesium = '"+valueList[8]+"', milkthistle = '"+valueList[9]+"', mineral = '"+valueList[10]+"', omega3 = '"+valueList[11]+"', "
+	    			+ "probiotic = '"+valueList[12]+"', propolis = '"+valueList[13]+"', redginseng = '"+valueList[14]+"', vitaminA = '"+valueList[15]+"', vitaminB = '"+valueList[16]+"', "
+	    			+ "vitaminC = '"+valueList[17]+"', vitaminD = '"+valueList[18]+"', vitaminE = '"+valueList[19]+"', vitaminK = '"+valueList[20]+"', zinc = '"+valueList[21]+"')") ;
+	    	conn.eval("v <- as.numeric(myList[1, 1:22])") ;
 	    	conn.eval("ml <- data.frame(amino = v[1], biotin = v[2], calcium = v[3], collagen = v[4], dietryfiber = v[5],"
 	    								+ "gammalinolenic = v[6], iron = v[7], lutein = v[8], magnesium = v[9], milkthistle = v[10],"
-	    								+ "mineral = v [11], omega3 = v[12], phosphorus = v[13], probiotic = v[14],"
-	    								+ "propolis = v[15], redginseng = v[16], selenium = v[17], vitaminA = v[18], vitaminB = v[19],"
-	    								+ "vitaminC = v[20], vitaminD = v[21], vitaminE = v[22], vitaminK = v[23], zinc = v[24])") ;
+	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
+	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
+	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
 	    	conn.eval("print(ml)") ;
 	    	conn.eval("str(ml)") ;
 	    	// conn.eval("ml <- data.frame(amino = valueList[1])") ;
@@ -273,8 +282,15 @@ public class qBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return vList ;
+    	return "/question/qResult" ;
     }
+    
+    @RequestMapping("/Project_2nd/question/aResult.do")
+    public String aResult(pDTO dto, Model model) {
+    	model.addAttribute("aResult", service.aResult(dto)) ;
+    	return "/question/qResult";
+    }
+    
     //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
     public String getBoardList(qDTO dto, Model model) {

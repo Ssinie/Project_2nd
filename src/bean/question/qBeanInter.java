@@ -42,4 +42,6 @@ public interface qBeanInter {
 	void updateBoard(qDTO dto);
 	
 	void updateValue(vDTO dto);
+
+	public Object aResult(pDTO dto);
 }

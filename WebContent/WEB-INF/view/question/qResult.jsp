@@ -7,15 +7,15 @@
 <h1>qResult.</h1>
 
 <div id = result>
-	<form method = "post">
+	<form method = "post" action = "aResult.do">
 		필요 영양소:
 		추천 영양제:<br/>
-		nick: ${param.nick}<br/>
-		age: ${param.age}<br/>
+		nick: ${aResult.nick}<br/>
+		age: ${aResult.age}<br/>
 		
-		weight: ${param.weight}<br/>
-		height: ${param.height}<br/>
-		gender: ${param.gender}<br/>
+		weight: ${aResult.weight}<br/>
+		height: ${aResult.height}<br/>
+		gender: ${aResult.gender}<br/>
 		c01: ${paramValues.contents}<br/>
 		c02: ${param.contents}<br/>
 		c03: ${param.contents}<br/>
@@ -37,10 +37,10 @@
 	</form>
 </div>
 	
-	<%--
+	<!--
 		String nick = request.getParameter("nick");
 		out.println("nick : <b>"+nick+"</b><br>");
 		
 		String contents01 = request.getParameter("contents01");
 		out.println("contents01 : <b>"+contents01+"</b><br>");
-	--%>
+	-->

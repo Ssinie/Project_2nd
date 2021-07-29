@@ -39,8 +39,10 @@
 	<select id = "qSelect20" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 20</select>
 	<select id = "qSelect21" resultType = "qDTO" parameterType = "qDTO">select * from question where num = 21</select>
 	
+	<select id = "aResult" resultType = "pDTO" parameterType = "String">select nick, age, weight, height, gender from pinfo</select>
+	
 	<select id = "qValue" resultType = "vDTO" parameterType = "String">select nutri01, val01, nutri02, val02 from question_value where qnum = #{value}</select>
-
+	
 	<resultMap id="qDTOResult" type="qDTO">
 		<result property="num" column="num" />
 		<result property="title" column="title" />

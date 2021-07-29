@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,6 +27,7 @@ public class ItemType {
 
 	@Autowired
 	private SqlSessionTemplate dao = null;
+	
 	
 	/* '데이터 활용 서비스' 사이트의 '건강기능식품 품목제조신고(원재료) OpenAPI' 를 이용하여 DB에 저장하는 클래스.
 	 * www.foodsafetykorea.go.kr
@@ -284,18 +286,18 @@ public class ItemType {
 	 * 
 	 * 1. 'ITEM_TYPE_VALUE' 테이블 값을 LIST로 가져온다.
 	 * 2. 
-	 */
+	 
 	@RequestMapping("/RetrunValueList.do")
 	public String RetrunValueList(Model model) {
-		List result = ReturnValueList();
+		List result = ReturnValueList(dao);
 		model.addAttribute("result",result);
 		return "/master/ItemListInput";
 	}
-	
-	public List ReturnValueList() {
+	*/
+	public List ReturnValueList(SqlSessionTemplate dao) {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
-		KeyNumberCheck();
+		KeyNumberCheck(dao);
 		List list = dao.selectList("item_type.selectTypeValue");
 		List result = new ArrayList();
 		for(int i = 0; i < list.size(); i++) {
@@ -537,7 +539,7 @@ public class ItemType {
 	}
 	
 	// item_search_key 테이블의 key값을 넣어주는 작업...
-	public void KeyNumberCheck() {
+	public void KeyNumberCheck(SqlSessionTemplate dao) {
 		HashMap searchDto;
 		Integer count;
 		List list;

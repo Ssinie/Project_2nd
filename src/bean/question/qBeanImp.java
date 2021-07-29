@@ -98,4 +98,8 @@ public class qBeanImp implements qBeanInter{
 		mybatis.update("question.updateValue", dto);
 		
 	}
+	@Override
+	public Object aResult(pDTO dto) {
+		return mybatis.selectList("aResult", dto) ;
+	}
 }
