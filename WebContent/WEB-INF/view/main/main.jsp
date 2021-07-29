@@ -37,7 +37,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="main.ns"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -57,13 +57,20 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+				<c:choose>
+					<c:when test="${sessionId == null}">
+						<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+					</c:when>
+					<c:otherwise>
+						<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+					</c:otherwise>
+				</c:choose>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li class="active"><a href="main.ns">Home</a></li>
+                <li><a href="productlist.ns">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -123,7 +130,14 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+								<c:choose>
+									<c:when test="${sessionId == null}">
+										<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+									</c:when>
+									<c:otherwise>
+										<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+									</c:otherwise>
+								</c:choose>
                             </div>
                         </div>
                     </div>
@@ -286,11 +300,11 @@
             	<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
-                            <ul class="featured__item__pic__hover">
+                            <!-- <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#">Crab Pool Security</a></h6>

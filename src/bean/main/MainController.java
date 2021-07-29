@@ -40,9 +40,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("product.ns")
-	public String product(ProductDTO dto, HttpSession session, Model model) throws Exception{
+	public String product(@RequestParam("num") int num, ProductDTO dto, HttpSession session, Model model) throws Exception{
 		
-		int num = 723;
 		model.addAttribute("num", num);
 		
 		String id = (String)session.getAttribute("sessionId");

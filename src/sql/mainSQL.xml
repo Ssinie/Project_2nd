@@ -18,7 +18,7 @@
 	</delete>
 	
 	<select id="getMainPd" resultType="productDTO">
-		<![CDATA[select name, imgurl from (select name, imgurl from test_item order by view_count desc) where rownum <= 8]]>
+		<![CDATA[select num, name, imgurl from (select num, name, imgurl from item_name order by view_count desc) where rownum <= 8]]>
 	</select>
 	
 	<select id="getCategory" resultType="String">
@@ -26,11 +26,11 @@
 	</select>
 	
 	<select id="getCatePd" parameterType="productListDTO" resultType="productDTO">
-		<![CDATA[select name, imgurl from (select name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
+		<![CDATA[select num, name, imgurl from (select num, name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
 	</select>
 	
 	<select id="getCateBest" parameterType="String" resultType="productDTO"> <!-- 관심상품 등록순으로 변경 예정 -->
-		<![CDATA[select name, imgurl from (select name, imgurl, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
+		<![CDATA[select num, name, imgurl from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
 	</select>
 	
 	<select id="catePdCount" parameterType="String" resultType="int">
@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getSearchPd" parameterType="productListDTO" resultType="productDTO">
-		<![CDATA[select name, imgurl from (select name, imgurl, rank() over(order by view_count desc) AS rank from item_name where name like '%' || #{keyword} || '%') where rank>=#{startRow} and rank<=#{endRow}]]>
+		<![CDATA[select num, name, imgurl from (select num, name, imgurl, rank() over(order by view_count desc) AS rank from item_name where name like '%' || #{keyword} || '%') where rank>=#{startRow} and rank<=#{endRow}]]>
 	</select>
 	
 	<select id="searchPdCount" parameterType="String" resultType="int">
