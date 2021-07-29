@@ -48,7 +48,7 @@ public class ItemKeyValueDTO {
 		this.zinc = 0;
 		this.biotin = 0;
 		this.milkthistle = 0;
-		this.irom = 0;
+		this.iron = 0;
 		this.propolis = 0;
 		this.amino = 0;
 		this.dietryfiber = 0;
@@ -74,7 +74,7 @@ public class ItemKeyValueDTO {
 	private double zinc;
 	private double biotin;
 	private double milkthistle;
-	private double irom;
+	private double iron;
 	private double propolis;
 	private double amino;
 	private double dietryfiber;
@@ -97,7 +97,7 @@ public class ItemKeyValueDTO {
 	public void addZinc(double zinc) {this.zinc = this.zinc + zinc;}
 	public void addBiotin(double biotin) {this.biotin = this.biotin + biotin;}
 	public void addMilkthistle(double milkthistle) {this.milkthistle = this.milkthistle + milkthistle;}
-	public void addIrom(double irom) {this.irom = this.irom + irom;}
+	public void addIron(double irom) {this.iron = this.iron + irom;}
 	public void addPropolis(double propolis) {this.propolis = this.propolis + propolis;}
 	public void addAmino(double amino) {this.amino = this.amino + amino;}
 	public void addDietryfiber(double dietryfiber) {this.dietryfiber = this.dietryfiber + dietryfiber;}
@@ -205,11 +205,11 @@ public class ItemKeyValueDTO {
 	public void setMilkthistle(double milkthistle) {
 		this.milkthistle = milkthistle;
 	}
-	public double getIrom() {
-		return irom;
+	public double getIron() {
+		return iron;
 	}
-	public void setIrom(double irom) {
-		this.irom = irom;
+	public void setIron(double iron) {
+		this.iron = iron;
 	}
 	public double getPropolis() {
 		return propolis;

@@ -514,7 +514,7 @@ public class ItemType {
 			case 15 : ikvdto.addZinc(values);break;
 			case 16 : ikvdto.addBiotin(values);break;
 			case 17 : ikvdto.addMilkthistle(values);break;
-			case 18 : ikvdto.addIrom(values);break;
+			case 18 : ikvdto.addIron(values);break;
 			case 19 : ikvdto.addPropolis(values);break;
 			case 20 : ikvdto.addAmino(values);break;
 			case 21 : ikvdto.addDietryfiber(values);break;
