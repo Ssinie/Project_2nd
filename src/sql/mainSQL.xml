@@ -33,8 +33,16 @@
 		<![CDATA[select name, imgurl from (select name, imgurl, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
 	</select>
 	
-	<select id="getPdCount" parameterType="String" resultType="int">
+	<select id="catePdCount" parameterType="String" resultType="int">
 		select count(*) from item_name where subtag=#{category}
+	</select>
+	
+	<select id="getSearchPd" parameterType="productListDTO" resultType="productDTO">
+		<![CDATA[select name, imgurl from (select name, imgurl, rank() over(order by view_count desc) AS rank from item_name where name like '%' || #{keyword} || '%') where rank>=#{startRow} and rank<=#{endRow}]]>
+	</select>
+	
+	<select id="searchPdCount" parameterType="String" resultType="int">
+		select count(*) from item_name where name like '%' || #{keyword} || '%'
 	</select>
 	
 </mapper>

@@ -192,12 +192,12 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="search.ns">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
+                                <input type="text" name="keyword" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -218,25 +218,25 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <!-- <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <!-- <div class="breadcrumb__text">
+                    <div class="breadcrumb__text">
                         <h2>${category}</h2>
                         <div class="breadcrumb__option">
-                            <a href="#"></a>
+                            <a href="#">없음</a>
                             <span></span>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Breadcrumb Section End -->
 
     <!-- Product Section Begin -->
-    <section class="product spad">
+    <section class="product">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
@@ -422,7 +422,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span></span>
-                                            <h5><a href="#">${dto.name}</a></h5>
+                                            <h6><a href="#">${dto.name}</a></h6>
                                             <div class="product__item__price"><span></span></div>
                                         </div>
                                     </div>
@@ -536,7 +536,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>${pdCount}</span> 개의 상품</h6>
+                                    <h6><span>${catePdCount}</span> 개의 상품</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -550,11 +550,7 @@
                     
                     <div class="row">
                     
-                    <c:if test="${pdCount == 0}">
-                   		상품이 존재하지 않습니다.
-                    </c:if>
-                    
-                    <c:if test="${pdCount != 0}">
+                    <c:if test="${catePdCount != 0}">
                     	<c:forEach var="dto" items="${productList}" varStatus="status">
 	                    	<div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
@@ -566,8 +562,8 @@
 	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">
-	                                    <h6><a href="http://localhost:8080/Project_2nd/product.ns">Crab Pool Security</a></h6>
-	                                    <h5>${dto.name}</h5>
+	                                    <h6><a href="product.ns">${dto.name}</a></h6>
+	                                    <h5></h5>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -579,10 +575,9 @@
                     
                     <!-- 페이징 처리 -->
                     <div class="product__pagination">
-                    <%-- <c:forEach var="num" items=""></c:forEach>  --%>
                     
-                    <c:if test="${pdCount > 0}">
-                    	<c:set var="pageCount" value="${pdCount / pageSize + (pdCount%pageSize == 0 ? 0:1)}" />
+                    <c:if test="${catePdCount > 0}">
+                    	<c:set var="pageCount" value="${catePdCount / pageSize + (catePdCount%pageSize == 0 ? 0:1)}" />
                     	<c:set var="pageBlock" value="${10}" />
                     	<fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />
                     	<c:set var="startPage" value="${result * 10 + 1}" />

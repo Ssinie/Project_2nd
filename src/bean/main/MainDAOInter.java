@@ -25,7 +25,13 @@ public interface MainDAOInter {
 	// 카테고리별 상품목록 조회순 6개 상품명, 이미지 select --> 관심상품 등록순으로 변경 예정
 	public List getCateBest(String category) throws Exception;
 	
-	// 상품 개수 select count(*)
-	public int getPdCount(String category) throws Exception;
+	// 카테고리별 상품개수 select count(*)
+	public int catePdCount(String category) throws Exception;
+	
+	// 검색 상품목록 조회순 상품명, 이미지 select
+	public List getSearchPd(ProductListDTO dto) throws Exception;
+	
+	// 검색 상품개수 select count(*)
+	public int searchPdCount(String keyword) throws Exception;
 }
 

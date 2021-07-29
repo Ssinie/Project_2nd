@@ -31,7 +31,7 @@ public class MainController {
 		List mainList = mainDAO.getMainPd();
 		model.addAttribute("mainList", mainList);
 		
-		return "/main/index";
+		return "/main/main";
 	}
 	
 	@RequestMapping("product.ns")
@@ -112,10 +112,9 @@ public class MainController {
 		dto.setStartRow(startRow);
 		dto.setEndRow(endRow);
 		
-		int pdCount = mainDAO.getPdCount(category);
+		int catePdCount = mainDAO.catePdCount(category);
 		
-		
-		if(pdCount > 0) {
+		if(catePdCount > 0) {
 			List productList = mainDAO.getCatePd(dto);
 			model.addAttribute("productList", productList);
 		}
@@ -126,7 +125,7 @@ public class MainController {
 		List productBest = mainDAO.getCateBest(category);
 		model.addAttribute("productBest", productBest);
 		
-		model.addAttribute("pdCount", pdCount);
+		model.addAttribute("catePdCount", catePdCount);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("currentPage", currentPage);
 	
@@ -134,7 +133,41 @@ public class MainController {
 	}
 	
 	@RequestMapping("search.ns")
-	public String search(Model model) throws Exception {
+	public String search(@RequestParam("keyword") String keyword, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model) throws Exception {
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pageNum", pageNum);
+		System.out.println(keyword);
+		
+		int pageSize = 9;
+		if(pageNum.equals("null")) {
+			pageNum = "1";
+		}
+		int searchPdCount = mainDAO.searchPdCount(keyword);
+		int currentPage = Integer.parseInt(pageNum);
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		
+		dto.setKeyword(keyword);
+		dto.setStartRow(startRow);
+		dto.setEndRow(endRow);
+		
+		System.out.println("dto keyword = "+dto.getKeyword());
+		System.out.println("dto start = "+dto.getStartRow());
+		System.out.println("dto end = "+dto.getEndRow());
+		
+		if(searchPdCount > 0) {
+			List searchList = mainDAO.getSearchPd(dto);
+			model.addAttribute("searchList", searchList);
+			System.out.println(searchList);
+		}
+		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
+		model.addAttribute("searchPdCount", searchPdCount);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("currentPage", currentPage);
 		
 		return "/product/search";
 	}
