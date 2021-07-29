@@ -57,7 +57,14 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+				<c:choose>
+					<c:when test="${sessionId == null}">
+						<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+					</c:when>
+					<c:otherwise>
+						<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+					</c:otherwise>
+				</c:choose>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -123,7 +130,14 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+								<c:choose>
+									<c:when test="${sessionId == null}">
+										<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+									</c:when>
+									<c:otherwise>
+										<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+									</c:otherwise>
+								</c:choose>
                             </div>
                         </div>
                     </div>
@@ -134,13 +148,13 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="main.ns"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="main.ns">Home</a></li>
                             <li class="active"><a href="./shop-grid.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
@@ -555,14 +569,15 @@
 	                    	<div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
-	                                    <ul class="product__item__pic__hover">
+	                                	<a href="product.ns?num=${dto.num}"></a>
+	                                   <!--  <ul class="product__item__pic__hover">
 	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
 	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
 	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-	                                    </ul>
+	                                    </ul> -->
 	                                </div>
 	                                <div class="product__item__text">
-	                                    <h6><a href="product.ns">${dto.name}</a></h6>
+	                                    <h6><a href="product.ns?num=${dto.num}">${dto.name}</a></h6>
 	                                    <h5></h5>
 	                                </div>
 	                            </div>
