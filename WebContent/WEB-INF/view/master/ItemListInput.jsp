@@ -53,7 +53,7 @@
 		<td>${IKVDTO.zinc}</td>
 		<td>${IKVDTO.biotin}</td>
 		<td>${IKVDTO.milkthistle}</td>
-		<td>${IKVDTO.irom}</td>
+		<td>${IKVDTO.iron}</td>
 		<td>${IKVDTO.propolis}</td>
 		<td>${IKVDTO.amino}</td>
 		<td>${IKVDTO.dietryfiber}</td>

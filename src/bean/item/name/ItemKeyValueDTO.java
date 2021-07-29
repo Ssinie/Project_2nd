@@ -21,7 +21,7 @@ public class ItemKeyValueDTO {
 	 * zinc : INDEX 15 : 아연
 	 * biotin : INDEX 16 : 비오틴
 	 * milkthistle : INDEX 17 : 밀크씨슬
-	 * irom : INDEX 18 : 철
+	 * iron : INDEX 18 : 철
 	 * Propolis : INDEX 19 : 프로폴리스
 	 * amino : INDEX 20 : 아미노산
 	 * dietryfiber : INDEX 21 : 식이섬유
@@ -97,7 +97,7 @@ public class ItemKeyValueDTO {
 	public void addZinc(double zinc) {this.zinc = this.zinc + zinc;}
 	public void addBiotin(double biotin) {this.biotin = this.biotin + biotin;}
 	public void addMilkthistle(double milkthistle) {this.milkthistle = this.milkthistle + milkthistle;}
-	public void addIron(double irom) {this.iron = this.iron + irom;}
+	public void addIron(double iron) {this.iron = this.iron + iron;}
 	public void addPropolis(double propolis) {this.propolis = this.propolis + propolis;}
 	public void addAmino(double amino) {this.amino = this.amino + amino;}
 	public void addDietryfiber(double dietryfiber) {this.dietryfiber = this.dietryfiber + dietryfiber;}
