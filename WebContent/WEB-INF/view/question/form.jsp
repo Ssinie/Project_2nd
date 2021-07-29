@@ -4,6 +4,8 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
+<!-- 접속 주소 : http://localhost:8080/Project_2nd/question/form.do -->
+
 <script type = "text/javascript">
 	//보이기
 	function c02_show() {document.getElementById("c02").style.display = "block";}
