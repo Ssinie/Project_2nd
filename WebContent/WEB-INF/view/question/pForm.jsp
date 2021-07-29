@@ -4,6 +4,8 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
+<!-- 접속 주소 : http://localhost:8080/Project_2nd/question/pForm.do -->
+
 <h1>신상정보.</h1>
 
 <form action = "/Project_2nd/question/pInsert.do" method = "post">
