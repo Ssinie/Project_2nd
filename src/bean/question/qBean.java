@@ -3,6 +3,7 @@ package bean.question;
 import bean.question.pDTO;
 import bean.question.qDTO;
 import bean.question.qBeanInter;
+import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
 
 import java.util.ArrayList;
@@ -147,7 +148,7 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(HttpServletRequest request, vDTO dto) throws Exception{
+    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	String [] pValue = request.getParameterValues("contents") ;
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
@@ -189,9 +190,11 @@ public class qBean {
     	
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
-    		int value = vMap.get(dto.getNutri01()) ;
-	        value = value + dto.getVal01() ;
-	        vMap.put(dto.getNutri01(), value) ;
+    		if(dto.getNutri01() != null) {
+	    		int value = vMap.get(dto.getNutri01()) ;
+		        value = value + dto.getVal01() ;
+		        vMap.put(dto.getNutri01(), value) ;
+    		}
     	}
     	
     	for(int i = 0 ; i < vList.size(); i++) {
@@ -234,8 +237,21 @@ public class qBean {
         
         // ItemType 클래스의 ReturnValueList 메소드 호출.
         ItemType it = new ItemType() ; 
-        List result = it.ReturnValueList(sessions);
-    	System.out.println(result) ;
+        List resultList = it.ReturnValueList(sessions);
+    	// System.out.println(result) ;
+        
+        // List를 배열로 담기.
+        String [] ikvList = null ;
+        // = new String[resultList.size()] ;
+        for(int i = 0 ; i < resultList.size() ; i++) {
+        	ikvDto = (ItemKeyValueDTO) resultList.get(i) ;
+        	ikvList = new String[]{ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
+        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
+        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
+        	} ;
+        	System.out.println(Arrays.toString(ikvList)) ;
+        }
+        
         
     	// R 연결 및 data.frame화.
     	RConnection conn ;
