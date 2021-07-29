@@ -62,6 +62,11 @@ public class MainDAOImpl implements MainDAOInter {
 	public int searchPdCount(String keyword) throws Exception {
 		return dao.selectOne("main.searchPdCount", keyword);
 	}
+
+	@Override
+	public List getPd(int num) throws Exception {
+		return dao.selectList("main.getPd", num);
+	}
 	
 }
 

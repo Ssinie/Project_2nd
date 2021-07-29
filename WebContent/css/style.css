@@ -1660,7 +1660,7 @@ ol {
 -----------------------*/
 
 .product-details {
-	padding-top: 80px;
+	padding-top: 20px;
 }
 
 .product__details__pic__item {
@@ -1723,6 +1723,10 @@ ol {
 	color: #6f6f6f;
 	padding: 13px 16px 13px;
 	background: #f5f5f5;
+}
+
+.product__details__text .heart-icon:hover {
+	cursor: pointer;
 }
 
 .product__details__text ul {
