@@ -287,6 +287,12 @@ public class ItemType {
 	 */
 	@RequestMapping("/RetrunValueList.do")
 	public String RetrunValueList(Model model) {
+		List result = ReturnValueList();
+		model.addAttribute("result",result);
+		return "/master/ItemListInput";
+	}
+	
+	public List ReturnValueList() {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
 		KeyNumberCheck();
@@ -301,9 +307,9 @@ public class ItemType {
 			
 			result.add(ikvdto);
 		}
-		model.addAttribute("result",result);
-		return "/master/ItemListInput";
+		return result;
 	}
+	
 	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
 	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto) {
 		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
