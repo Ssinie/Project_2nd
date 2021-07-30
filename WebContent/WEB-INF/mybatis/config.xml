@@ -15,6 +15,7 @@
 		<typeAlias type = "bean.item.name.ItemTypeDTO" alias = "ItemTypeDTO"/>
 		<typeAlias type = "bean.item.name.ItemTypeValueDTO" alias = "ItemTypeValueDTO"/>
 		<typeAlias type = "bean.item.name.ItemTypeValueCheckDTO" alias = "ItemTypeValueCheckDTO"/>
+		<typeAlias type = "bean.item.name.ItemKeyValueDTO" alias = "ItemKeyValueDTO"/>
 		<typeAlias type = "bean.main.MemberDTO" alias = "memberDTO"/>
 		<typeAlias type = "bean.main.ProductDTO" alias = "productDTO" />
 		<typeAlias type = "bean.main.ProductListDTO" alias = "productListDTO" />

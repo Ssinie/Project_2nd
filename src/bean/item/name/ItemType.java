@@ -306,7 +306,12 @@ public class ItemType {
 	
 	@RequestMapping("/RetrunValueLists.do")
 	public String RetrunValueLists(Model model) {
-		List result = ReturnValueList(dao);
+		List result = ReturnValueListat(dao);
+		ItemKeyValueDTO ikvDto;
+		for(int i = 0; i < result.size(); i++) {
+			ikvDto = (ItemKeyValueDTO)result.get(i);
+			dao.insert("item_type.InsertItemTypeKeyValue",ikvDto);
+		}
 		model.addAttribute("result",result);
 		return "/master/ItemListInput";
 	}
@@ -317,7 +322,7 @@ public class ItemType {
 	 * 전달하여 준다. List 인덱스엔 'ItemKeyValueDTO' 형식의 dto가
 	 * 입력되어 전달된다.
 	 */
-	public List ReturnValueList(SqlSessionTemplate dao) {
+	public List ReturnValueListat(SqlSessionTemplate dao) {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
 		KeyNumberCheck(dao);
@@ -333,6 +338,12 @@ public class ItemType {
 			result.add(ikvdto);
 		}
 		return result;
+	}
+	
+	public List ReturnValueList(SqlSessionTemplate dao) {
+		List list = null;
+		list = dao.selectList("item_type.SelectItemKeyValue");
+		return list;
 	}
 	
 	// 전달받은 DTO정보를 이용하여 case에 맞춰 'ItemKeyValueDTO'에 정보를 담음.

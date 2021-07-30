@@ -28,6 +28,15 @@
 		#{INDEXED},#{ELEMENT},#{NUM}
 		)
 	</insert>
+	<insert id = "InsertItemTypeKeyValue" parameterType="ItemKeyValueDTO">
+		insert into ITEM_TYPE_KEYVALUE values(
+		#{PRDLST_REPORT_NO},#{vitaA},#{vitaB},#{vitaC},#{vitaD},#{vitaE},
+		#{vitaK},#{omega3},#{lutein},#{probiotics},#{calcium},#{collagen},
+		#{redGinseng},#{magnesium},#{mineral},#{zinc},#{biotin},#{milkthistle},
+		#{iron},#{propolis},#{amino},#{dietryfiber},#{gammalinolenic}
+		)
+		
+	</insert>
 	<select id = "selectType" resultType="ItemTypeDTO">
 		select * from ITEM_TYPE order by to_number(PRDLST_REPORT_NO)
 	</select>
@@ -43,6 +52,10 @@
 	<select id = "SelectKey" resultType="int" parameterType="String">
 		select NUM from ITEM_TYPE_KEY where ELEMENT = #{element}
 	</select>
+	<select id = "SelectItemKeyValue" resultType = "ItemKeyValueDTO">
+		select * from ITEM_TYPE_KEYVALUE
+	</select>
+	
 	<!-- ITEM_SEARCH_KEY 테이블에서 컬럼정보를 가져오기 위함 -->
 	<select id = "SearchKeyFind" resultType="HashMap">
 		select indexed, searchstring from item_search_key
