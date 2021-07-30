@@ -183,50 +183,37 @@ public class qBean {
         vMap.put("biotin", 0) ;
         vMap.put("milkthistle", 0) ;
         vMap.put("iron", 0) ;
-        // vMap.put("phosphorus", 0) ;
         vMap.put("propolis", 0) ;
         vMap.put("amino", 0) ;
         vMap.put("dietryfiber", 0) ;
         vMap.put("gammalinolenic", 0) ;
-        // vMap.put("selenium", 0) ;
-    	// System.out.println(vMap) ;
     	
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
+    		// System.out.println(dto.getNutri01() + "  " + dto.getVal01()) ;
     		if(dto.getNutri01() != null) {
-	    		int value = vMap.get(dto.getNutri01()) ;
-		        value = value + dto.getVal01() ;
-		        vMap.put(dto.getNutri01(), value) ;
+    			// System.out.println(vMap.get(dto.getNutri01())) ;
+    			int value = 0 ;
+    			if(vMap.get(dto.getNutri01()) != null) {
+		    		value = vMap.get(dto.getNutri01()) ;
+    			}
+    		value = value + dto.getVal01() ;
+		    vMap.put(dto.getNutri01(), value) ;
     		}
     	}
     	
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
     		if(dto.getNutri02() != null) {
-	    		int value02 = vMap.get(dto.getNutri02()) ;
-		        value02 = value02 + dto.getVal02() ;
-		        vMap.put(dto.getNutri02(), value02) ;
+    			int value02 = 0 ;
+    			if(vMap.get(dto.getNutri02()) != null) {
+		    		value02 = vMap.get(dto.getNutri02()) ;
+    			}
+	        value02 = value02 + dto.getVal02() ;
+	        vMap.put(dto.getNutri02(), value02) ;
     		}
     	}
-    	/* 	
-    	for(int i = 0 ; i < vList.size() ; i++){
-    		dto = vList.get(i) ;
-	    	if(vMap.containsKey(dto.getNutri01())) {
-	    		dto.setVal01(dto.getVal01() + dto.getVal01());
-	    		vMap.put(dto.getNutri01(), dto.getVal01() + "") ;
-	    	} else if (dto.getNutri01() != null) {
-	    		dto.setVal01(dto.getVal01());
-	    		vMap.put(dto.getNutri01(), dto.getVal01() + "") ;
-	    	}
-	    	if(vMap.containsKey(dto.getNutri02()) || dto.getNutri02() != null) {
-	    		dto.setVal02(dto.getVal02() + dto.getVal02());
-	    		vMap.put(dto.getNutri02(), dto.getVal02() + "") ;
-	    	} else if (dto.getNutri02() != null) {
-	    		dto.setVal02(dto.getVal02());
-	    		vMap.put(dto.getNutri02(), dto.getVal02() + "") ;
-	    	}
-    	}
-    	*/
+
     	System.out.println("선택된 영양소 : " + vMap) ;
     	
     	Object obj[] = vMap.keySet().toArray() ;
@@ -248,14 +235,13 @@ public class qBean {
         // = new String[resultList.size()] ;
         for(int i = 0 ; i < resultList.size() ; i++) {
         	ikvDto = (ItemKeyValueDTO) resultList.get(i) ;
-        	ikvList = new String[]{ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
-        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
-        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
-        	} ;
+        	ikvList = new String[]{ikvDto.getPRDLST_REPORT_NO() + "", ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
+					        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
+					        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
+					        	} ;
         	System.out.println(Arrays.toString(ikvList)) ;
         }
-        
-        
+        System.out.println("1번째" + ikvList[0]) ;
     	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
@@ -263,6 +249,20 @@ public class qBean {
 			REXP x = conn.eval("R.version.string") ;
 	    	// System.out.println("R version : " + x.asString()) ;
 	    	
+			String [] ikvList02 = ikvList ;
+			System.out.println("2번째" + Arrays.toString(ikvList02)) ;
+			System.out.println(ikvList02[0]) ;
+			for(int i = 0 ; i < ikvList02.length ; i++) {
+	        	conn.eval("ikvList <- c('"+ikvList02[i]+"')") ;
+	        	conn.eval("ikvList02 <- data.frame(ikvList)") ;
+	        	//conn.eval("ikvList02 <- data.frame(ikvList02, ikvList)") ;
+	        	//conn.eval("finalList <- data.frame(finalList, ikvList)") ;
+	        	//conn.eval("print(finalList)") ;
+	        }
+			conn.eval("print(ikvList)") ;
+			conn.eval("str(ikvList)") ;
+	        // conn.eval("print(finalList)") ;
+	        
 	    	//, length(pValue)
 	    	// + "assign(pValue[i],i)"
 	    	/*
@@ -288,6 +288,18 @@ public class qBean {
 	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
 	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
 	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
+	    	
+	    	conn.eval("ikvList <- data.frame(amino = '"+ikvList[1]+"', biotin = '"+ikvList[2]+"', calcium = '"+ikvList[3]+"', collagen = '"+ikvList[4]+"', dietryfiber = '"+ikvList[5]+"', gammalinolenic = '"+ikvList[6]+"', "
+	    			+ "iron = '"+ikvList[7]+"', lutein = '"+ikvList[8]+"', magnesium = '"+ikvList[9]+"', milkthistle = '"+ikvList[10]+"', mineral = '"+ikvList[11]+"', omega3 = '"+ikvList[12]+"', "
+	    			+ "probiotic = '"+ikvList[13]+"', propolis = '"+ikvList[14]+"', redginseng = '"+ikvList[15]+"', vitaminA = '"+ikvList[16]+"', vitaminB = '"+ikvList[17]+"', "
+	    			+ "vitaminC = '"+ikvList[18]+"', vitaminD = '"+ikvList[19]+"', vitaminE = '"+ikvList[20]+"', vitaminK = '"+ikvList[21]+"', zinc = '"+ikvList[22]+"')") ;
+	    	conn.eval("v02 <- as.numeric(ikvList[1, 1:22])") ;
+	    	conn.eval("ikvl <- data.frame(amino = v[1], biotin = v[2], calcium = v[3], collagen = v[4], dietryfiber = v[5],"
+	    								+ "gammalinolenic = v[6], iron = v[7], lutein = v[8], magnesium = v[9], milkthistle = v[10],"
+	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
+	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
+	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
+	    	
 	    	conn.eval("print(ml)") ;
 	    	conn.eval("str(ml)") ;
 	    	// conn.eval("ml <- data.frame(amino = valueList[1])") ;
@@ -378,5 +390,4 @@ public class qBean {
     	service.updateValue(dto);
     	return "redirect:/question/getValueList.do";
     }
-    
 }
