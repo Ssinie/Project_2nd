@@ -31,13 +31,16 @@
 	<select id = "selectType" resultType="ItemTypeDTO">
 		select * from ITEM_TYPE order by to_number(PRDLST_REPORT_NO)
 	</select>
+	<select id = "SearchTypeCount" resultType="int" parameterType="String">
+		select count(*) from ITEM_TYPE where PRDLST_REPORT_NO = #{PRDLST_REPORT_NO}
+	</select>
 	<select id = "selectTypeValue" resultType="ItemTypeValueDTO">
 		select * from ITEM_TYPE_VALUE
 	</select>
 	<select id = "selectVC" resultType="ItemTypeValueCheckDTO" parameterType="int">
 		select * from ITEM_TYPE_VALUECHECK where MAINTYPE = #{ELE_COUNT}
 	</select>
-	<select id = "" resultType="int" parameterType="String">
+	<select id = "SelectKey" resultType="int" parameterType="String">
 		select NUM from ITEM_TYPE_KEY where ELEMENT = #{element}
 	</select>
 	<!-- ITEM_SEARCH_KEY 테이블에서 컬럼정보를 가져오기 위함 -->
@@ -62,5 +65,14 @@
 	<!-- 테이블 정보 삽입 시 기존의 정보를 초기화 하기 위함 -->
 	<delete id = "deleteSearchKeys">
 		delete from ITEM_SEARCH_KEYS
+	</delete>
+	<delete id = "deleteItemTypeKey">
+		delete from ITEM_TYPE_KEY
+	</delete>
+	<delete id = "deleteItemTypeValue">
+		delete from ITEM_TYPE_VALUE
+	</delete>
+	<delete id = "deleteItemType">
+		delete from ITEM_TYPE
 	</delete>
 </mapper>

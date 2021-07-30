@@ -48,6 +48,7 @@ public class ItemType {
 		String result = "";
 		ItemTypeDTO dto = null;
 		try {
+			dao.delete("item_type.deleteItemType");
 			for(int j = 1; j <= 100; j++) {
 				int StartNum = (j * 10) + 1;
 				int EndNum = (j * 10) + 10;
@@ -65,7 +66,7 @@ public class ItemType {
 				JSONArray itemArray = (JSONArray)itemTypeResult.get("row");
 				String [] count;
 				List arr;
-				
+				int searchCount;
 				for(int i =0; i < itemArray.size(); i++) {
 					JSONObject itemInfo = (JSONObject)itemArray.get(i);
 					arr = new ArrayList();
@@ -92,8 +93,11 @@ public class ItemType {
 						arr.add(v);
 					}
 					dto.setELE_COUNT(arr.size());
-					dao.insert("item_type.insert",dto);
-					System.out.println(i+"번째 입력종료");
+					searchCount = dao.selectOne("item_type.SearchTypeCount",dto.getPRDLST_REPORT_NO());
+					if(searchCount == 0) {
+						dao.insert("item_type.insert",dto);
+						System.out.println(i+"번째 입력종료");
+					}
 			}
 				
 			}
@@ -102,6 +106,11 @@ public class ItemType {
 		}		
 		return "/master/ItemTypeCheck";
 	}
+	
+	/* 개발용 관리페이지의 Controller
+	 * 페이지를 불러올 때 'ITEM_TYPE' 테이블의 테이블 정보를 가져와
+	 * 표를 이용해 정보를 노출시켜준다.
+	 */
 	@RequestMapping("/itemtype.do")
 	public String ItemTypeSelect(Model model) {
 		List list = null;
@@ -171,8 +180,9 @@ public class ItemType {
 	}
 	
 	/* 제품정보의 성분이 겹치지 않는 항목을 'ITEM_TYPE_KEY' 테이블에 추가하는 메서드 
-	 * 
-	 * 
+	 * DB에서 제품정보를 가져와서 텍스트를 split하여 arr에 하나씩 List로 담음
+	 * arr에 있는 하나씩담긴 내용을 중복검사하여 하나씩 다시 담음
+	 * 하나씩 담은 내용을 'ITEM_TYPE_KEY' 테이블에 하나씩 입력함
 	 */
 	@RequestMapping("/ItemTypeKeyInsert.do")
 	public String ItemTypeKeyInsert() {
@@ -185,8 +195,7 @@ public class ItemType {
 		
 		try {
 			ItemTypeDTO dto = new ItemTypeDTO();
-			
-			// DB에서 제품정보를 가져와서 텍스트를 split하여 arr에 하나씩 List로 담음
+			dao.delete("item_type.deleteItemTypeKey");
 			list = dao.selectList("item_type.selectType");
 			for(int i =0; i < list.size(); i++) {
 				dto = (ItemTypeDTO)list.get(i);
@@ -195,13 +204,11 @@ public class ItemType {
 					arr.add(v);
 					}
 				}
-			// arr에 있는 하나씩담긴 내용을 중복검사하여 하나씩 다시 담음
 			for(String v : arr) {
 				if(!result.contains(v)) {
 					result.add(v);
 				}
 			}
-			// 하나씩 담은 내용을 csv파일에 하나씩 입력함
 			for(int i=0; i < result.size(); i++) {
 				String v = result.get(i);
 				hash.put("num", i+1);
@@ -244,6 +251,9 @@ public class ItemType {
 		String element;
 		Integer itemNum;
 		list = dao.selectList("item_type.selectType");
+		
+		dao.delete("item_type.deleteItemTypeValue");
+		
 		for(int i = 0; i < list.size(); i++) {
 			vcdto = new ItemTypeValueCheckDTO();
 			dto = (ItemTypeDTO)list.get(i);
@@ -254,9 +264,11 @@ public class ItemType {
 			vcdto = dao.selectOne("item_type.selectVC",dto.getELE_COUNT());
 			vdto = new ItemTypeValueDTO();
 			vdto.setPRDLST_REPORT_NO(dto.getPRDLST_REPORT_NO());
+			
+			
 			for(int v = 0; v < dto.getELE_COUNT(); v++) {
 				element = ele[v];
-				itemNum = dao.selectOne("item_type.", element);
+				itemNum = dao.selectOne("item_type.SelectKey", element);
 				if(itemNum == null) {
 					v = 100;
 				}
@@ -290,14 +302,21 @@ public class ItemType {
 	 * 
 	 * 1. 'ITEM_TYPE_VALUE' 테이블 값을 LIST로 가져온다.
 	 * 2. 
-	 
-	@RequestMapping("/RetrunValueList.do")
-	public String RetrunValueList(Model model) {
+	 */
+	
+	@RequestMapping("/RetrunValueLists.do")
+	public String RetrunValueLists(Model model) {
 		List result = ReturnValueList(dao);
 		model.addAttribute("result",result);
 		return "/master/ItemListInput";
 	}
-	*/
+	
+	
+	/* 설문에서 제품의 표준편차를 List로 받아가기 위해 만든 메서드
+	 * 설문에서 해당 메서드를 호출하면 return 값으로 List를 반환하여
+	 * 전달하여 준다. List 인덱스엔 'ItemKeyValueDTO' 형식의 dto가
+	 * 입력되어 전달된다.
+	 */
 	public List ReturnValueList(SqlSessionTemplate dao) {
 		ItemTypeValueDTO itvdto;
 		ItemKeyValueDTO ikvdto;
@@ -316,7 +335,7 @@ public class ItemType {
 		return result;
 	}
 	
-	// 전달받은 DTO정보를 이용하여 case에 맞춰 설문정보에 맞는 DTO에 정보를 담음.
+	// 전달받은 DTO정보를 이용하여 case에 맞춰 'ItemKeyValueDTO'에 정보를 담음.
 	public ItemKeyValueDTO dtoFactoring(ItemTypeValueDTO itvdto, SqlSessionTemplate dao) {
 		ItemKeyValueDTO ikvdto = new ItemKeyValueDTO();
 		Integer count;
@@ -443,63 +462,17 @@ public class ItemType {
 							switchIndex(itvdto.getValue_10(), ikvdto, index);}
 					}else {
 						index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-						switchIndex(itvdto.getValue_10(), ikvdto, index);}}break;
-						
+						switchIndex(itvdto.getValue_10(), ikvdto, index);}}break;		
 				default : break;
 			}
-				
 		}
-		
-		/*
-		if(itvdto.getKey_1() != 0) {
-			int key = itvdto.getKey_1();
-			System.out.println(key);
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_1(), ikvdto, index);
-		}else if(itvdto.getKey_2() != 0) {
-			int key = itvdto.getKey_2();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_2(), ikvdto, index);
-		}else if(itvdto.getKey_3() != 0) {
-			int key = itvdto.getKey_3();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_3(), ikvdto, index);
-		}else if(itvdto.getKey_4() != 0) {
-			int key = itvdto.getKey_4();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_4(), ikvdto, index);
-		}else if(itvdto.getKey_5() != 0) {
-			int key = itvdto.getKey_5();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_5(), ikvdto, index);
-		}else if(itvdto.getKey_6() != 0) {
-			int key = itvdto.getKey_6();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_6(), ikvdto, index);
-		}else if(itvdto.getKey_7() != 0) {
-			int key = itvdto.getKey_7();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_7(), ikvdto, index);
-		}else if(itvdto.getKey_8() != 0) {
-			int key = itvdto.getKey_8();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_8(), ikvdto, index);
-		}else if(itvdto.getKey_9() != 0) {
-			int key = itvdto.getKey_9();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_9(), ikvdto, index);
-		}else if(itvdto.getKey_10() != 0) {
-			int key = itvdto.getKey_10();
-			Integer index = dao.selectOne("item_type.SearchKeysFindIndex", key);
-			switchIndex(itvdto.getValue_10(), ikvdto, index);
-		}else {
-			System.out.println("잘못된 키 값");
-		}
-		*/
-		
 		return ikvdto;
 	}
 	
+	
+	/* 인덱스 정보를 지역변수로 받아, 
+	 * 인덱스에 맞는 'ItemKeyValueDTO' 클래스에 해당하는 벨류값을 더해준다.
+	 */
 	public void switchIndex(double values, ItemKeyValueDTO ikvdto, Integer index) {
 		if(index != null) {
 			switch(index) {
