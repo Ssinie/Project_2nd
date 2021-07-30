@@ -13,7 +13,8 @@
 <h1>관리자 목록</h1>
 <br>
 <c:if test="${mem == null }">
-	<a href="register.ns">관리자 등록</a>
+	<a href="/Project_2nd/manager/hello.ns">홈</a>
+	<a href="register.ns">관리자등록</a>
 	<a href="managerLogin.ns">로그인</a>
 </c:if>
 <c:if test="${mem != null}">

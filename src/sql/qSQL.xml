@@ -109,4 +109,71 @@
 		val02 = #{val02}
 		where seq = #{seq}
 	</update>
+	
+	<select id="qList" resultType="qDTO" parameterType="bean.healthy.Criteria">
+		select num, 
+	           title, 
+			   contents02,
+			   contents03,
+			   contents04,
+			   contents05,
+			   contents06,
+			   contents07,
+			   contents08,
+			   contents09,
+			   contents10,
+			   dates
+    	from (
+       		   select num, 
+	           		  title, 
+			  		  contents02,
+			    	  contents03,
+			  		  contents04,
+			  		  contents05,
+			  		  contents06,
+			 		  contents07,
+			 		  contents08,
+				      contents09,
+			          contents10,
+			          dates,
+            	      row_number() over(order by num asc) as rnum
+        from QUESTION
+        ) q
+    	where rNum between #{rowStart} and #{rowEnd}
+  		order by num asc
+	</select>
+	
+	<select id="qCount" resultType="int" parameterType="qDTO">
+		select count(num)
+		from QUESTION
+		where num >0
+	</select>
+
+	<select id="vList" resultType="vDTO" parameterType="bean.healthy.Criteria">
+		select qnum,
+			   nutri01,
+			   val01,
+			   nutri02,
+			   val02,
+			   seq
+    	from (
+       		   select qnum,
+			   nutri01,
+			   val01,
+			   nutri02,
+			   val02,
+			   seq,
+            	      row_number() over(order by seq asc) as rnum
+        from QUESTION_VALUE
+        ) v
+    	where rNum between #{rowStart} and #{rowEnd}
+  		order by seq asc
+	</select>
+	
+	<select id="vCount" resultType="int" parameterType="vDTO">
+		select count(seq)
+		from QUESTION_VALUE
+		where seq >0
+	</select>
+	
 </mapper>

@@ -15,4 +15,8 @@ public class CrawlingDAOMybatis {
 		mybatis.insert("crawling.insertTitleUrl", dto);
 	}
 	
+	public void deleteAll(CrawlingDTO dto) {
+		mybatis.delete("crawling.deleteAll", dto);
+	}
+	
 }

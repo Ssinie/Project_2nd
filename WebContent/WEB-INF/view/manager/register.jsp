@@ -85,7 +85,7 @@ $(document).ready(function(){
 		<td align="center" colspan="3"><span class="msg">아이디를 확인해주세요.</span></td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange"><label for="pw">비밀번호</label></td>
+		<td align="center" bgcolor="orange"><label for="password">비밀번호</label></td>
 		<td><input type="password" name="password" id="pw1" required/></td>
 	</tr>
 	<tr>
@@ -135,7 +135,7 @@ $(document).ready(function(){
 	<tr>
 		<td align="center" colspan="2">
 			<button type="submit" id="submit" disabled="disabled">등록완료</button>
-			<button type="button" onclick="">취소</button>
+			<button type="button" onclick='location.href="getManagerList.ns"'>취소</button>
 		</td>
 	</tr>
 	

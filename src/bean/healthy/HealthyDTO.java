@@ -18,72 +18,58 @@ public class HealthyDTO {
 	private String writer;
 	private Timestamp regdate;
 	private Timestamp updateDate;
+	private int count;
 	
-
+	
 	public int getNum() {
 		return num;
 	}
-
-
 	public String getTitle() {
 		return title;
 	}
-
-
 	public String getContent() {
 		return content;
 	}
-
-
 	public String getWriter() {
 		return writer;
 	}
-
-
 	public Timestamp getRegdate() {
 		return regdate;
 	}
-
-
 	public Timestamp getUpdateDate() {
 		return updateDate;
 	}
-
-
+	public int getCount() {
+		return count;
+	}
 	public void setNum(int num) {
 		this.num = num;
 	}
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
-
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-
-
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
-
-
+	public void setCount(int count) {
+		this.count = count;
+	}
 	@Override
 	public String toString() {
-		return "HealthyDTO [num=" + num + ", title=" + title + ", content="
-				+ content + ", writer=" + writer + ", regdate=" + regdate + ", updateDate=" + updateDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("HealthyDTO [num=").append(num).append(", title=").append(title).append(", content=")
+				.append(content).append(", writer=").append(writer).append(", regdate=").append(regdate)
+				.append(", updateDate=").append(updateDate).append(", count=").append(count).append("]");
+		return builder.toString();
 	}
 	
 

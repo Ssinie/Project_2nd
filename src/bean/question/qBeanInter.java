@@ -2,6 +2,7 @@ package bean.question;
 
 import java.util.List;
 
+import bean.healthy.Criteria;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
@@ -44,4 +45,12 @@ public interface qBeanInter {
 	void updateValue(vDTO dto);
 
 	public Object aResult(pDTO dto);
+	
+	int qCount();
+	
+	List<qDTO> qList(Criteria cri);
+	
+	int vCount();
+	
+	List<vDTO> vList(Criteria cri);
 }

@@ -47,6 +47,33 @@
 	<select id="getBoardList" resultMap="HealthyDTOResult">
 		SELECT * 
 		FROM T_HEALTHY_BOARD
-		ORDER BY NUM DESC
-	</select>	
+		ORDER BY NUM desc
+	</select>
+	
+	<select id="count" resultType="int" parameterType="HealthyDTO">
+		select count(num)
+		from T_HEALTHY_BOARD
+		where num >0
+	</select>
+	
+	<select id="listPage" resultType="HealthyDTO" parameterType="bean.healthy.Criteria">
+		select num, 
+	           title, 
+	           content, 
+	           writer, 
+	           regdate, 
+	           updatedate
+    	from (
+       		   select num, 
+       		   	      title, 
+       		   	      content, 
+       		   	      writer, 
+       		   	      regdate, 
+       		   	      updatedate,
+            	      row_number() over(order by num desc) as rnum
+        from T_HEALTHY_BOARD
+        ) tb
+    	where rNum between #{rowStart} and #{rowEnd}
+  		order by num desc
+	</select>
 </mapper>

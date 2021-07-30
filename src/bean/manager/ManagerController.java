@@ -22,7 +22,7 @@ public class ManagerController {
    @Autowired
    private ManagerService managerService;
    
-   @RequestMapping("test.ns")
+   @RequestMapping("hello.ns")
    public String test() {
 	   return"/manager/test";
    }

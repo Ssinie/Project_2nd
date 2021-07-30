@@ -1,5 +1,6 @@
 package bean.question;
 
+import bean.healthy.Criteria;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
@@ -101,5 +102,21 @@ public class qBeanImp implements qBeanInter{
 	@Override
 	public Object aResult(pDTO dto) {
 		return mybatis.selectList("aResult", dto) ;
+	}
+	
+	public int qCount() {
+		return mybatis.selectOne("question.qCount");
+	}
+	
+	public List<qDTO> qList(Criteria cri) {
+		return mybatis.selectList("question.qList", cri);
+	}
+	
+	public int vCount() {
+		return mybatis.selectOne("question.vCount");
+	}
+	
+	public List<vDTO> vList(Criteria cri) {
+		return mybatis.selectList("question.vList", cri);
 	}
 }

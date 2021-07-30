@@ -11,7 +11,7 @@
 <body>
 <center>
 <h1>관리자 로그인</h1>
-
+<a href="getManagerList.ns">글목록</a>
 <form action="loginCheck.ns" method="post">
 	<c:if test="${mem.id == null }">
 	<table border="1" cellpadding="0" cellspacing="0">
@@ -26,7 +26,10 @@
 	</tr>
 
 	<tr>
-		<td align="center" colspan="2"><input type="submit" value="로그인"/></td>
+		<td align="center" colspan="2">		
+			<input type="button" onclick='location.href="register.ns"' value="관리자등록"/>
+			<input type="submit" value="로그인"/>
+		</td>
 	</tr>
 	</table>
 	</c:if>

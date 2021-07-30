@@ -7,21 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Nutrients Sunday</title>
+<style type="text/css">
+	li {list-style: none; float: left; padding: 6px;}
+</style>
 </head>
 <body>
 <center>
 <h1>게시글 목록</h1>
+<p>총 게시글 수:(${pageMaker.totalCount }개)</p>
 <br>
+<a href="/Project_2nd/manager/hello.ns">홈</a>
 <a href="insertBoardV.ns">새글 등록</a>
 <a href="crawling.ns">크롤링 하기</a>
-<br>
+<button type="button" onclick='location.href="deleteAll.ns"'>전체삭제</button>
 <table border="1" cellpadding="0" cellspacing="0" width="1050">
 <tr>
-	<th bgcolor="orange" width="100">번호</th>
-	<th bgcolor="orange" width="400">제목</th>
-	<th bgcolor="orange" width="150">작성자</th>
-	<th bgcolor="orange" width="200">등록일</th>
-	<th bgcolor="orange" width="200">수정일</th>
+	<th bgcolor="#b7a2de" width="100">번호</th>
+	<th bgcolor="#b7a2de" width="400">제목</th>
+	<th bgcolor="#b7a2de" width="150">작성자</th>
+	<th bgcolor="#b7a2de" width="200">등록일</th>
+	<th bgcolor="#b7a2de" width="200">수정일</th>
 </tr>
 
 <c:forEach items="${boardList }" var="board">
@@ -38,9 +43,26 @@
 	<td align="center">${board.updateDate }</td>
 </tr>
 </c:forEach>
-
-
 </table>
+<div style="display: inline-block;">
+ <ul>
+  <c:if test="${pageMaker.prev}">
+   <li><a href="getBoardList.ns${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+  </c:if> 
+  
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+   <li><a href="getBoardList.ns${pageMaker.makeQuery(idx)}">${idx}</a></li>
+  </c:forEach>
+    
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+   <li><a href="getBoardList.ns${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+  </c:if> 
+ </ul>
+</div>
+
+
+
+
 </center>
 </body>
 </html>

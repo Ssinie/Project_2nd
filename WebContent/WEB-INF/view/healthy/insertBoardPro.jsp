@@ -15,15 +15,15 @@
 <form action="insertBoard.ns" method="post">
 <table border="1" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="center" bgcolor="orange" width="70">제목</td>
+		<td align="center" bgcolor="#b7a2de" width="70">제목</td>
 		<td><input type="text" name="title"/></td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange" width="70">작성자</td>
+		<td align="center" bgcolor="#b7a2de" width="70">작성자</td>
 		<td><input type="text" name="writer"/></td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange" width="70">내용</td>
+		<td align="center" bgcolor="#b7a2de" width="70">내용</td>
 		<td><textarea name="content" cols="40" rows="10"></textarea></td>
 	</tr>
 	<tr>

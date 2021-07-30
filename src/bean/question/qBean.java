@@ -3,6 +3,8 @@ package bean.question;
 import bean.question.pDTO;
 import bean.question.qDTO;
 import bean.question.qBeanInter;
+import bean.healthy.Criteria;
+import bean.healthy.PageMaker;
 import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
 
@@ -19,6 +21,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.rosuda.REngine.REXP;
@@ -309,8 +312,14 @@ public class qBean {
     
     //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
-    public String getBoardList(qDTO dto, Model model) {
-    	model.addAttribute("boardList", service.getBoardList(dto));
+    public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model) {
+    	List<qDTO> list = service.qList(cri);
+    	model.addAttribute("boardList", list);
+    
+    	PageMaker pageMaker = new PageMaker();
+    	pageMaker.setCri(cri);
+    	pageMaker.setTotalCount(service.qCount());
+    	model.addAttribute("pageMaker", pageMaker);
     	return "/question/getBoardList";
     }
     
@@ -337,9 +346,16 @@ public class qBean {
     
     //인선- QUESTION_VALUE 리스트
     @RequestMapping("getValueList.do")
-    public String getValueList(vDTO dto, Model model) {
-    	model.addAttribute("boardList", service.getValueList(dto));
+    public String getValueList(@ModelAttribute("cri") Criteria cri, Model model) {
+    	List<vDTO> list = service.vList(cri);
+    	model.addAttribute("boardList", list);
+    
+    	PageMaker pageMaker = new PageMaker();
+    	pageMaker.setCri(cri);
+    	pageMaker.setTotalCount(service.vCount());
+    	model.addAttribute("pageMaker", pageMaker);
     	return "/question/getValueList";
+
     }
     
     //인선- QUESTION_VALUE 상세화면

@@ -13,5 +13,9 @@ public interface BoardService {
 	HealthyDTO getBoard(HealthyDTO dto);
 
 	List<HealthyDTO> getBoardList(HealthyDTO dto);
+	
+	int count();
+	
+	List<HealthyDTO> listPage(Criteria cri);
 
 }

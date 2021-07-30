@@ -15,27 +15,27 @@
 <input name="seq" type="hidden" value="${board.seq }" />
 <table border="1" cellpadding="0" cellspacing="0">
 	<tr>
-		<td bgcolor="lightblue" align="center">번호</td>
+		<td bgcolor="#65e08c" align="center">번호</td>
 		<td align="left">${board.seq }</td>
 	</tr>
 	<tr>
-		<td bgcolor="lightblue" align="center">Qnum</td>
+		<td bgcolor="#65e08c" align="center">Qnum</td>
 		<td><input style="width:300px;" type="text" id="qnum" name="qnum" value="${board.qnum }"/></td>
 	</tr>
 	<tr>
-		<td bgcolor="lightblue" align="center">Nutri01</td>
+		<td bgcolor="#65e08c" align="center">Nutri01</td>
 		<td><input style="width:300px;" type="text" id="nutri01" name="nutri01" value="${board.nutri01 }"/></td>
 	</tr>
 		<tr>
-		<td bgcolor="lightblue" align="center">Val01</td>
+		<td bgcolor="#65e08c" align="center">Val01</td>
 		<td><input style="width:300px;" type="text" id="val01" name="val01" value="${board.val01 }"/></td>
 	</tr>
 		<tr>
-		<td bgcolor="lightblue" align="center">Nutri02</td>
+		<td bgcolor="#65e08c" align="center">Nutri02</td>
 		<td><input style="width:300px;" type="text" id="nutri02" name="nutri02" value="${board.nutri02 }"/></td>
 	</tr>
 		<tr>
-		<td bgcolor="lightblue" align="center">Val02</td>
+		<td bgcolor="#65e08c" align="center">Val02</td>
 		<td><input style="width:300px;" type="text" id="val02" name="val02" value="${board.val02 }"/></td>
 	</tr>
 	<tr>

@@ -1,6 +1,7 @@
 package bean.healthy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,13 +76,25 @@ public class HealthyController {
 		conditionMap.put("내용", "CONTENT");
 		return conditionMap;
 	}
-	
+	/*
 	@RequestMapping("getBoardList.ns")
 	public String getBoardList(HealthyDTO dto, Model model)	{
 		model.addAttribute("boardList", boardService.getBoardList(dto));
 		return "/healthy/getBoardList";
 	}
+	*/
 	
+	@RequestMapping("getBoardList.ns")
+	public String listPage(@ModelAttribute("cri") Criteria cri, Model model) {
+		List<HealthyDTO> list = boardService.listPage(cri);
+		model.addAttribute("boardList", list);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.count());
+		model.addAttribute("pageMaker", pageMaker);
+		return "/healthy/getBoardList";
+	}
 	
 	
 	

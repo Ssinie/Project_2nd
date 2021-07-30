@@ -16,23 +16,23 @@
 <input name="num" type="hidden" value="${board.num }" />
 <table border="1" cellpadding="0" cellspacing="0">
 	<tr>
-		<td align="center" bgcolor="orange" width="70">제목</td>
+		<td align="center" bgcolor="#b7a2de" width="70">제목</td>
 		<td align="left"><input name="title" type="text" value="${board.title }" /></td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange">작성자</td>
+		<td align="center" bgcolor="#b7a2de">작성자</td>
 		<td align="left">${board.writer }</td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange">내용</td>
+		<td align="center" bgcolor="#b7a2de">내용</td>
 		<td align="left">${board.content }</td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange">등록일</td>
+		<td align="center" bgcolor="#b7a2de">등록일</td>
 		<td align="left">${board.regdate }</td>
 	</tr>
 	<tr>
-		<td align="center" bgcolor="orange">수정일</td>
+		<td align="center" bgcolor="#b7a2de">수정일</td>
 		<td align="left">${board.updateDate }</td>
 	</tr>
 	<tr>
@@ -42,9 +42,9 @@
 	</tr>		
 </table>
 </form>
-<hr>
 <a href="deleteBoard.ns?num=${board.num }">글삭제</a>
 <a href="getBoardList.ns">글목록</a>
+<hr>
 </center>
 </body>
 </html>

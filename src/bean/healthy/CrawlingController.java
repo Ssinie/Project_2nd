@@ -17,6 +17,8 @@ public class CrawlingController {
 	
 	@RequestMapping("crawling.ns")
 	public String insertNaver() {
+		CrawlingDTO a = new CrawlingDTO();
+		crawlingService.deleteAll(a);
 		RConnection conn = null;
 		try {
 			conn = new RConnection();
@@ -29,9 +31,9 @@ public class CrawlingController {
 			conn.eval(" library(dplyr) ");
 			conn.eval(" library(stringr) ");
 			conn.eval(" base_url <- 'https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid2=241&sid1=103&date=' ");
-			conn.eval(" sysdate_url <- paste(base_url, '&page=', sep=format(Sys.Date(),'%Y%m%d'))");
+			conn.eval(" sysdate_url <- paste(base_url, '&page=', sep=format(Sys.Date()-1,'%Y%m%d'))");
 			conn.eval(" urls <- NULL ");
-			conn.eval(" for (x in 0:6){ "
+			conn.eval(" for (x in 0:10){ "
 					+ " urls <- c(urls, paste(sysdate_url,x+1,sep = '')); "
 					+ " } ");
 			conn.eval(" news_links <- NULL ");
@@ -72,5 +74,12 @@ public class CrawlingController {
 		return "redirect:/healthy/getBoardList.ns"; 
 	}
 	
+	@RequestMapping("deleteAll.ns")
+	public String deleteAll(CrawlingDTO dto) {
+		crawlingService.deleteAll(dto);
+		System.out.println("삭제버튼 눌름" + dto);
+		return "redirect:/healthy/getBoardList.ns";
+	}
+
 	
 }

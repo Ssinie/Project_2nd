@@ -6,35 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Nutrients Sunday</title>
 </head>
 <ul>
 	<li><a href="/Project_2nd/manager/getManagerList.ns">관리자 계정</a>
-    	<ul>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>                  
-        </ul>
     </li>
     
-    <li><a href="/Project_2nd/question/getBoardList.do">설문지 내용</a>
+    <li>설문지 내용
         <ul>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>                  
+        <li><a href="/Project_2nd/question/getBoardList.do">QUESTION</a></li>
+        <li><a href="/Project_2nd/question/getValueList.do">QUESTION_VALUE</a></li>                  
         </ul>
     </li>
     
     <li><a href="/Project_2nd/healthy/getBoardList.ns">건강정보</a>
-        <ul>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>                  
-        </ul>
     </li>
     
     <li><a href="">공지사항</a>
-        <ul>
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>                  
-        </ul>
     </li>
 </ul>
 <body>

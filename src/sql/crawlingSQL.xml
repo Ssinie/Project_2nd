@@ -7,4 +7,8 @@
 	<insert id="insertTitleUrl" parameterType="CrawlingDTO">
 		insert into T_HEALTHY_BOARD values(SEQ_HEALTHY_BOARD.nextval, #{naverTitle},#{naverUrl} ,'naver', sysdate , sysdate )
 	</insert>
+	
+	<delete id="deleteAll">
+		TRUNCATE TABLE T_HEALTHY_BOARD
+	</delete>
  </mapper>

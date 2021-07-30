@@ -14,6 +14,11 @@ public class CrawlingServiceImpl implements CrawlingService{
 		crawlingDAOmybatis.insertTitleUrl(dto);
 	}
 
+	public void deleteAll(CrawlingDTO dto) {
+		crawlingDAOmybatis.deleteAll(dto);
+		
+	}
+
 	
 	
 }
