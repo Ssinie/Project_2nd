@@ -226,6 +226,7 @@ public class qBean {
         }
         
         // ItemType 클래스의 ReturnValueList 메소드 호출.
+        //List 타입으로 호출됨.
         ItemType it = new ItemType() ; 
         List resultList = it.ReturnValueList(sessions);
     	// System.out.println(result) ;
@@ -242,6 +243,7 @@ public class qBean {
         	System.out.println(Arrays.toString(ikvList)) ;
         }
         System.out.println("1번째" + ikvList[0]) ;
+        
     	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
@@ -253,14 +255,24 @@ public class qBean {
 			System.out.println("2번째" + Arrays.toString(ikvList02)) ;
 			System.out.println(ikvList02[0]) ;
 			for(int i = 0 ; i < ikvList02.length ; i++) {
+				conn.eval("List <- data.frame(amino = '"+ikvList02[0]+"', biotin = '"+ikvList02[1]+"', calcium = '"+ikvList02[2]+"', collagen = '"+ikvList02[3]+"', dietryfiber = '"+ikvList02[4]+"', gammalinolenic = '"+ikvList02[5]+"', "
+		    			+ "iron = '"+ikvList02[6]+"', lutein = '"+ikvList02[7]+"', magnesium = '"+ikvList02[8]+"', milkthistle = '"+ikvList02[9]+"', mineral = '"+ikvList02[10]+"', omega3 = '"+ikvList02[11]+"', "
+		    			+ "probiotic = '"+ikvList02[12]+"', propolis = '"+ikvList02[13]+"', redginseng = '"+ikvList02[14]+"', vitaminA = '"+ikvList02[15]+"', vitaminB = '"+ikvList02[16]+"', "
+		    			+ "vitaminC = '"+ikvList02[17]+"', vitaminD = '"+ikvList02[18]+"', vitaminE = '"+ikvList02[19]+"', vitaminK = '"+ikvList02[20]+"', zinc = '"+ikvList02[21]+"')") ;
+				conn.eval("rownames(List) <- c('"+ikvList02[0]+"')") ;
+				conn.eval("finalList <- data.frame(c(finalList, List))") ;
+			}
+			/*
+			for(int i = 0 ; i < ikvList02.length ; i++) {
 	        	conn.eval("ikvList <- c('"+ikvList02[i]+"')") ;
 	        	conn.eval("ikvList02 <- data.frame(ikvList)") ;
 	        	//conn.eval("ikvList02 <- data.frame(ikvList02, ikvList)") ;
 	        	//conn.eval("finalList <- data.frame(finalList, ikvList)") ;
 	        	//conn.eval("print(finalList)") ;
 	        }
-			conn.eval("print(ikvList)") ;
-			conn.eval("str(ikvList)") ;
+	        */
+			conn.eval("print(List)") ;
+			conn.eval("str(List)") ;
 	        // conn.eval("print(finalList)") ;
 	        
 	    	//, length(pValue)
@@ -288,7 +300,7 @@ public class qBean {
 	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
 	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
 	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
-	    	
+	    	/*
 	    	conn.eval("ikvList <- data.frame(amino = '"+ikvList[1]+"', biotin = '"+ikvList[2]+"', calcium = '"+ikvList[3]+"', collagen = '"+ikvList[4]+"', dietryfiber = '"+ikvList[5]+"', gammalinolenic = '"+ikvList[6]+"', "
 	    			+ "iron = '"+ikvList[7]+"', lutein = '"+ikvList[8]+"', magnesium = '"+ikvList[9]+"', milkthistle = '"+ikvList[10]+"', mineral = '"+ikvList[11]+"', omega3 = '"+ikvList[12]+"', "
 	    			+ "probiotic = '"+ikvList[13]+"', propolis = '"+ikvList[14]+"', redginseng = '"+ikvList[15]+"', vitaminA = '"+ikvList[16]+"', vitaminB = '"+ikvList[17]+"', "
@@ -299,6 +311,7 @@ public class qBean {
 	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
 	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
 	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
+	    	*/
 	    	
 	    	conn.eval("print(ml)") ;
 	    	conn.eval("str(ml)") ;
