@@ -232,36 +232,49 @@ public class qBean {
     	// System.out.println(result) ;
         
         // List를 배열로 담기.
-        String [] ikvList = null ;
+        String [] ikvList = new String[resultList.size()] ;
+        String [][] ikvList02 = new String[resultList.size()][23] ;
         // = new String[resultList.size()] ;
         for(int i = 0 ; i < resultList.size() ; i++) {
         	ikvDto = (ItemKeyValueDTO) resultList.get(i) ;
-        	ikvList = new String[]{ikvDto.getPRDLST_REPORT_NO() + "", ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
+        	ikvList = new String[] {ikvDto.getPRDLST_REPORT_NO() + "", ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
 					        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
 					        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
 					        	} ;
         	System.out.println(Arrays.toString(ikvList)) ;
+        	ikvList02[i] = ikvList ;
         }
-        System.out.println("1번째" + ikvList[0]) ;
-        
+        // System.out.println("1번째" + ikvList[0]) ;
+        for(int i = 0 ; i < ikvList02.length ; i++) {
+        	System.out.println("2중배열 : " + Arrays.toString(ikvList02[i])) ;
+        }
+        // System.out.println("2중배열" + Arrays.toString(ikvList02)) ;
     	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
 			conn = new RConnection() ;
 			REXP x = conn.eval("R.version.string") ;
 	    	// System.out.println("R version : " + x.asString()) ;
-	    	
-			String [] ikvList02 = ikvList ;
-			System.out.println("2번째" + Arrays.toString(ikvList02)) ;
-			System.out.println(ikvList02[0]) ;
-			for(int i = 0 ; i < ikvList02.length ; i++) {
-				conn.eval("List <- data.frame(amino = '"+ikvList02[0]+"', biotin = '"+ikvList02[1]+"', calcium = '"+ikvList02[2]+"', collagen = '"+ikvList02[3]+"', dietryfiber = '"+ikvList02[4]+"', gammalinolenic = '"+ikvList02[5]+"', "
-		    			+ "iron = '"+ikvList02[6]+"', lutein = '"+ikvList02[7]+"', magnesium = '"+ikvList02[8]+"', milkthistle = '"+ikvList02[9]+"', mineral = '"+ikvList02[10]+"', omega3 = '"+ikvList02[11]+"', "
-		    			+ "probiotic = '"+ikvList02[12]+"', propolis = '"+ikvList02[13]+"', redginseng = '"+ikvList02[14]+"', vitaminA = '"+ikvList02[15]+"', vitaminB = '"+ikvList02[16]+"', "
-		    			+ "vitaminC = '"+ikvList02[17]+"', vitaminD = '"+ikvList02[18]+"', vitaminE = '"+ikvList02[19]+"', vitaminK = '"+ikvList02[20]+"', zinc = '"+ikvList02[21]+"')") ;
-				conn.eval("rownames(List) <- c('"+ikvList02[0]+"')") ;
-				conn.eval("finalList <- data.frame(c(finalList, List))") ;
+			
+			String [][] ikvList03 = ikvList02 ;
+			// 데이터 프레임 선언.
+			conn.eval("ikvList <- data.frame(amino = '"+ikvList03[0][1]+"', biotin = '"+ikvList03[0][2]+"', calcium = '"+ikvList03[0][3]+"', collagen = '"+ikvList03[0][4]+"', dietryfiber = '"+ikvList03[0][5]+"', gammalinolenic = '"+ikvList03[0][6]+"', "
+	    			+ "iron = '"+ikvList03[0][7]+"', lutein = '"+ikvList03[0][8]+"', magnesium = '"+ikvList03[0][9]+"', milkthistle = '"+ikvList03[0][10]+"', mineral = '"+ikvList03[0][11]+"', omega3 = '"+ikvList03[0][12]+"', "
+	    			+ "probiotic = '"+ikvList03[0][13]+"', propolis = '"+ikvList03[0][14]+"', redginseng = '"+ikvList03[0][15]+"', vitaminA = '"+ikvList03[0][16]+"', vitaminB = '"+ikvList03[0][17]+"', "
+	    			+ "vitaminC = '"+ikvList03[0][18]+"', vitaminD = '"+ikvList03[0][19]+"', vitaminE = '"+ikvList03[0][20]+"', vitaminK = '"+ikvList03[0][21]+"', zinc = '"+ikvList03[0][22]+"')") ;
+			// conn.eval("rownames(ikvList) <- c('"+ikvList03[0][0]+"')") ;
+			
+			for(int i = 0 ; i < ikvList03.length ; i++) {
+				conn.eval("ikvList02 <- data.frame(amino = '"+ikvList03[i][1]+"', biotin = '"+ikvList03[i][2]+"', calcium = '"+ikvList03[i][3]+"', collagen = '"+ikvList03[i][4]+"', dietryfiber = '"+ikvList03[i][5]+"', gammalinolenic = '"+ikvList03[i][6]+"', "
+		    			+ "iron = '"+ikvList03[i][7]+"', lutein = '"+ikvList03[i][8]+"', magnesium = '"+ikvList03[i][9]+"', milkthistle = '"+ikvList03[i][10]+"', mineral = '"+ikvList03[i][11]+"', omega3 = '"+ikvList03[i][12]+"', "
+		    			+ "probiotic = '"+ikvList03[i][13]+"', propolis = '"+ikvList03[i][14]+"', redginseng = '"+ikvList03[i][15]+"', vitaminA = '"+ikvList03[i][16]+"', vitaminB = '"+ikvList03[i][17]+"', "
+		    			+ "vitaminC = '"+ikvList03[i][18]+"', vitaminD = '"+ikvList03[i][19]+"', vitaminE = '"+ikvList03[i][20]+"', vitaminK = '"+ikvList03[i][21]+"', zinc = '"+ikvList03[i][22]+"')") ;
+				conn.eval("rownames(ikvList02) <- '"+ikvList03[i][0]+"'") ;
+				conn.eval("ikvList <- rbind(ikvList, ikvList02)") ;
 			}
+			conn.eval("print(ikvList)") ;
+			conn.eval("str(ikvList)") ;
+			conn.eval("ikvList.index") ;
 			/*
 			for(int i = 0 ; i < ikvList02.length ; i++) {
 	        	conn.eval("ikvList <- c('"+ikvList02[i]+"')") ;
@@ -271,8 +284,7 @@ public class qBean {
 	        	//conn.eval("print(finalList)") ;
 	        }
 	        */
-			conn.eval("print(List)") ;
-			conn.eval("str(List)") ;
+			
 	        // conn.eval("print(finalList)") ;
 	        
 	    	//, length(pValue)
@@ -315,14 +327,6 @@ public class qBean {
 	    	
 	    	conn.eval("print(ml)") ;
 	    	conn.eval("str(ml)") ;
-	    	// conn.eval("ml <- data.frame(amino = valueList[1])") ;
-	    	// conn.eval("print(ml") ;
-	    	// conn.eval("str(ml)") ;
-	    	// conn.eval("myList <- data.frame("+nutriList+" = "+valueList+"") ;
-	    	// conn.eval("print(myList)") ;
-	    	// conn.eval("pList <- strsplit(pValue, split = '#')") ;
-	    	// conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
-	    	// conn.eval("score <- c(pList[[1]][2], pList[[1]][4], pList[[2]][2], pList[[2]][4], pList[[3]][2]), pList[[3]][4], pList[[4]][2], pList[[4]][4], pList[[5]][2], pList[[5]][4], pList[[6]][2], pList[[6]][4], pList[[7]][2], pList[[7]][4], pList[[8]][2], pList[[8]][4], pList[[9]][2], pList[[9]][4], pList[[10]][2], pList[[10]][4]") ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
