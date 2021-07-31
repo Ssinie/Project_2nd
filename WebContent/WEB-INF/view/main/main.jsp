@@ -31,6 +31,7 @@
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
+        <input type="hidden" name="referer" value="${referer}"/>
     </div>
 
     <!-- Humberger Begin -->

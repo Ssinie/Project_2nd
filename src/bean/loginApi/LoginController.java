@@ -4,20 +4,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
- 
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import bean.main.MemberDAOImpl;
@@ -43,8 +44,8 @@ public class LoginController {
  
     // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "login.ns", method = { RequestMethod.GET, RequestMethod.POST })
-    public String login(Model model, HttpSession session) throws Exception{
-        
+    public String login(Model model, HttpSession session, HttpServletRequest request) throws Exception{
+    	
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
@@ -52,18 +53,21 @@ public class LoginController {
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
         //System.out.println("네이버:" + naverAuthUrl);
         
-        //네이버 
         model.addAttribute("url", naverAuthUrl);
- 
+        
         /* 생성한 인증 URL을 View로 전달 */
         return "/loginApi/login";
     }
  
     // 네이버 로그인 성공 시 callback 호출 메소드
     @RequestMapping(value = "callback.ns", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(MemberDTO dto, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+    public String callback(@RequestParam String code, @RequestParam String state, MemberDTO dto, Model model, HttpSession session, HttpServletRequest request)
             throws Exception, ParseException {
-        OAuth2AccessToken oauthToken;
+        String preUrl = (String)session.getAttribute("preUrl");
+        System.out.println("naver referer = "+preUrl);
+        model.addAttribute("preUrl", preUrl);
+    	
+    	OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
         
         //1. 로그인 사용자 정보를 읽어온다.
@@ -127,8 +131,11 @@ public class LoginController {
     }
     
     @RequestMapping("kakao.ns")
-    public String kakao(MemberDTO dto, Model model, @RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception{
-        
+    public String kakao(@RequestParam(value = "code", required = false) String code, MemberDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
+        String preUrl = (String)session.getAttribute("preUrl");
+        System.out.println("kakao referer = "+preUrl);
+        model.addAttribute("preUrl", preUrl);
+    	
         String access_Token = kakaoService.getAccessToken(code);
         HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
         
@@ -168,7 +175,9 @@ public class LoginController {
     }
 
     @RequestMapping("logout.ns")
-    public String logout(HttpSession session) throws Exception{
+    public String logout(Model model, HttpSession session, HttpServletRequest request) throws Exception{
+    	String preUrl = (String)session.getAttribute("preUrl");
+    	model.addAttribute("preUrl", preUrl);
     	
     	session.invalidate();
     	

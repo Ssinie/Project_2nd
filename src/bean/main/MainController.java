@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("main.ns")
-	public String main(HttpSession session, Model model) throws Exception {
+	public String main(Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		String preUrl = request.getRequestURL().toString();
+		session.setAttribute("preUrl", preUrl);
 		
 		List categoryList = mainDAO.getCategory();
 		model.addAttribute("categoryList", categoryList);
@@ -40,7 +44,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("product.ns")
-	public String product(@RequestParam("num") int num, ProductDTO dto, HttpSession session, Model model) throws Exception{
+	public String product(@RequestParam("num") int num, ProductDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
+		String preUrl = request.getRequestURL().toString();
+		session.setAttribute("preUrl", preUrl);
 		
 		model.addAttribute("num", num);
 		
@@ -100,7 +106,13 @@ public class MainController {
 	 *  
 	 */
 	@RequestMapping("productlist.ns")
-	public String productList(@RequestParam("category") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model) throws Exception {
+	public String productList(@RequestParam(value="category", required=false, defaultValue="null") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		String preUrl = request.getRequestURL()+"?"+request.getQueryString().toString();
+		session.setAttribute("preUrl", preUrl);
+		
+		if(category.equals("null")) {
+			category = "all";
+		}
 		
 		model.addAttribute("category", category);
 		model.addAttribute("pageNum", pageNum);
@@ -134,12 +146,14 @@ public class MainController {
 		model.addAttribute("catePdCount", catePdCount);
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("currentPage", currentPage);
-	
+		
 		return "/product/productList";
 	}
 	
 	@RequestMapping("search.ns")
-	public String search(@RequestParam("keyword") String keyword, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model) throws Exception {
+	public String search(@RequestParam("keyword") String keyword, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		String preUrl = request.getRequestURL()+"?"+request.getQueryString().toString();
+		session.setAttribute("preUrl", preUrl);
 		
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("pageNum", pageNum);
@@ -180,7 +194,7 @@ public class MainController {
 	
 	@RequestMapping("test.ns")
 	public String test() {
-		return "/product/shop-grid";
+		return "/myPage/myPage";
 	}
 }
 

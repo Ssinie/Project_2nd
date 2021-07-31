@@ -6,7 +6,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <script type="text/javascript">
-	location.replace("http://localhost:8080/Project_2nd/main.ns");
+	location.replace('${preUrl}');
 </script>
 </head>
 

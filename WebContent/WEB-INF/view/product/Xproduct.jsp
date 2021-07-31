@@ -11,6 +11,7 @@
 
 $(document).ready(function() {
 	var id = '${id}'
+	var num = '$'
 	
 	$("#wish").click(function() {
 		if(id == ""){
