@@ -6,6 +6,63 @@
 <html lang="zxx">
 
 <head>
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var id = '${sessionId}';
+	$test = $('[data-pid]');
+	
+	$test.on('click', function() {
+		var num = $(this).data("pid");
+		
+		if(id == "") {
+			alert("로그인이 필요합니다.");
+		}else{
+			$.ajax({
+				url: "wishlistPro.ns",
+				data: { num: $(this).data("pid") },
+				success: function(result){
+					if(result == "0"){
+						alert("관심상품 삭제 완료");
+					}
+					if(result == "1"){
+						alert("관심상품 등록 완료");
+					}
+				}
+			})
+		}
+		
+		  
+		});
+	
+	/* $("[data-pid]").click(function() {
+		if(id == ""){
+			alert("로그인이 필요합니다.");
+		}else{
+			$.ajax({
+				alert("뭐 어쩌라고");
+				url: "wishlistPro.ns",
+				success: function(result){
+					if(result == "null"){
+						alert("로그인이 필요합니다.");
+					}
+					if(result == "1"){
+						alert("관심상품 등록 완료");
+					}
+					if(result == "0"){
+						alert("관심상품 삭제 완료");
+					}
+				}
+			});
+		}
+		
+	}); */
+});
+
+</script>
+
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
@@ -290,7 +347,7 @@
                                     <input type="radio" id="white">
                                 </label>
                             </div>
-                            <div class="sidebar__item__color sidebar__item__color--gray">
+                            <div class="sidebar__item__color sidebar__item__color--gray">to.
                                 <label for="gray">
                                     Gray
                                     <input type="radio" id="gray">
@@ -427,16 +484,16 @@
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
                                             data-setbg="${dto.imgurl}">
-                                            <div class="product__discount__percent">HOT</div><!-- 
+                                            <div class="product__discount__percent">HOT</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a data-pid="${dto.num}" class="wish" href="#"><i class="fa fa-heart"></i></a></li>
+                                                <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
                                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul> -->
+                                            </ul>
                                         </div>
                                         <div class="product__item__text">
                                             <span></span>
-                                            <h6><a href="product.ns">${dto.name}</a></h6>
+                                            <h6>${dto.name}</h6>
                                             <div class="product__item__price"><span></span></div>
                                         </div>
                                     </div>
@@ -569,14 +626,14 @@
 	                    	<div class="col-lg-4 col-md-6 col-sm-6">
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
-	                                    <!-- <ul class="product__item__pic__hover">
+	                                    <ul class="product__item__pic__hover">
 	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+	                                        <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
 	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-	                                    </ul> -->
+	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">
-	                                    <h6><a href="product.ns?num=${dto.num}">${dto.name}</a></h6>
+	                                    <h6>${dto.name}</h6>
 	                                    <h5></h5>
 	                                </div>
 	                            </div>

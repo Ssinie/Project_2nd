@@ -43,46 +43,50 @@ public class MainController {
 		return "/main/main";
 	}
 	
-	@RequestMapping("product.ns")
-	public String product(@RequestParam("num") int num, ProductDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
-		String preUrl = request.getRequestURL().toString();
-		session.setAttribute("preUrl", preUrl);
-		
-		model.addAttribute("num", num);
-		
-		String id = (String)session.getAttribute("sessionId");
-		model.addAttribute("id", id);
-		
-		List pdList = mainDAO.getPd(num);
-		model.addAttribute("pdList", pdList);
-		
-		dto.setId(id);
-		dto.setNum(num);
-		
-		if(id != null) {
-			String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
-				
-			System.out.println("상품 페이지 wishCheck = "+wishCheck);
-				
-			if(wishCheck == "null") { // 관심상품 클릭 안 했으면
-				model.addAttribute("wishCheck", "0");
-			}
-			if(wishCheck == "1"){
-				model.addAttribute("wishCheck", "1");
-			}
-		}
-		
-		return "/product/product";
-	}
+//	@RequestMapping("product.ns")
+//	public String product(@RequestParam("num") int num, ProductDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
+//		String preUrl = request.getRequestURL().toString();
+//		session.setAttribute("preUrl", preUrl);
+//		
+//		model.addAttribute("num", num);
+//		
+//		String id = (String)session.getAttribute("sessionId");
+//		model.addAttribute("id", id);
+//		
+//		List pdList = mainDAO.getPd(num);
+//		model.addAttribute("pdList", pdList);
+//		
+//		dto.setId(id);
+//		dto.setNum(num);
+//		
+//		if(id != null) {
+//			String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
+//				
+//			System.out.println("상품 페이지 wishCheck = "+wishCheck);
+//				
+//			if(wishCheck == "null") { // 관심상품 클릭 안 했으면
+//				model.addAttribute("wishCheck", "0");
+//			}
+//			if(wishCheck == "1"){
+//				model.addAttribute("wishCheck", "1");
+//			}
+//		}
+//		
+//		return "/product/product";
+//	}
 	
 	@RequestMapping("wishlistPro.ns")
-	public @ResponseBody String wishlistPro(ProductDTO dto, String id, int num, String wishCheck) throws Exception{
+	public @ResponseBody String wishlistPro(@RequestParam("num") int num, ProductDTO dto, HttpSession session) throws Exception{
 		String result = null;
+		String id = (String)session.getAttribute("sessionId");
+		
+		System.out.println(id);
+		System.out.println(num);
 		
 		dto.setId(id);
 		dto.setNum(num);
-		
-		wishCheck = String.valueOf(mainDAO.wishCheck(dto));
+			
+		String wishCheck = String.valueOf(mainDAO.wishCheck(dto));
 		
 		System.out.println("클릭했을 때 wishCheck = "+wishCheck);
 		
@@ -106,13 +110,12 @@ public class MainController {
 	 *  
 	 */
 	@RequestMapping("productlist.ns")
-	public String productList(@RequestParam(value="category", required=false, defaultValue="null") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+	public String productList(@RequestParam("category") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		String preUrl = request.getRequestURL()+"?"+request.getQueryString().toString();
 		session.setAttribute("preUrl", preUrl);
 		
-		if(category.equals("null")) {
-			category = "all";
-		}
+		String sessionId = (String)session.getAttribute("sessionId");
+		model.addAttribute("sessionId", sessionId);
 		
 		model.addAttribute("category", category);
 		model.addAttribute("pageNum", pageNum);

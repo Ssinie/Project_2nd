@@ -16,7 +16,6 @@ $(document).ready(function() {
 	$("#wish").click(function() {
 		if(id == ""){
 			alert("로그인이 필요합니다.");
-			//document.location.href="http://localhost:8080/Project_2nd/login.ns";
 		}else{
 			$.ajax({
 				url: "/Project_2nd/wishlistPro.ns",
