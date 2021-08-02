@@ -7,7 +7,8 @@
 <input type="button" value="CSV파일 출력" onClick="location.href='http://localhost:8080/Project_2nd/master/itemTypeCSVWrite.do'"><br />
 <input type="button" value="제품키값 입력" onClick="location.href='http://localhost:8080/Project_2nd/master/ItemTypeKeyInsert.do'"><br />
 <input type="button" value="가중치 부여" onClick="location.href='http://localhost:8080/Project_2nd/master/ItemTypeValueInsert.do'"><br />
-<input type="button" value="상품들의 가중치뽑기" onClick="location.href='http://localhost:8080/Project_2nd/master/RetrunValueLists.do'">
+<input type="button" value="상품들의 가중치뽑기" onClick="location.href='http://localhost:8080/Project_2nd/master/RetrunValueLists.do'"><br />
+<input type="button" value="셀레니움 크롤링" onClick="location.href='http://localhost:8080/Project_2nd/item/selenium.do'"><br />
 <br />
 <br />
 <% int i = 1; %>

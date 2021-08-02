@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/item")
 public class ItemNameCheck {
 	
 	@Autowired
@@ -224,5 +225,105 @@ public class ItemNameCheck {
 		hash.put("maintag", maintag);
 		hash.put("subtag", subtag);
 		return hash;
+	}
+	
+	/* 동적페이지 크롤링을 위한 셀레니움을 키는 메서드
+	 * 아래의 스탭을 참조..
+	 * # 동적 크롤링
+	 * # -Selenium 웹조작 서버
+	 * # -다운로드 : 크롬드라이버
+	 * # -드라이버/jar 같은폴더에 넣어둔다.
+	 * # ex) d:/r/
+	 * 
+	 * # cmd 실행
+	 * # 드라이버/jar 폴더로 이동
+	 * # java   -jar   selenium-server-standalone.jar   -port   4445
+	 */
+	public void conSelenium(RConnection conn) {
+		try {
+			conn.eval("library(RSelenium)");
+			conn.eval("library(rvest)");
+			conn.eval("remDr <- remoteDriver(remoteServerAddr=\"localhost\", port=4445, browserName=\"chrome\")");
+			conn.eval("remDr$open()");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* 셀레니움 브라우저를 이용한 크롤링
+	 * 
+	 */
+	@RequestMapping("/selenium.do")
+	public String seleniumCrolling(Model model) {
+		RList item;
+		List nametag;
+		List urltag;
+		List imgtag;
+		String catId = "50002426";
+		String pageurl = urlpath1+catId+urlpath2;
+		
+		ItemNameDTO dto;
+		try {
+			conn = new RConnection();
+			conSelenium(conn);
+			conn.eval("item_name <- c(); item_url <- c(); item_img <- c();");
+			conn.assign("pageurl",pageurl);
+			conn.assign("urlpath3",urlpath3);
+			conn.eval("for(u in 1:2){"
+					+ "  url <- paste(pageurl,u,urlpath3,sep='');"
+					+ "  print(paste(\"출력성공1\"));"
+					+ "  remDr$navigate(url);"
+					+ "  print(paste(\"출력성공2\"));"
+					+ "  webNode <- remDr$findElements(using=\"css\",\"#__next > div > div.style_container__1YjHN > div > div.style_content_wrap__1PzEo > div.style_content__2T20F > div.seller_filter_area > div > div.subFilter_sort_box__1r06j > a:nth-child(7)\");"
+					+ "  sapply(webNode,function(x){x$clickElement()});"
+					+ "  for(k in 1:13){"
+					+ "    remDr$executeScript(paste(\"scrollTo(\",k*400,\",\",(k*400)+400,\")\"));Sys.sleep(0.6);}"
+					+ "  Sys.sleep(0.3);"
+					+ "  html <- remDr$getPageSource()[[1]];"
+					+ "  Sys.sleep(0.3);"
+					+ "  html <- read_html(html);"
+					+ "  for(i in 2:16){"
+					+ "    for(j in 1:5){"
+					+ "      path <- paste(\"ul:nth-child(\",i,\") > li:nth-child(\",j,\") > div > div.imgList_title__3yJlT > a\");"
+					+ "      imgPath <- paste(\"ul:nth-child(\",i,\") > li:nth-child(\",j,\") > div.thumbnail_thumb_wrap__1pEkS._wrapper > a > img\");"
+					+ "      nodes <- html_nodes(html,path);"
+					+ "      img_nodes <- html_nodes(html,imgPath);"
+					+ "      text <- html_text(nodes);"
+					+ "      link <- html_attr(nodes,'href');"
+					+ "      img <- html_attr(img_nodes,'src');"
+					+ "      item_name <- c(item_name,text);"
+					+ "      item_url <- c(item_url, link);"
+					+ "      item_img <- c(item_img,img);}}}");
+			conn.eval("item <- data.frame(item_name, item_url, item_img)");
+			item = conn.eval("item").asList();
+			
+			if(item != null) {
+				List itemIndex = new ArrayList();
+				nametag = new ArrayList();
+				urltag = new ArrayList();
+				imgtag = new ArrayList();
+				for(int i = 0; i < item.size(); i++) {
+					String [] val = item.at(i).asStrings();
+					if(i == 0) {for(String c : val) {nametag.add(c);}}			
+					if(i == 1) {for(String c : val) {urltag.add(c);}}
+					if(i == 2) {for(String c : val) {imgtag.add(c);}}
+				}
+				dto = new ItemNameDTO();
+				for(int i = 0; i < nametag.size(); i++) {
+					dto.setName((String)nametag.get(i));
+					dto.setUrl((String)urltag.get(i));
+					dto.setImgurl((String)imgtag.get(i));
+					itemIndex.add(dto);
+				}
+				model.addAttribute("list",itemIndex);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+		
+		return "/master/ItemNameInput";
 	}
 }
