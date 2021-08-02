@@ -25,10 +25,4 @@ public class MemberDAOImpl implements MemberDAOInter {
 		dao.update("member.loginLog", dto);
 		
 	}
-
-//	@Override
-//	public void deleteInfo(MemberDTO dto) throws Exception {
-//		dao.update("member.deleteInfo", dto);
-//		
-//	}
 }

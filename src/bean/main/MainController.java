@@ -195,9 +195,14 @@ public class MainController {
 		return "/product/search";
 	}
 	
-	@RequestMapping("test.ns")
-	public String test() {
-		return "/myPage/myPage";
+	@RequestMapping("loading.ns")
+	public String loading(@RequestParam("num") int num, Model model) throws Exception {
+		
+		String url = mainDAO.getUrl(num);
+		
+		model.addAttribute("url", url);
+		
+		return "/product/loading";
 	}
 }
 

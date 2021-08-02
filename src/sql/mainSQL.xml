@@ -26,11 +26,11 @@
 	</select>
 	
 	<select id="getCatePd" parameterType="productListDTO" resultType="productDTO">
-		<![CDATA[select num, name, imgurl from (select num, name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
+		<![CDATA[select num, name, imgurl, url from (select num, name, imgurl, url, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
 	</select>
 	
-	<select id="getCateBest" parameterType="String" resultType="productDTO"> <!-- 관심상품 등록순으로 변경 예정 -->
-		<![CDATA[select num, name, imgurl from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
+	<select id="getCateBest" parameterType="String" resultType="productDTO"> <!-- 관심상품 등록순(x) 설문조사 반영(o)으로 변경 예정 -->
+		<![CDATA[select num, name, imgurl, url from (select num, name, imgurl, url, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
 	</select>
 	
 	<select id="catePdCount" parameterType="String" resultType="int">
@@ -45,8 +45,12 @@
 		select count(*) from item_name where name like '%' || #{keyword} || '%'
 	</select>
 	
-	<select id="getPd" parameterType="int" resultType="productDTO">
+<!--<select id="getPd" parameterType="int" resultType="productDTO">
 		select name, imgurl from item_name where num=#{num}
+	</select> -->
+	
+	<select id="getUrl" parameterType="int" resultType="String">
+		select url from item_name where num=#{num}
 	</select>
 	
 </mapper>

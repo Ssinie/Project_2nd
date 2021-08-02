@@ -12,17 +12,18 @@
 
 $(document).ready(function() {
 	var id = '${sessionId}';
-	$test = $('[data-pid]');
+	$wish = $('[data-wish]');
+	$shop = $('[data-shop]');
 	
-	$test.on('click', function() {
-		var num = $(this).data("pid");
+	$wish.on('click', function() {
+		var num = $(this).data("wish");
 		
 		if(id == "") {
 			alert("로그인이 필요합니다.");
 		}else{
 			$.ajax({
 				url: "wishlistPro.ns",
-				data: { num: $(this).data("pid") },
+				data: { num: $(this).data("wish") },
 				success: function(result){
 					if(result == "0"){
 						alert("관심상품 삭제 완료");
@@ -32,33 +33,14 @@ $(document).ready(function() {
 					}
 				}
 			})
-		}
-		
-		  
-		});
+		} 
+	});
+
+	$shop.on('click', function() {
+		var num = $(this).data("shop");
+		window.open("loading.ns?num="+num);
+	});
 	
-	/* $("[data-pid]").click(function() {
-		if(id == ""){
-			alert("로그인이 필요합니다.");
-		}else{
-			$.ajax({
-				alert("뭐 어쩌라고");
-				url: "wishlistPro.ns",
-				success: function(result){
-					if(result == "null"){
-						alert("로그인이 필요합니다.");
-					}
-					if(result == "1"){
-						alert("관심상품 등록 완료");
-					}
-					if(result == "0"){
-						alert("관심상품 삭제 완료");
-					}
-				}
-			});
-		}
-		
-	}); */
 });
 
 </script>
@@ -486,9 +468,9 @@ $(document).ready(function() {
                                             data-setbg="${dto.imgurl}">
                                             <div class="product__discount__percent">HOT</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a data-pid="${dto.num}" class="wish" href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
                                                 <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="product__item__text">
@@ -627,9 +609,9 @@ $(document).ready(function() {
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
 	                                    <ul class="product__item__pic__hover">
-	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+	                                        <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
 	                                        <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+	                                        <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">
