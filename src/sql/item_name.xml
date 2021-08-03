@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="item_name">
 	<select id="setItem_name" parameterType="ItemNameDTO">
-		insert into item_name(num, name, url, maintag, subtag) values(item_name_seq.nextval, #{name}, #{url}, #{maintag}, #{subtag})
+		insert into item_name(num, name, url, maintag, subtag, imgurl) values(item_name_seq.nextval, #{name}, #{url}, #{maintag}, #{subtag}, #{imgurl})
 	</select>
 </mapper>

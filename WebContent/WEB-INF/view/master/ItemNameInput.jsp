@@ -8,6 +8,8 @@
 	<tr>
 		<td>num</td>
 		<td>상품명</td>
+		<td>중분류</td>
+		<td>소분류</td>
 		<td>상품URL</td>
 		<td>사진URL</td>
 	</tr>
@@ -15,6 +17,8 @@
 	<tr>
 		<td><%=i%></td>
 		<td>${dto.name}</td>
+		<td>${dto.maintag}</td>
+		<td>${dto.subtag}</td>
 		<td>${dto.url}</td>
 		<td>${dto.imgurl}</td>
 	</tr>

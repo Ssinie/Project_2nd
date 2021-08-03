@@ -109,7 +109,7 @@ public class ItemType {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return "/master/ItemTypeCheck";
+		return "/master/ItemListInput";
 	}
 	
 	/* 개발용 관리페이지의 Controller
