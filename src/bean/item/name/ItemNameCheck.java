@@ -85,22 +85,16 @@ public class ItemNameCheck {
 			conn.eval("item_name <- c(); item_url <- c(); item_img <- c();");
 			conn.assign("pageurl",pageurl);
 			conn.assign("urlpath3",urlpath3);
-			int u = 1;
-			conn.assign("u",u+"");
-			conn.eval("url <- paste(pageurl,u,urlpath3,sep='');");
-			conn.eval("remDr$navigate(url)");
-			conn.eval("Sys.sleep(1)");
-			conn.eval("webNode <- remDr$findElements(using=\"css\",\"#__next > div > div.style_container__1YjHN > div > div.style_content_wrap__1PzEo > div.style_content__2T20F > div.seller_filter_area > div > div.subFilter_sort_box__1r06j > a:nth-child(7)\");");
-			conn.eval("sapply(webNode,function(x){x$clickElement()});");
-			for(; u <= repcount ; u++) {
+			for(int u = 1; u <= repcount ; u++) {
 				conn.assign("u",u+"");
 				conn.eval("url <- paste(pageurl,u,urlpath3,sep='');");
 				conn.eval("remDr$navigate(url)");
 				conn.eval("Sys.sleep(1)");
-				conn.eval("for(k in 1:13){"
+				conn.eval("for(k in 1:14){"
 						+ "remDr$executeScript(paste(\"scrollTo(\",k*400,\",\",(k*400)+400,\")\"));"
 						+ "Sys.sleep(0.6);}");
 				conn.eval("html <- remDr$getPageSource()[[1]]");
+				conn.eval("Sys.sleep(0.3);");
 				conn.eval("html <- read_html(html);");
 				conn.eval("  for(i in 2:16){"
 					+ "    for(j in 1:5){"
@@ -111,6 +105,7 @@ public class ItemNameCheck {
 					+ "      text <- html_text(nodes);"
 					+ "      link <- html_attr(nodes,'href');"
 					+ "      img <- html_attr(img_nodes,'src');"
+					+ "      if(length(img) == 0){img <- 'empty'};"
 					+ "      item_name <- c(item_name,text);"
 					+ "      item_url <- c(item_url, link);"
 					+ "      item_img <- c(item_img,img);}}");
@@ -190,7 +185,7 @@ public class ItemNameCheck {
 	
 	// 마켓 카테고리를 list로 리턴해줌..
 	public int [] marketnum() {
-		int [] listnum = {2428, 2609, 2610};
+		int [] listnum = {2609, 2610};
 		// 완료 2425, 2427, 7042, 7043, 7044, 2440, 2441, 2442, 2443, 2444, 2445, 2609, 2610, 2612, 2428, 2446, 2447, 2448, 2608, 2426, 2429
 		// , };
 		return listnum;
