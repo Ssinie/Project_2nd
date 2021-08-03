@@ -28,6 +28,11 @@ public class ItemType {
 	@Autowired
 	private SqlSessionTemplate dao = null;
 	
+	@RequestMapping("item.do")
+	public String item() {
+		return"/master/Item";
+	}
+	
 	
 	/* '데이터 활용 서비스' 사이트의 '건강기능식품 품목제조신고(원재료) OpenAPI' 를 이용하여 DB에 저장하는 클래스.
 	 * www.foodsafetykorea.go.kr
