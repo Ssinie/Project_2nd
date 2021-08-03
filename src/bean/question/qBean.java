@@ -7,6 +7,7 @@ import bean.healthy.Criteria;
 import bean.healthy.PageMaker;
 import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
+import bean.item.name.ItemTypeDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.RList;
 import org.rosuda.REngine.Rserve.RConnection;
@@ -78,7 +79,7 @@ public class qBean {
 	}
     
     @RequestMapping("pInsert.do")
-	public String pInsert(pDTO dto, Model model) throws Exception{
+	public String pInsert(pDTO dto, Model model, HttpServletRequest request) throws Exception{
     	// 신상정보 DB입력.
     	service.pInsert(dto) ;
     	
@@ -146,12 +147,19 @@ public class qBean {
         List<qDTO> qSelect21 = service.qSelect21() ;
         model.addAttribute("qSelect21", qSelect21) ;
         
+        String pNick = request.getParameter("nick") ;
+        String pAge = request.getParameter("age") ;
+        String pWeight = request.getParameter("weight") ;
+        String pheight = request.getParameter("height") ;
+        String pGender = request.getParameter("gender") ;
+        System.out.println(pNick) ;
+        
 		return "/question/form" ;
 	}
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto) throws Exception{
+    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto, Model model) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	String [] pValue = request.getParameterValues("contents") ;
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
@@ -190,9 +198,7 @@ public class qBean {
     	
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
-    		// System.out.println(dto.getNutri01() + "  " + dto.getVal01()) ;
     		if(dto.getNutri01() != null) {
-    			// System.out.println(vMap.get(dto.getNutri01())) ;
     			int value = 0 ;
     			if(vMap.get(dto.getNutri01()) != null) {
 		    		value = vMap.get(dto.getNutri01()) ;
@@ -227,28 +233,27 @@ public class qBean {
         
         // ItemType 클래스의 ReturnValueList 메소드 호출.
         //List 타입으로 호출됨.
-        ItemType it = new ItemType() ; 
+        ItemType it = new ItemType() ;
         List resultList = it.ReturnValueList(sessions);
-    	// System.out.println(result) ;
-        
+    	
         // List를 배열로 담기.
         String [] ikvList = new String[resultList.size()] ;
         String [][] ikvList02 = new String[resultList.size()][23] ;
-        // = new String[resultList.size()] ;
         for(int i = 0 ; i < resultList.size() ; i++) {
         	ikvDto = (ItemKeyValueDTO) resultList.get(i) ;
         	ikvList = new String[] {ikvDto.getPRDLST_REPORT_NO() + "", ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
 					        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
 					        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
 					        	} ;
-        	System.out.println(Arrays.toString(ikvList)) ;
         	ikvList02[i] = ikvList ;
         }
-        // System.out.println("1번째" + ikvList[0]) ;
+        
+        /*
         for(int i = 0 ; i < ikvList02.length ; i++) {
-        	System.out.println("2중배열 : " + Arrays.toString(ikvList02[i])) ;
+        	System.out.println("데이타 : " + Arrays.toString(ikvList02[i])) ;
         }
-        // System.out.println("2중배열" + Arrays.toString(ikvList02)) ;
+        */
+        
     	// R 연결 및 data.frame화.
     	RConnection conn ;
     	try {
@@ -257,51 +262,27 @@ public class qBean {
 	    	// System.out.println("R version : " + x.asString()) ;
 			
 			String [][] ikvList03 = ikvList02 ;
-			// 데이터 프레임 선언.
+			// 크롤링 데이터를 데이터 프레임화.
 			conn.eval("ikvList <- data.frame(amino = '"+ikvList03[0][1]+"', biotin = '"+ikvList03[0][2]+"', calcium = '"+ikvList03[0][3]+"', collagen = '"+ikvList03[0][4]+"', dietryfiber = '"+ikvList03[0][5]+"', gammalinolenic = '"+ikvList03[0][6]+"', "
 	    			+ "iron = '"+ikvList03[0][7]+"', lutein = '"+ikvList03[0][8]+"', magnesium = '"+ikvList03[0][9]+"', milkthistle = '"+ikvList03[0][10]+"', mineral = '"+ikvList03[0][11]+"', omega3 = '"+ikvList03[0][12]+"', "
 	    			+ "probiotic = '"+ikvList03[0][13]+"', propolis = '"+ikvList03[0][14]+"', redginseng = '"+ikvList03[0][15]+"', vitaminA = '"+ikvList03[0][16]+"', vitaminB = '"+ikvList03[0][17]+"', "
-	    			+ "vitaminC = '"+ikvList03[0][18]+"', vitaminD = '"+ikvList03[0][19]+"', vitaminE = '"+ikvList03[0][20]+"', vitaminK = '"+ikvList03[0][21]+"', zinc = '"+ikvList03[0][22]+"')") ;
+	    			+ "vitaminC = '"+ikvList03[0][18]+"', vitaminD = '"+ikvList03[0][19]+"', vitaminE = '"+ikvList03[0][20]+"', vitaminK = '"+ikvList03[0][21]+"', zinc = '"+ikvList03[0][22]+"', pro_NO = '"+ikvList03[0][0]+"')") ;
 			// conn.eval("rownames(ikvList) <- c('"+ikvList03[0][0]+"')") ;
 			
 			for(int i = 0 ; i < ikvList03.length ; i++) {
 				conn.eval("ikvList02 <- data.frame(amino = '"+ikvList03[i][1]+"', biotin = '"+ikvList03[i][2]+"', calcium = '"+ikvList03[i][3]+"', collagen = '"+ikvList03[i][4]+"', dietryfiber = '"+ikvList03[i][5]+"', gammalinolenic = '"+ikvList03[i][6]+"', "
 		    			+ "iron = '"+ikvList03[i][7]+"', lutein = '"+ikvList03[i][8]+"', magnesium = '"+ikvList03[i][9]+"', milkthistle = '"+ikvList03[i][10]+"', mineral = '"+ikvList03[i][11]+"', omega3 = '"+ikvList03[i][12]+"', "
 		    			+ "probiotic = '"+ikvList03[i][13]+"', propolis = '"+ikvList03[i][14]+"', redginseng = '"+ikvList03[i][15]+"', vitaminA = '"+ikvList03[i][16]+"', vitaminB = '"+ikvList03[i][17]+"', "
-		    			+ "vitaminC = '"+ikvList03[i][18]+"', vitaminD = '"+ikvList03[i][19]+"', vitaminE = '"+ikvList03[i][20]+"', vitaminK = '"+ikvList03[i][21]+"', zinc = '"+ikvList03[i][22]+"')") ;
-				conn.eval("rownames(ikvList02) <- '"+ikvList03[i][0]+"'") ;
+		    			+ "vitaminC = '"+ikvList03[i][18]+"', vitaminD = '"+ikvList03[i][19]+"', vitaminE = '"+ikvList03[i][20]+"', vitaminK = '"+ikvList03[i][21]+"', zinc = '"+ikvList03[i][22]+"', pro_NO = '"+ikvList03[i][0]+"')") ;
+				// conn.eval("rownames(ikvList02) <- '"+ikvList03[i][0]+"'") ;
 				conn.eval("ikvList <- rbind(ikvList, ikvList02)") ;
 			}
+			// 형 변환 시 list 오류 나면 unlist로 감싸기.
+			conn.eval("ikvList[1:22] <- as.numeric(unlist(ikvList[1:22]))") ;
 			conn.eval("print(ikvList)") ;
 			conn.eval("str(ikvList)") ;
-			conn.eval("ikvList.index") ;
-			/*
-			for(int i = 0 ; i < ikvList02.length ; i++) {
-	        	conn.eval("ikvList <- c('"+ikvList02[i]+"')") ;
-	        	conn.eval("ikvList02 <- data.frame(ikvList)") ;
-	        	//conn.eval("ikvList02 <- data.frame(ikvList02, ikvList)") ;
-	        	//conn.eval("finalList <- data.frame(finalList, ikvList)") ;
-	        	//conn.eval("print(finalList)") ;
-	        }
-	        */
 			
-	        // conn.eval("print(finalList)") ;
-	        
-	    	//, length(pValue)
-	    	// + "assign(pValue[i],i)"
-	    	/*
-	    	conn.assign("nutriList", nutriList) ;
-	    	conn.assign("valueList", valueList) ;
-	    	conn.eval("print(nutriList)") ;
-	    	conn.eval("str(nutriList)") ;
-	    	conn.eval("print(valueList)") ;
-	    	conn.eval("str(valueList)") ;
-	    	conn.eval("library('stringr')") ;
-	    	conn.eval("valueList <- as.numeric(valueList)") ;
-	    	conn.eval("valueList <- c(valueList)") ;
-	    	conn.eval("print(valueList)") ;
-	    	conn.eval("str(valueList)") ;
-	    	*/
+			// 설문조사 값을 데이터 프레임화.
 	    	conn.eval("myList <- data.frame(amino = '"+valueList[0]+"', biotin = '"+valueList[1]+"', calcium = '"+valueList[2]+"', collagen = '"+valueList[3]+"', dietryfiber = '"+valueList[4]+"', gammalinolenic = '"+valueList[5]+"', "
 	    			+ "iron = '"+valueList[6]+"', lutein = '"+valueList[7]+"', magnesium = '"+valueList[8]+"', milkthistle = '"+valueList[9]+"', mineral = '"+valueList[10]+"', omega3 = '"+valueList[11]+"', "
 	    			+ "probiotic = '"+valueList[12]+"', propolis = '"+valueList[13]+"', redginseng = '"+valueList[14]+"', vitaminA = '"+valueList[15]+"', vitaminB = '"+valueList[16]+"', "
@@ -309,34 +290,64 @@ public class qBean {
 	    	conn.eval("v <- as.numeric(myList[1, 1:22])") ;
 	    	conn.eval("ml <- data.frame(amino = v[1], biotin = v[2], calcium = v[3], collagen = v[4], dietryfiber = v[5],"
 	    								+ "gammalinolenic = v[6], iron = v[7], lutein = v[8], magnesium = v[9], milkthistle = v[10],"
-	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
+	    								+ "mineral = v[11], omega3 = v[12], probiotic = v[13],"
 	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
 	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
-	    	/*
-	    	conn.eval("ikvList <- data.frame(amino = '"+ikvList[1]+"', biotin = '"+ikvList[2]+"', calcium = '"+ikvList[3]+"', collagen = '"+ikvList[4]+"', dietryfiber = '"+ikvList[5]+"', gammalinolenic = '"+ikvList[6]+"', "
-	    			+ "iron = '"+ikvList[7]+"', lutein = '"+ikvList[8]+"', magnesium = '"+ikvList[9]+"', milkthistle = '"+ikvList[10]+"', mineral = '"+ikvList[11]+"', omega3 = '"+ikvList[12]+"', "
-	    			+ "probiotic = '"+ikvList[13]+"', propolis = '"+ikvList[14]+"', redginseng = '"+ikvList[15]+"', vitaminA = '"+ikvList[16]+"', vitaminB = '"+ikvList[17]+"', "
-	    			+ "vitaminC = '"+ikvList[18]+"', vitaminD = '"+ikvList[19]+"', vitaminE = '"+ikvList[20]+"', vitaminK = '"+ikvList[21]+"', zinc = '"+ikvList[22]+"')") ;
-	    	conn.eval("v02 <- as.numeric(ikvList[1, 1:22])") ;
-	    	conn.eval("ikvl <- data.frame(amino = v[1], biotin = v[2], calcium = v[3], collagen = v[4], dietryfiber = v[5],"
-	    								+ "gammalinolenic = v[6], iron = v[7], lutein = v[8], magnesium = v[9], milkthistle = v[10],"
-	    								+ "mineral = v [11], omega3 = v[12], probiotic = v[13],"
-	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
-	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
-	    	*/
-	    	
 	    	conn.eval("print(ml)") ;
 	    	conn.eval("str(ml)") ;
+	    	
+	    	// 대망의 knn 회귀 분석!!!
+	    	conn.eval("library(class)") ;
+	    	// 훈련 데이타.
+	    	conn.eval("data01 <- ikvList[ ,c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22)]") ;
+	    	// 품번 데이타.
+	    	conn.eval("data02 <- ikvList[ ,23]") ;
+	    	// 조지기. (머신러닝)
+	    	conn.eval("result <- knn(data01, ml, data02, k = 3, prob = TRUE)") ;
+	    	conn.eval("result02 <- knn(data01, ml, data02, k = 1, prob = TRUE)") ;
+	    	conn.eval("result03 <- knn(data01, ml, data02, k = 5, prob = TRUE)") ;
+	    	conn.eval("print(result)") ;
+	    	conn.eval("print(result02)") ;
+	    	conn.eval("print(result03)") ;
+	    	conn.eval("result") ;
+	    	conn.eval("result02") ;
+	    	conn.eval("result03") ;
+	    	
+	    	// 결과 페이지 3개씩 출력 하고자 3번 작업함.
+	    	String result1 = conn.eval("result").asString() ;
+	    	String result2 = conn.eval("result02").asString() ;
+	    	String result3 = conn.eval("result03").asString() ;
+	    	
+	    	System.out.println("추천 영양제 품번 : " + result1) ;
+	    	System.out.println("추천 영양제 품번 2 : " + result2) ;
+	    	System.out.println("추천 영양제 품번 3 : " + result3) ;
+	    	
+	    	ItemTypeDTO result01 = (ItemTypeDTO)service.pResult(result1) ;
+	    	ItemTypeDTO result02 = (ItemTypeDTO)service.pResult(result2) ;
+	    	ItemTypeDTO result03 = (ItemTypeDTO)service.pResult(result3) ;
+	    	
+	    	System.out.println(result01.getPRDLST_NM()) ;
+	    	System.out.println(result01.getBSSH_NM()) ;
+	    	System.out.println(result02.getPRDLST_NM()) ;
+	    	System.out.println(result02.getBSSH_NM()) ;
+	    	System.out.println(result03.getPRDLST_NM()) ;
+	    	System.out.println(result03.getBSSH_NM()) ;
+	    	
+	    	// qResult 페이지로 결과 값 넘기기 저장. model.addAttribute로.
+	    	model.addAttribute("pResult01", result01) ;
+	    	model.addAttribute("pResult02", result02) ;
+	    	model.addAttribute("pResult03", result03) ;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return "/question/qResult" ;
     }
     
-    @RequestMapping("/Project_2nd/question/aResult.do")
-    public String aResult(pDTO dto, Model model) {
+    @RequestMapping("aResult.do")
+    public String aResult(pDTO dto, Model model) throws Exception {
+    	pInsert(dto, model, null) ;
     	model.addAttribute("aResult", service.aResult(dto)) ;
-    	return "/question/qResult";
+    	return "/question/qResult" ;
     }
     
     //인선- 설문지 내용 리스트
@@ -384,7 +395,6 @@ public class qBean {
     	pageMaker.setTotalCount(service.vCount());
     	model.addAttribute("pageMaker", pageMaker);
     	return "/question/getValueList";
-
     }
     
     //인선- QUESTION_VALUE 상세화면

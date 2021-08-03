@@ -8,32 +8,24 @@
 
 <div id = result>
 	<form method = "post" action = "aResult.do">
-		필요 영양소:
-		추천 영양제:<br/>
-		nick: ${aResult.nick}<br/>
-		age: ${aResult.age}<br/>
+		<c:if test = "${pResult01.BSSH_NM != pResult02.BSSH_NM && pResult01.BSSH_NM != pResult03.BSSH_NM}">추천 영양제: ${pResult01.BSSH_NM}의</c:if>
+		<c:if test = "${pResult01.PRDLST_NM != pResult02.PRDLST_NM && pResult01.PRDLST_NM != pResult03.PRDLST_NM}">${pResult01.PRDLST_NM} 입니다!</c:if><br/>
+		<c:if test = "${pResult02.BSSH_NM != pResult01.BSSH_NM && pResult02.BSSH_NM != pResult03.BSSH_NM}">추천 영양제: ${pResult02.BSSH_NM}의</c:if>
+		<c:if test = "${pResult02.PRDLST_NM != pResult01.PRDLST_NM && pResult02.PRDLST_NM != pResult03.PRDLST_NM}">${pResult02.PRDLST_NM} 입니다!</c:if><br/>
+		<c:if test = "${pResult03.BSSH_NM != pResult01.BSSH_NM && pResult03.BSSH_NM != pResult02.BSSH_NM}">추천 영양제: ${pResult03.BSSH_NM}의</c:if>
+		<c:if test = "${pResult03.PRDLST_NM != pResult01.PRDLST_NM && pResult03.PRDLST_NM != pResult02.PRDLST_NM}">${pResult03.PRDLST_NM} 입니다!</c:if><br/>
 		
-		weight: ${aResult.weight}<br/>
-		height: ${aResult.height}<br/>
-		gender: ${aResult.gender}<br/>
-		c01: ${paramValues.contents}<br/>
-		c02: ${param.contents}<br/>
-		c03: ${param.contents}<br/>
-		c04: ${param.contents}<br/>
-		c05: ${param.contents}<br/>
-		c06: ${param.contents}<br/>
-		c07: ${param.contents}<br/>
-		c08: ${param.contents}<br/>
-		c09: ${param.contents}<br/>
-		<!--c10: ${param.contents10}<br/>-->
-		<!--c11: ${param.contents11}<br/>-->
-		<!--c10: ${param.contents12}<br/>-->
+		nick: ${nick}<br/>
+		age: ${param.age}<br/>
+		weight: ${weight}<br/>
+		height: ${param.height}<br/>
+		gender: ${param.gender}<br/>
 	</form>
 </div>
 
 <div id = result02>
 	<form method = "post">
-		${param.nick}님이 제일 필요한 영양소는 ${paramValues.contents} 입니다.
+		${aResult.nick}님이 제일 필요한 영양소는 ${paramValues.contents} 입니다.
 	</form>
 </div>
 	

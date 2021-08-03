@@ -3,12 +3,17 @@ package bean.question;
 import java.util.List;
 
 import bean.healthy.Criteria;
+import bean.item.name.ItemTypeDTO;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
 public interface qBeanInter {
 	
 	public void pInsert(pDTO dto) throws Exception ;
+	
+	public Object aResult(pDTO dto) ;
+	
+	public Object pResult(String result) ;
 	
 	public List<qDTO> qSelect() throws Exception ;
 	public List<qDTO> qSelect02() throws Exception ;
@@ -43,8 +48,6 @@ public interface qBeanInter {
 	void updateBoard(qDTO dto);
 	
 	void updateValue(vDTO dto);
-
-	public Object aResult(pDTO dto);
 	
 	int qCount();
 	

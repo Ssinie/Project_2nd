@@ -293,5 +293,10 @@
 	<br/>
 	<div id = "etc" style = "display: none"><input type = "text" name = "contents12"></div>
 	-->
+	<input type = "hidden" name = "nick" value = "${nick}">
+	<input type = "hidden" name = "age" value = "${age}">
+	<input type = "hidden" name = "weight" value = "${param.weight}">
+	<input type = "hidden" name = "height" value = "${param.height}">
+	<input type = "hidden" name = "gender" value = "${param.gender}">
 	<input type = "submit" value = "결과">
 </form>

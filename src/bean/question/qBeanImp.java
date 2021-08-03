@@ -1,6 +1,7 @@
 package bean.question;
 
 import bean.healthy.Criteria;
+import bean.item.name.ItemTypeDTO;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
@@ -23,10 +24,23 @@ public class qBeanImp implements qBeanInter{
 	@Resource(name = "qBean")
     private qBean qBean ;
 	
-	@Override
-    public List<qDTO> qSelect() throws Exception{
-        return qBean.qSelect();
+    // 개인정보 입력.
+    @Override
+    public void pInsert(pDTO dto) throws Exception{
+    	mybatis.insert("question.pInsert", dto) ;	
     }
+	
+	public Object aResult(pDTO dto){
+		return mybatis.selectList("question.aResult", dto) ;
+	}
+
+	@Override
+	public Object pResult(String result) {
+		return mybatis.selectOne("question.pResult", result);
+	}
+	
+	@Override
+    public List<qDTO> qSelect() throws Exception{return qBean.qSelect();}
     @Override
     public List<qDTO> qSelect02() throws Exception{return qBean.qSelect02();}
     @Override
@@ -68,12 +82,6 @@ public class qBeanImp implements qBeanInter{
     @Override
     public List<qDTO> qSelect21() throws Exception{return qBean.qSelect21();}
     
-    // 개인정보 입력.
-    @Override
-    public void pInsert(pDTO dto) throws Exception{
-    	mybatis.insert("question.pInsert", dto) ;	
-    }
-    
     public List<qDTO> getBoardList(qDTO dto) {
     	return mybatis.selectList("question.getBoardList", dto);
     }
@@ -98,10 +106,6 @@ public class qBeanImp implements qBeanInter{
 	public void updateValue(vDTO dto) {
 		mybatis.update("question.updateValue", dto);
 		
-	}
-	@Override
-	public Object aResult(pDTO dto) {
-		return mybatis.selectList("aResult", dto) ;
 	}
 	
 	public int qCount() {
