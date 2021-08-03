@@ -24,7 +24,9 @@
 </c:if>
 <c:if test="${mem != null }">
 	<p>${mem.id }님 반갑습니다.</p>
-	<a href="managerlogout.ns">로그아웃</a>
+	<input type="button" onclick='location.href="hello.ns"' value="홈"/>
+	<input type="button" onclick='location.href="register.ns"' value="관리자등록"/>
+	<input type="button" onclick='location.href="managerlogout.ns"' value="로그아웃"/>
 </c:if>
 
 

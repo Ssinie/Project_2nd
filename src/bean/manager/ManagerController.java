@@ -2,7 +2,10 @@ package bean.manager;
 
 
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -23,14 +26,32 @@ public class ManagerController {
    private ManagerService managerService;
    
    @RequestMapping("hello.ns")
-   public String test() {
+   public String test(HttpServletRequest request, HttpServletResponse response) {
+	  HttpSession session = request.getSession();
+	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+	  	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+	  		  try {
+	  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+	  		} catch (IOException e) {
+	  			e.printStackTrace();
+	  		}
+	  	  }    	
 	   return"/manager/test";
    }
    
    
     @RequestMapping("register.ns")
-    public String getRegister() { 
-       return "/manager/register";
+    public String getRegister(HttpServletRequest request, HttpServletResponse response) { 
+      HttpSession session = request.getSession();
+  	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+  	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+  		  try {
+  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+  		} catch (IOException e) {
+  			e.printStackTrace();
+  		}
+  	  }    	
+    	return "/manager/register";
    }
     
    
@@ -64,7 +85,7 @@ public class ManagerController {
 	  }else {
 		  session.setAttribute("mem", loginCheck);
 		  session.setMaxInactiveInterval(1000);
-		  return "redirect:/manager/getManagerList.ns";
+		  return "redirect:/manager/hello.ns";
 	  }
 	  
 	  
@@ -78,22 +99,50 @@ public class ManagerController {
    }
    
    @RequestMapping("getManager.ns")
-   public String getManager(ManagerDTO dto, Model model) {
-      System.out.println(dto+"1번");
+   public String getManager(ManagerDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+	  HttpSession session = request.getSession();
+	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+		  try {
+			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
+	  System.out.println(dto+"1번");
       model.addAttribute("manager", managerService.getManager(dto));
       System.out.println(dto+"2번");
       return "/manager/getBoard";
    }
    
    @RequestMapping("getManagerList.ns")
-   public String getBoardList(ManagerDTO dto, Model model) {
+   public String getBoardList(ManagerDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+	  HttpSession session = request.getSession();
+	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+		  try {
+			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
       model.addAttribute("boardList", managerService.getBoardList(dto));
       return "/manager/getBoardList";
    }
    
    @RequestMapping("updateManagerV.ns")
-   public String updateManagerV(ManagerDTO dto) {
-      return "/manager/updateManager";
+   public String updateManagerV(ManagerDTO dto, HttpServletRequest request, HttpServletResponse response) {
+	   HttpSession session = request.getSession();
+	   ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+		  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+			  try {
+				response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		  }
+	   
+	   return "/manager/updateManager";
    }
    
    @RequestMapping("updateManager.ns")
@@ -127,7 +176,16 @@ public class ManagerController {
    
    
    @RequestMapping("pwUpdateV.ns")
-   public String pwupdateV(ManagerDTO dto) {
+   public String pwupdateV(ManagerDTO dto, HttpServletRequest request, HttpServletResponse response) {
+	   HttpSession session = request.getSession();
+	   ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+		  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+			  try {
+				response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		  }
 	   System.out.println(dto);
 	   return "/manager/pwUpdate";
    }

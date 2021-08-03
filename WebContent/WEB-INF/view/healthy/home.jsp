@@ -13,7 +13,7 @@
 
 <p> 이 페이지는 게시글 목록으로 가기위한 테스트용 home 페이지이다.</p>
 
-<p><a href="http://localhost:8080/Project_2nd/getlist.ns">게시물 목록</a></p>
+<p><a href="getBoardList.ns">글목록</a></p>
 
 </body>
 </html>

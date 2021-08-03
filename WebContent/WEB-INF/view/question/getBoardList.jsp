@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Nutrients Sunday</title>
 <style type="text/css">
 	li {list-style: none; float: left; padding: 6px;}
 </style>

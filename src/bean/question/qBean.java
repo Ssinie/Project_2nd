@@ -8,7 +8,9 @@ import bean.healthy.PageMaker;
 import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
 import bean.item.name.ItemTypeDTO;
+import bean.manager.ManagerDTO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -350,12 +354,20 @@ public class qBean {
     	return "/question/qResult" ;
     }
     
-    //인선- 설문지 내용 리스트
+  //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
-    public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model) {
+    public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	List<qDTO> list = service.qList(cri);
     	model.addAttribute("boardList", list);
-    
     	PageMaker pageMaker = new PageMaker();
     	pageMaker.setCri(cri);
     	pageMaker.setTotalCount(service.qCount());
@@ -365,14 +377,32 @@ public class qBean {
     
     //인선- 설문지 내용 상세화면
     @RequestMapping("getBoard.do")
-    public String getBoard(qDTO dto, Model model) {
+    public String getBoard(qDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	model.addAttribute("board", service.getBoard(dto));
     	return "/question/getBoard";
     }
     
     //인선- 설문지 내용 수정화면
     @RequestMapping("updateBoard.do")
-    public String updateBoardView(qDTO dto, Model model) {
+    public String updateBoardView(qDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	model.addAttribute("board", service.getBoard(dto));
     	return "/question/updateBoard";
     }
@@ -386,7 +416,16 @@ public class qBean {
     
     //인선- QUESTION_VALUE 리스트
     @RequestMapping("getValueList.do")
-    public String getValueList(@ModelAttribute("cri") Criteria cri, Model model) {
+    public String getValueList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	List<vDTO> list = service.vList(cri);
     	model.addAttribute("boardList", list);
     
@@ -395,18 +434,37 @@ public class qBean {
     	pageMaker.setTotalCount(service.vCount());
     	model.addAttribute("pageMaker", pageMaker);
     	return "/question/getValueList";
+
     }
     
     //인선- QUESTION_VALUE 상세화면
     @RequestMapping("getValue.do")
-    public String getValue(vDTO dto, Model model) {
+    public String getValue(vDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	model.addAttribute("board", service.getValue(dto));
     	return "question/getValue";
     }
     
     //인선- QUESTION_VALUE 수정화면
     @RequestMapping("updateValue.do")
-    public String updateValueView(vDTO dto, Model model) {
+    public String updateValueView(vDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
+      HttpSession session = request.getSession();
+   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+   		  try {
+   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+   		} catch (IOException e) {
+   			e.printStackTrace();
+   		}
+   	  }
     	model.addAttribute("board", service.getValue(dto));
     	return "/question/updateValue";
     }
@@ -417,4 +475,5 @@ public class qBean {
     	service.updateValue(dto);
     	return "redirect:/question/getValueList.do";
     }
+    
 }

@@ -35,14 +35,17 @@
 		<td align="center" bgcolor="#b7a2de">수정일</td>
 		<td align="left">${board.updateDate }</td>
 	</tr>
+<c:if test="${mem != null }">
 	<tr>
 		<td colspan="2" align="center">
 			<input type="submit" value="글수정">
+			<button type="button" id=test name="test" onclick='location.href="deleteBoard.ns?num=${board.num }";'>글삭제</button>
 		</td>
 	</tr>		
+</c:if>
 </table>
 </form>
-<a href="deleteBoard.ns?num=${board.num }">글삭제</a>
+
 <a href="getBoardList.ns">글목록</a>
 <hr>
 </center>

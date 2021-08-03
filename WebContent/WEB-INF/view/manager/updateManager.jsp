@@ -21,12 +21,12 @@
 	</tr>
 	<tr>
 		<td align="center" bgcolor="orange"><label for="managerNAME">이름</label></td>
-		<td><input type="text" id="managerNAME" name="name" value="${manager.name }"/></td>
+		<td><input type="text" id="managerNAME" name="name" value="${manager.name }" required/></td>
 	</tr>
 	<tr>
 		<td align="center" bgcolor="orange"><label for="managerNAME">소속부서</label></td>
 		<td>
-			<select name="department">
+			<select name="department" required>
 				<option value="none">=== 선택 ===</option>
 				<option value="인사부">인사부</option>
 				<option value="기획부">기획부</option>
@@ -39,8 +39,8 @@
 	<tr>
 		<td align="center" bgcolor="orange"><label for="managerGENDER">성별</label></td>
 		<td>
-			<input type="radio" id="managerGENDER" name="gender" value="여성">여성
-			<input type="radio" id="managerGENDER" name="gender" value="남성">남성
+			<input type="radio" id="managerGENDER" name="gender" value="여성" required>여성
+			<input type="radio" id="managerGENDER" name="gender" value="남성" required>남성
 		</td>
 	</tr>
 		<tr>

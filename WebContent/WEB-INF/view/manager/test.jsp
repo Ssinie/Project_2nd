@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>Nutrients Sunday</title>
 </head>
+<c:if test="${mem != null }">
+	<p>${mem.id }님 반갑습니다.</p>
+	<input type="button" onclick='location.href="managerlogout.ns"' value="로그아웃"/>
+</c:if>
 <ul>
 	<li><a href="/Project_2nd/manager/getManagerList.ns">관리자 계정</a>
     </li>

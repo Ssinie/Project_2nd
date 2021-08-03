@@ -114,7 +114,8 @@
 	
 	<select id="qList" resultType="qDTO" parameterType="bean.healthy.Criteria">
 		select num, 
-	           title, 
+	           title,
+	           contents01,
 			   contents02,
 			   contents03,
 			   contents04,
@@ -127,7 +128,8 @@
 			   dates
     	from (
        		   select num, 
-	           		  title, 
+	           		  title,
+	           		  contents01, 
 			  		  contents02,
 			    	  contents03,
 			  		  contents04,

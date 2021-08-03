@@ -17,8 +17,7 @@ public class CrawlingController {
 	
 	@RequestMapping("crawling.ns")
 	public String insertNaver() {
-		CrawlingDTO a = new CrawlingDTO();
-		crawlingService.deleteAll(a);
+
 		RConnection conn = null;
 		try {
 			conn = new RConnection();
@@ -57,7 +56,8 @@ public class CrawlingController {
 			
 			String [] title = news.at(0).asStrings();
 			String [] url = news.at(1).asStrings();
-			
+			CrawlingDTO a = new CrawlingDTO();
+			crawlingService.deleteAll(a);
 			CrawlingDTO dto = new CrawlingDTO();
 			for(int x = 0; x < title.length; x++) {
 				dto.setNaverTitle(title[x]);

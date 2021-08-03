@@ -15,11 +15,19 @@
 <center>
 <h1>게시글 목록</h1>
 <p>총 게시글 수:(${pageMaker.totalCount }개)</p>
+<p>현재 페이지: ${cri.page}페이지</p>
 <br>
-<a href="/Project_2nd/manager/hello.ns">홈</a>
-<a href="insertBoardV.ns">새글 등록</a>
-<a href="crawling.ns">크롤링 하기</a>
-<button type="button" onclick='location.href="deleteAll.ns"'>전체삭제</button>
+<c:if test="${mem != null }">
+	<p>${mem.id }님 반갑습니다.</p>
+	<input type="button" onclick='location.href="/Project_2nd/manager/hello.ns"' value="홈"/>
+	<input type="button" onclick='location.href="insertBoardV.ns"' value="새글"/>
+	<input type="button" onclick='location.href="crawling.ns"' value="크롤링"/>
+	<button type="button" onclick='location.href="deleteAll.ns"'>전체삭제</button>
+	<input type="button" onclick='location.href="/Project_2nd/manager/managerlogout.ns"' value="로그아웃"/>	
+</c:if>
+<c:if test="${mem == null }">
+	<a href="/Project_2nd/index.ns">메인으로 돌아가기</a>
+</c:if>
 <table border="1" cellpadding="0" cellspacing="0" width="1050">
 <tr>
 	<th bgcolor="#b7a2de" width="100">번호</th>
