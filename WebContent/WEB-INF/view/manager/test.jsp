@@ -26,6 +26,9 @@
     <li><a href="/Project_2nd/healthy/getBoardList.ns">건강정보</a>
     </li>
     
+    <li><a href="/Project_2nd/master/item.do">Item</a>
+    </li>
+    
     <li><a href="">공지사항</a>
     </li>
 </ul>

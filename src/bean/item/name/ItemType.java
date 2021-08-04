@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +26,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import bean.manager.ManagerDTO;
+
 @Controller
 @RequestMapping("/master")
 public class ItemType {
@@ -29,7 +36,16 @@ public class ItemType {
 	private SqlSessionTemplate dao = null;
 	
 	@RequestMapping("item.do")
-	public String item() {
+	public String item(HttpServletRequest request, HttpServletResponse response) {
+		 HttpSession session = request.getSession();
+	  	 ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
+	  	 	if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
+	  		  try {
+	  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
+	  		} catch (IOException e) {
+	  			e.printStackTrace();
+	  		}
+	  	  }    
 		return"/master/Item";
 	}
 	
