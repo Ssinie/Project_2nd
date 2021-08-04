@@ -6,7 +6,7 @@ public class ProductDTO {
 	private int num;
 	private String name;
 	private String imgurl;
-//	private String url;
+	private String subtag;
 	
 	public String getName() {
 		return name;
@@ -32,11 +32,11 @@ public class ProductDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-//	public String getUrl() {
-//		return url;
-//	}
-//	public void setUrl(String url) {
-//		this.url = url;
-//	}
+	public String getSubtag() {
+		return subtag;
+	}
+	public void setSubtag(String subtag) {
+		this.subtag = subtag;
+	}
 	
 }

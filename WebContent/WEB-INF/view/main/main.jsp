@@ -6,6 +6,45 @@
 <html lang="zxx">
 
 <head>
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var id = '${sessionId}';
+	$wish = $('[data-wish]');
+	$shop = $('[data-shop]');
+	
+	$wish.on('click', function() {
+		var num = $(this).data("wish");
+		
+		if(id == "") {
+			alert("로그인이 필요합니다.");
+		}else{
+			$.ajax({
+				url: "wishlistPro.ns",
+				data: { num: $(this).data("wish") },
+				success: function(result){
+					if(result == "0"){
+						alert("관심상품에서 삭제되었습니다.");
+					}
+					if(result == "1"){
+						alert("관심상품으로 등록되었습니다.");
+					}
+				}
+			})
+		} 
+	});
+
+	$shop.on('click', function() {
+		var num = $(this).data("shop");
+		window.open("loading.ns?num="+num);
+	});
+	
+});
+
+</script>
+
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
@@ -40,21 +79,21 @@
         <div class="humberger__menu__logo">
             <a href="main.ns"><img src="img/logo.png" alt=""></a>
         </div>
-        <div class="humberger__menu__cart">
+        <!-- <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
+        </div> -->
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
+                <!-- <img src="img/language.png" alt=""> -->
+                <div>마이페이지</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
+                    <li><a href="mypage.ns">내 관심상품</a></li>
+                    <li><a href="#">내 문의내역</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
@@ -70,31 +109,31 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="main.ns">Home</a></li>
-                <li><a href="productlist.ns">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
+                <li class="active"><a href="main.ns">홈</a></li>
+                <li><a href="productlist.ns">영양제</a></li>
+                <li><a href="#">건강뉴스</a>
+                   <!--  <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                         <li><a href="./checkout.html">Check Out</a></li>
                         <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <!-- <li><a href="./blog.html">Blog</a></li> -->
+                <li><a href="./contact.html">공지사항</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
+            <!-- <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a> -->
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> help@nutrientsunday.co.kr</li>
+                <li>매일매일 일요일처럼 활기차게! Nutrient Sunday</li>
             </ul>
         </div>
     </div>
@@ -108,26 +147,26 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> help@nutrientsunday.co.kr</li>
+                                <li>매일매일 일요일처럼 활기차게! Nutrient Sunday</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
+                            <!-- <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
+                            </div> -->
                             <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
+                                <!-- <img src="img/language.png" alt=""> -->
+                                <div>마이페이지</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
+                                    <li><a href="mypage.ns">내 관심상품</a></li>
+                                    <li><a href="#">내 문의내역</a></li>
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
@@ -149,34 +188,35 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="main.ns"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
+                            <li class="active"><a href="main.ns">홈</a></li>
+                            <li><a href="./contact.html">공지사항</a></li>
+                            <li><a href="productlist.ns">영양제</a></li>
+                            <li><a href="#">건강뉴스</a>
+                                <!-- <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <!-- <li><a href="./blog.html">Blog</a></li> -->
+                            
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <!-- <ul>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span></span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>$150.00</span></div> -->
                     </div>
                 </div>
             </div>
@@ -195,7 +235,7 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span> 전체 카테고리 </span>
                         </div>
                         <ul>
                             <c:forEach var="category" items="${categoryList}">
@@ -208,12 +248,12 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="search.ns">
-                                <div class="hero__search__categories">
+                                <!-- <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" name="keyword" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                </div> -->
+                                <input type="text" name="keyword" placeholder="피로 개선에 효과 좋은 간 영양제, '밀크씨슬' 찾으세요?">
+                                <button type="submit" class="site-btn">검색</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -228,10 +268,10 @@
                     </div>
                     <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <span>NUTRIENT TEST</span>
+                            <h2>알고리즘 <br />영양제 테스트</h2>
+                            <p>간단한 테스트로 <br />필요한 영양성분과 제품을 확인하세요.</p>
+                            <a href="question/pForm.do" class="primary-btn">지금 테스트 하기</a>
                         </div>
                     </div>
                 </div>
@@ -301,14 +341,14 @@
             	<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
-                            <!-- <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul> -->
+                            <ul class="featured__item__pic__hover">
+                                <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+                                <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+                                <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h6>${dto.subtag}</h6>
                             <h5>${dto.name}</h5>
                         </div>
                     </div>

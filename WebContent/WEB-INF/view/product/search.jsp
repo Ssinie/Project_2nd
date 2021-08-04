@@ -6,6 +6,45 @@
 <html lang="zxx">
 
 <head>
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var id = '${sessionId}';
+	$wish = $('[data-wish]');
+	$shop = $('[data-shop]');
+	
+	$wish.on('click', function() {
+		var num = $(this).data("wish");
+		
+		if(id == "") {
+			alert("로그인이 필요합니다.");
+		}else{
+			$.ajax({
+				url: "wishlistPro.ns",
+				data: { num: $(this).data("wish") },
+				success: function(result){
+					if(result == "0"){
+						alert("관심상품에서 삭제되었습니다.");
+					}
+					if(result == "1"){
+						alert("관심상품으로 등록되었습니다.");
+					}
+				}
+			})
+		} 
+	});
+
+	$shop.on('click', function() {
+		var num = $(this).data("shop");
+		window.open("loading.ns?num="+num);
+	});
+	
+});
+
+</script>
+
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
@@ -37,7 +76,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="main.ns"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -570,15 +609,15 @@
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
 	                                	<a href="product.ns?num=${dto.num}"></a>
-	                                   <!--  <ul class="product__item__pic__hover">
-	                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-	                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-	                                    </ul> -->
+	                                    <ul class="product__item__pic__hover">
+	                                        <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+	                                        <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+	                                        <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">
-	                                    <h6><a href="product.ns?num=${dto.num}">${dto.name}</a></h6>
-	                                    <h5></h5>
+	                                    <h6>${dto.subtag}</h6>
+	                                    <h5>${dto.name}</h5>
 	                                </div>
 	                            </div>
 	                        </div>

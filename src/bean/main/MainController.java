@@ -110,43 +110,66 @@ public class MainController {
 	 *  
 	 */
 	@RequestMapping("productlist.ns")
-	public String productList(@RequestParam("category") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
-		String preUrl = request.getRequestURL()+"?"+request.getQueryString().toString();
-		session.setAttribute("preUrl", preUrl);
+	public String productList(@RequestParam(value="category", required=false, defaultValue="null") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		
+		if(request.getQueryString() == null) {
+			String preUrl = request.getRequestURL().toString();
+			session.setAttribute("preUrl", preUrl);
+		}
+		
+		if(request.getQueryString() != null) {
+			String preUrl = request.getRequestURL()+"?"+request.getQueryString().toString();
+			session.setAttribute("preUrl", preUrl);
+		}
 		
 		String sessionId = (String)session.getAttribute("sessionId");
 		model.addAttribute("sessionId", sessionId);
-		
-		model.addAttribute("category", category);
 		model.addAttribute("pageNum", pageNum);
 		
-		dto.setCategory(category);
-		
 		int pageSize = 9;
-		if(pageNum.equals("null")) {
-			pageNum = "1";
-		}
-		
+			if(pageNum.equals("null")) {
+				pageNum = "1";
+			}
+			
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = currentPage * pageSize;
 		dto.setStartRow(startRow);
 		dto.setEndRow(endRow);
-		
-		int catePdCount = mainDAO.catePdCount(category);
-		
-		if(catePdCount > 0) {
-			List productList = mainDAO.getCatePd(dto);
-			model.addAttribute("productList", productList);
+			
+		if(category.equals("null")) {
+			
+			int catePdCount = mainDAO.allPdCount();
+			model.addAttribute("catePdCount", catePdCount);
+			
+			if(catePdCount > 0) {
+				List productList = mainDAO.getAllPd(dto);
+				model.addAttribute("productList", productList);
+			}
+			
+			List productBest = mainDAO.getAllBest();
+			model.addAttribute("productBest", productBest);
+			
+		}else {
+			
+			model.addAttribute("category", category);
+			dto.setCategory(category);
+			
+			int catePdCount = mainDAO.catePdCount(category);
+			model.addAttribute("catePdCount", catePdCount);
+			
+			if(catePdCount > 0) {
+				List productList = mainDAO.getCatePd(dto);
+				model.addAttribute("productList", productList);
+				
+				List productBest = mainDAO.getCateBest(category);
+				model.addAttribute("productBest", productBest);
+			}
 		}
-		
+			
 		List categoryList = mainDAO.getCategory();
 		model.addAttribute("categoryList", categoryList);
-		
-		List productBest = mainDAO.getCateBest(category);
-		model.addAttribute("productBest", productBest);
-		
-		model.addAttribute("catePdCount", catePdCount);
+				
 		model.addAttribute("pageSize", pageSize);
 		model.addAttribute("currentPage", currentPage);
 		
@@ -160,7 +183,6 @@ public class MainController {
 		
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("pageNum", pageNum);
-		System.out.println(keyword);
 		
 		int pageSize = 9;
 		if(pageNum.equals("null")) {
@@ -175,14 +197,9 @@ public class MainController {
 		dto.setStartRow(startRow);
 		dto.setEndRow(endRow);
 		
-		System.out.println("dto keyword = "+dto.getKeyword());
-		System.out.println("dto start = "+dto.getStartRow());
-		System.out.println("dto end = "+dto.getEndRow());
-		
 		if(searchPdCount > 0) {
 			List searchList = mainDAO.getSearchPd(dto);
 			model.addAttribute("searchList", searchList);
-			System.out.println(searchList);
 		}
 		
 		List categoryList = mainDAO.getCategory();
@@ -203,6 +220,46 @@ public class MainController {
 		model.addAttribute("url", url);
 		
 		return "/product/loading";
+	}
+	
+	@RequestMapping("mypage.ns")
+	public String myPage(@RequestParam(value="category", required=false, defaultValue="null") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		String preUrl = request.getRequestURL().toString();
+		session.setAttribute("preUrl", preUrl);
+		
+		String id = (String)session.getAttribute("sessionId");
+		dto.setId(id);
+		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
+		if(id != null) {
+			
+			int pageSize = 6;
+			if(pageNum.equals("null")) {
+				pageNum = "1";
+			}
+			
+			int currentPage = Integer.parseInt(pageNum);
+			int startRow = (currentPage - 1) * pageSize + 1;
+			int endRow = currentPage * pageSize;
+			
+			dto.setStartRow(startRow);
+			dto.setEndRow(endRow);
+			
+			int mypagePdCount = mainDAO.mypagePdCount(id);
+			
+			if(mypagePdCount > 0) {
+				List mypageList = mainDAO.getMypagePd(dto);
+				model.addAttribute("mypageList", mypageList);
+				
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				model.addAttribute("pageSize", pageSize);
+				model.addAttribute("currentPage", currentPage);
+			}
+		}
+		
+		return "/product/myPage";
 	}
 }
 

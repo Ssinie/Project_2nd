@@ -72,6 +72,31 @@ public class MainDAOImpl implements MainDAOInter {
 	public String getUrl(int num) throws Exception {
 		return dao.selectOne("main.getUrl", num);
 	}
+
+	@Override
+	public List getMypagePd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getMypagePd", dto);
+	}
+
+	@Override
+	public int mypagePdCount(String id) throws Exception {
+		return dao.selectOne("main.mypagePdCount", id);
+	}
+
+	@Override
+	public List getAllPd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getAllPd", dto);
+	}
+
+	@Override
+	public List getAllBest() throws Exception {
+		return dao.selectList("main.getAllBest");
+	}
+
+	@Override
+	public int allPdCount() throws Exception {
+		return dao.selectOne("main.allPdCount");
+	}
 }
 
 

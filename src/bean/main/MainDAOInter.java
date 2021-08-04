@@ -13,7 +13,7 @@ public interface MainDAOInter {
 	// 관심상품 삭제 delete
 	public void wishDelete(ProductDTO dto) throws Exception;
 	
-	// 메인 페이지 전체상품 조회순 상품명, 이미지 select
+	// 메인 페이지 전체상품 조회순 상품명, 이미지 8개 select
 	public List getMainPd() throws Exception;
 	
 	// 상품목록 카테고리 select
@@ -39,5 +39,20 @@ public interface MainDAOInter {
 	
 	// 상품번호로 상품구매 url select
 	public String getUrl(int num) throws Exception;
+	
+	// 아이디로 wishlist 상품번호 select --> 상품번호로 상품명, 이미지, 영양성분 select
+	public List getMypagePd(ProductListDTO dto) throws Exception;
+	
+	// 아이디로 관심상품 개수 select
+	public int mypagePdCount(String id) throws Exception;
+	
+	// 전체상품 조회순 select
+	public List getAllPd(ProductListDTO dto) throws Exception;
+	
+	// 전체상품 조회순 상품명, 이미지 6개 select
+	public List getAllBest() throws Exception;
+	
+	// 전체상품 개수 select count(*)
+	public int allPdCount() throws Exception;
 }
 

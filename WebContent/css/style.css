@@ -2277,6 +2277,10 @@ ol {
   Blog
 -----------------------*/
 
+.blog {
+	padding-top: 20px;
+}
+
 .blog__item {
 	margin-bottom: 60px;
 }

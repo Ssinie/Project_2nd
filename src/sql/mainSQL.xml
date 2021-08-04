@@ -10,7 +10,7 @@
 	</select>
 	
 	<insert id="wishInsert" parameterType="productDTO">
-		insert into wishlist(id, num, clicked) values(#{id}, #{num}, 1)
+		insert into wishlist(id, num, clicked, click_date) values(#{id}, #{num}, 1, sysdate)
 	</insert>
 	
 	<delete id="wishDelete">
@@ -18,19 +18,19 @@
 	</delete>
 	
 	<select id="getMainPd" resultType="productDTO">
-		<![CDATA[select num, name, imgurl from (select num, name, imgurl from item_name order by view_count desc) where rownum <= 8]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <= 8]]>
 	</select>
 	
 	<select id="getCategory" resultType="String">
-		select distinct subtag from test_nutrient
+		select subtag from test_nutrient
 	</select>
 	
 	<select id="getCatePd" parameterType="productListDTO" resultType="productDTO">
-		<![CDATA[select num, name, imgurl, url from (select num, name, imgurl, url, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name where subtag=#{category}) where rank>=#{startRow} and rank<=#{endRow}]]>
 	</select>
 	
 	<select id="getCateBest" parameterType="String" resultType="productDTO"> <!-- 관심상품 등록순(x) 설문조사 반영(o)으로 변경 예정 -->
-		<![CDATA[select num, name, imgurl, url from (select num, name, imgurl, url, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <=6 and subtag=#{category}]]>
 	</select>
 	
 	<select id="catePdCount" parameterType="String" resultType="int">
@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="getSearchPd" parameterType="productListDTO" resultType="productDTO">
-		<![CDATA[select num, name, imgurl from (select num, name, imgurl, rank() over(order by view_count desc) AS rank from item_name where name like '%' || #{keyword} || '%') where rank>=#{startRow} and rank<=#{endRow}]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name where name like '%' || #{keyword} || '%') where rank>=#{startRow} and rank<=#{endRow}]]>
 	</select>
 	
 	<select id="searchPdCount" parameterType="String" resultType="int">
@@ -51,6 +51,27 @@
 	
 	<select id="getUrl" parameterType="int" resultType="String">
 		select url from item_name where num=#{num}
+	</select>
+	
+	<select id="getMypagePd" parameterType="productListDTO" resultType="productDTO">
+		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and w.rank>=#{startRow} and w.rank<=#{endRow}
+]]>
+	</select>
+	
+	<select id="mypagePdCount" parameterType="productListDTO" resultType="int">
+		select count(*) from wishlist where id = #{id}
+	</select>
+	
+	<select id="getAllPd" parameterType="productListDTO" resultType="productDTO">
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag, rank() over(order by view_count desc) AS rank from item_name) where rank>=#{startRow} and rank<=#{endRow}]]>
+	</select>
+	
+	<select id="getAllBest" resultType="productDTO">
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <=6]]>
+	</select>
+	
+	<select id="allPdCount" resultType="int">
+		select count(*) from item_name
 	</select>
 	
 </mapper>

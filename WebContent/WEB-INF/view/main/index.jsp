@@ -104,7 +104,7 @@
                   </div>
                 </div>
                 
-                <p style="display:inline-block"><a href="http://localhost:8080/Project_2nd/question/pForm.do" class="btn btn-primary px-5 py-3">테스트 시작</a></p>
+                <p style="display:inline-block"><a href="question/pForm.do" class="btn btn-primary px-5 py-3">테스트 시작</a></p>
                 <div style="display:inline-block; width:50px"></div>
                 <p style="display:inline-block"><a href="main.ns" class="btn btn-primary px-5 py-3">홈페이지로</a></p>
               </div>
