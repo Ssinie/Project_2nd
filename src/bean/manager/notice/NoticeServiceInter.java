@@ -11,6 +11,9 @@ public interface NoticeServiceInter {
 	// 공지사항의 모든 게시글을 리스트로 리턴
 	public List selectList();
 	
+	// 공지사항의 게시글 수를 int로 리턴
+	public int selectCount();
+	
 	// 공지사항의 게시글을 눌럿을 때의 게시글 내용 리턴
 	public NoticeDTO selectForm(int num); // 리턴 DTO
 	

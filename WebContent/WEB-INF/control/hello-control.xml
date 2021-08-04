@@ -39,7 +39,7 @@
    <bean id = "productListDTO" class = "bean.main.ProductListDTO" /> <!-- 상품목록 DTO -->
    <bean id = "ManagerDTO" class = "bean.manager.ManagerDTO" /> <!-- 관리자 DTO -->
    <bean id = "ManagerDAOMybatis" class = "bean.manager.ManagerDAOMybatis" /> <!-- 관리자 DAO -->
-   <bean id = "NoticeDTO" class = "bean.manager.notice.NoticeDTO" /> <!-- 공지사항 DTO -->
+   <bean id = "noticeImpl" class = "bean.manager.notice.NoticeServiceImpl" /> <!-- 공지사항 DTO -->
    <!-- <bean id = "UserManagerDTO" class = "bean.userManager.UserManagerDTO" />  -->
    <!--   <bean id = "UserManagerDAOMybatis" class = "bean.userMager.UserManagerDAOMybatis" />  -->
 </beans>

@@ -3,5 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeSQL">
-
+	<select id="selectNotice" resultType="NoticeDTO">
+		select * from notice order by updatedate desc
+	</select>
+	<select id="selectNum" resultType="NoticeDTO" parameterType="int">
+		select * from notice where num=#{num}
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*) from notice
+	</select>
+	<insert id="insertNotice" parameterType="NoticeDTO">
+		insert into notice(num, title, content, writer, regdate, updatedate) values(
+		notice_seq.nextval, #{title}, #{content}, #{writer}, sysdate, sysdate)
+	</insert>
+	<update id="updateNotice" parameterType="NoticeDTO">
+		insert into notice(title, content, writer, updatedate) values(
+		#{title}, #{content}, #{writer}, sysdate)
+	</update>
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice where num=#{num}
+	</delete>
 </mapper>
