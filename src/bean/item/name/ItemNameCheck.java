@@ -41,6 +41,7 @@ public class ItemNameCheck {
 				String maintag = (String)markettag.get("maintag");
 				String subtag = (String)markettag.get("subtag");
 				String catId = (50000000 + v) + "";
+				int pageNum = pageNumCheck(catId, conn);
 				RList list = check.seleniumCrollingList(conn, catId, 4);
 				ArrayList nametag = new ArrayList();
 				ArrayList urltag = new ArrayList();
@@ -78,14 +79,14 @@ public class ItemNameCheck {
 	/* 셀레니움 브라우저를 이용한 크롤링
 	 * 
 	 */
-	public RList seleniumCrollingList(RConnection conn, String catId, int repcount) {
+	public RList seleniumCrollingList(RConnection conn, String catId, int pageNum) {
 		RList item = null;
 		String pageurl = urlpath1+catId+urlpath2;
 		try {
 			conn.eval("item_name <- c(); item_url <- c(); item_img <- c();");
 			conn.assign("pageurl",pageurl);
 			conn.assign("urlpath3",urlpath3);
-			for(int u = 1; u <= repcount ; u++) {
+			for(int u = 1; u <= pageNum ; u++) {
 				conn.assign("u",u+"");
 				conn.eval("url <- paste(pageurl,u,urlpath3,sep='');");
 				conn.eval("remDr$navigate(url)");
@@ -149,24 +150,28 @@ public class ItemNameCheck {
 	}
 	
 	// 상품명을 찾을 때 사용할 페이지 갯수를 구할 메서드
-	// 페이지 URL을 찾아 상품갯수를 구한 뒤 (상품 갯수 / 20) 반올림 하여 페이지 수 를 구함.
+	// 페이지 URL을 찾아 상품갯수를 구한 뒤 (상품 갯수 / 80) 반올림 하여 페이지 수 를 구함.
 	// 간혹 크롤링 중 정보를 가져오지 못하는 경우가 있어, while문을 사용하여 반복하도록 함.
-	public static int pageNumCheck(long catId) {
+	// 온전한 80개의 정보가 필요하기에 마지막 리턴값에 1을 빼줌
+	public static int pageNumCheck(String catId, RConnection conn) {
 		int pageNum = 0;
 		System.out.println("페이지 체크 ID :"+catId);
 		String pageurl = urlpath1+catId+urlpath2+1+urlpath3;
 		try {
-			conn = new RConnection();
 			// 완성한 String 문자 URL로 전달
 			conn.assign("url", pageurl);
-			conn.eval("library(rvest)"); 
 			conn.eval("pageNum <- 0");
+			conn.eval("remDr$navigate(url)");
+			conn.eval("html <- remDr$getPageSource()[[1]]");
+			conn.eval("Sys.sleep(0.3);");
+			conn.eval("html <- read_html(html);");
+			conn.eval("Sys.sleep(0.3);");
 			conn.eval("while(pageNum == 0){ "
-					 +"html <- read_html(url);"
-					 +"nodes <- html_nodes(html, \"div.seller_filter_area > ul > li:nth-child(1) > a > span\");"
+					 +"nodes <- html_nodes(html, \"div.seller_filter_area > ul > li.active > a > span.subFilter_num__2x0jq\");"
 				 	 +"text <- html_text(nodes);"
+					 +"print(text);"
 					 +"text <- gsub(\",\",\"\",text);"
-					 +"pageNum <- ceiling(as.numeric(text)/20);"
+					 +"pageNum <- ceiling(as.numeric(text)/80);"
 					 +"if(length(pageNum) == 0){"
 					 +"pageNum <- 0;"
 					 +"Sys.sleep(0.5);"
@@ -177,16 +182,14 @@ public class ItemNameCheck {
 			System.out.print(pageNum);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			conn.close();
 		}
-		return pageNum;
+		return pageNum-1;
 	}
 	
 	// 마켓 카테고리를 list로 리턴해줌..
 	public int [] marketnum() {
-		int [] listnum = {2609, 2610};
-		// 완료 2425, 2427, 7042, 7043, 7044, 2440, 2441, 2442, 2443, 2444, 2445, 2609, 2610, 2612, 2428, 2446, 2447, 2448, 2608, 2426, 2429
+		int [] listnum = {2425};
+		// 재도정 2609, 2610, , 2427, 7042, 7043, 7044, 2440, 2441, 2442, 2443, 2444, 2445, 2609, 2610, 2612, 2428, 2446, 2447, 2448, 2608, 2426, 2429
 		// , };
 		return listnum;
 	}

@@ -22,6 +22,7 @@
 		<typeAlias type = "bean.healthy.HealthyDTO" alias = "HealthyDTO" />
 		<typeAlias type = "bean.healthy.CrawlingDTO" alias = "CrawlingDTO" />
 		<typeAlias type = "bean.manager.ManagerDTO" alias = "ManagerDTO" />
+		<typeAlias type = "bean.manager.notice.NoticeDTO" alias = "NoticeDTO" />
 		<!-- <typeAlias type = "bean.userManager.UserManagerDTO" alias = "UserManagerDTO" /> -->
 		
 	</typeAliases>
@@ -37,6 +38,7 @@
 		<mapper resource="/sql/crawlingSQL.xml" />
 		<mapper resource="/sql/mainSQL.xml" />
 		<mapper resource="/sql/managerSQL.xml" />
+		<mapper resource="/sql/noticeSQL.xml" />
 		<!-- <mapper resource="/sql/userManagerSQL.xml" /> -->
 	</mappers>
 </configuration>
