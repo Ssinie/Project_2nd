@@ -27,30 +27,14 @@ public class ManagerController {
    
    @RequestMapping("hello.ns")
    public String test(HttpServletRequest request, HttpServletResponse response) {
-	  HttpSession session = request.getSession();
-	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-	  	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-	  		  try {
-	  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-	  		} catch (IOException e) {
-	  			e.printStackTrace();
-	  		}
-	  	  }    	
+	   managerService.sessionChk(request, response);
 	   return"/manager/test";
    }
    
    
     @RequestMapping("register.ns")
     public String getRegister(HttpServletRequest request, HttpServletResponse response) { 
-      HttpSession session = request.getSession();
-  	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-  	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-  		  try {
-  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-  		} catch (IOException e) {
-  			e.printStackTrace();
-  		}
-  	  }    	
+    	managerService.sessionChk(request, response);
     	return "/manager/register";
    }
     
@@ -100,15 +84,7 @@ public class ManagerController {
    
    @RequestMapping("getManager.ns")
    public String getManager(ManagerDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-	  HttpSession session = request.getSession();
-	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-		  try {
-			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  }
+	  managerService.sessionChk(request, response);
 	  System.out.println(dto+"1번");
       model.addAttribute("manager", managerService.getManager(dto));
       System.out.println(dto+"2번");
@@ -117,31 +93,14 @@ public class ManagerController {
    
    @RequestMapping("getManagerList.ns")
    public String getBoardList(ManagerDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-	  HttpSession session = request.getSession();
-	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-		  try {
-			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  }
+	  managerService.sessionChk(request, response);
       model.addAttribute("boardList", managerService.getBoardList(dto));
       return "/manager/getBoardList";
    }
    
    @RequestMapping("updateManagerV.ns")
    public String updateManagerV(ManagerDTO dto, HttpServletRequest request, HttpServletResponse response) {
-	   HttpSession session = request.getSession();
-	   ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-		  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-			  try {
-				response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		  }
-	   
+	   managerService.sessionChk(request, response);   
 	   return "/manager/updateManager";
    }
    
@@ -177,15 +136,7 @@ public class ManagerController {
    
    @RequestMapping("pwUpdateV.ns")
    public String pwupdateV(ManagerDTO dto, HttpServletRequest request, HttpServletResponse response) {
-	   HttpSession session = request.getSession();
-	   ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-		  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-			  try {
-				response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		  }
+	   managerService.sessionChk(request, response);
 	   System.out.println(dto);
 	   return "/manager/pwUpdate";
    }

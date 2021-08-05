@@ -2,6 +2,10 @@ package bean.manager;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 public interface ManagerService {
 	
 	void register(ManagerDTO dto);
@@ -23,5 +27,7 @@ public interface ManagerService {
 	int idChk(ManagerDTO dto);
 	
 	void pwUdate(ManagerDTO dot);
+	
+	void sessionChk(HttpServletRequest request, HttpServletResponse response);
 
 }
