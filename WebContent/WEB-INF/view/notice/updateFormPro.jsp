@@ -5,13 +5,13 @@
 <c:if test="${result == 1}">
 	<meta http-equiv="Refresh" content="0;url=board.jsp" >
 	   <script language="JavaScript">         
-         alert("삭제되었습니다.");
+         alert("수정이 완료되었습니다.");
          window.location="board.do";
       </script>
 </c:if>
 <c:if test="${result == 0}">
 	<script language="JavaScript">         
-         alert("아이디와 비밀번호를 확인하여주세요.");
+         alert("작성 중 오류가 발생하였습니다. 다시 작성하여주세요.");
          history.go(-1);
       </script>
 </c:if>

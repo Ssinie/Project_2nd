@@ -17,8 +17,8 @@
 <tr>
 	<input type="submit" value="완료" />
 </tr>
+</form>
 <tr>
 	<input type="button" vaule="돌아가기" Onclick="location.href='http://localhost:8080/Project_2nd/manager/board.do'"/>
 </tr>
 </table>
-</form>

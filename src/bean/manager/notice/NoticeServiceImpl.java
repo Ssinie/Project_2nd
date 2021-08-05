@@ -56,7 +56,11 @@ public class NoticeServiceImpl implements NoticeServiceInter{
 
 	@Override
 	public int checkAcount(ManagerDTO dto) {
-		int result = mybatis.selectOne("ManagerDTOResult.loginCheck",dto);
+		int result = 0;
+		ManagerDTO loginCheck = mybatis.selectOne("manager.loginCheck",dto);
+		if(loginCheck != null) {
+			result = 1;
+		}
 		return result;
 	}
 

@@ -61,15 +61,16 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	@RequestMapping("/writeFormPro.do")
 	public String writeFormPro(NoticeDTO dto, Model model) {
 		int result = noticeImpl.insertNotice(dto);
-		String url = board(model);
-		return url;
+		model.addAttribute("result", result);
+		return "/notice/writeFormPro";
 	}
 
 	// 공지사항 게시글 작성 or 수정 처리 페이지
 	@Override
 	@RequestMapping("/updateForm.do")
-	public String updateForm(int num) {
+	public String updateForm(int num, Model model) {
 		dto = noticeImpl.selectForm(num);
+		model.addAttribute("dto",dto);
 		return "/notice/updateForm";
 	}
 	
@@ -78,14 +79,15 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	@RequestMapping("/updateFormPro.do")
 	public String updatePro(NoticeDTO dto, Model model) {
 		int result = noticeImpl.updateNotice(dto);
-		String url = board(model);
-		return url;
+		model.addAttribute("result", result);
+		return "/notice/updateFormPro";
 	}
 
 	// 공지사항 게시글 삭제 페이지
 	@Override
 	@RequestMapping("/deleteForm.do")
-	public String deleteForm(int num) {
+	public String deleteForm(Model model, int num) {
+		model.addAttribute("num", num);
 		return "/notice/deleteForm";
 	}
 
@@ -101,7 +103,7 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 			result = noticeImpl.deleteNotice(num);
 		}
 		model.addAttribute("result", result);
-		return "/deletePro";
+		return "/notice/deletePro";
 	}
 
 

@@ -10,7 +10,7 @@
 		<td>제목</td>
 		<td>
 			<input type="text" name="title" />
-			<input type="hidden" name="writer" />
+			<input type="hidden" name="writer" value="${writer}"/>
 		</td>
 	</tr>
 	<tr>

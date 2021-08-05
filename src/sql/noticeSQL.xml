@@ -17,8 +17,7 @@
 		notice_seq.nextval, #{title}, #{content}, #{writer}, sysdate, sysdate)
 	</insert>
 	<update id="updateNotice" parameterType="NoticeDTO">
-		insert into notice(title, content, writer, updatedate) values(
-		#{title}, #{content}, #{writer}, sysdate)
+		update notice set title=#{title}, content=#{content}, writer=#{writer}, updatedate=sysdate where num=#{num}
 	</update>
 	<delete id="deleteNotice" parameterType="int">
 		delete from notice where num=#{num}

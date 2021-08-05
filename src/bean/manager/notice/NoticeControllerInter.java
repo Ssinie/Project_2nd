@@ -25,13 +25,13 @@ public interface NoticeControllerInter {
 	public String writeFormPro(NoticeDTO dto, Model model);
 	
 	// 공지사항 게시글 수정 페이지
-	public String updateForm(int num);
+	public String updateForm(int num, Model model);
 	
 	// 공지사항 게시글 작성 or 수정 처리 페이지 
 	public String updatePro(NoticeDTO dto, Model model);
 	
 	// 공지사항 게시글 삭제 페이지
-	public String deleteForm(int num);
+	public String deleteForm(Model model, int num);
 	
 	// 공지사항 게시글 삭제 처리 페이지
 	public String deleteFormPro(Model model, int num, String id, String password);

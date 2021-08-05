@@ -20,7 +20,7 @@
 	<tr>
 		<td colspan="2">
 		<input type="button" value="목록" onClick="location.href='http://localhost:8080/Project_2nd/manager/board.do'" />
-		<input type="button" value="수정" onClick="location.href='http://localhost:8080/Project_2nd/manager/updateForm.do'" />
+		<input type="button" value="수정" onClick="location.href='http://localhost:8080/Project_2nd/manager/updateForm.do?num=${dto.num}'" />
 		<input type="button" value="삭제" onClick="location.href='http://localhost:8080/Project_2nd/manager/deleteForm.do?num=${dto.num}'" />
 		</td>
 	</tr>
