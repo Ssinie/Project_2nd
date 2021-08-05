@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import bean.manager.ManagerDTO;
+
 public class NoticeServiceImpl implements NoticeServiceInter{
 
 	@Autowired
@@ -49,6 +51,12 @@ public class NoticeServiceImpl implements NoticeServiceInter{
 	@Override
 	public int deleteNotice(int num) {
 		int result = mybatis.delete("noticeSQL.deleteNotice",num);
+		return result;
+	}
+
+	@Override
+	public int checkAcount(ManagerDTO dto) {
+		int result = mybatis.selectOne("ManagerDTOResult.loginCheck",dto);
 		return result;
 	}
 

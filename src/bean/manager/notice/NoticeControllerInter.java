@@ -13,10 +13,7 @@ public interface NoticeControllerInter {
 	 */
 	
 	// 공지사항 게시글 확인 페이지
-	public String board(Model model, HttpServletRequest request);
-	
-	// 공지사항 게시글 내용 확인 페이지
-	public String content();
+	public String board(Model model);
 	
 	// 공지사항 게시글 확인 폼 페이지
 	public String form(Model model, int num);
@@ -25,15 +22,17 @@ public interface NoticeControllerInter {
 	public String writeForm(Model model);
 	
 	// 공지사항 게시글 처리 페이지
-	public String writeFormPro(NoticeDTO dto, Model model, HttpServletRequest request);
+	public String writeFormPro(NoticeDTO dto, Model model);
 	
 	// 공지사항 게시글 수정 페이지
 	public String updateForm(int num);
 	
 	// 공지사항 게시글 작성 or 수정 처리 페이지 
-	public String updatePro();
+	public String updatePro(NoticeDTO dto, Model model);
+	
+	// 공지사항 게시글 삭제 페이지
+	public String deleteForm(int num);
 	
 	// 공지사항 게시글 삭제 처리 페이지
-	public String deleteForm(int num);
-	 
+	public String deleteFormPro(Model model, int num, String id, String password);
 }

@@ -26,7 +26,7 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	// 공지사항 게시글 확인 페이지
 	@Override
 	@RequestMapping("/board.do")
-	public String board(Model model, HttpServletRequest request) {
+	public String board(Model model) {
 		// String result = "/managerLogin";
 		// HttpSession session = request.getSession();
 		// ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
@@ -42,14 +42,6 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 
 	// 공지사항 게시글 내용 확인 페이지
 	@Override
-	@RequestMapping("/content.do")
-	public String content() {
-		// TODO Auto-generated method stub
-		return "/notice/content";
-	}
-
-	// 공지사항 게시글 작성 or 수정 폼 페이지
-	@Override
 	@RequestMapping("/form.do")
 	public String form(Model model, int num) {
 		dto = noticeImpl.selectForm(num);
@@ -61,17 +53,15 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	@Override
 	@RequestMapping("/writeForm.do")
 	public String writeForm(Model model) {
-		
 		return "/notice/writeForm";
 	}
 	
 	// 공지사항 게시글 처리 페이지
 	@Override
 	@RequestMapping("/writeFormPro.do")
-	public String writeFormPro(NoticeDTO dto, Model model, HttpServletRequest request) {
-		System.out.println(1);
+	public String writeFormPro(NoticeDTO dto, Model model) {
 		int result = noticeImpl.insertNotice(dto);
-		String url = board(model, request);
+		String url = board(model);
 		return url;
 	}
 
@@ -82,19 +72,38 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 		dto = noticeImpl.selectForm(num);
 		return "/notice/updateForm";
 	}
+	
+	// 공지사항 게시글 작성 or 수정 처리 페이지 
+	@Override
+	@RequestMapping("/updateFormPro.do")
+	public String updatePro(NoticeDTO dto, Model model) {
+		int result = noticeImpl.updateNotice(dto);
+		String url = board(model);
+		return url;
+	}
 
+	// 공지사항 게시글 삭제 페이지
 	@Override
 	@RequestMapping("/deleteForm.do")
 	public String deleteForm(int num) {
-		// TODO Auto-generated method stub
 		return "/notice/deleteForm";
 	}
 
+	// 공지사항 게시글 삭제 처리 페이지
 	@Override
-	public String updatePro() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping("/deleteFormPro.do")
+	public String deleteFormPro(Model model, int num, String id, String password) {
+		ManagerDTO dto = new ManagerDTO();
+		dto.setId(id);
+		dto.setPassword(password);
+		int result = noticeImpl.checkAcount(dto);
+		if(result == 1) {
+			result = noticeImpl.deleteNotice(num);
+		}
+		model.addAttribute("result", result);
+		return "/deletePro";
 	}
+
 
 	
 

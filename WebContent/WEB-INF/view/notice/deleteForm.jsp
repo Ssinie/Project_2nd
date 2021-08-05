@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<form action="deleteFormPro" method="post">
+<form action="deleteFormPro.do" method="post">
+<input type="hidden" name="num" value="${num}"/>
 <table>
 <tr>정말 삭제하시겠습니까?</tr>
 <tr>
