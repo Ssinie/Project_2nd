@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="getCategory" resultType="String">
-		select subtag from test_nutrient
+		select subtag from item_subtag
 	</select>
 	
 	<select id="getCatePd" parameterType="productListDTO" resultType="productDTO">
@@ -80,6 +80,14 @@
 	
 	<select id="mypageSearchCount" parameterType="productListDTO" resultType="int">
 		select count(*) from item_name i, (select num from wishlist where id = #{id}) w where i.num = w.num and i.name like '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="getMypageTagPd" parameterType="productListDTO" resultType="productDTO">
+		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and i.subtag = #{category} and w.rank>=#{startRow} and w.rank<=#{endRow}]]>
+	</select>
+	
+	<select id="mypageTagPdCount" parameterType="productListDTO" resultType="int">
+		select count(*) from item_name i, (select num from wishlist where id = #{id}) w where i.num = w.num and i.subtag = #{category}
 	</select>
 	
 </mapper>

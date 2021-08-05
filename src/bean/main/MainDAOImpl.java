@@ -107,6 +107,16 @@ public class MainDAOImpl implements MainDAOInter {
 	public int mypageSearchCount(ProductListDTO dto) throws Exception {
 		return dao.selectOne("main.mypageSearchCount", dto);
 	}
+
+	@Override
+	public List getMypageTagPd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getMypageTagPd", dto);
+	}
+
+	@Override
+	public int mypageTagPdCount(ProductListDTO dto) throws Exception {
+		return dao.selectOne("main.mypageTagPdCount", dto);
+	}
 }
 
 

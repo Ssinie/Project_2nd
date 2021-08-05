@@ -252,7 +252,8 @@ public class MainController {
 			dto.setStartRow(startRow);
 			dto.setEndRow(endRow);
 			
-			if(mykeyword.equals("null")) {
+			if(mykeyword.equals("null") && category.equals("null")) {
+				System.out.println("암것도 없다고");
 				int mypagePdCount = mainDAO.mypagePdCount(id);
 				model.addAttribute("mypagePdCount", mypagePdCount);
 				
@@ -262,6 +263,7 @@ public class MainController {
 				}
 			}
 			if(!mykeyword.equals("null")) {
+				System.out.println("검색어 있다고");
 				dto.setKeyword(mykeyword);
 				
 				int mypagePdCount = mainDAO.mypageSearchCount(dto);
@@ -269,6 +271,18 @@ public class MainController {
 				
 				if(mypagePdCount > 0) {
 					List mypageList = mainDAO.getMypageSearch(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
+			}
+			if(!category.equals("null")) {
+				System.out.println("영양성분 있다고");
+				dto.setCategory(category);
+				
+				int mypagePdCount = mainDAO.mypageTagPdCount(dto);
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypageTagPd(dto);
 					model.addAttribute("mypageList", mypageList);
 				}
 			}
@@ -282,5 +296,3 @@ public class MainController {
 	}
 	
 }
-
-
