@@ -282,7 +282,7 @@ $(document).ready(function() {
     <!-- Blog Section Begin -->
     <section class="blog spad">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-4 col-md-5">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
@@ -298,7 +298,7 @@ $(document).ready(function() {
                                 <li><a href="#">내 문의내역</a></li>
                                 <!-- <li><a href="#">Food (5)</a></li>
                                 <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li> -->
+                                <li><a href="#">Travel (10)</a></li>
                             </ul>
                         </div>
                         <!-- <div class="blog__sidebar__item">
@@ -332,7 +332,7 @@ $(document).ready(function() {
                                     </div>
                                 </a>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="blog__sidebar__item">
                             <h4>Search By</h4>
                             <div class="blog__sidebar__item__tags">
@@ -363,7 +363,7 @@ $(document).ready(function() {
 		                                    </ul>
 		                                    <h5><a href="#">${dto.name}</a></h5>
 		                                    <p>${dto.subtag} </p>
-		                                    <a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span> --></a>
+		                                    <a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span></a>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -397,14 +397,28 @@ $(document).ready(function() {
 		
 		                    </c:if>
 		                        
-		                    </div> <!-- product__pagination End -->
+		                    </div>
 		                    
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+           	<h1>신상정보.</h1>
+
+			<form action = "/Project_2nd/question/pInsert.do" method = "post">
+				nick: <input type = "text" name = "nick" required><br/>
+				age: <input type = "number" min = "10" max = "120" name = "age" required><br/>
+				height: <input type = "number" min = "100" max = "250" name = "height" value = "h" required><br/>
+				weight: <input type = "number" min = "30" max = "300" name = "weight" value = "w" required><br/>
+				gender: m<input type = "radio" name = "gender" value = "male" required>
+				w<input type = "radio" name = "gender" value = "female" required><br/>
+				<br/>
+				<input type = "submit" value = "다음">
+			</form> 
         </div>
+
     </section>
+
     <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->

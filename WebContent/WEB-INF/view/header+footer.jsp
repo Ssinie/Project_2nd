@@ -6,27 +6,6 @@
 <html lang="zxx">
 
 <head>
-<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$delete = $('[data-delete]');
-	
-	$delete.on('click'), function() {
-		$.ajax({
-			url: "",
-			data: { num: $(this).data("delete") },
-			success: function(result){
-				alert("관심상품에서 삭제삭제삭제");
-			}
-		})
-	}
-	
-});
-
-</script>
-
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
@@ -52,6 +31,7 @@ $(document).ready(function() {
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
+        <input type="hidden" name="referer" value="${referer}"/>
     </div>
 
     <!-- Humberger Begin -->
@@ -73,7 +53,14 @@ $(document).ready(function() {
                 <div>마이페이지</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="mypage.ns">내 관심상품</a></li>
+                    <li>
+                    	<c:if test="${sessionId == null}">
+                        	<a href="login.ns?from=mypage.ns">내 관심상품</a>
+                        </c:if>
+                        <c:if test="${sessionId != null}">
+                        	<a href="mypage.ns">내 관심상품</a>
+                        </c:if>
+                    </li>
                     <li><a href="#">내 문의내역</a></li>
                 </ul>
             </div>
@@ -146,7 +133,14 @@ $(document).ready(function() {
                                 <div>마이페이지</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a data->내 관심상품</a></li>
+                                    <li>
+                                    	<c:if test="${sessionId == null}">
+                                    		<a href="login.ns?from=mypage.ns">내 관심상품</a>
+                                    	</c:if>
+                                    	<c:if test="${sessionId != null}">
+                                    		<a href="mypage.ns">내 관심상품</a>
+                                    	</c:if>
+                                    </li>
                                     <li><a href="#">내 문의내역</a></li>
                                 </ul>
                             </div>
@@ -209,27 +203,19 @@ $(document).ready(function() {
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
+    <section class="hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span> 전체 카테고리 </span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <c:forEach var="category" items="${categoryList}">
+                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -255,154 +241,27 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </div>
+<!--                     <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                        <div class="hero__text">
+                            <span>NUTRIENT TEST</span>
+                            <h2>알고리즘 <br />영양제 테스트</h2>
+                            <p>간단한 테스트로 <br />필요한 영양성분과 제품을 확인하세요.</p>
+                            <a href="question/pForm.do" class="primary-btn">지금 테스트 하기</a>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
-
-    <!-- Breadcrumb Section Begin -->
-    <!-- <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Blog</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Blog</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- Breadcrumb Section End -->
-
+    
     <!-- Blog Section Begin -->
-    <section class="blog spad">
+    <section class="from-blog spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="mypage.ns">
-                                <input type="text" name="mykeyword" placeholder="무엇을 찾으시나요?">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="mypage.ns">내 관심상품</a></li>
-                                <li><a href="#">내 문의내역</a></li>
-                                <!-- <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li> -->
-                            </ul>
-                        </div>
-                        <!-- <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div> -->
-                        <div class="blog__sidebar__item">
-                            <h4>Search By</h4>
-                            <div class="blog__sidebar__item__tags">
-								<c:forEach var="category" items="${categoryList}">
-	                            	<a href="mypage.ns?category=${category}">${category}</a>
-	                            </c:forEach>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-7">
-                    <div class="row">
-                    <c:choose>
-						<c:when test="${sessionId == null}">
-							<p>관심상품이 없습니다.</p>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="dto" items="${mypageList}">
-		                    	<div class="col-lg-6 col-md-6 col-sm-6">
-		                            <div class="blog__item">
-		                                <div class="blog__item__pic">
-		                                    <img src="${dto.imgurl}" alt="">
-		                                </div>
-		                                <div class="blog__item__text">
-		                                    <ul>
-		                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-		                                        <li><i class="fa fa-comment-o"></i> 5</li>
-		                                    </ul>
-		                                    <h5><a href="#">${dto.name}</a></h5>
-		                                    <p>${dto.subtag} </p>
-		                                    <a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span> --></a>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </c:forEach>
-						</c:otherwise>
-					</c:choose>
-					
-                        <div class="col-lg-12">
-		                    <div class="product__pagination">
-		                    
-		                    <c:if test="${mypagePdCount > 0}">
-		                    	<c:set var="pageCount" value="${mypagePdCount / pageSize + (mypagePdCount%pageSize == 0 ? 0:1)}" />
-		                    	<c:set var="pageBlock" value="${10}" />
-		                    	<fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />
-		                    	<c:set var="startPage" value="${result * 10 + 1}" />
-		                    	<c:set var="endPage" value="${startPage + pageBlock -1}" />
-		                    	<c:if test="${endPage > pageCount}">
-		                    		<c:set var="endPage" value="${pageCount}" />
-		                    	</c:if>
-		                    	<c:if test="${startPage > 10}">
-		                    		<a href="mypage.ns?pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>
-		                    	</c:if>
-		                    	
-		                    	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		                    		<a href="mypage.ns?pageNum=${i}">${i}</a>
-		                    	</c:forEach>
-		                    	
-		                    	<c:if test="${endPage < pageCount}">
-		                    		<a href="mypage.ns?pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>
-		                    	</c:if>
-		
-		                    </c:if>
-		                        
-		                    </div> <!-- product__pagination End -->
-		                    
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            <h1>1조 파이팅</h1>
+            <!-- 														여기에 넣으시면 됩니다 -->
+            
         </div>
     </section>
     <!-- Blog Section End -->
@@ -490,3 +349,4 @@ $(document).ready(function() {
 </body>
 
 </html>
+

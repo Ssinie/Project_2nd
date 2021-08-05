@@ -253,7 +253,6 @@ public class MainController {
 			dto.setEndRow(endRow);
 			
 			if(mykeyword.equals("null") && category.equals("null")) {
-				System.out.println("암것도 없다고");
 				int mypagePdCount = mainDAO.mypagePdCount(id);
 				model.addAttribute("mypagePdCount", mypagePdCount);
 				
@@ -263,7 +262,6 @@ public class MainController {
 				}
 			}
 			if(!mykeyword.equals("null")) {
-				System.out.println("검색어 있다고");
 				dto.setKeyword(mykeyword);
 				
 				int mypagePdCount = mainDAO.mypageSearchCount(dto);
@@ -275,7 +273,6 @@ public class MainController {
 				}
 			}
 			if(!category.equals("null")) {
-				System.out.println("영양성분 있다고");
 				dto.setCategory(category);
 				
 				int mypagePdCount = mainDAO.mypageTagPdCount(dto);
@@ -294,5 +291,13 @@ public class MainController {
 		
 		return "/product/myPage";
 	}
+	
+	@RequestMapping("test.ns")
+	public String test() {
+		
+		
+		return "/header+footer";
+	}
+	
 	
 }
