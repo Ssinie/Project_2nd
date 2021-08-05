@@ -125,7 +125,7 @@
                                 <div>마이페이지</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="mypage.ns">내 관심상품</a></li>
+                                    <li><a data->내 관심상품</a></li>
                                     <li><a href="#">내 문의내역</a></li>
                                 </ul>
                             </div>
@@ -215,7 +215,7 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="mypage.ns?keyword=${keyword}">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
@@ -265,8 +265,8 @@
                 <div class="col-lg-4 col-md-5">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
+                            <form action="mypage.ns?keyword=${keyword}">
+                                <input type="text" placeholder="">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -326,7 +326,7 @@
                     <div class="row">
                     <c:choose>
 						<c:when test="${sessionId == null}">
-							<p>관심상품이 없습니다.</p>
+							
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="dto" items="${mypageList}">

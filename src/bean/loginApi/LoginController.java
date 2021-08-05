@@ -44,7 +44,11 @@ public class LoginController {
  
     // 로그인 첫 화면 요청 메소드
     @RequestMapping(value = "login.ns", method = { RequestMethod.GET, RequestMethod.POST })
-    public String login(Model model, HttpSession session, HttpServletRequest request) throws Exception{
+    public String login(@RequestParam(value="from", required=false, defaultValue="null") String from, Model model, HttpSession session) throws Exception{
+    	if(!from.equals("null")) {
+    		String preUrl = "http://localhost:8080/Project_2nd/"+from;
+    		session.setAttribute("preUrl", preUrl);
+    	}
     	
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -64,7 +68,6 @@ public class LoginController {
     public String callback(@RequestParam String code, @RequestParam String state, MemberDTO dto, Model model, HttpSession session, HttpServletRequest request)
             throws Exception, ParseException {
         String preUrl = (String)session.getAttribute("preUrl");
-        System.out.println("naver referer = "+preUrl);
         model.addAttribute("preUrl", preUrl);
     	
     	OAuth2AccessToken oauthToken;
@@ -83,8 +86,6 @@ public class LoginController {
         Object obj = parser.parse(apiResult);
         JSONObject jsonObj = (JSONObject)obj;
         JSONObject response_obj = (JSONObject)jsonObj.get("response");
-        
-        System.out.println(response_obj);
 
         String id = (String)response_obj.get("id");
         String name = (String)response_obj.get("name");
@@ -114,7 +115,6 @@ public class LoginController {
         dto.setProfile_image(profile_image);
         
         int checkId = memberDAO.checkId(dto);
-        System.out.println("checkId naver = "+checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());
@@ -133,7 +133,7 @@ public class LoginController {
     @RequestMapping("kakao.ns")
     public String kakao(@RequestParam(value = "code", required = false) String code, MemberDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
         String preUrl = (String)session.getAttribute("preUrl");
-        System.out.println("kakao referer = "+preUrl);
+        System.out.println("kakao preUrl === "+preUrl);
         model.addAttribute("preUrl", preUrl);
     	
         String access_Token = kakaoService.getAccessToken(code);
@@ -156,7 +156,6 @@ public class LoginController {
         dto.setBirthday(birthday);
         
         int checkId = memberDAO.checkId(dto);
-        System.out.println("checkId (기존 회원인가) = "+checkId);
         
         if(checkId == 1) {
         	session.setAttribute("sessionId", dto.getId());

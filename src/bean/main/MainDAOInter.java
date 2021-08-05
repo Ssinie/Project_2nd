@@ -54,5 +54,12 @@ public interface MainDAOInter {
 	
 	// 전체상품 개수 select count(*)
 	public int allPdCount() throws Exception;
+	
+	// 마이페이지 검색 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
+	public List getMypageSearch(ProductListDTO dto) throws Exception;
+	
+	// 마이페이지 검색 개수
+	public int mypageSearchCount(ProductListDTO dto) throws Exception;
+	
 }
 

@@ -58,7 +58,7 @@
 ]]>
 	</select>
 	
-	<select id="mypagePdCount" parameterType="productListDTO" resultType="int">
+	<select id="mypagePdCount" parameterType="String" resultType="int">
 		select count(*) from wishlist where id = #{id}
 	</select>
 	
@@ -72,6 +72,14 @@
 	
 	<select id="allPdCount" resultType="int">
 		select count(*) from item_name
+	</select>
+	
+	<select id="getMypageSearch" parameterType="productListDTO" resultType="productDTO">
+		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and i.name like '%' || #{keyword} || '%' and w.rank>=#{startRow} and w.rank<=#{endRow}]]>
+	</select>
+	
+	<select id="mypageSearchCount" parameterType="productListDTO" resultType="int">
+		select count(*) from item_name i, (select num from wishlist where id = #{id}) w where i.num = w.num and i.name like '%' || #{keyword} || '%'
 	</select>
 	
 </mapper>

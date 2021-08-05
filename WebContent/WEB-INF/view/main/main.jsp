@@ -92,7 +92,14 @@ $(document).ready(function() {
                 <div>마이페이지</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="mypage.ns">내 관심상품</a></li>
+                    <li>
+                    	<c:if test="${sessionId == null}">
+                        	<a href="login.ns?from=mypage.ns">내 관심상품</a>
+                        </c:if>
+                        <c:if test="${sessionId != null}">
+                        	<a href="mypage.ns">내 관심상품</a>
+                        </c:if>
+                    </li>
                     <li><a href="#">내 문의내역</a></li>
                 </ul>
             </div>
@@ -165,7 +172,14 @@ $(document).ready(function() {
                                 <div>마이페이지</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="mypage.ns">내 관심상품</a></li>
+                                    <li>
+                                    	<c:if test="${sessionId == null}">
+                                    		<a href="login.ns?from=mypage.ns">내 관심상품</a>
+                                    	</c:if>
+                                    	<c:if test="${sessionId != null}">
+                                    		<a href="mypage.ns">내 관심상품</a>
+                                    	</c:if>
+                                    </li>
                                     <li><a href="#">내 문의내역</a></li>
                                 </ul>
                             </div>

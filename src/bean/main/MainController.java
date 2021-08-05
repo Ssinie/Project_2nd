@@ -223,7 +223,12 @@ public class MainController {
 	}
 	
 	@RequestMapping("mypage.ns")
-	public String myPage(@RequestParam(value="category", required=false, defaultValue="null") String category, @RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+	public String myPage(
+			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword, 
+			@RequestParam(value="category", required=false, defaultValue="null") String category, 
+			@RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, 
+			ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+		
 		String preUrl = request.getRequestURL().toString();
 		session.setAttribute("preUrl", preUrl);
 		
@@ -247,20 +252,36 @@ public class MainController {
 			dto.setStartRow(startRow);
 			dto.setEndRow(endRow);
 			
-			int mypagePdCount = mainDAO.mypagePdCount(id);
-			
-			if(mypagePdCount > 0) {
-				List mypageList = mainDAO.getMypagePd(dto);
-				model.addAttribute("mypageList", mypageList);
-				
+			if(keyword.equals("null")) {
+				int mypagePdCount = mainDAO.mypagePdCount(id);
 				model.addAttribute("mypagePdCount", mypagePdCount);
-				model.addAttribute("pageSize", pageSize);
-				model.addAttribute("currentPage", currentPage);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypagePd(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
 			}
+			if(!keyword.equals("null")) {
+				model.addAttribute("keyword", keyword);
+				dto.setKeyword(keyword);
+				
+				int mypagePdCount = mainDAO.mypageSearchCount(dto);
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypageSearch(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
+			}
+			
+			model.addAttribute("pageSize", pageSize);
+			model.addAttribute("currentPage", currentPage);
 		}
+		
 		
 		return "/product/myPage";
 	}
+	
 }
 
 
