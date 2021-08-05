@@ -215,13 +215,13 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="mypage.ns?keyword=${keyword}">
-                                <div class="hero__search__categories">
+                            <form action="search.ns">
+                                <!-- <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                </div> -->
+                                <input type="text" name="keyword" placeholder="피로 개선에 효과 좋은 간 영양제, '밀크씨슬' 찾으세요?">
+                                <button type="submit" class="site-btn">검색</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -265,8 +265,8 @@
                 <div class="col-lg-4 col-md-5">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
-                            <form action="mypage.ns?keyword=${keyword}">
-                                <input type="text" placeholder="">
+                            <form action="mypage.ns">
+                                <input type="text" name="mykeyword" placeholder="무엇을 찾으시나요?">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -326,7 +326,7 @@
                     <div class="row">
                     <c:choose>
 						<c:when test="${sessionId == null}">
-							
+							<p>관심상품이 없습니다.</p>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="dto" items="${mypageList}">

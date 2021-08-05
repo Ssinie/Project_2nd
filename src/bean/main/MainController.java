@@ -224,7 +224,7 @@ public class MainController {
 	
 	@RequestMapping("mypage.ns")
 	public String myPage(
-			@RequestParam(value="keyword", required=false, defaultValue="null") String keyword, 
+			@RequestParam(value="mykeyword", required=false, defaultValue="null") String mykeyword, 
 			@RequestParam(value="category", required=false, defaultValue="null") String category, 
 			@RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, 
 			ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
@@ -252,7 +252,7 @@ public class MainController {
 			dto.setStartRow(startRow);
 			dto.setEndRow(endRow);
 			
-			if(keyword.equals("null")) {
+			if(mykeyword.equals("null")) {
 				int mypagePdCount = mainDAO.mypagePdCount(id);
 				model.addAttribute("mypagePdCount", mypagePdCount);
 				
@@ -261,9 +261,8 @@ public class MainController {
 					model.addAttribute("mypageList", mypageList);
 				}
 			}
-			if(!keyword.equals("null")) {
-				model.addAttribute("keyword", keyword);
-				dto.setKeyword(keyword);
+			if(!mykeyword.equals("null")) {
+				dto.setKeyword(mykeyword);
 				
 				int mypagePdCount = mainDAO.mypageSearchCount(dto);
 				model.addAttribute("mypagePdCount", mypagePdCount);
