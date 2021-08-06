@@ -16,7 +16,7 @@
 	<tr>
 		<td>내용</td>
 		<td>
-			<textarea name="content" rows="30" cols="80">${dto.content}</textarea><br />
+			<textarea name="content" rows="30" cols="80" wrap="hard">${dto.content}</textarea><br />
 		</td>
 	</tr>
 	<tr>
