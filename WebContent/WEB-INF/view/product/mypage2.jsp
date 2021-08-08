@@ -278,62 +278,17 @@ $(document).ready(function() {
         </div>
     </section> -->
     <!-- Breadcrumb Section End -->
-
-    <!-- Blog Section Begin -->
-    <section class="blog spad">
+    
+    <!-- Featured Section Begin -->
+    <section class="feature spad">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="mypage.ns">
-                                <input type="text" name="mykeyword" placeholder="무엇을 찾으시나요?">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
-                            <ul>
-                                <li><a href="mypage.ns">내 관심상품</a></li>
-                                <li><a href="#">내 문의내역</a></li>
-                                <!-- <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
-                            </ul>
-                        </div>
-                        <!-- <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="blog__sidebar__item">
+       		<div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <a href="mypage.ns"><h2>내 관심상품</h2></a>
+                    </div>
+                    <div class="featured__controls">
+                    	<div class="blog__sidebar__item">
                             <h4>Search By</h4>
                             <div class="blog__sidebar__item__tags">
 								<c:forEach var="category" items="${categoryList}">
@@ -341,83 +296,130 @@ $(document).ready(function() {
 	                            </c:forEach>
                             </div>
                         </div>
+                        <%-- <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <c:forEach var="">
+                            	<li data-filter=".oranges">Oranges</li>
+                            </c:forEach>
+                            
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul> --%>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-7">
-                    <div class="row">
-                    <c:choose>
-						<c:when test="${sessionId == null}">
-							<p>관심상품이 없습니다.</p>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="dto" items="${mypageList}">
-		                    	<div class="col-lg-6 col-md-6 col-sm-6">
-		                            <div class="blog__item">
-		                                <div class="blog__item__pic">
-		                                    <img src="${dto.imgurl}" alt="">
-		                                </div>
-		                                <div class="blog__item__text">
-		                                    <ul>
-		                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-		                                        <li><i class="fa fa-comment-o"></i> 5</li>
-		                                    </ul>
-		                                    <h5><a href="#">${dto.name}</a></h5>
-		                                    <p>${dto.subtag} </p>
-		                                    <a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span></a>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </c:forEach>
-						</c:otherwise>
-					</c:choose>
-					
-                        <div class="col-lg-12">
-		                    <div class="product__pagination">
-		                    
-		                    <c:if test="${mypagePdCount > 0}">
-		                    	<c:set var="pageCount" value="${mypagePdCount / pageSize + (mypagePdCount%pageSize == 0 ? 0:1)}" />
-		                    	<c:set var="pageBlock" value="${10}" />
-		                    	<fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />
-		                    	<c:set var="startPage" value="${result * 10 + 1}" />
-		                    	<c:set var="endPage" value="${startPage + pageBlock -1}" />
-		                    	<c:if test="${endPage > pageCount}">
-		                    		<c:set var="endPage" value="${pageCount}" />
-		                    	</c:if>
-		                    	<c:if test="${startPage > 10}">
-		                    		<a href="mypage.ns?pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>
-		                    	</c:if>
-		                    	
-		                    	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-		                    		<a href="mypage.ns?pageNum=${i}">${i}</a>
-		                    	</c:forEach>
-		                    	
-		                    	<c:if test="${endPage < pageCount}">
-		                    		<a href="mypage.ns?pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>
-		                    	</c:if>
-		
-		                    </c:if>
-		                        
-		                    </div>
-		                    
+            </div>
+            <div class="row featured__filter">
+            <c:forEach var="dto" items="${mypageList}" varStatus="status">
+            	<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                    <div class="featured__item">
+                    	<input type="checkbox" name="num" value="${dto.num}" checked />
+                        <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
+                        </div>
+                        <div class="featured__item__text">
+                            <h6>${dto.subtag}</h6>
+                            <h5>${dto.name}</h5>
                         </div>
                     </div>
                 </div>
-            </div> -->
-           	<h1>신상정보.</h1>
-
-			<form action = "/Project_2nd/question/pInsert.do" method = "post">
-				nick: <input type = "text" name = "nick" required><br/>
-				age: <input type = "number" min = "10" max = "120" name = "age" required><br/>
-				height: <input type = "number" min = "100" max = "250" name = "height" value = "h" required><br/>
-				weight: <input type = "number" min = "30" max = "300" name = "weight" value = "w" required><br/>
-				gender: m<input type = "radio" name = "gender" value = "male" required>
-				w<input type = "radio" name = "gender" value = "female" required><br/>
-				<br/>
-				<input type = "submit" value = "다음">
-			</form> 
+            </c:forEach>
+            </div>
+            
+            <div class="col-lg-12">                                                                                       
+			    <div class="product__pagination">                                                                         
+			                                                                                                              
+			    <c:if test="${mypagePdCount > 0}">                                                                        
+			    	<c:set var="pageCount" value="${mypagePdCount / pageSize + (mypagePdCount%pageSize == 0 ? 0:1)}" />   
+			    	<c:set var="pageBlock" value="${10}" />                                                               
+			    	<fmt:parseNumber var="result" value="${currentPage / 10}" integerOnly="true" />                       
+			    	<c:set var="startPage" value="${result * 10 + 1}" />                                                  
+			    	<c:set var="endPage" value="${startPage + pageBlock -1}" />                                           
+			    	<c:if test="${endPage > pageCount}">                                                                  
+			    		<c:set var="endPage" value="${pageCount}" />                                                      
+			    	</c:if>                                                                                               
+			    	<c:if test="${startPage > 10}">                                                                       
+			    		<a href="mypage.ns?pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>             
+			    	</c:if>                                                                                               
+			    	                                                                                                      
+			    	<c:forEach var="i" begin="${startPage}" end="${endPage}">                                             
+			    		<a href="mypage.ns?pageNum=${i}">${i}</a>                                                         
+			    	</c:forEach>                                                                                          
+			    	                                                                                                      
+			    	<c:if test="${endPage < pageCount}">                                                                  
+			    		<a href="mypage.ns?pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>            
+			    	</c:if>                                                                                               
+			                                                                                                              
+			    </c:if>                                                                                                   
+			                                                                                                              
+			    </div> <!-- product__pagination End -->                                                                   
+			                                                                                                              
+			</div>                                                                                                        
+            
+            <div class="blog__item__text">
+				<a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span> --></a>
+            
+            	<div class="blog__sidebar__search" style="display:inline-block;">
+	                <form action="mypage.ns">
+		                <input type="text" name="mykeyword" placeholder="내 관심상품 검색">
+		                <button type="submit"><span class="icon_search"></span></button>
+	                </form>
+                </div>
+            </div>
+			
         </div>
-
+        
     </section>
+    <!-- Featured Section End -->
+    
+    
+	
+    <!-- Blog Section Begin -->
+    <%-- <section class="blog spad">
+        <div class="container">
+            
+        <table border="1" width="1150">
+        <c:if test="">
+        </c:if>
+        	<tr>
+        	<c:forEach var="dto" items="${mypageList}" varStatus="i">
+           	
+           	<c:if test="${i.count%col==0}"> 
+           		<tr align='center'>
+           	</c:if>
+           		<td>
+           			<table width="230" height="360" align='center'>
+           				<tr align='left'> <!-- checkbox -->
+           				<td>
+           					<input type="checkbox" name="num" value="${dto.num}" checked />
+           				</td>
+           				</tr>
+           				
+           				<tr align='center'> <!-- imgurl -->
+           				<td>
+           					<img src="${dto.imgurl}"/>
+           				</td>
+           				</tr>
+           				
+           				<tr align='center'> <!-- subtag -->
+           				<td>
+           					<h6>${dto.subtag}</h6>
+           				</td>
+           				</tr>
+           				
+           				<tr align='center'> <!-- name -->
+           				<td>
+           					<h5><strong>${dto.name}</strong></h5>
+           				</td>
+           				</tr>
+           			</table>
+           		
+           		
+           	</c:forEach>
+           	</tr>	
+        </table>
+           	
+        </div>
+    </section> --%>
 
     <!-- Blog Section End -->
 

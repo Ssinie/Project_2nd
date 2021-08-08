@@ -285,7 +285,7 @@ $(document).ready(function() {
                             <span>NUTRIENT TEST</span>
                             <h2>알고리즘 <br />영양제 테스트</h2>
                             <p>간단한 테스트로 <br />필요한 영양성분과 제품을 확인하세요.</p>
-                            <a href="question/pForm.do" class="primary-btn">지금 테스트 하기</a>
+                            <a href="/Project_2nd/index.ns" class="primary-btn">알아보기</a>
                         </div>
                     </div>
                 </div>

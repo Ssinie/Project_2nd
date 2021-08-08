@@ -149,7 +149,7 @@
     </div>
     
     
-    <div class="site-section bg-light">
+    <!-- <div class="site-section bg-light">
       <div class="container">
         <div class="row">
           <div class="title-section text-center col-12">
@@ -202,7 +202,7 @@
          </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="site-section">
       <div class="container">

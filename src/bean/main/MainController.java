@@ -1,16 +1,13 @@
 package bean.main;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
+import bean.healthy.BoardService;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,9 +133,10 @@ public class MainController {
 		int endRow = currentPage * pageSize;
 		dto.setStartRow(startRow);
 		dto.setEndRow(endRow);
-			
-		if(category.equals("null")) {
-			
+		model.addAttribute("startRow", startRow);
+		model.addAttribute("endRow", endRow);
+		
+		if(category.equals("null") || category.equals(""))  {
 			int catePdCount = mainDAO.allPdCount();
 			model.addAttribute("catePdCount", catePdCount);
 			
@@ -222,7 +220,7 @@ public class MainController {
 		return "/product/loading";
 	}
 	
-	@RequestMapping("mypage.ns")
+	@RequestMapping("mypage2.ns")
 	public String myPage(
 			@RequestParam(value="mykeyword", required=false, defaultValue="null") String mykeyword, 
 			@RequestParam(value="category", required=false, defaultValue="null") String category, 
@@ -292,12 +290,74 @@ public class MainController {
 		return "/product/myPage";
 	}
 	
-	@RequestMapping("test.ns")
-	public String test() {
+	@RequestMapping("mypage.ns")
+	public String mypage(
+			@RequestParam(value="mykeyword", required=false, defaultValue="null") String mykeyword,
+			@RequestParam(value="category", required=false, defaultValue="null") String category,
+			@RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum,
+			ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
 		
+		String preUrl = request.getRequestURL().toString();
+		session.setAttribute("preUrl", preUrl);
 		
-		return "/header+footer";
-	}
+		String id = (String)session.getAttribute("sessionId");
+		dto.setId(id);
+		
+		int pageSize = 8;
+		if(pageNum.equals("null")) {
+			pageNum = "1";
+		}
+		int col = 5;
+		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
+		if(id != null) {
+			
+			int currentPage = Integer.parseInt(pageNum);
+			int startRow = (currentPage - 1) * pageSize + 1;
+			int endRow = currentPage * pageSize;
+			
+			dto.setStartRow(startRow);
+			dto.setEndRow(endRow);
+			
+			if(mykeyword.equals("null") && category.equals("null")) {
+				int mypagePdCount = mainDAO.mypagePdCount(id);
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypagePd(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
+			}
+			if(!mykeyword.equals("null")) {
+				dto.setKeyword(mykeyword);
+				
+				int mypagePdCount = mainDAO.mypageSearchCount(dto);
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypageSearch(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
+			}
+			if(!category.equals("null")) {
+				dto.setCategory(category);
+				
+				int mypagePdCount = mainDAO.mypageTagPdCount(dto);
+				model.addAttribute("mypagePdCount", mypagePdCount);
+				
+				if(mypagePdCount > 0) {
+					List mypageList = mainDAO.getMypageTagPd(dto);
+					model.addAttribute("mypageList", mypageList);
+				}
+			}
+		}
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("col", col);
+		
+		return "/product/mypage2";
 	
+	}
 	
 }

@@ -18,7 +18,7 @@
 	</delete>
 	
 	<select id="getMainPd" resultType="productDTO">
-		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <= 8]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <= 6]]>
 	</select>
 	
 	<select id="getCategory" resultType="String">

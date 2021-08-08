@@ -810,6 +810,10 @@ ol {
   Featured
 -----------------------*/
 
+.feature{
+	padding-top: 20px;
+}
+
 .featured {
 	padding-top: 80px;
 	padding-bottom: 40px;

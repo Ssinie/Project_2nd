@@ -13,15 +13,23 @@
 $(document).ready(function() {
 	$delete = $('[data-delete]');
 	
-	$delete.on('click'), function() {
-		$.ajax({
-			url: "",
-			data: { num: $(this).data("delete") },
-			success: function(result){
-				alert("관심상품에서 삭제삭제삭제");
-			}
-		})
-	}
+	$delete.on('click', function() {
+		if(confirm('관심상품에서 삭제하시겠습니까?')) {
+			$.ajax({
+				url: "wishlistPro.ns",
+				data: { num: $(this).data("delete") },
+				success: function(result){
+					if(result == "0"){
+						alert("관심상품 삭제 완료");
+						location.reload();
+					}
+				}
+			})
+		}else{
+			
+		}
+		
+	});
 	
 });
 
@@ -357,10 +365,10 @@ $(document).ready(function() {
 		                                    <img src="${dto.imgurl}" alt="">
 		                                </div>
 		                                <div class="blog__item__text">
-		                                    <ul>
+		                                    <!-- <ul>
 		                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
 		                                        <li><i class="fa fa-comment-o"></i> 5</li>
-		                                    </ul>
+		                                    </ul> -->
 		                                    <h5><a href="#">${dto.name}</a></h5>
 		                                    <p>${dto.subtag} </p>
 		                                    <a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span> --></a>

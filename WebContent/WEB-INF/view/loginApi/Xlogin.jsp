@@ -21,8 +21,8 @@
 
 	<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
 	<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
-	<div id="naver_id_login" style="text-align:center"><a href="${url}"><img width="23" height="23" src="img/naver.png"/></a></div>
-	<div id="kakao_id_login" style="text-align:center"><a href="https://kauth.kakao.com/oauth/authorize?client_id=cab40a487624fe914d53ae28da0663b8&redirect_uri=http://localhost:8080/Project_2nd/kakao.ns&response_type=code"><img width="24" height="24" src="img/kakao.png"/></a></div>
+	<div id="naver_id_login" style="text-align:center"><a href="${url}"><img src="img/login_naver.png"/></a></div>
+	<div id="kakao_id_login" style="text-align:center"><a href="https://kauth.kakao.com/oauth/authorize?client_id=cab40a487624fe914d53ae28da0663b8&redirect_uri=http://localhost:8080/Project_2nd/kakao.ns&response_type=code"><img src="img/login_kakao.png"/></a></div>
 		
 </body>
 </html>
