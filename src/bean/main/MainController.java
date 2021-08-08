@@ -217,6 +217,9 @@ public class MainController {
 		
 		model.addAttribute("url", url);
 		
+		List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
 		return "/product/loading";
 	}
 	
@@ -285,7 +288,6 @@ public class MainController {
 			model.addAttribute("pageSize", pageSize);
 			model.addAttribute("currentPage", currentPage);
 		}
-		
 		
 		return "/product/myPage";
 	}

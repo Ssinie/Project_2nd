@@ -2,6 +2,7 @@ package bean.loginApi;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +22,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import bean.main.MainDAOImpl;
 import bean.main.MemberDAOImpl;
 import bean.main.MemberDTO;
  
 @Controller
 public class LoginController {
+	@Autowired
+	private MainDAOImpl mainDAO = null;
 	
 	@Autowired
 	private MemberDAOImpl memberDAO = null;
@@ -59,7 +63,9 @@ public class LoginController {
         
         model.addAttribute("url", naverAuthUrl);
         
-        /* 생성한 인증 URL을 View로 전달 */
+        List categoryList = mainDAO.getCategory();
+		model.addAttribute("categoryList", categoryList);
+		
         return "/loginApi/login";
     }
  
