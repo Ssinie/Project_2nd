@@ -158,154 +158,119 @@ public class qBean {
         String pWeight = request.getParameter("weight") ;
         String pheight = request.getParameter("height") ;
         String pGender = request.getParameter("gender") ;
-        System.out.println(pNick) ;
+        System.out.println(pNick);
         
-		return "/question/form" ;
+		return "/question/form";
 	}
     
- // 설문조사 값 R 로 전송.
+    // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
     public String qResult(Model model) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
-    	ItemTypeValueDTO resultDto;
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
+    	ItemTypeValueDTO resultDto;
     	String PRDLST_REPORT_NO = qResultBestItem(pValue);
     	if(PRDLST_REPORT_NO != null) {
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
     	}
-    	int count;
-    	count = service.count() ;
-    	// int count = select count(*) from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10}
-    	if(count == 1) {
-    		String result = service.countOne() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 1) {
-    		findindex = service.countList() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	// int count = select count(*) from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_9 = #{key_9}
-    	// select count(*) from Item_Type_Value where KEY_1 = #{key_1} and KEY_2 = #{key_2} and key_3 = #{key_3} and key_4 = #{key_4} and key_5 = #{key_5} and key_6 = #{key_6} and key_7 = #{key_7} and key_8 = #{key_8} and key_9 = #{key_9} and key_10 = #{key_10}
     	
-    	if(count == 2) {
-    		String result = service.countOne02() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 2) {
-    		findindex = service.countList02() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 3) {
-    		String result = service.countOne03() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 3) {
-    		findindex = service.countList03() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 4) {
-    		String result = service.countOne04() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 4) {
-    		findindex = service.countList04() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 5) {
-    		String result = service.countOne05() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 5) {
-    		findindex = service.countList05() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 6) {
-    		String result = service.countOne06() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 6) {
-    		findindex = service.countList06() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 7) {
-    		String result = service.countOne07() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 7) {
-    		findindex = service.countList07() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 8) {
-    		String result = service.countOne08() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 8) {
-    		findindex = service.countList08() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 9) {
-    		String result = service.countOne09() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 9) {
-    		findindex = service.countList09() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
-    	if(count == 10) {
-    		String result = service.countOne10() ;
-    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		findindexs.add(result);
-    	}else if(count > 10) {
-    		findindex = service.countList10() ;
-    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
-    		for(int i = 0 ; i < findindex.size() ; i++) {
-    			String result = (String) findindex.get(i);
-    			findindexs.add(result);
-    		}
-    	}
+    	qResultSelectItem(findindexs, findindex);
     	
-    	// contains 해서 findindexs의 중복되지 않은 값 처리
-    	System.out.println(findindexs.size());
-    	
-    	return "/question/qResult" ;
+    	return "/question/qResult";
+    }
+    
+    public List qResultSelectItem(List findindexs, List findindex) throws Exception{
+    
+		int count;
+		count = service.count();
+		
+		if(count == 1) {String result = service.countOne();
+			findindexs.add(result);
+		}else if(count > 1) {findindex = service.countList();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 2) {String result = service.countOne02();
+			findindexs.add(result);
+		}else if(count > 2) {findindex = service.countList02();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 3) {
+			String result = service.countOne03();
+			findindexs.add(result);
+		}else if(count > 3) {findindex = service.countList03();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 4) {String result = service.countOne04();
+			findindexs.add(result);
+		}else if(count > 4) {findindex = service.countList04();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 5) {String result = service.countOne05();
+			findindexs.add(result);
+		}else if(count > 5) {findindex = service.countList05();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 6) {String result = service.countOne06();
+			findindexs.add(result);
+		}else if(count > 6) {findindex = service.countList06();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 7) {String result = service.countOne07();
+			findindexs.add(result);
+		}else if(count > 7) {findindex = service.countList07();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 8) {String result = service.countOne08();
+			findindexs.add(result);
+		}else if(count > 8) {findindex = service.countList08();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 9) {String result = service.countOne09();
+			findindexs.add(result);
+		}else if(count > 9) {findindex = service.countList09();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		if(count == 10) {String result = service.countOne10();
+			findindexs.add(result);
+		}else if(count > 10) {findindex = service.countList10();
+			for(int i = 0 ; i < findindex.size() ; i++) {
+				String result = (String) findindex.get(i);
+				findindexs.add(result);
+			}
+		}
+		// contains 해서 findindexs의 중복되지 않은 값 처리
+		System.out.println(findindexs.size());
+		
+		return findindexs ;
     }
     
     // String 배열을 전달하면 최적합 제품의 No를 리턴함
@@ -468,9 +433,7 @@ public class qBean {
 	    	
 	    	rl2 = conn.eval("result").asString() ;
 	    	System.out.println(rl2);
-	    	
-	        
-	        
+
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
