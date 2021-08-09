@@ -120,20 +120,7 @@ public class ItemType {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return "/master/ItemListInput";
-	}
-	
-	/* 개발용 관리페이지의 Controller
-	 * 페이지를 불러올 때 'ITEM_TYPE' 테이블의 테이블 정보를 가져와
-	 * 표를 이용해 정보를 노출시켜준다.
-	 */
-	@RequestMapping("/itemtype.do")
-	public String ItemTypeSelect(Model model) {
-		List list = null;
-		list = dao.selectList("item_type.selectType");
-		
-		model.addAttribute("list",list);
-		return "/master/ItemTypeCheck";
+		return "/master/itemPro";
 	}
 	
 	/* 
@@ -192,7 +179,7 @@ public class ItemType {
 			e.printStackTrace();
 		}
 		
-		return "/master/ItemTypeCheck";
+		return "/master/itemPro";
 	}
 	
 	/* 제품정보의 성분이 겹치지 않는 항목을 'ITEM_TYPE_KEY' 테이블에 추가하는 메서드 
@@ -237,7 +224,7 @@ public class ItemType {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "/master/ItemTypeCheck";
+		return "/master/itemPro";
 	}
 	
 	/*
@@ -307,7 +294,7 @@ public class ItemType {
 		}
 		
 		
-		return "/master/ItemTypeCheck";
+		return "/master/itemPro";
 	}
 	
 	/*
@@ -329,7 +316,7 @@ public class ItemType {
 			dao.insert("item_type.InsertItemTypeKeyValue",ikvDto);
 		}
 		model.addAttribute("result",result);
-		return "/master/ItemListInput";
+		return "/master/itemPro";
 	}
 	
 	
