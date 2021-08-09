@@ -8,6 +8,7 @@ import bean.healthy.PageMaker;
 import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
 import bean.item.name.ItemTypeDTO;
+import bean.item.name.ItemTypeValueDTO;
 import bean.manager.ManagerDTO;
 import bean.manager.ManagerServiceImpl;
 
@@ -162,20 +163,57 @@ public class qBean {
 		return "/question/form" ;
 	}
     
-    // 설문조사 값 R 로 전송.
+ // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto, ItemTypeDTO itDto, Model model) throws Exception{
+    public String qResult(Model model) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
-    	String [] pValue = request.getParameterValues("contents") ;
+    	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
+    	ItemTypeValueDTO resultDto;
+    	List findindexs = new ArrayList();
+    	List findindex = new ArrayList();
+    	String PRDLST_REPORT_NO = qResultBestItem(pValue);
+    	if(PRDLST_REPORT_NO != null) {
+    		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
+    	}
+    	int count;
+    	// service.count()
+    	// int count = select count(*) from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10}
+    	if(count == 1) {
+    		// String result = select one (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
+    		findindexs.add(result);
+    	}else if(count > 1) {
+    		// findindex = select List (select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_10 = #{key_10})
+    		for(int i =0; i < findindex.size();i++) {
+    			result = findindex.get(i);
+    			findindexs.add(result);
+    		}
+    	}
+    	// int count = select count(*) from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2}.... and key_9 = #{key_9}
+    	
+    	// contains 해서 findindexs의 중복되지 않은 값 처리
+    	System.out.println(findindexs.size());
+    	
+    	
+    	return "/question/qResult" ;
+    }
+    
+    // String 배열을 전달하면 최적합 제품의 No를 리턴함
+    public String qResultBestItem(String[] pValue) throws Exception{
+    	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
+    	vDTO dto = new vDTO();
+    	ItemKeyValueDTO ikvDto = new ItemKeyValueDTO();
+    	ItemTypeDTO itDto = new ItemTypeDTO();
+    	String rl2 = null;
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
     	for(String v : pValue) {
-    		System.out.println("----------" + "질문 답변 : " + v + "----------") ;
     		vDTO dto02 = session.selectOne("question.qValue", v) ;
     		vList.add(dto02) ;
     	}
+    	System.out.println("1번");
     	// vList의 크기 만큼, key의 유무를 따져 중복이면 그 값만큼 더하고 집어 넣는다.
     	// 중복이 아니면 null값 체크 후 넣는다.
     	// TreeMap 으로 영양소 알파벳 순서대로 집어 넣는다.
+    	
     	TreeMap<String, Integer> vMap = new TreeMap<String, Integer>() ;
     	// 영양소 기본값 셋팅.
     	vMap.put("vitaminA", 0) ;
@@ -200,7 +238,7 @@ public class qBean {
         vMap.put("amino", 0) ;
         vMap.put("dietryfiber", 0) ;
         vMap.put("gammalinolenic", 0) ;
-    	
+        System.out.println("2번");
     	for(int i = 0 ; i < vList.size(); i++) {
     		dto = vList.get(i) ;
     		if(dto.getNutri01() != null) {
@@ -224,9 +262,7 @@ public class qBean {
 	        vMap.put(dto.getNutri02(), value02) ;
     		}
     	}
-
-    	System.out.println("선택된 영양소 : " + vMap) ;
-    	
+    	System.out.println("3번");
     	Object obj[] = vMap.keySet().toArray() ;
         Object val[] = vMap.values().toArray() ;
         String [] nutriList = new String[obj.length] ;
@@ -235,13 +271,15 @@ public class qBean {
            nutriList[i] = (String)obj[i];
            valueList[i] = val[i] + "";
         }
-        
+        System.out.println("4번");
         // ItemType 클래스의 ReturnValueList 메소드 호출.
         //List 타입으로 호출됨.
         ItemType it = new ItemType() ;
         List resultList = it.ReturnValueList(sessions);
     	
         // List를 배열로 담기.
+        // ikvList -> 한 줄의 정보배열(기차)
+        // ikvList02 -> 줄의 모음(정류장)
         String [] ikvList = new String[resultList.size()] ;
         String [][] ikvList02 = new String[resultList.size()][23] ;
         for(int i = 0 ; i < resultList.size() ; i++) {
@@ -252,7 +290,7 @@ public class qBean {
 					        	} ;
         	ikvList02[i] = ikvList ;
         }
-        
+        System.out.println("5번");
         /*
         for(int i = 0 ; i < ikvList02.length ; i++) {
         	System.out.println("데이타 : " + Arrays.toString(ikvList02[i])) ;
@@ -274,6 +312,8 @@ public class qBean {
 	    			+ "vitaminC = '"+ikvList03[0][18]+"', vitaminD = '"+ikvList03[0][19]+"', vitaminE = '"+ikvList03[0][20]+"', vitaminK = '"+ikvList03[0][21]+"', zinc = '"+ikvList03[0][22]+"', pro_NO = '"+ikvList03[0][0]+"')") ;
 			// conn.eval("rownames(ikvList) <- c('"+ikvList03[0][0]+"')") ;
 			
+			System.out.println("6번");
+			
 			for(int i = 0 ; i < ikvList03.length ; i++) {
 				conn.eval("ikvList02 <- data.frame(amino = '"+ikvList03[i][1]+"', biotin = '"+ikvList03[i][2]+"', calcium = '"+ikvList03[i][3]+"', collagen = '"+ikvList03[i][4]+"', dietryfiber = '"+ikvList03[i][5]+"', gammalinolenic = '"+ikvList03[i][6]+"', "
 		    			+ "iron = '"+ikvList03[i][7]+"', lutein = '"+ikvList03[i][8]+"', magnesium = '"+ikvList03[i][9]+"', milkthistle = '"+ikvList03[i][10]+"', mineral = '"+ikvList03[i][11]+"', omega3 = '"+ikvList03[i][12]+"', "
@@ -282,10 +322,13 @@ public class qBean {
 				// conn.eval("rownames(ikvList02) <- '"+ikvList03[i][0]+"'") ;
 				conn.eval("ikvList <- rbind(ikvList, ikvList02)") ;
 			}
+			System.out.println(ikvList03.length);
+			System.out.println(ikvList02.length);
+			System.out.println("7번");
+			
 			// 형 변환 시 list 오류 나면 unlist로 감싸기.
 			conn.eval("ikvList[1:22] <- as.numeric(unlist(ikvList[1:22]))") ;
-			conn.eval("print(ikvList)") ;
-			conn.eval("str(ikvList)") ;
+			System.out.println("ikvList 출력");
 			
 			// 설문조사 값을 데이터 프레임화.
 	    	conn.eval("myList <- data.frame(amino = '"+valueList[0]+"', biotin = '"+valueList[1]+"', calcium = '"+valueList[2]+"', collagen = '"+valueList[3]+"', dietryfiber = '"+valueList[4]+"', gammalinolenic = '"+valueList[5]+"', "
@@ -298,8 +341,7 @@ public class qBean {
 	    								+ "mineral = v[11], omega3 = v[12], probiotic = v[13],"
 	    								+ "propolis = v[14], redginseng = v[15], vitaminA = v[16], vitaminB = v[17],"
 	    								+ "vitaminC = v[18], vitaminD = v[19], vitaminE = v[20], vitaminK = v[21], zinc = v[22])") ;
-	    	conn.eval("print(ml)") ;
-	    	conn.eval("str(ml)") ;
+	    	System.out.println("8번");
 	    	
 	    	// 대망의 knn 회귀 분석!!!
 	    	conn.eval("library(class)") ;
@@ -308,172 +350,20 @@ public class qBean {
 	    	// 품번 데이타.
 	    	conn.eval("data02 <- ikvList[ ,23]") ;
 	    	// 조지기. (머신러닝)
-	    	conn.eval("result1 <- 0") ;
-	    	// conn.eval("result <- knn(data01, ml, data02, k = 3, prob = TRUE)") ;
-	    	// conn.eval("result <- as.character(result)") ;
-	    	/*
-	    	for(int i = 1 ; i < 21 ; i++) {
-	    		for(int j = 1 ; j < 6 ; j++) {
-	    			conn.eval("result <- knn(data01, ml, data02, k = '"+j+"', prob = TRUE)") ;
-	    			conn.eval("result <- as.character(result)") ;
-	    			conn.eval("result1 <- c(result1, result)") ;
-	    		}
-	    	}
-	    	*/
-	    	conn.eval("for(i in 1:20) {\n"
-	    			+ "  for(j in 1:5) {\n"
-	    			+ "    result <- knn(data01, ml, data02, k = j, prob = TRUE)\n"
-	    			+ "    result <- as.character(result)\n"
-	    			+ "    result1 <- c(result1, result)\n"
-	    			+ "  }\n"
-	    			+ "}") ;
-	    	conn.eval("result1 <- result1[-1]") ;
-	    	/*
-	    	conn.eval("for(i in 1:9){
-	    			+ "result01 <- knn(data01, ml, data02, k = i, prob = TRUE)"
-	    			+ "}") ;
-	    	*/
-
-	    	conn.eval("print(result1)") ;
-	    	conn.eval("str(result1)") ;
-	    	conn.eval("result1") ;
-	    	// List r1 = (List)conn.eval("result1") ;
-	    	// System.out.println(r1) ;
-	    	/*
-	    	// 결과 페이지 최대 3개씩 출력 하고자 3번 작업함.
-	    	String result1 = conn.eval("result").asString() ;
-	    	String result2 = conn.eval("result02").asString() ;
-	    	String result3 = conn.eval("result03").asString() ;
-	    	String result4 = conn.eval("result04").asString() ;
-	    	String result5 = conn.eval("result05").asString() ;
-	    	*/
-	    	String rl = conn.eval("result1").asString() ;
-	    	String [] rl2 = conn.eval("result1").asStrings() ;
-	    	System.out.println("?!?!?" + rl) ;
-	    	System.out.println("?!?!?2" + Arrays.toString(rl2)) ;
-	    	// 중복값 제거.
-	    	List<String> list = new ArrayList<String>() ;
-	    	List setList = new ArrayList() ;
-	    	for(String v : rl2) {
-	    		list.add(v) ;
-	    	}
-	    	//list.add(result2) ;
-	    	//list.add(result3) ;
-	    	//list.add(result4) ;
-	    	//list.add(result5) ;
+	    	System.out.println("9번");
+	    	conn.eval("result <- knn(data01, ml, data02, k = 1, prob = TRUE)");
 	    	
-	    	for(String v : list) {
-	            System.out.println("중복 = " + v) ;
-	         }
-	    	// 중복 값 제거 후 리스트에 담기.
-	    	System.out.println("====================") ;
-	        for(String v : list) {
-	        	if(!setList.contains(v)) {
-	        		setList.add(v) ;
-	        	}
-	        }
-	        // 중복 값 제거 후 콘솔 출력.
-	        for(Object v : setList) {
-	        	System.out.println("안중복 = " + v) ;
-	        }
+	    	System.out.println("10번");
+	    	
+	    	rl2 = conn.eval("result").asString() ;
+	    	System.out.println(rl2);
+	    	
 	        
-	        // 중복 아닌 값들 list인 setList 에서 하나 씩 꺼내서 pResult 쿼리문 적용 후 vl이라는 list에 담기.
-	        List<ItemTypeDTO> vl = new ArrayList<ItemTypeDTO>() ;
-	        // HashMap<String, String> vMap2 = new HashMap<String, String>() ;
 	        
-	        for(int i = 0 ; i < setList.size() ; i++) {
-	        	itDto = (ItemTypeDTO) setList.get(i);
-	        	vl = service.pResult() ;
-	        	vDTO dto02 = session.selectOne("question.qValue", v) ;
-	        	// vl = (List<ItemTypeDTO>) (service.pResult((ItemTypeDTO) v)) ;
-	        	// vMap2.put(r.getPRDLST_NM(), r.getBSSH_NM()) ;
-	        	// vl 리스트에 선택된 pResult 쿼리문 적용한 것 담기.
-	        	// vl.add(r) ;
-	        	
-	        	System.out.println("====================\n" + (i + 1) + "번 : " + ((ItemTypeDTO) vl).getPRDLST_NM() + "\n") ;
-		    	System.out.println(((ItemTypeDTO) vl).getBSSH_NM() + "\n====================") ;
-		    	model.addAttribute("pr", vl) ;
-	        }
-	        for(Object v : vl) {
-	        	System.out.println("vl에 담긴 요소 : " + v) ;
-	        }
-	        
-	        // System.out.println("선택된 영양소 : " + vMap2) ;
-	        // Object vn[] = vMap2.keySet().toArray() ;
-	        String [] valueNames = new String[vl.size()] ;
-	        /* for(int i = 0 ; i < vn.length ; i ++) {
-	           valueNames[i] = (String)vn[i] ;
-	        } */
-	        System.out.println("띠용" + Arrays.toString(valueNames)) ;
-	        ArrayList vnList = new ArrayList<>(Arrays.asList(valueNames));
-	        for(int i = 0 ; i < vnList.size() ; i++) {
-	        	System.out.println("싸그리 몽땅 중2 " + (i + 1) + "번 : " + vnList.get(i)) ;
-	        }
-	        /*
-	        // ??왜 주소??
-	        for(int i = 0 ; i < vl.size() ; i++) {
-	        	System.out.println("싸그리 몽땅 중 " + (i + 1) + "번 : " + vl.get(i)) ;
-	        }
-	        */
-	        List<Object> nvl = new ArrayList<Object>() ;
-	        /*
-	        for(int i = 0 ; i < vl.size() ; i++) {
-	        	Object v = vl.get(i) ;
-	        	System.out.println(v) ;
-	        	
-	        	Object nv = service.nResult(v) ;
-	        	nvl.add(nv) ;
-	        	
-	        	System.out.println("++++++\n" + (i + 1) + "번 : " + ((ItemNameDTO) nv).getName() + "\n") ;
-	        	model.addAttribute("nr", nv) ;
-	        }
-	        */
-	        for(Object v : vl) {
-	        	itDto = session.selectOne("question.nResult", v) ;
-	        	nvl.add(itDto) ;
-	        	System.out.println("nvl" + nvl) ;
-	        	// System.out.println("====================\n" + "번 : " + itDto.getName() + "\n") ;
-	        	System.out.println("----------" + "솎아낸 것 : " + v + "----------") ;
-	        }
-	        /*
-	        for (int i = 0 ; vl.size() ; i++) { 
-	        	System.out.println("vl" + vl.get(i)) ;
-	        }
-	    	Object[] a = (Object[]) vl.get(i) ;
-	    	System.out.println("a" + a) ;
-	    	
-	    	Object b = service.nResult(a) ;
-	    	System.out.println("b" + b) ;
-	    	*/
-	    	/*
-	    	ItemTypeDTO result01 = (ItemTypeDTO)service.pResult(result1) ;
-	    	ItemTypeDTO result02 = (ItemTypeDTO)service.pResult(result2) ;
-	    	ItemTypeDTO result03 = (ItemTypeDTO)service.pResult(result3) ;
-	    	ItemTypeDTO result04 = (ItemTypeDTO)service.pResult(result4) ;
-	    	ItemTypeDTO result05 = (ItemTypeDTO)service.pResult(result5) ;
-	    	
-	    	System.out.println("====================\n" + "1번 : " + result01.getPRDLST_NM() + "\n") ;
-	    	System.out.println(result01.getBSSH_NM() + "\n====================") ;
-	    	System.out.println("====================\n" + "2번 : " + result02.getPRDLST_NM() + "\n") ;
-	    	System.out.println(result02.getBSSH_NM() + "\n====================") ;
-	    	System.out.println("====================\n" + "3번 : " + result03.getPRDLST_NM() + "\n") ;
-	    	System.out.println(result03.getBSSH_NM() + "\n====================") ;
-	    	System.out.println("====================\n" + "4번 : " + result04.getPRDLST_NM() + "\n") ;
-	    	System.out.println(result04.getBSSH_NM() + "\n====================") ;
-	    	System.out.println("====================\n" + "5번 : " + result05.getPRDLST_NM() + "\n") ;
-	    	System.out.println(result05.getBSSH_NM() + "\n====================") ;
-	    	
-	    	// qResult 페이지로 결과 값 넘기기 저장. model.addAttribute로.
-	    	model.addAttribute("pResult01", result01) ;
-	    	model.addAttribute("pResult02", result02) ;
-	    	model.addAttribute("pResult03", result03) ;
-	    	model.addAttribute("pResult04", result04) ;
-	    	model.addAttribute("pResult05", result05) ;
-	    	*/
     	} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return "/question/qResult" ;
+    	return rl2;
     }
     
     @RequestMapping("aResult.do")

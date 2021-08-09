@@ -5,6 +5,7 @@ import java.util.List;
 import bean.healthy.Criteria;
 import bean.item.name.ItemNameDTO;
 import bean.item.name.ItemTypeDTO;
+import bean.item.name.ItemTypeValueDTO;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
@@ -59,4 +60,6 @@ public interface qBeanInter {
 	int vCount();
 	
 	List<vDTO> vList(Criteria cri);
+	
+	ItemTypeValueDTO resultItemSearch(String no);
 }

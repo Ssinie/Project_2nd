@@ -182,4 +182,14 @@
 		where seq >0
 	</select>
 	
+	
+	<select id="resultItemSearch" resultType="ItemTypeValueDTO" parameterType="String">
+		select * from Item_Type_Value where PRDLST_REPORT_NO = #{PRDLST_REPORT_NO}
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

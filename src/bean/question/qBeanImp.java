@@ -3,6 +3,7 @@ package bean.question;
 import bean.healthy.Criteria;
 import bean.item.name.ItemNameDTO;
 import bean.item.name.ItemTypeDTO;
+import bean.item.name.ItemTypeValueDTO;
 import bean.question.pDTO;
 import bean.question.qDTO;
 
@@ -127,5 +128,11 @@ public class qBeanImp implements qBeanInter{
 	
 	public List<vDTO> vList(Criteria cri) {
 		return mybatis.selectList("question.vList", cri);
+	}
+
+	@Override
+	public ItemTypeValueDTO resultItemSearch(String no) {
+		
+		return mybatis.selectOne("question.resultItemSearch", no);
 	}
 }
