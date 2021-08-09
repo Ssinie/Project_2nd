@@ -64,8 +64,8 @@ public class ItemType {
 		String result = "";
 		ItemTypeDTO dto = null;
 		try {
-			dao.delete("item_type.deleteItemType");
-			for(int j = 1; j <= 100; j++) {
+			// dao.delete("item_type.deleteItemType");
+			for(int j = 350; j <= 500; j++) {
 				int StartNum = (j * 10) + 1;
 				int EndNum = (j * 10) + 10;
 				System.out.println("URL 입력 시작");
