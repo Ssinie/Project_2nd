@@ -170,7 +170,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="main.ns">홈</a></li>
-                            <li><a href="./contact.html">공지사항</a></li>
+                            <li><a href="notice.ns">공지사항</a></li>
                             <li><a href="productlist.ns">영양제</a></li>
                             <li><a href="#">건강뉴스</a>
                                 <!-- <ul class="header__menu__dropdown">

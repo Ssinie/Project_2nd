@@ -266,7 +266,7 @@
 			<tr>
 				<td>제목</td>
 				<td>
-					${dto.title}
+					<b>${dto.title}</b>
 				</td>
 			</tr>
 			</theader>

@@ -60,6 +60,7 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	@Override
 	@RequestMapping("/writeFormPro.do")
 	public String writeFormPro(NoticeDTO dto, Model model) {
+		dto.setContent(dto.getContent().replace("\r\n", "<br>"));
 		int result = noticeImpl.insertNotice(dto);
 		model.addAttribute("result", result);
 		return "/notice/writeFormPro";
@@ -78,6 +79,7 @@ public class NoticeControllerImpl implements NoticeControllerInter{
 	@Override
 	@RequestMapping("/updateFormPro.do")
 	public String updatePro(NoticeDTO dto, Model model) {
+		dto.setContent(dto.getContent().replace("\r\n", "<br>"));
 		int result = noticeImpl.updateNotice(dto);
 		model.addAttribute("result", result);
 		return "/notice/updateFormPro";
