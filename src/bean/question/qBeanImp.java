@@ -1,6 +1,7 @@
 package bean.question;
 
 import bean.healthy.Criteria;
+import bean.item.name.ItemNameDTO;
 import bean.item.name.ItemTypeDTO;
 import bean.question.pDTO;
 import bean.question.qDTO;
@@ -34,9 +35,13 @@ public class qBeanImp implements qBeanInter{
 		return mybatis.selectList("question.aResult", dto) ;
 	}
 
+	public Object pResult(ItemTypeDTO dto) {
+		return mybatis.selectList("question.pResult", dto);
+	}
+	
 	@Override
-	public Object pResult(String result) {
-		return mybatis.selectOne("question.pResult", result);
+	public Object nResult(Object result) {
+		return mybatis.selectOne("question.nResult", result) ;
 	}
 	
 	@Override

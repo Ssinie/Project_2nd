@@ -164,7 +164,7 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto, Model model) throws Exception{
+    public String qResult(HttpServletRequest request, vDTO dto, ItemKeyValueDTO ikvDto, ItemTypeDTO itDto, Model model) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	String [] pValue = request.getParameterValues("contents") ;
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
@@ -308,41 +308,169 @@ public class qBean {
 	    	// 품번 데이타.
 	    	conn.eval("data02 <- ikvList[ ,23]") ;
 	    	// 조지기. (머신러닝)
-	    	conn.eval("result <- knn(data01, ml, data02, k = 3, prob = TRUE)") ;
-	    	conn.eval("result02 <- knn(data01, ml, data02, k = 1, prob = TRUE)") ;
-	    	conn.eval("result03 <- knn(data01, ml, data02, k = 5, prob = TRUE)") ;
-	    	conn.eval("print(result)") ;
-	    	conn.eval("print(result02)") ;
-	    	conn.eval("print(result03)") ;
-	    	conn.eval("result") ;
-	    	conn.eval("result02") ;
-	    	conn.eval("result03") ;
-	    	
-	    	// 결과 페이지 3개씩 출력 하고자 3번 작업함.
+	    	conn.eval("result1 <- 0") ;
+	    	// conn.eval("result <- knn(data01, ml, data02, k = 3, prob = TRUE)") ;
+	    	// conn.eval("result <- as.character(result)") ;
+	    	/*
+	    	for(int i = 1 ; i < 21 ; i++) {
+	    		for(int j = 1 ; j < 6 ; j++) {
+	    			conn.eval("result <- knn(data01, ml, data02, k = '"+j+"', prob = TRUE)") ;
+	    			conn.eval("result <- as.character(result)") ;
+	    			conn.eval("result1 <- c(result1, result)") ;
+	    		}
+	    	}
+	    	*/
+	    	conn.eval("for(i in 1:20) {\n"
+	    			+ "  for(j in 1:5) {\n"
+	    			+ "    result <- knn(data01, ml, data02, k = j, prob = TRUE)\n"
+	    			+ "    result <- as.character(result)\n"
+	    			+ "    result1 <- c(result1, result)\n"
+	    			+ "  }\n"
+	    			+ "}") ;
+	    	conn.eval("result1 <- result1[-1]") ;
+	    	/*
+	    	conn.eval("for(i in 1:9){
+	    			+ "result01 <- knn(data01, ml, data02, k = i, prob = TRUE)"
+	    			+ "}") ;
+	    	*/
+
+	    	conn.eval("print(result1)") ;
+	    	conn.eval("str(result1)") ;
+	    	conn.eval("result1") ;
+	    	// List r1 = (List)conn.eval("result1") ;
+	    	// System.out.println(r1) ;
+	    	/*
+	    	// 결과 페이지 최대 3개씩 출력 하고자 3번 작업함.
 	    	String result1 = conn.eval("result").asString() ;
 	    	String result2 = conn.eval("result02").asString() ;
 	    	String result3 = conn.eval("result03").asString() ;
+	    	String result4 = conn.eval("result04").asString() ;
+	    	String result5 = conn.eval("result05").asString() ;
+	    	*/
+	    	String rl = conn.eval("result1").asString() ;
+	    	String [] rl2 = conn.eval("result1").asStrings() ;
+	    	System.out.println("?!?!?" + rl) ;
+	    	System.out.println("?!?!?2" + Arrays.toString(rl2)) ;
+	    	// 중복값 제거.
+	    	List<String> list = new ArrayList<String>() ;
+	    	List setList = new ArrayList() ;
+	    	for(String v : rl2) {
+	    		list.add(v) ;
+	    	}
+	    	//list.add(result2) ;
+	    	//list.add(result3) ;
+	    	//list.add(result4) ;
+	    	//list.add(result5) ;
 	    	
-	    	System.out.println("추천 영양제 품번 : " + result1) ;
-	    	System.out.println("추천 영양제 품번 2 : " + result2) ;
-	    	System.out.println("추천 영양제 품번 3 : " + result3) ;
+	    	for(String v : list) {
+	            System.out.println("중복 = " + v) ;
+	         }
+	    	// 중복 값 제거 후 리스트에 담기.
+	    	System.out.println("====================") ;
+	        for(String v : list) {
+	        	if(!setList.contains(v)) {
+	        		setList.add(v) ;
+	        	}
+	        }
+	        // 중복 값 제거 후 콘솔 출력.
+	        for(Object v : setList) {
+	        	System.out.println("안중복 = " + v) ;
+	        }
+	        
+	        // 중복 아닌 값들 list인 setList 에서 하나 씩 꺼내서 pResult 쿼리문 적용 후 vl이라는 list에 담기.
+	        List<ItemTypeDTO> vl = new ArrayList<ItemTypeDTO>() ;
+	        // HashMap<String, String> vMap2 = new HashMap<String, String>() ;
+	        
+	        for(int i = 0 ; i < setList.size() ; i++) {
+	        	itDto = (ItemTypeDTO) setList.get(i);
+	        	vl = service.pResult() ;
+	        	vDTO dto02 = session.selectOne("question.qValue", v) ;
+	        	// vl = (List<ItemTypeDTO>) (service.pResult((ItemTypeDTO) v)) ;
+	        	// vMap2.put(r.getPRDLST_NM(), r.getBSSH_NM()) ;
+	        	// vl 리스트에 선택된 pResult 쿼리문 적용한 것 담기.
+	        	// vl.add(r) ;
+	        	
+	        	System.out.println("====================\n" + (i + 1) + "번 : " + ((ItemTypeDTO) vl).getPRDLST_NM() + "\n") ;
+		    	System.out.println(((ItemTypeDTO) vl).getBSSH_NM() + "\n====================") ;
+		    	model.addAttribute("pr", vl) ;
+	        }
+	        for(Object v : vl) {
+	        	System.out.println("vl에 담긴 요소 : " + v) ;
+	        }
+	        
+	        // System.out.println("선택된 영양소 : " + vMap2) ;
+	        // Object vn[] = vMap2.keySet().toArray() ;
+	        String [] valueNames = new String[vl.size()] ;
+	        /* for(int i = 0 ; i < vn.length ; i ++) {
+	           valueNames[i] = (String)vn[i] ;
+	        } */
+	        System.out.println("띠용" + Arrays.toString(valueNames)) ;
+	        ArrayList vnList = new ArrayList<>(Arrays.asList(valueNames));
+	        for(int i = 0 ; i < vnList.size() ; i++) {
+	        	System.out.println("싸그리 몽땅 중2 " + (i + 1) + "번 : " + vnList.get(i)) ;
+	        }
+	        /*
+	        // ??왜 주소??
+	        for(int i = 0 ; i < vl.size() ; i++) {
+	        	System.out.println("싸그리 몽땅 중 " + (i + 1) + "번 : " + vl.get(i)) ;
+	        }
+	        */
+	        List<Object> nvl = new ArrayList<Object>() ;
+	        /*
+	        for(int i = 0 ; i < vl.size() ; i++) {
+	        	Object v = vl.get(i) ;
+	        	System.out.println(v) ;
+	        	
+	        	Object nv = service.nResult(v) ;
+	        	nvl.add(nv) ;
+	        	
+	        	System.out.println("++++++\n" + (i + 1) + "번 : " + ((ItemNameDTO) nv).getName() + "\n") ;
+	        	model.addAttribute("nr", nv) ;
+	        }
+	        */
+	        for(Object v : vl) {
+	        	itDto = session.selectOne("question.nResult", v) ;
+	        	nvl.add(itDto) ;
+	        	System.out.println("nvl" + nvl) ;
+	        	// System.out.println("====================\n" + "번 : " + itDto.getName() + "\n") ;
+	        	System.out.println("----------" + "솎아낸 것 : " + v + "----------") ;
+	        }
+	        /*
+	        for (int i = 0 ; vl.size() ; i++) { 
+	        	System.out.println("vl" + vl.get(i)) ;
+	        }
+	    	Object[] a = (Object[]) vl.get(i) ;
+	    	System.out.println("a" + a) ;
 	    	
+	    	Object b = service.nResult(a) ;
+	    	System.out.println("b" + b) ;
+	    	*/
+	    	/*
 	    	ItemTypeDTO result01 = (ItemTypeDTO)service.pResult(result1) ;
 	    	ItemTypeDTO result02 = (ItemTypeDTO)service.pResult(result2) ;
 	    	ItemTypeDTO result03 = (ItemTypeDTO)service.pResult(result3) ;
+	    	ItemTypeDTO result04 = (ItemTypeDTO)service.pResult(result4) ;
+	    	ItemTypeDTO result05 = (ItemTypeDTO)service.pResult(result5) ;
 	    	
-	    	System.out.println(result01.getPRDLST_NM()) ;
-	    	System.out.println(result01.getBSSH_NM()) ;
-	    	System.out.println(result02.getPRDLST_NM()) ;
-	    	System.out.println(result02.getBSSH_NM()) ;
-	    	System.out.println(result03.getPRDLST_NM()) ;
-	    	System.out.println(result03.getBSSH_NM()) ;
+	    	System.out.println("====================\n" + "1번 : " + result01.getPRDLST_NM() + "\n") ;
+	    	System.out.println(result01.getBSSH_NM() + "\n====================") ;
+	    	System.out.println("====================\n" + "2번 : " + result02.getPRDLST_NM() + "\n") ;
+	    	System.out.println(result02.getBSSH_NM() + "\n====================") ;
+	    	System.out.println("====================\n" + "3번 : " + result03.getPRDLST_NM() + "\n") ;
+	    	System.out.println(result03.getBSSH_NM() + "\n====================") ;
+	    	System.out.println("====================\n" + "4번 : " + result04.getPRDLST_NM() + "\n") ;
+	    	System.out.println(result04.getBSSH_NM() + "\n====================") ;
+	    	System.out.println("====================\n" + "5번 : " + result05.getPRDLST_NM() + "\n") ;
+	    	System.out.println(result05.getBSSH_NM() + "\n====================") ;
 	    	
 	    	// qResult 페이지로 결과 값 넘기기 저장. model.addAttribute로.
 	    	model.addAttribute("pResult01", result01) ;
 	    	model.addAttribute("pResult02", result02) ;
 	    	model.addAttribute("pResult03", result03) ;
-		} catch (Exception e) {
+	    	model.addAttribute("pResult04", result04) ;
+	    	model.addAttribute("pResult05", result05) ;
+	    	*/
+    	} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return "/question/qResult" ;

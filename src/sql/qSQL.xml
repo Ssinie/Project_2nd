@@ -41,9 +41,11 @@
 	
 	<select id = "qValue" resultType = "vDTO" parameterType = "String">select nutri01, val01, nutri02, val02 from question_value where qnum = #{value}</select>
 	
-	<select id = "pResult" resultType = "ItemTypeDTO" parameterType = "String">select BSSH_NM, PRDLST_NM from Item_Type where PRDLST_REPORT_NO = #{value}</select>
-	
 	<select id = "aResult" resultType = "pDTO" parameterType = "pDTO">select nick, age, weight, height, gender from pinfo where nick = #{value}</select>
+	
+	<select id = "pResult" resultType = "ItemTypeDTO" parameterType = "ItemTypeDTO">select PRDLST_NM, BSSH_NM from Item_Type where PRDLST_REPORT_NO = #{value}</select>
+	
+	<select id = "nResult" resultType = "ItemNameDTO" parameterType = "String">select * from Item_Name where name like '%'||#{BSSH_NM}||'%'</select>
 	
 	<resultMap id="qDTOResult" type="qDTO">
 		<result property="num" column="num" />
