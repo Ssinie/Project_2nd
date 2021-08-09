@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import bean.manager.ManagerDTO;
+import bean.manager.ManagerServiceImpl;
 
 @Controller
 @RequestMapping("/master")
@@ -37,15 +38,9 @@ public class ItemType {
 	
 	@RequestMapping("item.do")
 	public String item(HttpServletRequest request, HttpServletResponse response) {
-		 HttpSession session = request.getSession();
-	  	 ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-	  	 	if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-	  		  try {
-	  			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-	  		} catch (IOException e) {
-	  			e.printStackTrace();
-	  		}
-	  	  }    
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
 		return"/master/Item";
 	}
 	
@@ -69,8 +64,8 @@ public class ItemType {
 		String result = "";
 		ItemTypeDTO dto = null;
 		try {
-			dao.delete("item_type.deleteItemType");
-			for(int j = 1; j <= 100; j++) {
+			// dao.delete("item_type.deleteItemType");
+			for(int j = 350; j <= 500; j++) {
 				int StartNum = (j * 10) + 1;
 				int EndNum = (j * 10) + 10;
 				System.out.println("URL 입력 시작");
