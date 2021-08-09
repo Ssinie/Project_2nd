@@ -9,6 +9,7 @@ import bean.item.name.ItemKeyValueDTO;
 import bean.item.name.ItemType;
 import bean.item.name.ItemTypeDTO;
 import bean.manager.ManagerDTO;
+import bean.manager.ManagerServiceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -357,15 +358,9 @@ public class qBean {
   //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
     public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	List<qDTO> list = service.qList(cri);
     	model.addAttribute("boardList", list);
     	PageMaker pageMaker = new PageMaker();
@@ -378,15 +373,9 @@ public class qBean {
     //인선- 설문지 내용 상세화면
     @RequestMapping("getBoard.do")
     public String getBoard(qDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	model.addAttribute("board", service.getBoard(dto));
     	return "/question/getBoard";
     }
@@ -394,15 +383,9 @@ public class qBean {
     //인선- 설문지 내용 수정화면
     @RequestMapping("updateBoard.do")
     public String updateBoardView(qDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	model.addAttribute("board", service.getBoard(dto));
     	return "/question/updateBoard";
     }
@@ -417,15 +400,9 @@ public class qBean {
     //인선- QUESTION_VALUE 리스트
     @RequestMapping("getValueList.do")
     public String getValueList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	List<vDTO> list = service.vList(cri);
     	model.addAttribute("boardList", list);
     
@@ -440,15 +417,9 @@ public class qBean {
     //인선- QUESTION_VALUE 상세화면
     @RequestMapping("getValue.do")
     public String getValue(vDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	model.addAttribute("board", service.getValue(dto));
     	return "question/getValue";
     }
@@ -456,15 +427,9 @@ public class qBean {
     //인선- QUESTION_VALUE 수정화면
     @RequestMapping("updateValue.do")
     public String updateValueView(vDTO dto, Model model, HttpServletRequest request, HttpServletResponse response) {
-      HttpSession session = request.getSession();
-   	  ManagerDTO mem = (ManagerDTO)session.getAttribute("mem");
-   	  if(mem == null || mem.getVerify() != 9 || mem.getStatus()==90) {
-   		  try {
-   			response.sendRedirect("/Project_2nd/manager/managerLogin.ns");
-   		} catch (IOException e) {
-   			e.printStackTrace();
-   		}
-   	  }
+    	ManagerServiceImpl ma = new ManagerServiceImpl();
+    	ma.sessionChk(request, response);
+    	
     	model.addAttribute("board", service.getValue(dto));
     	return "/question/updateValue";
     }
