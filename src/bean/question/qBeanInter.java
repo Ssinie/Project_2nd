@@ -62,4 +62,46 @@ public interface qBeanInter {
 	List<vDTO> vList(Criteria cri);
 	
 	ItemTypeValueDTO resultItemSearch(String no);
+
+	public int count();
+
+	public String countOne();
+
+	public List countList();
+
+	public String countOne02();
+
+	public List countList02();
+
+	public String countOne03();
+
+	public List countList03();
+
+	public String countOne04();
+
+	public List countList04();
+
+	public String countOne05();
+
+	public List countList05();
+
+	public String countOne06();
+
+	public List countList06();
+
+	public String countOne07();
+
+	public List countList07();
+
+	public String countOne08();
+
+	public List countList08();
+
+	public String countOne09();
+
+	public List countList09();
+
+	public String countOne10();
+
+	public List countList10();
 }

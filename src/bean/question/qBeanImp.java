@@ -132,7 +132,111 @@ public class qBeanImp implements qBeanInter{
 
 	@Override
 	public ItemTypeValueDTO resultItemSearch(String no) {
-		
 		return mybatis.selectOne("question.resultItemSearch", no);
+	}
+
+	@Override
+	public int count() {
+		return mybatis.selectOne("question.count") ;
+	}
+
+	@Override
+	public String countOne() {
+		return mybatis.selectOne("question.countOne") ;
+	}
+
+	@Override
+	public List countList() {
+		return mybatis.selectList("question.countList") ;
+	}
+
+	@Override
+	public String countOne02() {
+		return mybatis.selectOne("question.countOne02") ;
+	}
+
+	@Override
+	public List countList02() {
+		return mybatis.selectList("question.countList02") ;
+	}
+
+	@Override
+	public String countOne03() {
+		return mybatis.selectOne("question.countOne03") ;
+	}
+
+	@Override
+	public List countList03() {
+		return mybatis.selectList("question.countList03") ;
+	}
+
+	@Override
+	public String countOne04() {
+		return mybatis.selectOne("question.countOne04") ;
+	}
+
+	@Override
+	public List countList04() {
+		return mybatis.selectList("question.countList04") ;
+	}
+
+	@Override
+	public String countOne05() {
+		return mybatis.selectOne("question.countOne05") ;
+	}
+
+	@Override
+	public List countList05() {
+		return mybatis.selectList("question.countList05") ;
+	}
+
+	@Override
+	public String countOne06() {
+		return mybatis.selectOne("question.countOne06") ;
+	}
+
+	@Override
+	public List countList06() {
+		return mybatis.selectList("question.countList06") ;
+	}
+
+	@Override
+	public String countOne07() {
+		return mybatis.selectOne("question.countOne07") ;
+	}
+
+	@Override
+	public List countList07() {
+		return mybatis.selectList("question.countList07") ;
+	}
+
+	@Override
+	public String countOne08() {
+		return mybatis.selectOne("question.countOne08") ;
+	}
+
+	@Override
+	public List countList08() {
+		return mybatis.selectList("question.countList08") ;
+	}
+
+	@Override
+	public String countOne09() {
+		return mybatis.selectOne("question.countOne09") ;
+	}
+
+	@Override
+	public List countList09() {
+		return mybatis.selectList("question.countList09") ;
+	}
+
+	@Override
+	public String countOne10() {
+		return mybatis.selectOne("question.countOne10") ;
+	}
+
+	@Override
+	public List countList10() {
+		return mybatis.selectList("question.countList10") ;
 	}
 }
