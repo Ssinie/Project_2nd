@@ -139,7 +139,6 @@ public class LoginController {
     @RequestMapping("kakao.ns")
     public String kakao(@RequestParam(value = "code", required = false) String code, MemberDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception{
         String preUrl = (String)session.getAttribute("preUrl");
-        System.out.println("kakao preUrl === "+preUrl);
         model.addAttribute("preUrl", preUrl);
     	
         String access_Token = kakaoService.getAccessToken(code);

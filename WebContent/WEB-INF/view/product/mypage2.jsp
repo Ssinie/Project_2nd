@@ -11,17 +11,78 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	$all = $('[data-all]');
 	$delete = $('[data-delete]');
+	$select = $('[data-select]');
 	
-	$delete.on('click'), function() {
-		$.ajax({
-			url: "",
-			data: { num: $(this).data("delete") },
-			success: function(result){
-				alert("관심상품에서 삭제삭제삭제");
+	$all.on('click', function() {		
+		if(confirm('관심상품을 전체삭제합니다.')) {
+			$.ajax({
+				url: "wishlistPro.ns",
+				success: function(result){
+					if(result == "10"){
+						alert("관심상품 전체삭제 완료");
+						location.reload();
+					}
+				}
+			})
+		}else{
+			/* 취소 클릭 */
+		}
+	});
+	
+	$delete.on('click', function() {
+		if(confirm('관심상품에서 삭제하시겠습니까?')) {
+			
+			$.ajax({
+				url: "wishlistPro.ns",
+				data: { num: $(this).data("delete") },
+				success: function(result){
+					if(result == "0"){
+						alert("관심상품 삭제 완료");
+						location.reload();
+					}
+				}
+			})
+		}else{
+			/* 취소 클릭 */
+		}
+	});
+	
+	$select.on('click', function() {
+		if(confirm('선택한 상품을 삭제하시겠습니까?')) {
+			var length = $("input[name='num']").length;
+			var count = 0;
+			var str = '';
+			for(var i = 0; i < length; i++){
+				if(document.getElementsByName("num")[i].checked == true){
+					count += 1;
+					var num = document.getElementsByName("num")[i].value;
+					if(i == length-1){
+						str += num;
+					}else{
+						str += num+"&";
+					}
+				}
 			}
-		})
-	}
+			if(count == ""){
+				alert("선택된 상품이 없습니다.");
+				return false;
+			}else{
+				$.ajax({
+					url: "wishlistPro.ns",
+					data: { str: str },
+					success: function(result){
+						if(result == "100"){
+							alert("관심상품 선택삭제 완료");
+							location.reload();
+						}
+					}
+				})
+			}
+		}
+			
+	});
 	
 });
 
@@ -313,12 +374,15 @@ $(document).ready(function() {
             <c:forEach var="dto" items="${mypageList}" varStatus="status">
             	<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
-                    	<input type="checkbox" name="num" value="${dto.num}" checked />
+                    	<input type="checkbox" name="num" value="${dto.num}" />
                         <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
                         </div>
                         <div class="featured__item__text">
                             <h6>${dto.subtag}</h6>
                             <h5>${dto.name}</h5>
+                            <div class="blog__item__text">
+                            	<a data-delete="${dto.num}" class="blog__btn">삭제</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -326,7 +390,7 @@ $(document).ready(function() {
             </div>
             
             <div class="col-lg-12">                                                                                       
-			    <div class="product__pagination">                                                                         
+			    <div class="product__pagination" style="text-align:center;">                                                                         
 			                                                                                                              
 			    <c:if test="${mypagePdCount > 0}">                                                                        
 			    	<c:set var="pageCount" value="${mypagePdCount / pageSize + (mypagePdCount%pageSize == 0 ? 0:1)}" />   
@@ -356,9 +420,9 @@ $(document).ready(function() {
 			</div>                                                                                                        
             
             <div class="blog__item__text">
-				<a data-delete="${dto.num}" class="blog__btn">관심상품 삭제<!-- <span class="arrow_right"></span> --></a>
-            
-            	<div class="blog__sidebar__search" style="display:inline-block;">
+            	<a data-all="" class="blog__btn">전체삭제<!-- <span class="arrow_right"></span> --></a>
+				<a data-select="" class="blog__btn">선택삭제<!-- <span class="arrow_right"></span> --></a>
+            	<div class="blog__sidebar__search" style="display:inline-block; float:right;">
 	                <form action="mypage.ns">
 		                <input type="text" name="mykeyword" placeholder="내 관심상품 검색">
 		                <button type="submit"><span class="icon_search"></span></button>

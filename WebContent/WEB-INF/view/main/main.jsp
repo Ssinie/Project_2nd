@@ -6,6 +6,16 @@
 <html lang="zxx">
 
 <head>
+
+<style>
+	.bgimg { 
+		width: 370px;
+		height: 266px;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>
+
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
@@ -322,9 +332,9 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>추천 베스트셀러</h2>
                     </div>
-                    <div class="featured__controls">
+                    <!-- <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
                             <li data-filter=".oranges">Oranges</li>
@@ -332,7 +342,7 @@ $(document).ready(function() {
                             <li data-filter=".vegetables">Vegetables</li>
                             <li data-filter=".fastfood">Fastfood</li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row featured__filter">
@@ -589,53 +599,53 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title from-blog__title">
-                        <h2>From The Blog</h2>
+                        <h2>오늘의 건강뉴스</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-1.jpg" alt="">
+                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
+                            <!-- <img src="" alt=""> -->
                         </div>
                         <div class="blog__item__text">
-                            <ul>
+                            <!-- <ul>
                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                 <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            </ul> -->
+                            <h5><a href="#">건강뉴스헤드라인</a></h5>
+                            <p>네이버뉴스 </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-2.jpg" alt="">
+                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
+                            <!-- <img src="" alt=""> -->
                         </div>
-                        <div class="blog__item__text">
-                            <ul>
+                        <div class="blog__item__text" >
+                            <!-- <ul>
                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                 <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            </ul> -->
+                            <h5><a href="#">건강뉴스헤드라인</a></h5>
+                            <p>네이버뉴스 </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
+                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
+                            <!-- <img src="" alt=""> -->
                         </div>
                         <div class="blog__item__text">
-                            <ul>
+                            <!-- <ul>
                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                                 <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            </ul> -->
+                            <h5><a href="#">건강뉴스헤드라인</a></h5>
+                            <p>네이버뉴스 </p>
                         </div>
                     </div>
                 </div>

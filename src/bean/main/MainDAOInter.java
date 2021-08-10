@@ -41,10 +41,10 @@ public interface MainDAOInter {
 	public String getUrl(int num) throws Exception;
 	
 	// 아이디로 wishlist 상품번호 select --> 상품번호로 상품명, 이미지, 영양성분 select
-	public List getMypagePd(ProductListDTO dto) throws Exception;
+	public List getWishPd(ProductListDTO dto) throws Exception;
 	
 	// 아이디로 관심상품 개수 select
-	public int mypagePdCount(String id) throws Exception;
+	public int wishPdCount(String id) throws Exception;
 	
 	// 전체상품 조회순 select
 	public List getAllPd(ProductListDTO dto) throws Exception;
@@ -55,17 +55,19 @@ public interface MainDAOInter {
 	// 전체상품 개수 select count(*)
 	public int allPdCount() throws Exception;
 	
-	// 마이페이지 검색 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
-	public List getMypageSearch(ProductListDTO dto) throws Exception;
+	// 관심상품 검색 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
+	public List getWishSearch(ProductListDTO dto) throws Exception;
 	
-	// 마이페이지 검색 개수
-	public int mypageSearchCount(ProductListDTO dto) throws Exception;
+	// 관심상품 검색 개수
+	public int wishSearchCount(ProductListDTO dto) throws Exception;
 	
-	// 마이페이지 영양성분별 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
-	public List getMypageTagPd(ProductListDTO dto) throws Exception;
+	// 관심상품 영양성분별 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
+	public List getWishTagPd(ProductListDTO dto) throws Exception;
 	
-	// 마이페이지 영양성분별 개수
-	public int mypageTagPdCount(ProductListDTO dto) throws Exception;
+	// 관심상품 영양성분별 개수
+	public int wishTagPdCount(ProductListDTO dto) throws Exception;
 	
+	// 관심상품 id로 전체삭제
+	public void wishAllDelete(String id) throws Exception;
 }
 

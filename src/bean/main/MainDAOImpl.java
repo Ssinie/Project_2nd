@@ -74,13 +74,13 @@ public class MainDAOImpl implements MainDAOInter {
 	}
 
 	@Override
-	public List getMypagePd(ProductListDTO dto) throws Exception {
-		return dao.selectList("main.getMypagePd", dto);
+	public List getWishPd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getWishPd", dto);
 	}
 
 	@Override
-	public int mypagePdCount(String id) throws Exception {
-		return dao.selectOne("main.mypagePdCount", id);
+	public int wishPdCount(String id) throws Exception {
+		return dao.selectOne("main.wishPdCount", id);
 	}
 
 	@Override
@@ -99,23 +99,28 @@ public class MainDAOImpl implements MainDAOInter {
 	}
 
 	@Override
-	public List getMypageSearch(ProductListDTO dto) throws Exception {
-		return dao.selectList("main.getMypageSearch", dto);
+	public List getWishSearch(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getWishSearch", dto);
 	}
 
 	@Override
-	public int mypageSearchCount(ProductListDTO dto) throws Exception {
-		return dao.selectOne("main.mypageSearchCount", dto);
+	public int wishSearchCount(ProductListDTO dto) throws Exception {
+		return dao.selectOne("main.wishSearchCount", dto);
 	}
 
 	@Override
-	public List getMypageTagPd(ProductListDTO dto) throws Exception {
-		return dao.selectList("main.getMypageTagPd", dto);
+	public List getWishTagPd(ProductListDTO dto) throws Exception {
+		return dao.selectList("main.getWishTagPd", dto);
 	}
 
 	@Override
-	public int mypageTagPdCount(ProductListDTO dto) throws Exception {
-		return dao.selectOne("main.mypageTagPdCount", dto);
+	public int wishTagPdCount(ProductListDTO dto) throws Exception {
+		return dao.selectOne("main.wishTagPdCount", dto);
+	}
+
+	@Override
+	public void wishAllDelete(String id) throws Exception {
+		dao.delete("main.wishAllDelete", id);
 	}
 }
 

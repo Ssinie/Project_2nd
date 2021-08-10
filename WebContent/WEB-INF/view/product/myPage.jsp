@@ -26,9 +26,8 @@ $(document).ready(function() {
 				}
 			})
 		}else{
-			
+			/* 취소 클릭 */
 		}
-		
 	});
 	
 });

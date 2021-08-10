@@ -13,12 +13,12 @@
 		insert into wishlist(id, num, clicked, click_date) values(#{id}, #{num}, 1, sysdate)
 	</insert>
 	
-	<delete id="wishDelete">
+	<delete id="wishDelete" parameterType="productDTO">
 		delete from wishlist where id=#{id} and num=#{num}
 	</delete>
 	
 	<select id="getMainPd" resultType="productDTO">
-		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <= 6]]>
+		<![CDATA[select num, name, imgurl, subtag from (select num, name, imgurl, subtag from item_name order by view_count desc) where rownum <= 8]]>
 	</select>
 	
 	<select id="getCategory" resultType="String">
@@ -53,12 +53,12 @@
 		select url from item_name where num=#{num}
 	</select>
 	
-	<select id="getMypagePd" parameterType="productListDTO" resultType="productDTO">
+	<select id="getWishPd" parameterType="productListDTO" resultType="productDTO">
 		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and w.rank>=#{startRow} and w.rank<=#{endRow}
 ]]>
 	</select>
 	
-	<select id="mypagePdCount" parameterType="String" resultType="int">
+	<select id="wishPdCount" parameterType="String" resultType="int">
 		select count(*) from wishlist where id = #{id}
 	</select>
 	
@@ -74,21 +74,25 @@
 		select count(*) from item_name
 	</select>
 	
-	<select id="getMypageSearch" parameterType="productListDTO" resultType="productDTO">
+	<select id="getWishSearch" parameterType="productListDTO" resultType="productDTO">
 		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and i.name like '%' || #{keyword} || '%' and w.rank>=#{startRow} and w.rank<=#{endRow}]]>
 	</select>
 	
-	<select id="mypageSearchCount" parameterType="productListDTO" resultType="int">
+	<select id="wishSearchCount" parameterType="productListDTO" resultType="int">
 		select count(*) from item_name i, (select num from wishlist where id = #{id}) w where i.num = w.num and i.name like '%' || #{keyword} || '%'
 	</select>
 	
-	<select id="getMypageTagPd" parameterType="productListDTO" resultType="productDTO">
+	<select id="getWishTagPd" parameterType="productListDTO" resultType="productDTO">
 		<![CDATA[select i.num, i.name, i.imgurl, i.subtag from item_name i, (select num, rank() over(order by click_date desc) AS rank from wishlist where id = #{id}) w where i.num = w.num and i.subtag = #{category} and w.rank>=#{startRow} and w.rank<=#{endRow}]]>
 	</select>
 	
-	<select id="mypageTagPdCount" parameterType="productListDTO" resultType="int">
+	<select id="wishTagPdCount" parameterType="productListDTO" resultType="int">
 		select count(*) from item_name i, (select num from wishlist where id = #{id}) w where i.num = w.num and i.subtag = #{category}
 	</select>
+	
+	<delete id="wishAllDelete" parameterType="String">
+		delete from wishlist where id=#{id}
+	</delete>
 	
 </mapper>
 

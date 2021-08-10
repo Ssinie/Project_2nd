@@ -247,10 +247,10 @@ $(document).ready(function() {
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="/Project_2nd/search.ns">
-                                <div class="hero__search__categories">
+                                <!-- <div class="hero__search__categories">
                                     전체 카테고리
                                     <span class="arrow_carrot-down"></span>
-                                </div>
+                                </div> -->
                                 <input type="text" name="keyword" placeholder="피로 개선에 효과 좋은 간 영양제, '밀크씨슬' 찾으세요?">
                                 <button type="submit" class="site-btn">검색</button>
                             </form>
@@ -458,7 +458,8 @@ $(document).ready(function() {
                                         </div>
                                         <div class="product__item__text">
                                             <span></span>
-                                            <h6>${dto.name}</h6>
+                                            <h6>${dto.subtag}</h6>
+                            				<h5>${dto.name}</h5>
                                             <div class="product__item__price"><span></span></div>
                                         </div>
                                     </div>
@@ -563,11 +564,11 @@ $(document).ready(function() {
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
+                                    <!-- <span>Sort By</span>
                                     <select>
                                         <option value="0">Default</option>
                                         <option value="0">Default</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
@@ -576,10 +577,10 @@ $(document).ready(function() {
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
-                                <div class="filter__option">
+                                <!-- <div class="filter__option">
                                     <span class="icon_grid-2x2"></span>
                                     <span class="icon_ul"></span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -598,8 +599,8 @@ $(document).ready(function() {
 	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">
-	                                    <h6>${dto.name}</h6>
-	                                    <h5></h5>
+	                                    <h6>${dto.subtag}</h6>
+                            			<h5>${dto.name}</h5>
 	                                </div>
 	                            </div>
 	                        </div>
