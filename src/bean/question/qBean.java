@@ -6,6 +6,7 @@ import bean.question.qBeanInter;
 import bean.healthy.Criteria;
 import bean.healthy.PageMaker;
 import bean.item.name.ItemKeyValueDTO;
+import bean.item.name.ItemNameDTO;
 import bean.item.name.ItemType;
 import bean.item.name.ItemTypeDTO;
 import bean.item.name.ItemTypeValueDTO;
@@ -172,6 +173,7 @@ public class qBean {
     	List findindex = new ArrayList();
     	ItemTypeValueDTO resultDto;
     	ItemTypeDTO typeDto;
+    	ItemNameDTO nameDto;
     	// String PRDLST_REPORT_NO = qResultBestItem(pValue);
     	String PRDLST_REPORT_NO = "20120019007415";
     	if(PRDLST_REPORT_NO != null) {
@@ -179,34 +181,33 @@ public class qBean {
     		typeDto = new ItemTypeDTO();
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
     		findindexs = qResultSelectItem(findindexs, resultDto);
+    		List nmList = new ArrayList();
+    		List result = new ArrayList();
+    		List conResult = new ArrayList();
+    		
     		for(int i = 0; i < findindexs.size(); i++) {
     			PRDLST_REPORT_NO = (String)findindexs.get(i);
     			// resultDto = 'PRDLST_REPORT_NO'를 이용하여 'Item_Type' 테이블에서 ItemTypeDTO 형태로 담기.
-    			ItemTypeDTO itDto = (ItemTypeDTO) service.sProduct(PRDLST_REPORT_NO);
+    			ItemTypeDTO itDto = service.sProduct(PRDLST_REPORT_NO);
     			// select * from ITEM_TYPE where PRDLST_REPORT_NO = #{}
-    			
-    			String nm = itDto.getBSSH_NM();
     			// 서비스 메서드에 지역변수로 resultDto.getBSSH_NM();
-    			int nm2 = service.sName(nm) ;
-    			// select count(*) from ITEM_NAME like name = %#{BSSH_NM}% // 파라미터 String 리절트 int
-    			List nmList = new ArrayList();
-    			if(nm2 == 1) { nmList.add(nm);
-    			} else if(nm2 > 1) { 
-    				for(int j = 0 ; j <  nmList.size() ; j++) {
-    					nmList.add(nm);
+    			int nm2 = service.sNameCount(itDto.getPRDLST_NM()) ;
+    			System.out.println(i+"번의 "+nm2+" "+itDto.getPRDLST_NM());
+    			nameDto = new ItemNameDTO();
+				if(nm2 == 1) { 
+    				nameDto = (ItemNameDTO)service.sName(itDto.getPRDLST_NM());
+    				result.add(nameDto);} 
+    			else if(nm2 > 1) { 
+    				nmList = service.sNames(itDto.getPRDLST_NM());
+    				for(int j = 0 ; j < nmList.size(); j++) {
+    					nameDto = (ItemNameDTO)nmList.get(j);
+    					result.add(nameDto);
     				}
     			}
-    			
-    			// if(count == 1){ selectOne > 리턴 ItemNameDTO
-    			// elseif(count > 1){ selectList > 리턴 ItemNameDTO
-    			// List 하나를 새로 생성해서 ItemNameDTO를 add 한다.
-    		
-    			
-    			// System.out.println("상품갯수 : "+List.size());
-    			// 테스트용으로 새로생성한 List의 size만큼 반복하고..
-    			// ItemNameDTO = list.get(i)
-    			// 반복문 안에서 System.out.println(ItemNameDTO.getName());
-    			
+    		}
+    		for(int i=0; i < result.size(); i++) {
+    			nameDto = new ItemNameDTO();
+    			nameDto = (ItemNameDTO)result.get(i);
     		}
     	}
     	return "/question/qResult";

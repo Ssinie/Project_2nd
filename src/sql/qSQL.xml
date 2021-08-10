@@ -310,7 +310,10 @@
 		select * from ITEM_TYPE where PRDLST_REPORT_NO = #{PRDLST_REPORT_NO}
 	</select>
 	
-	<select id = "sName" resultType = "int" parameterType = "String">
-		select count(*) from ITEM_NAME like name = '%'||#{BSSH_NM}||'%'
+	<select id = "sNameCount" resultType = "int" parameterType = "String">
+		select count(*) from ITEM_NAME where name like '%'||#{PRDLST_NM}||'%'
+	</select>
+	<select id = "sName" resultType = "ItemNameDTO" parameterType = "String">
+		select * from ITEM_NAME where name like '%'||#{PRDLST_NM}||'%'
 	</select>
 </mapper>

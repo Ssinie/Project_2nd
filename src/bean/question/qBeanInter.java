@@ -114,7 +114,11 @@ public interface qBeanInter {
 
 	public List countList10(ItemTypeValueDTO resultDto);
 
-	public List sProduct(String PRDLST_REPORT_NO);
+	public ItemTypeDTO sProduct(String PRDLST_REPORT_NO);
+	
+	public int sNameCount(String PRDLST_REPORT_NO);
 
-	public int sName(String nm);
+	public ItemNameDTO sName(String nm);
+	
+	public List sNames(String nm);
 }
