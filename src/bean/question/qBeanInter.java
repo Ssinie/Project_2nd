@@ -63,45 +63,45 @@ public interface qBeanInter {
 	
 	ItemTypeValueDTO resultItemSearch(String no);
 
-	public int count();
+	public int count(ItemTypeValueDTO resultDto);
 
-	public String countOne();
+	public String countOne(ItemTypeValueDTO resultDto);
 
-	public List countList();
+	public List countList(ItemTypeValueDTO resultDto);
 
-	public String countOne02();
+	public String countOne02(ItemTypeValueDTO resultDto);
 
-	public List countList02();
+	public List countList02(ItemTypeValueDTO resultDto);
 
-	public String countOne03();
+	public String countOne03(ItemTypeValueDTO resultDto);
 
-	public List countList03();
+	public List countList03(ItemTypeValueDTO resultDto);
 
-	public String countOne04();
+	public String countOne04(ItemTypeValueDTO resultDto);
 
-	public List countList04();
+	public List countList04(ItemTypeValueDTO resultDto);
 
-	public String countOne05();
+	public String countOne05(ItemTypeValueDTO resultDto);
 
-	public List countList05();
+	public List countList05(ItemTypeValueDTO resultDto);
 
-	public String countOne06();
+	public String countOne06(ItemTypeValueDTO resultDto);
 
-	public List countList06();
+	public List countList06(ItemTypeValueDTO resultDto);
 
-	public String countOne07();
+	public String countOne07(ItemTypeValueDTO resultDto);
 
-	public List countList07();
+	public List countList07(ItemTypeValueDTO resultDto);
 
-	public String countOne08();
+	public String countOne08(ItemTypeValueDTO resultDto);
 
-	public List countList08();
+	public List countList08(ItemTypeValueDTO resultDto);
 
-	public String countOne09();
+	public String countOne09(ItemTypeValueDTO resultDto);
 
-	public List countList09();
+	public List countList09(ItemTypeValueDTO resultDto);
 
-	public String countOne10();
+	public String countOne10(ItemTypeValueDTO resultDto);
 
-	public List countList10();
+	public List countList10(ItemTypeValueDTO resultDto);
 }

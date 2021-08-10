@@ -68,11 +68,9 @@ public class ItemType {
 			for(int j = 350; j <= 500; j++) {
 				int StartNum = (j * 10) + 1;
 				int EndNum = (j * 10) + 10;
-				System.out.println("URL 입력 시작");
 				URL url = new URL("https://openapi.foodsafetykorea.go.kr/api/"+key+"/C003/json/"+StartNum+"/"+EndNum);
 				
 				BufferedReader bf;
-				System.out.println("bf에 담음");
 				bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 		
 				result = bf.readLine();
@@ -112,7 +110,6 @@ public class ItemType {
 					searchCount = dao.selectOne("item_type.SearchTypeCount",dto.getPRDLST_REPORT_NO());
 					if(searchCount == 0) {
 						dao.insert("item_type.insert",dto);
-						System.out.println(i+"번째 입력종료");
 					}
 			}
 				
@@ -217,7 +214,6 @@ public class ItemType {
 				hash.put("num", i+1);
 				hash.put("element", v);
 				dao.insert("item_type.type_insert", hash);
-				System.out.println(i+1+"번째 삽입 완료");
 			}
 		
 		
@@ -290,7 +286,6 @@ public class ItemType {
 				}
 			}
 			dao.insert("item_type.insertValue",vdto);
-			System.out.println(i+" 번째 Susses");
 		}
 		
 		
@@ -356,7 +351,6 @@ public class ItemType {
 		Integer index;
 		List arr;
 		for(int i = 1; i <= 10; i ++) {
-			System.out.println("품번 : "+itvdto.getPRDLST_REPORT_NO()+" "+i+"번째 값 찾는중..");
 			switch(i) {
 				case 1 : 
 					if(itvdto.getKey_1() != 0) {int key = itvdto.getKey_1();

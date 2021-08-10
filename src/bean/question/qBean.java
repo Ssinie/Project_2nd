@@ -170,105 +170,108 @@ public class qBean {
     	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
-    	ItemTypeValueDTO resultDto;
+    	ItemTypeValueDTO resultDto = null;
     	String PRDLST_REPORT_NO = qResultBestItem(pValue);
     	if(PRDLST_REPORT_NO != null) {
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
+    		findindexs = qResultSelectItem(findindexs, resultDto);
     	}
     	
-    	qResultSelectItem(findindexs, findindex);
     	
+    	System.out.println(findindexs.size());
     	return "/question/qResult";
     }
     
-    public List qResultSelectItem(List findindexs, List findindex) throws Exception{
+    public List qResultSelectItem(List findindexs, ItemTypeValueDTO resultDto) throws Exception{
     
 		int count;
-		count = service.count();
+		List findindex = new ArrayList();
+		String result;
+		count = service.count(resultDto);
 		
-		if(count == 1) {String result = service.countOne();
+		if(count == 1) {result = service.countOne(resultDto);
 			findindexs.add(result);
-		}else if(count > 1) {findindex = service.countList();
+		}else if(count > 1) {findindex = service.countList(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 2) {String result = service.countOne02();
+		if(count == 2) {result = service.countOne02(resultDto);
 			findindexs.add(result);
-		}else if(count > 2) {findindex = service.countList02();
+		}else if(count > 2) {findindex = service.countList02(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
 		if(count == 3) {
-			String result = service.countOne03();
+			result = service.countOne03(resultDto);
 			findindexs.add(result);
-		}else if(count > 3) {findindex = service.countList03();
+		}else if(count > 3) {findindex = service.countList03(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 4) {String result = service.countOne04();
+		if(count == 4) {result = service.countOne04(resultDto);
 			findindexs.add(result);
-		}else if(count > 4) {findindex = service.countList04();
+		}else if(count > 4) {findindex = service.countList04(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 5) {String result = service.countOne05();
+		if(count == 5) {result = service.countOne05(resultDto);
 			findindexs.add(result);
-		}else if(count > 5) {findindex = service.countList05();
+		}else if(count > 5) {findindex = service.countList05(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 6) {String result = service.countOne06();
+		if(count == 6) {result = service.countOne06(resultDto);
 			findindexs.add(result);
-		}else if(count > 6) {findindex = service.countList06();
+		}else if(count > 6) {findindex = service.countList06(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 7) {String result = service.countOne07();
+		if(count == 7) {result = service.countOne07(resultDto);
 			findindexs.add(result);
-		}else if(count > 7) {findindex = service.countList07();
+		}else if(count > 7) {findindex = service.countList07(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 8) {String result = service.countOne08();
+		if(count == 8) {result = service.countOne08(resultDto);
 			findindexs.add(result);
-		}else if(count > 8) {findindex = service.countList08();
+		}else if(count > 8) {findindex = service.countList08(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 9) {String result = service.countOne09();
+		if(count == 9) {result = service.countOne09(resultDto);
 			findindexs.add(result);
-		}else if(count > 9) {findindex = service.countList09();
+		}else if(count > 9) {findindex = service.countList09(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
-		if(count == 10) {String result = service.countOne10();
+		if(count == 10) {result = service.countOne10(resultDto);
 			findindexs.add(result);
-		}else if(count > 10) {findindex = service.countList10();
+		}else if(count > 10) {findindex = service.countList10(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				String result = (String) findindex.get(i);
+				result = (String) findindex.get(i);
 				findindexs.add(result);
 			}
 		}
 		// contains 해서 findindexs의 중복되지 않은 값 처리
-		System.out.println(findindexs.size());
+		System.out.println("처리 메서드 종료"+findindexs.size());
 		
 		return findindexs ;
     }
