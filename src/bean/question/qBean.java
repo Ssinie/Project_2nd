@@ -171,6 +171,7 @@ public class qBean {
     	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
+    	List conResult = null;
     	ItemTypeValueDTO resultDto;
     	ItemTypeDTO typeDto;
     	ItemNameDTO nameDto;
@@ -183,7 +184,7 @@ public class qBean {
     		findindexs = qResultSelectItem(findindexs, resultDto);
     		List nmList = new ArrayList();
     		List result = new ArrayList();
-    		List conResult = new ArrayList();
+    		conResult = new ArrayList();
     		
     		for(int i = 0; i < findindexs.size(); i++) {
     			PRDLST_REPORT_NO = (String)findindexs.get(i);
@@ -203,13 +204,37 @@ public class qBean {
     					nameDto = (ItemNameDTO)nmList.get(j);
     					result.add(nameDto);
     				}
-    			}
-    		}
+    			}	
+			}
     		for(int i=0; i < result.size(); i++) {
     			nameDto = new ItemNameDTO();
     			nameDto = (ItemNameDTO)result.get(i);
+    			if(i == 0) {conResult.add(nameDto);}
+    			String firstName = nameDto.getName().substring(0, 2);
+    			int d = conResult.size();
+    			for(int j=0; j < conResult.size();j++) {
+    				ItemNameDTO nameDto2 = new ItemNameDTO();
+    				nameDto2 = (ItemNameDTO)conResult.get(j);
+        			String secondName = nameDto2.getName().substring(0, 2);
+        			if(!firstName.equals(secondName)) {
+        				--d;
+        			}
+        			if(d == 0) {
+        				conResult.add(nameDto);
+        				++d;
+        			}
+        			
+    			}
     		}
+    		System.out.println("정제된 수량 : "+conResult.size());
+    		for(int i=0; i < conResult.size();i++) {
+    			nameDto = new ItemNameDTO();
+    			nameDto = (ItemNameDTO)conResult.get(i);
+    			System.out.println(nameDto.getName());
+    		}
+    		
     	}
+    	model.addAttribute("nameDto",conResult);
     	return "/question/qResult";
     }
     

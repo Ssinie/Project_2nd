@@ -77,7 +77,9 @@
     		${r.BSSH_NM}
     		
 		</c:forEach>
-		
+		<c:forEach var="dto" items="${nameDto}">
+			<img src="${dto.imgurl}" />
+		</c:forEach>
 	</form>
 </div>
 
