@@ -136,107 +136,64 @@ public class qBeanImp implements qBeanInter{
 	}
 
 	@Override
-	public int count(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.count", resultDto) ;
-	}
+	public int count(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count", resultDto);}
+	@Override
+	public int count02(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count02", resultDto);}
+	@Override
+	public int count03(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count03", resultDto);}
+	@Override
+	public int count04(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count04", resultDto);}
+	@Override
+	public int count05(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count05", resultDto);}
+	@Override
+	public int count06(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count06", resultDto);}
+	@Override
+	public int count07(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count07", resultDto);}
+	@Override
+	public int count08(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count08", resultDto);}
+	@Override
+	public int count09(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count09", resultDto);}
+	@Override
+	public int count10(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.count10", resultDto);}
 
 	@Override
-	public String countOne(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne", resultDto) ;
-	}
-
+	public String countOne(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne", resultDto) ;}
 	@Override
-	public List countList(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList", resultDto) ;
-	}
-
+	public List countList(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList", resultDto) ;}
 	@Override
-	public String countOne02(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne02", resultDto) ;
-	}
-
+	public String countOne02(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne02", resultDto) ;}
 	@Override
-	public List countList02(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList02",resultDto) ;
-	}
-
+	public List countList02(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList02",resultDto) ;}
 	@Override
-	public String countOne03(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne03", resultDto) ;
-	}
-
+	public String countOne03(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne03", resultDto) ;}
 	@Override
-	public List countList03(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList03", resultDto) ;
-	}
-
+	public List countList03(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList03", resultDto) ;}
 	@Override
-	public String countOne04(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne04", resultDto) ;
-	}
-
+	public String countOne04(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne04", resultDto) ;}
 	@Override
-	public List countList04(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList04", resultDto) ;
-	}
-
+	public List countList04(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList04", resultDto) ;}
 	@Override
-	public String countOne05(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne05", resultDto) ;
-	}
-
+	public String countOne05(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne05", resultDto) ;}
 	@Override
-	public List countList05(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList05", resultDto) ;
-	}
-
+	public List countList05(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList05", resultDto) ;}
 	@Override
-	public String countOne06(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne06", resultDto) ;
-	}
-
+	public String countOne06(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne06", resultDto) ;}
 	@Override
-	public List countList06(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList06", resultDto) ;
-	}
-
+	public List countList06(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList06", resultDto) ;}
 	@Override
-	public String countOne07(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne07", resultDto) ;
-	}
-
+	public String countOne07(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne07", resultDto) ;}
 	@Override
-	public List countList07(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList07", resultDto) ;
-	}
-
+	public List countList07(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList07", resultDto) ;}
 	@Override
-	public String countOne08(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne08", resultDto) ;
-	}
-
+	public String countOne08(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne08", resultDto) ;}
 	@Override
-	public List countList08(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList08", resultDto) ;
-	}
-
+	public List countList08(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList08", resultDto) ;}
 	@Override
-	public String countOne09(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne09", resultDto) ;
-	}
-
+	public String countOne09(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne09", resultDto) ;}
 	@Override
-	public List countList09(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList09", resultDto) ;
-	}
-
+	public List countList09(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList09", resultDto) ;}
 	@Override
-	public String countOne10(ItemTypeValueDTO resultDto) {
-		return mybatis.selectOne("question.countOne10", resultDto) ;
-	}
-
+	public String countOne10(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne10", resultDto) ;}
 	@Override
-	public List countList10(ItemTypeValueDTO resultDto) {
-		return mybatis.selectList("question.countList10", resultDto) ;
-	}
+	public List countList10(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList10", resultDto) ;}
 }

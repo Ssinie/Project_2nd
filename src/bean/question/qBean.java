@@ -199,7 +199,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~9 검색
+		count = service.count02(resultDto);
 		if(count == 1) {result = service.countOne02(resultDto);
 			findindexs.add(result);
 		}else if(count > 2) {findindex = service.countList02(resultDto);
@@ -208,7 +208,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~8 검색
+		count = service.count03(resultDto);
 		if(count == 1) {
 			result = service.countOne03(resultDto);
 			findindexs.add(result);
@@ -218,7 +218,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~7 검색
+		count = service.count04(resultDto);
 		if(count == 1) {result = service.countOne04(resultDto);
 			findindexs.add(result);
 		}else if(count > 4) {findindex = service.countList04(resultDto);
@@ -227,7 +227,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~6 검색
+		count = service.count05(resultDto);
 		if(count == 1) {result = service.countOne05(resultDto);
 			findindexs.add(result);
 		}else if(count > 5) {findindex = service.countList05(resultDto);
@@ -236,7 +236,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~5 검색
+		count = service.count06(resultDto);
 		if(count == 1) {result = service.countOne06(resultDto);
 			findindexs.add(result);
 		}else if(count > 6) {findindex = service.countList06(resultDto);
@@ -245,7 +245,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~4 검색
+		count = service.count07(resultDto);
 		if(count == 1) {result = service.countOne07(resultDto);
 			findindexs.add(result);
 		}else if(count > 7) {findindex = service.countList07(resultDto);
@@ -254,7 +254,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~3 검색
+		count = service.count08(resultDto);
 		if(count == 1) {result = service.countOne08(resultDto);
 			findindexs.add(result);
 		}else if(count > 8) {findindex = service.countList08(resultDto);
@@ -263,7 +263,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1~2 검색
+		count = service.count09(resultDto);
 		if(count == 1) {result = service.countOne09(resultDto);
 			findindexs.add(result);
 		}else if(count > 9) {findindex = service.countList09(resultDto);
@@ -272,7 +272,7 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		// 카운트 키1 검색
+		count = service.count10(resultDto);
 		if(count == 1) {result = service.countOne10(resultDto);
 			findindexs.add(result);
 		}else if(count > 10) {findindex = service.countList10(resultDto);

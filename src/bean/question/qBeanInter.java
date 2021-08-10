@@ -64,6 +64,15 @@ public interface qBeanInter {
 	ItemTypeValueDTO resultItemSearch(String no);
 
 	public int count(ItemTypeValueDTO resultDto);
+	public int count02(ItemTypeValueDTO resultDto);
+	public int count03(ItemTypeValueDTO resultDto);
+	public int count04(ItemTypeValueDTO resultDto);
+	public int count05(ItemTypeValueDTO resultDto);
+	public int count06(ItemTypeValueDTO resultDto);
+	public int count07(ItemTypeValueDTO resultDto);
+	public int count08(ItemTypeValueDTO resultDto);
+	public int count09(ItemTypeValueDTO resultDto);
+	public int count10(ItemTypeValueDTO resultDto);
 
 	public String countOne(ItemTypeValueDTO resultDto);
 
