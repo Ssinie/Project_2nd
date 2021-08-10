@@ -171,16 +171,34 @@ public class qBean {
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
     	ItemTypeValueDTO resultDto;
+    	ItemTypeDTO typeDto;
     	// String PRDLST_REPORT_NO = qResultBestItem(pValue);
     	String PRDLST_REPORT_NO = "20120019007415";
     	if(PRDLST_REPORT_NO != null) {
     		resultDto = new ItemTypeValueDTO();
+    		typeDto = new ItemTypeDTO();
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
     		findindexs = qResultSelectItem(findindexs, resultDto);
+    		for(int i =0; i < findindexs.size(); i++) {
+    			PRDLST_REPORT_NO = (String)findindexs.get(i);
+    			// resultDto = 'PRDLST_REPORT_NO'를 이용하여 'Item_Type' 테이블에서 ItemTypeDTO 형태로 담기.
+    			// select * from ITEM_TYPE where PRDLST_REPORT_NO = #{}
+    			
+    			// 서비스 메서드에 지역변수로 resultDto.getBSSH_NM();
+    			// select count(*) from ITEM_NAME like name = %#{BSSH_NM}% // 파라미터 String 리절트 int
+    			// if(count == 1){ selectOne > 리턴 ItemNameDTO
+    			// elseif(count > 1){ selectList > 리턴 ItemNameDTO
+    			// List 하나를 새로 생성해서 ItemNameDTO를 add 한다.
+    		
+    			
+    			// System.out.println("상품갯수 : "+List.size());
+    			// 테스트용으로 새로생성한 List의 size만큼 반복하고..
+    			// ItemNameDTO = list.get(i)
+    			// 반복문 안에서 System.out.println(ItemNameDTO.getName());
+    			
+    			
+    		}
     	}
-    	
-    	
-    	System.out.println(findindexs.size());
     	return "/question/qResult";
     }
     
