@@ -19,8 +19,15 @@ public class HealthyDTO {
 	private Timestamp regdate;
 	private Timestamp updateDate;
 	private int count;
+	private String image;
 	
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getNum() {
 		return num;
 	}
