@@ -305,4 +305,15 @@
 	<select id = "countList10" resultType = "String" parameterType = "ItemTypeValueDTO">
 		select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{key_1}
 	</select>
+	
+	<select id = "sProduct" resultType = "ItemTypeDTO" parameterType = "String">
+		select * from ITEM_TYPE where PRDLST_REPORT_NO = #{PRDLST_REPORT_NO}
+	</select>
+	
+	<select id = "sNameCount" resultType = "int" parameterType = "String">
+		select count(*) from ITEM_NAME where name like '%'||#{PRDLST_NM}||'%'
+	</select>
+	<select id = "sName" resultType = "ItemNameDTO" parameterType = "String">
+		select * from ITEM_NAME where name like '%'||#{PRDLST_NM}||'%'
+	</select>
 </mapper>
