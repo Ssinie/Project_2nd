@@ -30,7 +30,7 @@ public class CrawlingController {
 			conn.eval(" library(dplyr) ");
 			conn.eval(" library(stringr) ");
 			conn.eval(" base_url <- 'https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid2=241&sid1=103&date=' ");
-			conn.eval(" sysdate_url <- paste(base_url, '&page=', sep=format(Sys.Date()-1,'%Y%m%d'))");
+			conn.eval(" sysdate_url <- paste(base_url, '&page=', sep=format(Sys.Date()-2,'%Y%m%d'))");
 			conn.eval(" urls <- NULL ");
 			conn.eval(" for (x in 0:10){ "
 					+ " urls <- c(urls, paste(sysdate_url,x+1,sep = '')); "
@@ -43,6 +43,20 @@ public class CrawlingController {
 					+ " html_attr('href')); "
 					+ " } ");
 			conn.eval(" news_links <- unique(news_links) ");
+			
+			
+			conn.eval(" naverImage <- NULL ");
+			conn.eval(" for(url in news_links){ "
+					+ " htmlz <- read_html(url); "
+					+ " a <- html_nodes(htmlz, '.end_photo_org > img:nth-child(1)')[1]; "
+					+ " if(length(a) == 0){ "
+					+ " naverImage <- c(naverImage, '이미지없음'); "
+					+ " } "
+					+ " else if(length(a) > 0){ "
+					+ " naverImage <- c(naverImage, html_attr(a , 'src')); "
+					+ " } "
+					+ " }"); 
+			
 			conn.eval(" Title <- NULL ");
 			conn.eval(" for (link in news_links){ "
 					+ " html <- read_html(link); "
@@ -51,17 +65,21 @@ public class CrawlingController {
 				    + " } ");
 			conn.eval(" title <- as.data.frame(Title) ");
 			conn.eval(" article_url <- as.data.frame(news_links) ");
-			conn.eval(" news <- cbind(title,article_url) ");
+			conn.eval(" naverImage_url <- as.data.frame(naverImage) ");
+			conn.eval(" news <- cbind(title,article_url,naverImage_url) ");
 			RList news = conn.eval("news").asList();
 			
 			String [] title = news.at(0).asStrings();
 			String [] url = news.at(1).asStrings();
+			String [] imageUrl = news.at(2).asStrings();
+			
 			CrawlingDTO a = new CrawlingDTO();
 			crawlingService.deleteAll(a);
 			CrawlingDTO dto = new CrawlingDTO();
 			for(int x = 0; x < title.length; x++) {
 				dto.setNaverTitle(title[x]);
 				dto.setNaverUrl(url[x]);
+				dto.setImageUrl(imageUrl[x]);
 				crawlingService.insertTitleUrl(dto);
 				
 			}
