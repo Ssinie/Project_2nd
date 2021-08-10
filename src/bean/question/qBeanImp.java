@@ -196,4 +196,14 @@ public class qBeanImp implements qBeanInter{
 	public String countOne10(ItemTypeValueDTO resultDto) {return mybatis.selectOne("question.countOne10", resultDto) ;}
 	@Override
 	public List countList10(ItemTypeValueDTO resultDto) {return mybatis.selectList("question.countList10", resultDto) ;}
+
+	@Override
+	public List sProduct(String PRDLST_REPORT_NO) {
+		return mybatis.selectList("question.sProduct", PRDLST_REPORT_NO);
+	}
+
+	@Override
+	public int sName(String nm) {
+		return mybatis.selectOne("question.sName", nm);
+	}
 }

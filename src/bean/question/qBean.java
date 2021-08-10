@@ -179,13 +179,24 @@ public class qBean {
     		typeDto = new ItemTypeDTO();
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
     		findindexs = qResultSelectItem(findindexs, resultDto);
-    		for(int i =0; i < findindexs.size(); i++) {
+    		for(int i = 0; i < findindexs.size(); i++) {
     			PRDLST_REPORT_NO = (String)findindexs.get(i);
     			// resultDto = 'PRDLST_REPORT_NO'를 이용하여 'Item_Type' 테이블에서 ItemTypeDTO 형태로 담기.
+    			ItemTypeDTO itDto = (ItemTypeDTO) service.sProduct(PRDLST_REPORT_NO);
     			// select * from ITEM_TYPE where PRDLST_REPORT_NO = #{}
     			
+    			String nm = itDto.getBSSH_NM();
     			// 서비스 메서드에 지역변수로 resultDto.getBSSH_NM();
+    			int nm2 = service.sName(nm) ;
     			// select count(*) from ITEM_NAME like name = %#{BSSH_NM}% // 파라미터 String 리절트 int
+    			List nmList = new ArrayList();
+    			if(nm2 == 1) { nmList.add(nm);
+    			} else if(nm2 > 1) { 
+    				for(int j = 0 ; j <  nmList.size() ; j++) {
+    					nmList.add(nm);
+    				}
+    			}
+    			
     			// if(count == 1){ selectOne > 리턴 ItemNameDTO
     			// elseif(count > 1){ selectList > 리턴 ItemNameDTO
     			// List 하나를 새로 생성해서 ItemNameDTO를 add 한다.
@@ -195,7 +206,6 @@ public class qBean {
     			// 테스트용으로 새로생성한 List의 size만큼 반복하고..
     			// ItemNameDTO = list.get(i)
     			// 반복문 안에서 System.out.println(ItemNameDTO.getName());
-    			
     			
     		}
     	}
