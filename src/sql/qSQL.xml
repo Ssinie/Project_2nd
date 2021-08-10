@@ -191,11 +191,11 @@
 	</select>
 	
 	<select id = "countOne" resultType = "String" parameterType = "ItemTypeValueDTO">
-		select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2} and KEY_3 = #{key_3} and KEY_4 = #{key_4} and KEY_5 = #{key_5} and KEY_6 = #{key_6} and KEY_7 = #{key_7} and KEY_8 = #{key_8} and KEY_9 = #{key_9} and key_10 = #{key_10}
+		select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{key_1} and KEY_2 = #{key_2} and KEY_3 = #{key_3} and KEY_4 = #{key_4} and KEY_5 = #{key_5} and KEY_6 = #{key_6} and KEY_7 = #{key_7} and KEY_8 = #{key_8} and KEY_9 = #{key_9} and key_10 = #{key_10}
 	</select>
 	
 	<select id = "countList" resultType = "String" parameterType = "ItemTypeValueDTO">
-		select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{KEY_1} and KEY_2 = #{key_2} and KEY_3 = #{key_3} and KEY_4 = #{key_4} and KEY_5 = #{key_5} and KEY_6 = #{key_6} and KEY_7 = #{key_7} and KEY_8 = #{key_8} and KEY_9 = #{key_9} and key_10 = #{key_10}
+		select PRDLST_REPORT_NO from Item_Type_Value where KEY_1 = #{key_1} and KEY_2 = #{key_2} and KEY_3 = #{key_3} and KEY_4 = #{key_4} and KEY_5 = #{key_5} and KEY_6 = #{key_6} and KEY_7 = #{key_7} and KEY_8 = #{key_8} and KEY_9 = #{key_9} and key_10 = #{key_10}
 	</select>
 	
 	<select id = "countOne02" resultType = "String" parameterType = "ItemTypeValueDTO">

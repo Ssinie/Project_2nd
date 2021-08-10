@@ -170,9 +170,11 @@ public class qBean {
     	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
-    	ItemTypeValueDTO resultDto = null;
-    	String PRDLST_REPORT_NO = qResultBestItem(pValue);
+    	ItemTypeValueDTO resultDto;
+    	// String PRDLST_REPORT_NO = qResultBestItem(pValue);
+    	String PRDLST_REPORT_NO = "20120019007415";
     	if(PRDLST_REPORT_NO != null) {
+    		resultDto = new ItemTypeValueDTO();
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
     		findindexs = qResultSelectItem(findindexs, resultDto);
     	}
@@ -187,8 +189,8 @@ public class qBean {
 		int count;
 		List findindex = new ArrayList();
 		String result;
-		count = service.count(resultDto);
 		
+		count = service.count(resultDto);
 		if(count == 1) {result = service.countOne(resultDto);
 			findindexs.add(result);
 		}else if(count > 1) {findindex = service.countList(resultDto);
@@ -197,7 +199,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 2) {result = service.countOne02(resultDto);
+		// 카운트 키1~9 검색
+		if(count == 1) {result = service.countOne02(resultDto);
 			findindexs.add(result);
 		}else if(count > 2) {findindex = service.countList02(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -205,7 +208,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 3) {
+		// 카운트 키1~8 검색
+		if(count == 1) {
 			result = service.countOne03(resultDto);
 			findindexs.add(result);
 		}else if(count > 3) {findindex = service.countList03(resultDto);
@@ -214,7 +218,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 4) {result = service.countOne04(resultDto);
+		// 카운트 키1~7 검색
+		if(count == 1) {result = service.countOne04(resultDto);
 			findindexs.add(result);
 		}else if(count > 4) {findindex = service.countList04(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -222,7 +227,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 5) {result = service.countOne05(resultDto);
+		// 카운트 키1~6 검색
+		if(count == 1) {result = service.countOne05(resultDto);
 			findindexs.add(result);
 		}else if(count > 5) {findindex = service.countList05(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -230,7 +236,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 6) {result = service.countOne06(resultDto);
+		// 카운트 키1~5 검색
+		if(count == 1) {result = service.countOne06(resultDto);
 			findindexs.add(result);
 		}else if(count > 6) {findindex = service.countList06(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -238,7 +245,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 7) {result = service.countOne07(resultDto);
+		// 카운트 키1~4 검색
+		if(count == 1) {result = service.countOne07(resultDto);
 			findindexs.add(result);
 		}else if(count > 7) {findindex = service.countList07(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -246,7 +254,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 8) {result = service.countOne08(resultDto);
+		// 카운트 키1~3 검색
+		if(count == 1) {result = service.countOne08(resultDto);
 			findindexs.add(result);
 		}else if(count > 8) {findindex = service.countList08(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -254,7 +263,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 9) {result = service.countOne09(resultDto);
+		// 카운트 키1~2 검색
+		if(count == 1) {result = service.countOne09(resultDto);
 			findindexs.add(result);
 		}else if(count > 9) {findindex = service.countList09(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
@@ -262,7 +272,8 @@ public class qBean {
 				findindexs.add(result);
 			}
 		}
-		if(count == 10) {result = service.countOne10(resultDto);
+		// 카운트 키1 검색
+		if(count == 1) {result = service.countOne10(resultDto);
 			findindexs.add(result);
 		}else if(count > 10) {findindex = service.countList10(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
