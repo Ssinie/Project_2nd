@@ -5,7 +5,7 @@
   
 <mapper namespace="crawling" >
 	<insert id="insertTitleUrl" parameterType="CrawlingDTO">
-		insert into T_HEALTHY_BOARD values(SEQ_HEALTHY_BOARD.nextval, #{naverTitle},#{naverUrl} ,'naver', sysdate , sysdate )
+		insert into T_HEALTHY_BOARD values(SEQ_HEALTHY_BOARD.nextval, #{naverTitle},#{naverUrl} ,#{imageUrl}, 'naver', sysdate , sysdate )
 	</insert>
 	
 	<delete id="deleteAll">
