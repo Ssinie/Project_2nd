@@ -44,7 +44,9 @@ public class MainController {
 		model.addAttribute("mainList", mainList);
 		
 		// 건강뉴스
-		
+		List healthyList = mainDAO.getHealthy();
+		System.out.println("healthyList === "+healthyList);
+		model.addAttribute("healthyList", healthyList);
 		return "/main/main";
 	}
 	

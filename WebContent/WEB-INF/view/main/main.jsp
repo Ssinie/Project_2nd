@@ -60,7 +60,7 @@ $(document).ready(function() {
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Nutrient Sunday</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -352,9 +352,9 @@ $(document).ready(function() {
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
                             <ul class="featured__item__pic__hover">
-                                <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+                                <li><a data-wish="${dto.num}" style="cursor:pointer;"><i class="fa fa-heart"></i></a></li>
                                 <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-                                <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a data-shop="${dto.num}" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
@@ -604,51 +604,25 @@ $(document).ready(function() {
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="blog__item__text">
-                            <!-- <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul> -->
-                            <h5><a href="#">건강뉴스헤드라인</a></h5>
-                            <p>네이버뉴스 </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="blog__item__text" >
-                            <!-- <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul> -->
-                            <h5><a href="#">건강뉴스헤드라인</a></h5>
-                            <p>네이버뉴스 </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic bgimg" style="background-image:url(https://imgnews.pstatic.net/image/023/2021/08/05/0003631610_001_20210805113405945.jpg?type=w647);">
-                            <!-- <img src="" alt=""> -->
-                        </div>
-                        <div class="blog__item__text">
-                            <!-- <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul> -->
-                            <h5><a href="#">건강뉴스헤드라인</a></h5>
-                            <p>네이버뉴스 </p>
-                        </div>
-                    </div>
-                </div>
+            <c:if test="${healthyList != null}">
+	            <c:forEach var="dto" items="${healthyList}">
+	            	<div class="col-lg-4 col-md-4 col-sm-6">
+	                    <div class="blog__item">
+	                        <div class="blog__item__pic bgimg" style="background-image:url(${dto.image});">
+	                            <!-- <img src="" alt=""> -->
+	                        </div>
+	                        <div class="blog__item__text">
+	                            <!-- <ul>
+	                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+	                                <li><i class="fa fa-comment-o"></i> 5</li>
+	                            </ul> -->
+	                            <h5><a href="${dto.content}">${dto.title}</a></h5>
+	                            <p>${dto.writer}</p>
+	                        </div>
+	                    </div>
+	                </div>
+	            </c:forEach>
+            </c:if>
             </div>
         </div>
     </section>

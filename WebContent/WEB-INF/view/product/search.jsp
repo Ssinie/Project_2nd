@@ -610,9 +610,9 @@ $(document).ready(function() {
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
 	                                	<a href="product.ns?num=${dto.num}"></a>
 	                                    <ul class="product__item__pic__hover">
-	                                        <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+	                                        <li><a data-wish="${dto.num}" style="cursor:pointer;"><i class="fa fa-heart"></i></a></li>
 	                                        <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-	                                        <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+	                                        <li><a data-shop="${dto.num}" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">

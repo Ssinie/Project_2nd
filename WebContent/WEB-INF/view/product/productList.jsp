@@ -451,9 +451,9 @@ $(document).ready(function() {
                                             data-setbg="${dto.imgurl}">
                                             <div class="product__discount__percent">HOT</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+                                                <li><a data-wish="${dto.num}" style="cursor:pointer;"><i class="fa fa-heart"></i></a></li>
                                                 <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-                                                <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a data-shop="${dto.num}" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="product__item__text">
@@ -593,9 +593,9 @@ $(document).ready(function() {
 	                            <div class="product__item">
 	                                <div id="setImg" class="product__item__pic set-bg" data-setbg="${dto.imgurl}">
 	                                    <ul class="product__item__pic__hover">
-	                                        <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li>
+	                                        <li><a data-wish="${dto.num}" style="cursor:pointer;"><i class="fa fa-heart"></i></a></li>
 	                                        <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-	                                        <li><a data-shop="${dto.num}"><i class="fa fa-shopping-cart"></i></a></li>
+	                                        <li><a data-shop="${dto.num}" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i></a></li>
 	                                    </ul>
 	                                </div>
 	                                <div class="product__item__text">

@@ -14,6 +14,7 @@ $(document).ready(function() {
 	$all = $('[data-all]');
 	$delete = $('[data-delete]');
 	$select = $('[data-select]');
+	$shop = $('[data-shop]');
 	
 	$all.on('click', function() {		
 		if(confirm('관심상품을 전체삭제합니다.')) {
@@ -65,7 +66,7 @@ $(document).ready(function() {
 					}
 				}
 			}
-			if(count == ""){
+			if(count == 0){
 				alert("선택된 상품이 없습니다.");
 				return false;
 			}else{
@@ -82,6 +83,11 @@ $(document).ready(function() {
 			}
 		}
 			
+	});
+	
+	$shop.on('click', function() {
+		var num = $(this).data("shop");
+		window.open("loading.ns?num="+num);
 	});
 	
 });
@@ -371,11 +377,21 @@ $(document).ready(function() {
                 </div>
             </div>
             <div class="row featured__filter">
+            <c:if test="${mypageList == null}">
+	            <div style="text-align:center; width:100%;">
+	            	<p>관심상품이 없습니다.</p>
+	            </div>
+            </c:if>
             <c:forEach var="dto" items="${mypageList}" varStatus="status">
             	<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                     	<input type="checkbox" name="num" value="${dto.num}" />
                         <div class="featured__item__pic set-bg" data-setbg="${dto.imgurl}">
+                        	<ul class="featured__item__pic__hover">
+                                <!-- <li><a data-wish="${dto.num}"><i class="fa fa-heart"></i></a></li> -->
+                                <!-- <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+                                <li><a data-shop="${dto.num}" style="cursor:pointer;"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
                         </div>
                         <div class="featured__item__text">
                             <h6>${dto.subtag}</h6>

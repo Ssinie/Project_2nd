@@ -94,5 +94,9 @@
 		delete from wishlist where id=#{id}
 	</delete>
 	
+	<select id="getHealthy" resultType="HealthyDTO">
+		<![CDATA[select num, title, content, image, writer from (select num, title, content, image, writer from t_healthy_board order by num desc) where rownum<=3]]>
+	</select>
+	
 </mapper>
 

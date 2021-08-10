@@ -25,7 +25,6 @@ public class MainDAOImpl implements MainDAOInter {
 	@Override
 	public void wishDelete(ProductDTO dto) throws Exception {
 		dao.delete("main.wishDelete", dto);
-		
 	}
 
 	@Override
@@ -122,6 +121,13 @@ public class MainDAOImpl implements MainDAOInter {
 	public void wishAllDelete(String id) throws Exception {
 		dao.delete("main.wishAllDelete", id);
 	}
+
+	@Override
+	public List getHealthy() throws Exception {
+		return dao.selectList("main.getHealthy");
+	}
+	
+	
 }
 
 

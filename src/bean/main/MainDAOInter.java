@@ -58,16 +58,19 @@ public interface MainDAOInter {
 	// 관심상품 검색 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
 	public List getWishSearch(ProductListDTO dto) throws Exception;
 	
-	// 관심상품 검색 개수
+	// 관심상품 검색 개수 select count(*)
 	public int wishSearchCount(ProductListDTO dto) throws Exception;
 	
 	// 관심상품 영양성분별 관심상품 등록순 상품번호, 상품명, 이미지, 영양성분 select
 	public List getWishTagPd(ProductListDTO dto) throws Exception;
 	
-	// 관심상품 영양성분별 개수
+	// 관심상품 영양성분별 개수 select count(*)
 	public int wishTagPdCount(ProductListDTO dto) throws Exception;
 	
-	// 관심상품 id로 전체삭제
+	// 관심상품 id로 전체삭제 delete
 	public void wishAllDelete(String id) throws Exception;
+	
+	// 건강뉴스 select
+	public List getHealthy() throws Exception;
 }
 
