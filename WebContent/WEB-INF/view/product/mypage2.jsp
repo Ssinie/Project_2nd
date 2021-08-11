@@ -99,7 +99,7 @@ $(document).ready(function() {
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Nutrient Sunday</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -125,7 +125,7 @@ $(document).ready(function() {
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="main.ns"><img src="img/logo.png" alt=""></a>
+            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
         </div>
         <!-- <div class="humberger__menu__cart">
             <ul>
@@ -137,38 +137,30 @@ $(document).ready(function() {
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <!-- <img src="img/language.png" alt=""> -->
-                <div>마이페이지</div>
-                <span class="arrow_carrot-down"></span>
+                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                <!-- <span class="arrow_carrot-down"></span>
                 <ul>
                     <li><a href="mypage.ns">내 관심상품</a></li>
                     <li><a href="#">내 문의내역</a></li>
-                </ul>
+                </ul> -->
             </div>
             <div class="header__top__right__auth">
 				<c:choose>
 					<c:when test="${sessionId == null}">
-						<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+						<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 					</c:when>
 					<c:otherwise>
-						<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+						<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 					</c:otherwise>
 				</c:choose>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="main.ns">홈</a></li>
-                <li><a href="productlist.ns">영양제</a></li>
-                <li><a href="#">건강뉴스</a>
-                   <!--  <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul> -->
-                </li>
-                <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">공지사항</a></li>
+				<li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+			    <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+			    <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+			    <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -210,20 +202,20 @@ $(document).ready(function() {
                             </div> -->
                             <div class="header__top__right__language">
                                 <!-- <img src="img/language.png" alt=""> -->
-                                <div>마이페이지</div>
-                                <span class="arrow_carrot-down"></span>
+                                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                                <!-- <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a data->내 관심상품</a></li>
                                     <li><a href="#">내 문의내역</a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <div class="header__top__right__auth">
 								<c:choose>
 									<c:when test="${sessionId == null}">
-										<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+										<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 									</c:when>
 									<c:otherwise>
-										<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+										<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 									</c:otherwise>
 								</c:choose>
                             </div>
@@ -236,25 +228,16 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="main.ns"><img src="img/logo.png" alt=""></a>
+                        <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="main.ns">홈</a></li>
-                            <li><a href="./contact.html">공지사항</a></li>
-                            <li><a href="productlist.ns">영양제</a></li>
-                            <li><a href="#">건강뉴스</a>
-                                <!-- <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul> -->
-                            </li>
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
-                            
+                            <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+						    <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+						    <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+						    <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -283,27 +266,19 @@ $(document).ready(function() {
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>전체 카테고리</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <c:forEach var="category" items="${categoryList}">
+                            	<li><a href="/Project_2nd/productlist.ns?${category}">${category}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="search.ns">
+                            <form action="/Project_2nd/search.ns">
                                 <!-- <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
@@ -317,8 +292,8 @@ $(document).ready(function() {
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>0507-1404-0050</h5>
+                                <span>365일 24시 고객센터</span>
                             </div>
                         </div>
                     </div>
@@ -327,24 +302,6 @@ $(document).ready(function() {
         </div>
     </section>
     <!-- Hero Section End -->
-
-    <!-- Breadcrumb Section Begin -->
-    <!-- <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Blog</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Blog</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- Breadcrumb Section End -->
     
     <!-- Featured Section Begin -->
     <section class="feature spad">
@@ -352,14 +309,14 @@ $(document).ready(function() {
        		<div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <a href="mypage.ns"><h2>내 관심상품</h2></a>
+                        <a href="/Project_2nd/mypage.ns"><h2>내 관심상품</h2></a>
                     </div>
                     <div class="featured__controls">
                     	<div class="blog__sidebar__item">
                             <h4>Search By</h4>
                             <div class="blog__sidebar__item__tags">
 								<c:forEach var="category" items="${categoryList}">
-	                            	<a href="mypage.ns?category=${category}">${category}</a>
+	                            	<a href="/Project_2nd/mypage.ns?category=${category}">${category}</a>
 	                            </c:forEach>
                             </div>
                         </div>
@@ -418,28 +375,27 @@ $(document).ready(function() {
 			    		<c:set var="endPage" value="${pageCount}" />                                                      
 			    	</c:if>                                                                                               
 			    	<c:if test="${startPage > 10}">                                                                       
-			    		<a href="mypage.ns?pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>             
+			    		<a href="/Project_2nd/mypage.ns?pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>             
 			    	</c:if>                                                                                               
 			    	                                                                                                      
 			    	<c:forEach var="i" begin="${startPage}" end="${endPage}">                                             
-			    		<a href="mypage.ns?pageNum=${i}">${i}</a>                                                         
+			    		<a href="/Project_2nd/mypage.ns?pageNum=${i}">${i}</a>                                                         
 			    	</c:forEach>                                                                                          
 			    	                                                                                                      
 			    	<c:if test="${endPage < pageCount}">                                                                  
-			    		<a href="mypage.ns?pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>            
+			    		<a href="/Project_2nd/mypage.ns?pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>            
 			    	</c:if>                                                                                               
 			                                                                                                              
 			    </c:if>                                                                                                   
 			                                                                                                              
-			    </div> <!-- product__pagination End -->                                                                   
-			                                                                                                              
+			    </div> <!-- product__pagination End -->                                                                                            
 			</div>                                                                                                        
             
             <div class="blog__item__text">
             	<a data-all="" class="blog__btn">전체삭제<!-- <span class="arrow_right"></span> --></a>
 				<a data-select="" class="blog__btn">선택삭제<!-- <span class="arrow_right"></span> --></a>
             	<div class="blog__sidebar__search" style="display:inline-block; float:right;">
-	                <form action="mypage.ns">
+	                <form action="/Project_2nd/mypage.ns">
 		                <input type="text" name="mykeyword" placeholder="내 관심상품 검색">
 		                <button type="submit"><span class="icon_search"></span></button>
 	                </form>
@@ -450,8 +406,6 @@ $(document).ready(function() {
         
     </section>
     <!-- Featured Section End -->
-    
-    
 	
     <!-- Blog Section Begin -->
     <%-- <section class="blog spad">
@@ -510,7 +464,7 @@ $(document).ready(function() {
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

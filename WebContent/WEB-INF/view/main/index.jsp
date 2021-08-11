@@ -117,13 +117,13 @@
 
 
 
-    <div class="site-section py-5">
+    <div class="site-section py-5" style="padding:5em 0 !important;">
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
             <div class="feature">
               <span class="wrap-icon flaticon-24-hours-drugs-delivery"></span>
-              <h3><a href="#">Free Delivery</a></h3>
+              <h3><a href="#">쉽고 간단한 테스트</a></h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa laborum voluptates excepturi neque labore .</p>
               <p><a href="#" class="d-flex align-items-center"><span class="mr-2">Learn more</span> <span class="icon-keyboard_arrow_right"></span></a></p>
             </div>
@@ -131,7 +131,7 @@
           <div class="col-lg-4">
             <div class="feature">
               <span class="wrap-icon flaticon-medicine"></span>
-              <h3><a href="#">New Medicine Everyday</a></h3>
+              <h3><a href="#">구매 페이지로 바로 연결</a></h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa laborum voluptates excepturi neque labore .</p>
               <p><a href="#" class="d-flex align-items-center"><span class="mr-2">Learn more</span> <span class="icon-keyboard_arrow_right"></span></a></p>
             </div>
@@ -139,7 +139,7 @@
           <div class="col-lg-4">
             <div class="feature">
               <span class="wrap-icon flaticon-test-tubes"></span>
-              <h3><a href="#">Medicines Guaranteed</a></h3>
+              <h3><a href="#">식품안전나라 허가 제품</a></h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa laborum voluptates excepturi neque labore .</p>
               <p><a href="#" class="d-flex align-items-center"><span class="mr-2">Learn more</span> <span class="icon-keyboard_arrow_right"></span></a></p>
             </div>
@@ -204,13 +204,32 @@
       </div>
     </div> -->
 
-    <div class="site-section">
+    <div class="site-section" style="padding:0 0 5em 0;">
       <div class="container">
         
         <div class="row justify-content-between">
+          <!-- <div class="col-lg-5">
+            <div class="title-section">
+              <h2 class="mb-5">왜 <strong class="text-primary">Nutrieny Sunday</strong>인가요?</h2>
+              <div class="step-number d-flex mb-4">
+                <span>1</span>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</p>
+              </div>
+
+              <div class="step-number d-flex mb-4">
+                <span>2</span>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</p>
+              </div>
+
+              <div class="step-number d-flex mb-4">
+                <span>3</span>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</p>
+              </div>
+            </div>
+          </div> -->
           <div class="col-lg-6">
             <div class="title-section">
-              <h2>Happy <strong class="text-primary">Customers</strong></h2>
+              <h2>만족한 <strong class="text-primary">이용후기</strong></h2>
             </div>
             <div class="block-3 products-wrap">
             <div class="owl-single no-direction owl-carousel">
@@ -262,7 +281,7 @@
           </div>
           <div class="col-lg-5">
             <div class="title-section">
-              <h2 class="mb-5">Why <strong class="text-primary">Us</strong></h2>
+              <h2 class="mb-5">왜 <strong class="text-primary">Nutrieny Sunday</strong>인가요?</h2>
               <div class="step-number d-flex mb-4">
                 <span>1</span>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam tempore</p>
@@ -288,29 +307,29 @@
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
 
             <div class="block-7">
-              <h3 class="footer-heading mb-4">About <strong class="text-primary">Pharmative</strong></h3>
+              <h3 class="footer-heading mb-4">About <strong class="text-primary">Nutrient Sunday</strong></h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
                 sed dolorum excepturi iure eaque, aut unde.</p>
             </div>
 
           </div>
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
-            <h3 class="footer-heading mb-4">Navigation</h3>
+            <h3 class="footer-heading mb-4">사이트맵</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="/Project_2nd/main.ns"><b>홈</b></a></li>
+              <li><a href="/Project_2nd/notice.ns"><b>공지사항</b></a></li>
+              <li><a href="/Project_2nd/productlist.ns"><b>영양제</b></a></li>
+              <li><a href="/Project_2nd/healthy/getBoardList.ns"><b>건강뉴스</b></a></li>
             </ul>
           </div>
 
           <div class="col-md-6 col-lg-3">
             <div class="block-5 mb-5">
-              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <h3 class="footer-heading mb-4">고객센터</h3>
               <ul class="list-unstyled">
-                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                <li class="email">emailaddress@domain.com</li>
+                <li class="address"><b>서울특별시 관악구 남부순환로 1820 에그옐로우 14층</b></li>
+                <li class="phone">0507-1404-0050</a></li>
+                <li class="email">help@nutrientsunday.co.kr</li>
               </ul>
             </div>
 

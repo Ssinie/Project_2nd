@@ -119,18 +119,10 @@ $(document).ready(function() {
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+            	<li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+                <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
                 <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
-                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a>
-                   <!--  <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul> -->
-                </li>
-                <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">공지사항</a></li>
+                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -205,18 +197,9 @@ $(document).ready(function() {
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
-                            <li><a href="./contact.html">공지사항</a></li>
+                            <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
                             <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
-                            <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a>
-                                <!-- <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul> -->
-                            </li>
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
-                            
+                            <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -238,7 +221,7 @@ $(document).ready(function() {
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -249,13 +232,13 @@ $(document).ready(function() {
                         </div>
                         <ul>
                             <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
+                            	<li><a href="/Project_2nd/productlist.ns?category=${category}">${category}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="hero__search">
+                    <div class="hero__search" style="padding-bottom:30px">
                         <div class="hero__search__form">
                             <form action="/Project_2nd/search.ns">
                                 <!-- <div class="hero__search__categories">
@@ -271,8 +254,8 @@ $(document).ready(function() {
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>0507-1404-0050</h5>
+                                <span>365일 24시 고객센터</span>
                             </div>
                         </div>
                     </div>
@@ -327,7 +310,7 @@ $(document).ready(function() {
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
-    <section><!-- class="featured spad" -->
+    <section class="featured spad" style="padding:80px 0 0 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -635,7 +618,7 @@ $(document).ready(function() {
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

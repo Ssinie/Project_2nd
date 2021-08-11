@@ -11,7 +11,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Nutrient Sunday</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="/Project_2nd/css/style.css" type="text/css">
     
     <style type="text/css">
+    	a { color: #212529; }
+    	a:hover { color: #212529; }
     	#paging { text-align: center; }
     	#paging .table { align: center; }
-    	#paging li { list-style: none; float: left; padding: 6px; }
+    	#paging li { list-style: none; float: center; padding: 6px; display:inline-block;}
    	</style>
 </head>
 
@@ -37,14 +39,13 @@
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
-        <input type="hidden" name="referer" value="${referer}"/>
     </div>
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="main.ns"><img src="img/logo.png" alt=""></a>
+            <a href="/Project_2nd/main.ns"><img src="/Project_2nd/img/logo.png" alt=""></a>
         </div>
         <!-- <div class="humberger__menu__cart">
             <ul>
@@ -56,45 +57,30 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <!-- <img src="img/language.png" alt=""> -->
-                <div>마이페이지</div>
+                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
                 <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li>
-                    	<c:if test="${sessionId == null}">
-                        	<a href="login.ns?from=mypage.ns">내 관심상품</a>
-                        </c:if>
-                        <c:if test="${sessionId != null}">
-                        	<a href="mypage.ns">내 관심상품</a>
-                        </c:if>
-                    </li>
+                <!-- <ul>
+                    <li><a href="mypage.ns">내 관심상품</a></li>
                     <li><a href="#">내 문의내역</a></li>
-                </ul>
+                </ul> -->
             </div>
             <div class="header__top__right__auth">
 				<c:choose>
 					<c:when test="${sessionId == null}">
-						<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+						<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 					</c:when>
 					<c:otherwise>
-						<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+						<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 					</c:otherwise>
 				</c:choose>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="main.ns">홈</a></li>
-                <li><a href="productlist.ns">영양제</a></li>
-                <li><a href="/healthy/getBoardList.ns">건강뉴스</a>
-                   <!--  <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul> -->
-                </li>
-                <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">공지사항</a></li>
+                <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+                <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+                <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -136,27 +122,20 @@
                             </div> -->
                             <div class="header__top__right__language">
                                 <!-- <img src="img/language.png" alt=""> -->
-                                <div>마이페이지</div>
-                                <span class="arrow_carrot-down"></span>
+                                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                                <!-- <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li>
-                                    	<c:if test="${sessionId == null}">
-                                    		<a href="login.ns?from=mypage.ns">내 관심상품</a>
-                                    	</c:if>
-                                    	<c:if test="${sessionId != null}">
-                                    		<a href="mypage.ns">내 관심상품</a>
-                                    	</c:if>
-                                    </li>
+                                    <li><a href="mypage.ns">내 관심상품</a></li>
                                     <li><a href="#">내 문의내역</a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <div class="header__top__right__auth">
 								<c:choose>
 									<c:when test="${sessionId == null}">
-										<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+										<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 									</c:when>
 									<c:otherwise>
-										<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+										<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 									</c:otherwise>
 								</c:choose>
                             </div>
@@ -169,25 +148,16 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="main.ns"><img src="img/logo.png" alt=""></a>
+                        <a href="/Project_2nd/main.ns"><img src="/Project_2nd/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
-                            <li><a href="./contact.html">공지사항</a></li>
-                            <li><a href="productlist.ns">영양제</a></li>
-                            <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a>
-                                <!-- <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul> -->
-                            </li>
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
-                            
+			                <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+			                <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+			                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -209,28 +179,49 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-normal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span> 전체 카테고리 </span>
+                            <span>전체 카테고리</span>
                         </div>
                         <ul>
-                            <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
-                            </c:forEach>
+	                        <li><a href="/Project_2nd/productlist.ns?category=멀티비타민">멀티비타민</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비타민A">비타민A</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비타민B">비타민B</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비타민C">비타민C</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비타민D">비타민D</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비타민E">비타민E</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=비오틴">비오틴</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=기타비타민">기타비타민</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=엽산">엽산</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=아연">아연</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=철분">철분</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=칼슘">칼슘</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=마그네슘">마그네슘</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=프로폴리스">프로폴리스</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=글루코사민">글루코사민</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=오메가3">오메가3</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=감마리놀렌산">감마리놀렌산</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=루테인">루테인</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=스쿠알렌">스쿠알렌</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=쏘팔메토">쏘팔메토</a></li>
+	                        <li><a href="/Project_2nd/productlist.ns?category=키토산">키토산</a></li>
+                            <%-- <c:forEach var="category" items="${categoryList}">
+                            	<li><a href="/Project_2nd/productlist.ns?${category}">${category}</a></li>
+                            </c:forEach> --%>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="search.ns">
+                            <form action="/Project_2nd/search.ns">
                                 <!-- <div class="hero__search__categories">
-                                    All Categories
+                                    전체 카테고리
                                     <span class="arrow_carrot-down"></span>
                                 </div> -->
                                 <input type="text" name="keyword" placeholder="피로 개선에 효과 좋은 간 영양제, '밀크씨슬' 찾으세요?">
@@ -242,19 +233,11 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>0507-1404-0050</h5>
+                                <span>365일 24시 고객센터</span>
                             </div>
                         </div>
                     </div>
-<!--                     <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>NUTRIENT TEST</span>
-                            <h2>알고리즘 <br />영양제 테스트</h2>
-                            <p>간단한 테스트로 <br />필요한 영양성분과 제품을 확인하세요.</p>
-                            <a href="question/pForm.do" class="primary-btn">지금 테스트 하기</a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -262,65 +245,82 @@
     <!-- Hero Section End -->
     
     <!-- Blog Section Begin -->
-    <section class="from-blog spad">
+    <section class="from-blog spad" style="padding-top:20px;">
         <div class="container">
         <div id="paging">
-        	<h1>게시글 목록</h1>
-				<p>총 게시글 수:(${pageMaker.totalCount }개)</p>
-				<p>현재 페이지: ${cri.page}페이지</p>
-				<br>
+        	<div class="section-title">
+            	<h2>건강뉴스</h2>
+            </div>
 				<c:if test="${mem != null }">
 				   <p>${mem.id }님 반갑습니다.</p>
 				   <input type="button" onclick='location.href="/Project_2nd/manager/hello.ns"' value="홈"/>
-				   <input type="button" onclick='location.href="insertBoardV.ns"' value="새글"/>
-				   <input type="button" onclick='location.href="crawling.ns"' value="크롤링"/>
-				   <button type="button" onclick='location.href="deleteAll.ns"'>전체삭제</button>
+				   <input type="button" onclick='location.href="/Project_2nd/healthy/insertBoardV.ns"' value="새 글"/>
+				   <input type="button" onclick='location.href="/Project_2nd/healthy/crawling.ns"' value="크롤링"/>
+				   <button type="button" onclick='location.href="/Project_2nd/healthy/deleteAll.ns"'>전체삭제</button>
 				   <input type="button" onclick='location.href="/Project_2nd/manager/managerlogout.ns"' value="로그아웃"/>   
 				</c:if>
-				<c:if test="${mem == null }">
-				   <a href="/Project_2nd/index.ns">메인으로 돌아가기</a>
-				</c:if>
-				<table class="table" border="1" cellpadding="0" cellspacing="0" width="1050">
-				<tr>
-				   <th bgcolor="#b7a2de" width="100">번호</th>
-				   <th bgcolor="#b7a2de" width="400">제목</th>
-				   <th bgcolor="#b7a2de" width="150">작성자</th>
-				   <th bgcolor="#b7a2de" width="200">등록일</th>
-				   <th bgcolor="#b7a2de" width="200">수정일</th>
-				</tr>
-				
-				<c:forEach items="${boardList }" var="board">
-				<tr>
-				   <td align="center">${board.num }</td>
-				   <c:if test="${board.writer eq 'naver' }"> 
-				      <td align="left"><a href="${board.content }">${board.title }</a></td>
-				   </c:if>
-				   <c:if test="${board.writer ne 'naver' }">
-				      <td align="left"><a href="getBoard.ns?num=${board.num }">${board.title }</a></td>
-				   </c:if>
-				   <td align="center">${board.writer }</td>
-				   <td align="center">${board.regdate }</td>
-				   <td align="center">${board.updateDate }</td>
-				</tr>
-				</c:forEach>
+				<table class="table">
+				<theader>
+					<tr>
+					   <td width="100">No.</td>
+					   <td width="400">제목</td>
+					   <td width="150">작성자</td>
+					   <td width="200">등록일</td>
+					   <td width="200">수정일</td>
+					</tr>
+				</theader>
+				<tbody>
+					<c:forEach items="${boardList }" var="board">
+					<tr>
+					   <td align="center">${board.num }</td>
+					   <c:if test="${board.writer eq 'naver' }"> 
+					      <td align="left"><a href="${board.content }">${board.title }</a></td>
+					   </c:if>
+					   <c:if test="${board.writer ne 'naver' }">
+					      <td align="left"><a href="/Project_2nd/healthy/getBoard.ns?num=${board.num }">${board.title }</a></td>
+					   </c:if>
+					   <td align="center">${board.writer }</td>
+					   <td align="center">${board.regdate }</td>
+					   <td align="center">${board.updateDate }</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			
 				</table>
-				<div style="display: inline-block;">
+				<div class="col-lg-12" style="display:inline-block; text-align:center;">                                                                                      
+				    <div class="product__pagination" style="text-align:center;">                                                                         
+					    <ul>
+						  <c:if test="${pageMaker.prev}">
+						   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+						  </c:if> 
+						  
+						  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+						   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						  </c:forEach>
+						    
+						  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+						  </c:if> 
+						 </ul>
+					 </div> <!-- product__pagination End -->
+				 </div>
+				
+				<%-- <div style="display: inline-block;">
 				 <ul>
 				  <c:if test="${pageMaker.prev}">
-				   <li><a href="getBoardList.ns${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+				   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 				  </c:if> 
 				  
 				  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-				   <li><a href="getBoardList.ns${pageMaker.makeQuery(idx)}">${idx}</a></li>
+				   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(idx)}">${idx}</a></li>
 				  </c:forEach>
 				    
 				  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				   <li><a href="getBoardList.ns${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+				   <li><a href="/Project_2nd/healthy/getBoardList.ns${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 				  </c:if> 
 				 </ul>
-				</div>
-        </div>
-				
+				</div> --%>
+        </div>		
 			
         </div>
     </section>
@@ -333,7 +333,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디/비밀번호 찾기</title>
+    <link rel="stylesheet" type="text/css" href="../css/findIdPw.css">
+    <script src="../jquery/jquery.js"></script>
+</head>
+
+<body>
+
+<script>
+    $(document).ready(function(){
+
+        $('ul.find_tabs li').click(function(){
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.find_tabs li').removeClass('current');
+            $('.find-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+        })
+    })
+</script>
+
+<div id="wrap">
+    <header id="header">
+        <div class="header_wrap"><p class="header_title"></p></div>
+    </header>
+
+    <main id="container">
+        <div class="content">
+
+            <div class="find_content">
+                <ul class="find_tabs">
+                    <li class="find-link current" data-tab="findId">아이디 찾기</li>
+                    <li class="find-link" data-tab="findPw">비밀번호 찾기</li>
+                </ul>
+
+                <div id="findId" class="find-content current">
+                        <div class="tab_find" >
+                            <div class="find_title"><span>이름</span></div>
+                            <div><input type="text" class="input_find" placeholder="이름 입력" /></div>
+
+                                <div class="find_title"><span>생년월일</span></div>
+                                <div class="find_birth">
+                                <div class="find_input_s">
+                                    <input type="text" name="birth_y" class="input_find_s" placeholder="년" />
+                                </div>
+                                <div class="find_select_s">
+                                    <select type="text" name="birth_m" class="select_find_s">
+                                        <option value selected>월 선택</option>
+                                        <option value="jan">1월</option>
+                                        <option value="feb">2월</option>
+                                        <option value="mar">3월</option>
+                                        <option value="apr">4월</option>
+                                        <option value="may">5월</option>
+                                        <option value="jun">6월</option>
+                                        <option value="jul">7월</option>
+                                        <option value="aug">8월</option>
+                                        <option value="sep">9월</option>
+                                        <option value="oct">10월</option>
+                                        <option value="nov">11월</option>
+                                        <option value="dec">12월</option>
+                                    </select>
+                                </div>
+                                <div class="find_input_s">
+                                    <input type="text" name="birth_d" class="input_find_s" placeholder="일" />
+                                </div>
+                            </div>
+                            <div class="find_title"><span>질문</span></div>
+                            <div>
+                                <select type="text" name="question" class="select_find">
+                                    <option value selected>질문을 선택하세요.</option>
+                                    <option value="opt1">기억에 남는 추억의 장소는?</option>
+                                    <option value="opt2">자신의 인생 좌우명은?</option>
+                                    <option value="opt3">자신의 보물 제1호는?</option>
+                                    <option value="opt4">가장 기억에 남는 선생님 성함은?</option>
+                                    <option value="opt5">추억하고 싶은 날짜가 있다면?</option>
+                                    <option value="opt6">인상 깊게 읽은 책 이름은?</option>
+                                    <option value="opt7">읽은 책 중에서 좋아하는 구절이 있다면?</option>
+                                    <option value="opt8">가장 존경하는 인물은?</option>
+                                    <option value="opt9">다시 태어나면 되고 싶은 것은?</option>
+                                    <option value="opt10">내가 좋아하는 캐릭터는?</option>
+                                </select>
+                            </div>
+                            <div><input type="text" class="input_find" placeholder="답"/></div>
+                            <div><button type="button" name="find_btn" class="find_btn">아이디 찾기</button></div>
+                        </div>
+                    </div>
+                <div id="findPw" class="find-content">
+                    <div class="find_title"><span>이메일 아이디</span></div>
+                        <input type="text" name="find_pw_email" class="input_find_m" placeholder="이메일 아이디 입력" />
+                        <button type="button" name="find_btn_s" class="find_btn_s">전송</button>
+                        <button type="button" name="find_btn" class="find_btn">비밀번호 재설정</button>
+                    </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="footer">
+        <div class="footer_wrap"></div>
+    </footer>
+
+</div>
+</body>
+</html>

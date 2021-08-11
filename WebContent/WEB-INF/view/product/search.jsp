@@ -50,7 +50,7 @@ $(document).ready(function() {
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>search</title>
+    <title>Nutrient Sunday</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -76,63 +76,55 @@ $(document).ready(function() {
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="main.ns"><img src="img/logo.png" alt=""></a>
+            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
         </div>
-        <div class="humberger__menu__cart">
+        <!-- <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
+        </div> -->
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="img/language.png" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
+                <!-- <img src="img/language.png" alt=""> -->
+                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                <!-- <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
+                    <li><a href="mypage.ns">내 관심상품</a></li>
+                    <li><a href="#">내 문의내역</a></li>
+                </ul> -->
             </div>
             <div class="header__top__right__auth">
 				<c:choose>
 					<c:when test="${sessionId == null}">
-						<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+						<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 					</c:when>
 					<c:otherwise>
-						<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+						<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 					</c:otherwise>
 				</c:choose>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+				<li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+			    <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+			    <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+			    <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
+            <!-- <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a> -->
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> help@nutrientsunday.co.kr</li>
+                <li>매일매일 일요일처럼 활기차게! Nutrient Sunday</li>
             </ul>
         </div>
     </div>
@@ -143,38 +135,38 @@ $(document).ready(function() {
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> help@nutrientsunday.co.kr</li>
+                                <li>매일매일 일요일처럼 활기차게! Nutrient Sunday</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
+                            <!-- <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
+                            </div> -->
                             <div class="header__top__right__language">
-                                <img src="img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
+                                <!-- <img src="img/language.png" alt=""> -->
+                                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                                <!-- <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
+                                    <li><a data->내 관심상품</a></li>
+                                    <li><a href="#">내 문의내역</a></li>
+                                </ul> -->
                             </div>
                             <div class="header__top__right__auth">
 								<c:choose>
 									<c:when test="${sessionId == null}">
-										<a href="login.ns"><i class="fa fa-user"></i> 로그인</a>
+										<a href="/Project_2nd/login.ns"><i class="fa fa-user"></i> 로그인</a>
 									</c:when>
 									<c:otherwise>
-										<a href="logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
+										<a href="/Project_2nd/logout.ns"><i class="fa fa-user"></i> 로그아웃</a>
 									</c:otherwise>
 								</c:choose>
                             </div>
@@ -187,34 +179,26 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="main.ns"><img src="img/logo.png" alt=""></a>
+                        <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="main.ns">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+						    <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+						    <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+						    <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <!-- <ul>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span></span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>$150.00</span></div> -->
                     </div>
                 </div>
             </div>
@@ -233,11 +217,11 @@ $(document).ready(function() {
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>전체 카테고리</span>
                         </div>
                         <ul>
                             <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?${category}">${category}</a></li>
+                            	<li><a href="/Project_2nd/productlist.ns?${category}">${category}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -245,13 +229,13 @@ $(document).ready(function() {
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="search.ns">
-                                <div class="hero__search__categories">
+                            <form action="/Project_2nd/search.ns">
+                                <!-- <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" name="keyword" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                </div> -->
+                                <input type="text" name="keyword" placeholder="피로 개선에 효과 좋은 간 영양제, '밀크씨슬' 찾으세요?">
+                                <button type="submit" class="site-btn">검색</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -259,8 +243,8 @@ $(document).ready(function() {
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>0507-1404-0050</h5>
+                                <span>365일 24시 고객센터</span>
                             </div>
                         </div>
                     </div>
@@ -270,24 +254,6 @@ $(document).ready(function() {
     </section>
     <!-- Hero Section End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <!-- <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <!-- <div class="breadcrumb__text">
-                        <h2>${category}</h2>
-                        <div class="breadcrumb__option">
-                            <a href="#"></a>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- Breadcrumb Section End -->
-
     <!-- Product Section Begin -->
     <section class="product">
         <div class="container">
@@ -295,11 +261,11 @@ $(document).ready(function() {
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>카테고리</h4>
                             <ul>
                             
                             <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
+                            	<li><a href="/Project_2nd/productlist.ns?category=${category}">${category}</a></li>
                             </c:forEach>
                             
                             </ul>
@@ -580,11 +546,11 @@ $(document).ready(function() {
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
+                                    <!-- <span>Sort By</span>
                                     <select>
                                         <option value="0">Default</option>
                                         <option value="0">Default</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
@@ -593,10 +559,10 @@ $(document).ready(function() {
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
-                                <div class="filter__option">
+                                <!-- <div class="filter__option">
                                     <span class="icon_grid-2x2"></span>
                                     <span class="icon_ul"></span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

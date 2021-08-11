@@ -109,17 +109,9 @@ $(document).ready(function() {
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
+                <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
                 <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
-                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a>
-                   <!--  <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul> -->
-                </li>
-                <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">공지사항</a></li>
+                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -194,18 +186,9 @@ $(document).ready(function() {
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/Project_2nd/main.ns">홈</a></li>
-                            <li><a href="./contact.html">공지사항</a></li>
-                            <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
-                            <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a>
-                                <!-- <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul> -->
-                            </li>
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
-                            
+			                <li><a href="/Project_2nd/notice.ns">공지사항</a></li>
+			                <li><a href="/Project_2nd/productlist.ns">영양제</a></li>
+			                <li><a href="/Project_2nd/healthy/getBoardList.ns">건강뉴스</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -238,7 +221,7 @@ $(document).ready(function() {
                         </div>
                         <ul>
                             <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?${category}">${category}</a></li>
+                            	<li><a href="/Project_2nd/productlist.ns?${category}">${category}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -260,8 +243,8 @@ $(document).ready(function() {
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>0507-1404-0050</h5>
+                                <span>365일 24시 고객센터</span>
                             </div>
                         </div>
                     </div>
@@ -278,11 +261,11 @@ $(document).ready(function() {
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
-                            <h4>Department</h4>
+                            <h4>카테고리</h4>
                             <ul>
                             
                             <c:forEach var="category" items="${categoryList}">
-                            	<li><a href="productlist.ns?category=${category}">${category}</a></li>
+                            	<li><a href="/Project_2nd/productlist.ns?category=${category}">${category}</a></li>
                             </c:forEach>
                             
                             </ul>
@@ -623,15 +606,15 @@ $(document).ready(function() {
                     		<c:set var="endPage" value="${pageCount}" />
                     	</c:if>
                     	<c:if test="${startPage > 10}">
-                    		<a href="productlist.ns?category=${category}&pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>
+                    		<a href="/Project_2nd/productlist.ns?category=${category}&pageNum=${startPage-10}"><i class="fa fa-long-arrow-left"></i></a>
                     	</c:if>
                     	
                     	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-                    		<a href="productlist.ns?category=${category}&pageNum=${i}">${i}</a>
+                    		<a href="/Project_2nd/productlist.ns?category=${category}&pageNum=${i}">${i}</a>
                     	</c:forEach>
                     	
                     	<c:if test="${endPage < pageCount}">
-                    		<a href="productlist.ns?category=${category}&pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>
+                    		<a href="/Project_2nd/productlist.ns?category=${category}&pageNum=${startPage+10}"><i class="fa fa-long-arrow-right"></i></a>
                     	</c:if>
 
                     </c:if>
@@ -650,7 +633,7 @@ $(document).ready(function() {
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="/Project_2nd/main.ns"><img src="img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
