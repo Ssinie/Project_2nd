@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-  <title>Pharmative &mdash; Colorlib Template</title>
+  <title>Nutrient Sunday</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -17,12 +17,8 @@
   <link rel="stylesheet" href="css/index/jquery-ui.css">
   <link rel="stylesheet" href="css/index/owl.carousel.min.css">
   <link rel="stylesheet" href="css/index/owl.theme.default.min.css">
-
-
   <link rel="stylesheet" href="css/index/aos.css">
-
   <link rel="stylesheet" href="css/index/style.css">
-
 </head>
 
 <body>

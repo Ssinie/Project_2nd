@@ -409,7 +409,12 @@ public class MainController {
 		model.addAttribute("col", col);
 		
 		return "/product/mypage2";
+	}
 	
+	@RequestMapping("error.ns")
+	public String error() throws Exception {
+		
+		return "/main/error";
 	}
 	
 }
