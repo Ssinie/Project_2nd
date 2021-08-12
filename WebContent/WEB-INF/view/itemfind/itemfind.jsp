@@ -22,6 +22,6 @@
 	<option value="${subtag}">${subtag}</option>
 </c:forEach>
 </select>
-<input type="text" name="count" />
+<input type="number" name="count" min="75" />
 <input type="submit" value="입력" />
 </form>
