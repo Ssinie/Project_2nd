@@ -29,7 +29,7 @@
     <li><a href="/Project_2nd/master/item.do">Item</a>
     </li>
     
-    <li><a href="">공지사항</a>
+    <li><a href="/Project_2nd/notice/board.do">공지사항</a>
     </li>
 </ul>
 <body>

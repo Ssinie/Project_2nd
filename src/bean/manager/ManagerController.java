@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -26,9 +27,9 @@ public class ManagerController {
    private ManagerService managerService;
    
    @RequestMapping("hello.ns")
-   public String test(HttpServletRequest request, HttpServletResponse response) {
+   public String hello(HttpServletRequest request, HttpServletResponse response) {
 	   managerService.sessionChk(request, response);
-	   return"/manager/test";
+	   return"/manager/managerMain";
    }
    
    
@@ -150,6 +151,7 @@ public class ManagerController {
 	   session.invalidate();
 	   return "/manager/managerLogin";
    }
+   
    
    
 

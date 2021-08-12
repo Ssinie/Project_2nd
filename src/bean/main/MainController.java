@@ -265,81 +265,8 @@ public class MainController {
 		return "/product/loading";
 	}
 	
-//	/*
-//	 * 기존 마이페이지
-//	 * - 검색 mykeyword 또는 태그 category 받아서 처리
-//	 */
-//	@RequestMapping("mypage2.ns")
-//	public String myPage(
-//			@RequestParam(value="mykeyword", required=false, defaultValue="null") String mykeyword, 
-//			@RequestParam(value="category", required=false, defaultValue="null") String category, 
-//			@RequestParam(value="pageNum", required=false, defaultValue="null") String pageNum, 
-//			ProductListDTO dto, Model model, HttpSession session, HttpServletRequest request) throws Exception {
-//		
-//		String preUrl = request.getRequestURL().toString();
-//		session.setAttribute("preUrl", preUrl);
-//		
-//		String id = (String)session.getAttribute("sessionId");
-//		dto.setId(id);
-//		
-//		List categoryList = mainDAO.getCategory();
-//		model.addAttribute("categoryList", categoryList);
-//		
-//		if(id != null) {
-//			
-//			int pageSize = 6;
-//			if(pageNum.equals("null")) {
-//				pageNum = "1";
-//			}
-//			
-//			int currentPage = Integer.parseInt(pageNum);
-//			int startRow = (currentPage - 1) * pageSize + 1;
-//			int endRow = currentPage * pageSize;
-//			
-//			dto.setStartRow(startRow);
-//			dto.setEndRow(endRow);
-//			
-//			if(mykeyword.equals("null") && category.equals("null")) {
-//				int mypagePdCount = mainDAO.wishPdCount(id);
-//				model.addAttribute("mypagePdCount", mypagePdCount);
-//				
-//				if(mypagePdCount > 0) {
-//					List mypageList = mainDAO.getWishPd(dto);
-//					model.addAttribute("mypageList", mypageList);
-//				}
-//			}
-//			if(!mykeyword.equals("null")) {
-//				dto.setKeyword(mykeyword);
-//				
-//				int mypagePdCount = mainDAO.wishSearchCount(dto);
-//				model.addAttribute("mypagePdCount", mypagePdCount);
-//				
-//				if(mypagePdCount > 0) {
-//					List mypageList = mainDAO.getWishSearch(dto);
-//					model.addAttribute("mypageList", mypageList);
-//				}
-//			}
-//			if(!category.equals("null")) {
-//				dto.setCategory(category);
-//				
-//				int mypagePdCount = mainDAO.wishTagPdCount(dto);
-//				model.addAttribute("mypagePdCount", mypagePdCount);
-//				
-//				if(mypagePdCount > 0) {
-//					List mypageList = mainDAO.getWishTagPd(dto);
-//					model.addAttribute("mypageList", mypageList);
-//				}
-//			}
-//			
-//			model.addAttribute("pageSize", pageSize);
-//			model.addAttribute("currentPage", currentPage);
-//		}
-//		
-//		return "/product/myPage";
-//	}
-	
 	/*
-	 * 신규 마이페이지
+	 * 마이페이지
 	 * - 검색 mykeyword 또는 태그 category 받아서 처리
 	 */
 	@RequestMapping("mypage.ns")
@@ -411,10 +338,20 @@ public class MainController {
 		return "/product/mypage2";
 	}
 	
+	/*
+	 * 에러 페이지
+	 *  
+	 */
 	@RequestMapping("error.ns")
 	public String error() throws Exception {
 		
 		return "/main/error";
+	}
+	
+	@RequestMapping("test.ns")
+	public String test() throws Exception {
+		
+		return "manager/admin";
 	}
 	
 }
