@@ -3,9 +3,8 @@
     
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
+<div class="loader">
 <!-- 접속 주소 : http://localhost:8080/Project_2nd/question/form.do -->
-
 <script type = "text/javascript">
 	//보이기
 	function c02_show() {document.getElementById("c02").style.display = "block";}
@@ -235,7 +234,7 @@
 		<c:if test = "${question != null}">
 			<input type = "checkbox" name = "contents" value = "7-1">${question.contents01}<br/>
 			<input type = "checkbox" name = "contents" value = "7-2">${question.contents02}<br/>
-			<input type = "checkbox" name = "contents" value = "7-3">${question.contents03}<r/>
+			<input type = "checkbox" name = "contents" value = "7-3">${question.contents03}<br/>
 			<input type = "checkbox" name = "contents" value = "5-1">${question.contents04}<br/>
 		</c:if>
 	</c:forEach>
@@ -300,3 +299,4 @@
 	<input type = "hidden" name = "gender" value = "${param.gender}">
 	<input type = "submit" value = "결과">
 </form>
+</div>

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -166,32 +167,29 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(Model model) throws Exception{
-    	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
-    	String [] pValue = {"1-4", "1-8","1-4-4","1-8-1", "2-2", "5-1", "3-1", "4-2", "5-1", "6-1", "6-5", "7-2"};
+    public String qResult(Model model, ServletRequest request) throws Exception{
+    	// form 페이지에서 체크 value 값을 pValue에 넣는다.
+    	String [] pValue = request.getParameterValues("contents");
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
     	List conResult = null;
     	ItemTypeValueDTO resultDto;
     	ItemTypeDTO typeDto;
     	ItemNameDTO nameDto;
-    	// String PRDLST_REPORT_NO = qResultBestItem(pValue);
-    	String PRDLST_REPORT_NO = "20120019007415";
+    	String rl2 = new String();
+		String PRDLST_REPORT_NO = qResultBestItem(pValue);
     	if(PRDLST_REPORT_NO != null) {
     		resultDto = new ItemTypeValueDTO();
     		typeDto = new ItemTypeDTO();
     		resultDto = service.resultItemSearch(PRDLST_REPORT_NO);
-    		findindexs = qResultSelectItem(findindexs, resultDto);
+    		findindexs = qResultSelectItem(findindexs, resultDto, rl2);
     		List nmList = new ArrayList();
     		List result = new ArrayList();
     		conResult = new ArrayList();
     		
     		for(int i = 0; i < findindexs.size(); i++) {
     			PRDLST_REPORT_NO = (String)findindexs.get(i);
-    			// resultDto = 'PRDLST_REPORT_NO'를 이용하여 'Item_Type' 테이블에서 ItemTypeDTO 형태로 담기.
     			ItemTypeDTO itDto = service.sProduct(PRDLST_REPORT_NO);
-    			// select * from ITEM_TYPE where PRDLST_REPORT_NO = #{}
-    			// 서비스 메서드에 지역변수로 resultDto.getBSSH_NM();
     			int nm2 = service.sNameCount(itDto.getPRDLST_NM()) ;
     			System.out.println(i+"번의 "+nm2+" "+itDto.getPRDLST_NM());
     			nameDto = new ItemNameDTO();
@@ -204,7 +202,7 @@ public class qBean {
     					nameDto = (ItemNameDTO)nmList.get(j);
     					result.add(nameDto);
     				}
-    			}	
+    			}
 			}
     		for(int i=0; i < result.size(); i++) {
     			nameDto = new ItemNameDTO();
@@ -218,14 +216,14 @@ public class qBean {
         			String secondName = nameDto2.getName().substring(0, 2);
         			if(!firstName.equals(secondName)) {
         				--d;
-        			}
-        			if(d == 0) {
+        			} if(d == 0) {
         				conResult.add(nameDto);
         				++d;
         			}
-        			
     			}
     		}
+
+    		// conResult에서 정제된 수량 nameDto에다가 넣기.
     		System.out.println("정제된 수량 : "+conResult.size());
     		for(int i=0; i < conResult.size();i++) {
     			nameDto = new ItemNameDTO();
@@ -238,101 +236,101 @@ public class qBean {
     	return "/question/qResult";
     }
     
-    public List qResultSelectItem(List findindexs, ItemTypeValueDTO resultDto) throws Exception{
+    public List qResultSelectItem(List findindexs, ItemTypeValueDTO resultDto, String rl2) throws Exception{
     
 		int count;
 		List findindex = new ArrayList();
-		String result;
+		String[] pValue = null;
 		
 		count = service.count(resultDto);
-		if(count == 1) {result = service.countOne(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 1) {findindex = service.countList(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count02(resultDto);
-		if(count == 1) {result = service.countOne02(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne02(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 2) {findindex = service.countList02(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count03(resultDto);
 		if(count == 1) {
-			result = service.countOne03(resultDto);
-			findindexs.add(result);
+			rl2 = service.countOne03(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 3) {findindex = service.countList03(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count04(resultDto);
-		if(count == 1) {result = service.countOne04(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne04(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 4) {findindex = service.countList04(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count05(resultDto);
-		if(count == 1) {result = service.countOne05(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne05(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 5) {findindex = service.countList05(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count06(resultDto);
-		if(count == 1) {result = service.countOne06(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne06(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 6) {findindex = service.countList06(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count07(resultDto);
-		if(count == 1) {result = service.countOne07(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne07(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 7) {findindex = service.countList07(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count08(resultDto);
-		if(count == 1) {result = service.countOne08(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne08(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 8) {findindex = service.countList08(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count09(resultDto);
-		if(count == 1) {result = service.countOne09(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne09(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 9) {findindex = service.countList09(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		count = service.count10(resultDto);
-		if(count == 1) {result = service.countOne10(resultDto);
-			findindexs.add(result);
+		if(count == 1) {rl2 = service.countOne10(resultDto);
+			findindexs.add(rl2);
 		}else if(count > 10) {findindex = service.countList10(resultDto);
 			for(int i = 0 ; i < findindex.size() ; i++) {
-				result = (String) findindex.get(i);
-				findindexs.add(result);
+				rl2 = (String) findindex.get(i);
+				findindexs.add(rl2);
 			}
 		}
 		// contains 해서 findindexs의 중복되지 않은 값 처리
@@ -342,75 +340,79 @@ public class qBean {
     }
     
     // String 배열을 전달하면 최적합 제품의 No를 리턴함
-    public String qResultBestItem(String[] pValue) throws Exception{
+    // Rserve 이용한 knn 분류분석 코드.
+    public String qResultBestItem(String [] pValue) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 vList로 넣는다.
     	vDTO dto = new vDTO();
     	ItemKeyValueDTO ikvDto = new ItemKeyValueDTO();
     	ItemTypeDTO itDto = new ItemTypeDTO();
-    	String rl2 = null;
+    	String rl2 = new String();
     	List<vDTO> vList =  new ArrayList<vDTO>() ;
+    	// ServletRequest request = null ;
+		// String [] pValue = request.getParameterValues("contents");
     	for(String v : pValue) {
-    		vDTO dto02 = session.selectOne("question.qValue", v) ;
-    		vList.add(dto02) ;
+			System.out.println("----------" + "질문 답변 : " + v + "----------");
+    		vDTO dto02 = session.selectOne("question.qValue", v);
+    		vList.add(dto02);
     	}
     	System.out.println("1번");
     	// vList의 크기 만큼, key의 유무를 따져 중복이면 그 값만큼 더하고 집어 넣는다.
     	// 중복이 아니면 null값 체크 후 넣는다.
     	// TreeMap 으로 영양소 알파벳 순서대로 집어 넣는다.
     	
-    	TreeMap<String, Integer> vMap = new TreeMap<String, Integer>() ;
+    	TreeMap<String, Integer> vMap = new TreeMap<String, Integer>();
     	// 영양소 기본값 셋팅.
-    	vMap.put("vitaminA", 0) ;
-        vMap.put("vitaminB", 0) ;
-        vMap.put("vitaminC", 0) ;
-        vMap.put("vitaminD", 0) ;
-        vMap.put("vitaminE", 0) ;
-        vMap.put("vitaminK", 0) ;
-        vMap.put("omega3", 0) ;
-        vMap.put("lutein", 0) ;
-        vMap.put("probiotic", 0) ;
-        vMap.put("calcium", 0) ;
-        vMap.put("collagen", 0) ;
-        vMap.put("redginseng", 0) ;
-        vMap.put("magnesium", 0) ;
-        vMap.put("mineral", 0) ;
-        vMap.put("zinc", 0) ;
-        vMap.put("biotin", 0) ;
-        vMap.put("milkthistle", 0) ;
-        vMap.put("iron", 0) ;
-        vMap.put("propolis", 0) ;
-        vMap.put("amino", 0) ;
-        vMap.put("dietryfiber", 0) ;
-        vMap.put("gammalinolenic", 0) ;
+    	vMap.put("vitaminA", 0);
+        vMap.put("vitaminB", 0);
+        vMap.put("vitaminC", 0);
+        vMap.put("vitaminD", 0);
+        vMap.put("vitaminE", 0);
+        vMap.put("vitaminK", 0);
+        vMap.put("omega3", 0);
+        vMap.put("lutein", 0);
+        vMap.put("probiotic", 0);
+        vMap.put("calcium", 0);
+        vMap.put("collagen", 0);
+        vMap.put("redginseng", 0);
+        vMap.put("magnesium", 0);
+        vMap.put("mineral", 0);
+        vMap.put("zinc", 0);
+        vMap.put("biotin", 0);
+        vMap.put("milkthistle", 0);
+        vMap.put("iron", 0);
+        vMap.put("propolis", 0);
+        vMap.put("amino", 0);
+        vMap.put("dietryfiber", 0);
+        vMap.put("gammalinolenic", 0);
         System.out.println("2번");
     	for(int i = 0 ; i < vList.size(); i++) {
-    		dto = vList.get(i) ;
+    		dto = vList.get(i);
     		if(dto.getNutri01() != null) {
-    			int value = 0 ;
+    			int value = 0;
     			if(vMap.get(dto.getNutri01()) != null) {
-		    		value = vMap.get(dto.getNutri01()) ;
+		    		value = vMap.get(dto.getNutri01());
     			}
-    		value = value + dto.getVal01() ;
-		    vMap.put(dto.getNutri01(), value) ;
+    		value = value + dto.getVal01();
+		    vMap.put(dto.getNutri01(), value);
     		}
     	}
     	
     	for(int i = 0 ; i < vList.size(); i++) {
-    		dto = vList.get(i) ;
+    		dto = vList.get(i);
     		if(dto.getNutri02() != null) {
-    			int value02 = 0 ;
+    			int value02 = 0;
     			if(vMap.get(dto.getNutri02()) != null) {
-		    		value02 = vMap.get(dto.getNutri02()) ;
+		    		value02 = vMap.get(dto.getNutri02());
     			}
-	        value02 = value02 + dto.getVal02() ;
-	        vMap.put(dto.getNutri02(), value02) ;
+	        value02 = value02 + dto.getVal02();
+	        vMap.put(dto.getNutri02(), value02);
     		}
     	}
     	System.out.println("3번");
-    	Object obj[] = vMap.keySet().toArray() ;
-        Object val[] = vMap.values().toArray() ;
-        String [] nutriList = new String[obj.length] ;
-        String [] valueList = new String[val.length] ;
+    	Object obj[] = vMap.keySet().toArray();
+        Object val[] = vMap.values().toArray();
+        String [] nutriList = new String[obj.length];
+        String [] valueList = new String[val.length];
         for(int i = 0 ; i < obj.length ; i ++) {
            nutriList[i] = (String)obj[i];
            valueList[i] = val[i] + "";
@@ -418,21 +420,21 @@ public class qBean {
         System.out.println("4번");
         // ItemType 클래스의 ReturnValueList 메소드 호출.
         //List 타입으로 호출됨.
-        ItemType it = new ItemType() ;
+        ItemType it = new ItemType();
         List resultList = it.ReturnValueList(sessions);
     	
         // List를 배열로 담기.
         // ikvList -> 한 줄의 정보배열(기차)
         // ikvList02 -> 줄의 모음(정류장)
-        String [] ikvList = new String[resultList.size()] ;
-        String [][] ikvList02 = new String[resultList.size()][23] ;
+        String [] ikvList = new String[resultList.size()];
+        String [][] ikvList02 = new String[resultList.size()][23];
         for(int i = 0 ; i < resultList.size() ; i++) {
         	ikvDto = (ItemKeyValueDTO) resultList.get(i) ;
         	ikvList = new String[] {ikvDto.getPRDLST_REPORT_NO() + "", ikvDto.getAmino() + "", ikvDto.getBiotin() + "", ikvDto.getCalcium() + "", ikvDto.getCollagen() + "", ikvDto.getDietryfiber() + "", ikvDto.getGammalinolenic() + "",
 					        	ikvDto.getIron() + "", ikvDto.getLutein() + "", ikvDto.getMagnesium() + "", ikvDto.getMilkthistle() + "", ikvDto.getMineral() + "", ikvDto.getOmega3() + "", ikvDto.getProbiotics() + "", ikvDto.getPropolis() + "",
 					        	ikvDto.getRedGinseng() + "", ikvDto.getVitaA() + "", ikvDto.getVitaB() + "", ikvDto.getVitaC() + "", ikvDto.getVitaD() + "", ikvDto.getVitaE() + "", ikvDto.getVitaK() + "", ikvDto.getZinc() + ""
-					        	} ;
-        	ikvList02[i] = ikvList ;
+					        	};
+        	ikvList02[i] = ikvList;
         }
         System.out.println("5번");
         /*
@@ -442,13 +444,13 @@ public class qBean {
         */
         
     	// R 연결 및 data.frame화.
-    	RConnection conn ;
+    	RConnection conn;
     	try {
-			conn = new RConnection() ;
-			REXP x = conn.eval("R.version.string") ;
+			conn = new RConnection();
+			REXP x = conn.eval("R.version.string");
 	    	// System.out.println("R version : " + x.asString()) ;
 			
-			String [][] ikvList03 = ikvList02 ;
+			String [][] ikvList03 = ikvList02;
 			// 크롤링 데이터를 데이터 프레임화.
 			conn.eval("ikvList <- data.frame(amino = '"+ikvList03[0][1]+"', biotin = '"+ikvList03[0][2]+"', calcium = '"+ikvList03[0][3]+"', collagen = '"+ikvList03[0][4]+"', dietryfiber = '"+ikvList03[0][5]+"', gammalinolenic = '"+ikvList03[0][6]+"', "
 	    			+ "iron = '"+ikvList03[0][7]+"', lutein = '"+ikvList03[0][8]+"', magnesium = '"+ikvList03[0][9]+"', milkthistle = '"+ikvList03[0][10]+"', mineral = '"+ikvList03[0][11]+"', omega3 = '"+ikvList03[0][12]+"', "
@@ -499,7 +501,7 @@ public class qBean {
 	    	
 	    	System.out.println("10번");
 	    	
-	    	rl2 = conn.eval("result").asString() ;
+	    	rl2 = conn.eval("result").asString();
 	    	System.out.println(rl2);
 
     	} catch (Exception e) {
@@ -507,15 +509,24 @@ public class qBean {
 		}
     	return rl2;
     }
+    /*
+    @RequestMapping("qResult.do")
+	public String rLoading(Model model, ServletRequest request) throws Exception {
+		
+    	String [] pValue = request.getParameterValues("contents");
+		model.addAttribute("pValue", pValue);
+		
+		return "/question/rLoading";
+	}
     
     @RequestMapping("aResult.do")
     public String aResult(pDTO dto, Model model) throws Exception {
-    	pInsert(dto, model, null) ;
-    	model.addAttribute("aResult", service.aResult(dto)) ;
-    	return "/question/qResult" ;
+    	pInsert(dto, model, null);
+    	model.addAttribute("aResult", service.aResult(dto));
+    	return "/question/qResult";
     }
-    
-  //인선- 설문지 내용 리스트
+    */
+    //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
     public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {
     	ManagerServiceImpl ma = new ManagerServiceImpl();
