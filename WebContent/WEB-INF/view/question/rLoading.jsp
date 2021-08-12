@@ -6,12 +6,17 @@
 	<head>
 		<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 		
+		<script language="JavaScript">
+        	setTimeout("location.href='qResult.do'",1000);
+      	</script>
+		
+		<!-- 
 		<script type="text/javascript">
-			var pValue = '${pValue}';
-			setTimeout("location.href='${pValue}'", 93000);
-			//location.href="${pValue}";
+			var url='qResult.do?contents=${contents}'
+			setTimeout("location.href='${url}'", 5000);
 		</script>
-	
+		 -->
+		 
 		<style>
 			img {
 			  margin: 0 auto;

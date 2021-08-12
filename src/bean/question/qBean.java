@@ -167,9 +167,9 @@ public class qBean {
     
     // 설문조사 값 R 로 전송.
     @RequestMapping("qResult.do")
-    public String qResult(Model model, ServletRequest request) throws Exception{
+    public String qResult(Model model, ServletRequest request, HttpSession session) throws Exception{
     	// form 페이지에서 체크 value 값을 pValue에 넣는다.
-    	String [] pValue = request.getParameterValues("contents");
+    	String [] pValue = (String [])session.getAttribute("contents");
     	List findindexs = new ArrayList();
     	List findindex = new ArrayList();
     	List conResult = null;
@@ -232,6 +232,7 @@ public class qBean {
     		}
     		
     	}
+    	session.removeAttribute("contents");
     	model.addAttribute("nameDto",conResult);
     	return "/question/qResult";
     }
@@ -509,16 +510,16 @@ public class qBean {
 		}
     	return rl2;
     }
-    /*
-    @RequestMapping("qResult.do")
-	public String rLoading(Model model, ServletRequest request) throws Exception {
+ 
+    @RequestMapping("rLoading.do")
+	public String rLoading(Model model, ServletRequest request, HttpSession session) throws Exception {
 		
     	String [] pValue = request.getParameterValues("contents");
-		model.addAttribute("pValue", pValue);
+    	session.setAttribute("contents", pValue);
 		
 		return "/question/rLoading";
 	}
-    
+    /*
     @RequestMapping("aResult.do")
     public String aResult(pDTO dto, Model model) throws Exception {
     	pInsert(dto, model, null);
