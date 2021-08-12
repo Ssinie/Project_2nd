@@ -6,4 +6,5 @@ public interface ItemFindServiceInter {
 
 	public List selectSubtag();
 	
+	public int selectCatId(String subtag);
 }

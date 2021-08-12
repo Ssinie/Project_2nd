@@ -8,5 +8,5 @@ public interface ItemFindControllerInter {
 		public String itemFind(Model model);
 		
 	// 관리페이지 중 itemfind 페이지의 처리를 진행 할 메서드
-	public String itemFindPro();
+	public String itemFindPro(Model model, String subtag, int count);
 }

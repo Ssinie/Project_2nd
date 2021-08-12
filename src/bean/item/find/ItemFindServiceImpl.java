@@ -12,8 +12,12 @@ public class ItemFindServiceImpl implements ItemFindServiceInter{
 	
 	@Override
 	public List selectSubtag() {
-		List list = mybatis.selectList("");
-		return list;
+		return mybatis.selectList("item_name.findCategory");
+	}
+
+	@Override
+	public int selectCatId(String subtag) {
+		return mybatis.selectOne("item_name.findCatId",subtag);
 	}
 
 }

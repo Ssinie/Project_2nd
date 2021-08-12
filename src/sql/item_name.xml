@@ -6,4 +6,13 @@
 	<select id="setItem_name" parameterType="ItemNameDTO">
 		insert into item_name(num, name, url, maintag, subtag, imgurl) values(item_name_seq.nextval, #{name}, #{url}, #{maintag}, #{subtag}, #{imgurl})
 	</select>
+	<select id="ItemOverlapCheck" resultType="int" parameterType="String">
+		select count(*) from item_name where name=#{name}
+	</select>
+	<select id="findCategory" resultType="String">
+		select subtag from item_subtag
+	</select>
+	<select id="findCatId" resultType="int" parameterType="String">
+		select catId from item_subtag where subtag=#{subtag}
+	</select>
 </mapper>

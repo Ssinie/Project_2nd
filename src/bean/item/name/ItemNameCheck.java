@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/item")
 public class ItemNameCheck {
 	
-	@Autowired
-	private SqlSessionTemplate dao = null;
+	
 	
 	// path1과 2 사이엔 상품탭 id값을 연결
 	// path2와 3 사이엔 페이지 번호 연결
@@ -27,22 +26,21 @@ public class ItemNameCheck {
 	public static String urlpath3 = "&pagingSize=80&productSet=total&query&sort=rel&timestamp=&viewType=thumb";
 	public static RConnection conn= null;
 	
-	@RequestMapping("/selenium.do")
-	public String itemInsert(Model model) {
+	public int itemInsert(SqlSessionTemplate dao, int catId, int count) {
+		int resultCount = 0;
 		ItemNameCheck check = new ItemNameCheck();
 		ItemNameDTO dto = null;
-		int [] catIds = check.marketnum();
-		List indexed = new ArrayList();
+		count = Math.round(count / 75);
+		System.out.println(count);
 		try {
 			conn = new RConnection();
 			conSelenium(conn);
-			for(int v : catIds) {
-				HashMap markettag = check.marktetag(v);
+				HashMap markettag = check.marktetag(catId);
 				String maintag = (String)markettag.get("maintag");
 				String subtag = (String)markettag.get("subtag");
-				String catId = (50000000 + v) + "";
-				int pageNum = pageNumCheck(catId, conn);
-				RList list = check.seleniumCrollingList(conn, catId, 4);
+				String catIdz = (50000000 + catId) + "";
+				int pageNum = pageNumCheck(catIdz, conn);
+				RList list = check.seleniumCrollingList(conn, catIdz, count);
 				ArrayList nametag = new ArrayList();
 				ArrayList urltag = new ArrayList();
 				ArrayList imgtag = new ArrayList();
@@ -60,20 +58,24 @@ public class ItemNameCheck {
 						dto.setImgurl((String)imgtag.get(i));
 						dto.setMaintag(maintag);
 						dto.setSubtag(subtag);
-						indexed.add(dto);
-						dao.insert("setItem_name",dto);
+						int countCheck = 0;
+						countCheck = dao.selectOne("ItemOverlapCheck", dto.getName());
+						if(countCheck > 0) {
+							dao.insert("setItem_name",dto);
+							System.out.println(resultCount+1+"입력완료");
+							resultCount++;
+						}
+						
 					}
 					Thread.sleep(1000);
 				}
-			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		finally {
 			conn.close();
 		}
-		model.addAttribute("list", indexed);
-		return "/master/ItemNameInput";
+		return resultCount;
 	}
 	
 	/* 셀레니움 브라우저를 이용한 크롤링
