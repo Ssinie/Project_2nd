@@ -8,7 +8,16 @@
 		
 		<script language="JavaScript">
         	setTimeout("location.href='qResult.do'",1000);
-        	setTimeout("pInfo()",1000);
+        	
+      	</script>
+		
+		<!-- 
+		<script type="text/javascript">
+			var url='qResult.do?contents=${contents}'
+			setTimeout("location.href='${url}'", 5000);
+		</script>
+		
+		setTimeout("pInfo()",1000);
       		function pInfo(){
       			nick = "${nick}";
       			age = "${age}";
@@ -17,13 +26,6 @@
       			gender = "${gender}";
       			location.href = "qResult.do?nick="+nick+"&age="+age+"&weight="+weight+"&height="+height+"&gender="+gender+";
       		}
-      	</script>
-		
-		<!-- 
-		<script type="text/javascript">
-			var url='qResult.do?contents=${contents}'
-			setTimeout("location.href='${url}'", 5000);
-		</script>
 		 -->
 		 
 		<style>
@@ -38,7 +40,7 @@
 	
 	<body>
 	
-		<a href="qResult.do"><img src="https://colorlib.com/wp/wp-content/uploads/sites/2/colorlib-push-logo.png" alt="Colorlib logo"></a>
+		<img src="https://colorlib.com/wp/wp-content/uploads/sites/2/colorlib-push-logo.png" alt="Colorlib logo">
 		<h1 style="text-align:center;">결과 페이지로 이동 중입니다.</h1>
 		<p style="text-align:center;"><strong>잠시만 기다려주세요.</strong></p>
 		<p style="text-align:center;"><strong>최대 2-4분 정도 소요 될 수 있습니다.</strong></p>
