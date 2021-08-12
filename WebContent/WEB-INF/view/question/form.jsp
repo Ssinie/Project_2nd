@@ -30,11 +30,12 @@
 	function c02_7_hide() {document.getElementById("c02_7").style.display = "none";}
 	function c02_8_hide() {document.getElementById("c02_8").style.display = "none";}
 	function c09_w_hide() {document.getElementById("c09_w").style.display = "none";}
+
 </script>
 
 <h1>설문조사.</h1>
 
-<form action = "/Project_2nd/question/qResult.do" method = "post">
+<form id = "form" name = "form" action = "/Project_2nd/question/rLoading.do" method = "post">
 	
 	<c:forEach var = "question" items = "${qSelect}">
 		01. ${question.title}<br/>
