@@ -12,7 +12,7 @@
 <body>
 <script type="text/javascript">
 	alert("관리자 등록이 되었습니다.")
-	location.href="managerLogin.ns"
+	location.href="getManagerList.ns"
 </script>
 </body>
 </html>

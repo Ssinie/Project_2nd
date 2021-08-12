@@ -12,11 +12,15 @@
 <center>
 <h1>관리자 목록</h1>
 <br>
+<%-- */
 <c:if test="${mem == null }">
 	<a href="/Project_2nd/manager/hello.ns">홈</a>
-	<a href="register.ns">관리자등록</a>
+	<c:if test="${mem.id eq 'admin' }">
+		<a href="register.ns">관리자등록</a>
+	</c:if>
 	<a href="managerLogin.ns">로그인</a>
 </c:if>
+/* --%>
 <c:if test="${mem != null}">
 <c:if test="${mem.status == 99}">
 		<p>status가 99인 사람만 보임!</p>
@@ -25,7 +29,9 @@
 <c:if test="${mem != null }">
 	<p>${mem.id }님 반갑습니다.</p>
 	<input type="button" onclick='location.href="hello.ns"' value="홈"/>
+	<c:if test="${mem.id eq 'admin' }">
 	<input type="button" onclick='location.href="register.ns"' value="관리자등록"/>
+	</c:if>
 	<input type="button" onclick='location.href="managerlogout.ns"' value="로그아웃"/>
 </c:if>
 
