@@ -258,7 +258,9 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                </div>
+            </div>
+            		<div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
                         <div class="hero__text">
                             <span>NUTRIENT TEST</span>
                             <h2>알고리즘 <br />영양제 테스트</h2>
@@ -266,8 +268,6 @@ $(document).ready(function() {
                             <a href="/Project_2nd/index.ns" class="primary-btn">알아보기</a>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Hero Section End -->
@@ -309,7 +309,7 @@ $(document).ready(function() {
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
-    <section class="featured spad" style="padding:80px 0 0 0;">
+    <section class="featured spad" style="padding:50px 0 0 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

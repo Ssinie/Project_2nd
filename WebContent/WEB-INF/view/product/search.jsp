@@ -555,7 +555,7 @@ $(document).ready(function() {
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>${searchPdCount}</span> 개의 상품</h6>
+                                    <h6><span>" ${keyword} "</span> 에 대한ㅤ<span>${searchPdCount}</span> 개의 상품</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
