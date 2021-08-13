@@ -34,6 +34,7 @@
 		<a href="/Project_2nd/healthy/getBoardList.ns" target="iframe">건강정보</a>
 		<a href="/Project_2nd/master/item.do" target="iframe">제품등록</a>
 		<a href="/Project_2nd/manager/board.do" target="iframe">공지사항</a>
+		<a href="/Project_2nd/itemfind.do" target="iframe">상품정보 등록</a>
 	</div>
 	
 	<div id="iframe">
