@@ -348,10 +348,21 @@ public class MainController {
 		return "/main/error";
 	}
 	
-	@RequestMapping("test.ns")
-	public String test() throws Exception {
+	@RequestMapping("test1.ns")
+	public String test1() throws Exception {
 		
-		return "manager/admin";
+		return "question/pFormView";
 	}
 	
+	@RequestMapping("test2.ns")
+	public String test2() throws Exception {
+		
+		return "question/formView";
+	}
+
+//	@RequestMapping("test3.ns")
+//	public String test3() throws Exception {
+//		
+//		return "question/pFormView";
+//	}
 }

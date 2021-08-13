@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" type="text/css" href="../css/join.css">
+</head>
+<body>
+<div id="wrap">
+
+    <header id="header">
+        <div class="header_wrap"><p class="header_title">pongdang</p></div>
+    </header>
+
+    <main id="container">
+        <div class="content">
+
+            <div class="join_content">
+                <div class="join_email">
+                    <div class="join_title"><span>이메일 아이디</span></div>
+                    <div class="join_input_m">
+                        <input type="text" name="email" class="input_join_m" placeholder="이메일 입력" />
+                        <button type="submit" name="email_plz" class="btn_s">인증번호 받기</button>
+                    </div>
+
+                    <div class="">
+                        <input type="text" name="check" class="input_join_m" placeholder="인증번호 입력"/>
+                        <button type="submit" name="check_plz" class="btn_s">인증번호 확인</button>
+                    </div>
+                </div>
+                <div class="join_pw">
+                    <div class="join_title"><span>비밀번호</span></div>
+                    <div class="join_input">
+                        <input type="password" name="pw" class="input_join" />
+                    </div>
+                </div>
+                <div class="join_re_pw">
+                    <div class="join_title"><span>비밀번호 재확인</span></div>
+                    <div class="join_input">
+                        <input type="password" name="re_pw" class="input_join" />
+                    </div>
+                </div>
+                <div class="join_name">
+                    <div class="join_title"><span>이름</span></div>
+                    <div class="join_input">
+                        <input type="text" name="name" class="input_join" />
+                    </div>
+                </div>
+                <div class="join_birth">
+                    <div class="join_title"><span>생년월일</span></div>
+                    <div class="join_input_s">
+                        <input type="text" name="birth_y" class="select_join_s" placeholder="년" />
+                    </div>
+                    <div class="join_select">
+                        <select type="text" name="birth_m" class="select_join_s">
+                            <option value selected>월 선택</option>
+                            <option value="jan">1월</option>
+                            <option value="feb">2월</option>
+                            <option value="mar">3월</option>
+                            <option value="apr">4월</option>
+                            <option value="may">5월</option>
+                            <option value="jun">6월</option>
+                            <option value="jul">7월</option>
+                            <option value="aug">8월</option>
+                            <option value="sep">9월</option>
+                            <option value="oct">10월</option>
+                            <option value="nov">11월</option>
+                            <option value="dec">12월</option>
+                        </select>
+                    </div>
+                    <div class="join_input_s">
+                        <input type="text" name="birth_d" class="select_join_s" placeholder="일" />
+                    </div>
+                </div>
+                <div class="join_nick">
+                    <div class="join_title"><span>닉네임</span></div>
+                    <div class="join_input">
+                        <input type="text" name="birth" class="input_join" />
+                    </div>
+                </div>
+                <div class="join_gender">
+                    <div class="join_title"><span>성별</span></div>
+                    <div class="join_input">
+                        <select id="gender" name="gender" class="select_join">
+                            <option value selected>선택</option>
+                            <option value="M">남자</option>
+                            <option value="F">여자</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="join_adr">
+                    <div class="join_title"><span>주소</span></div>
+                    <div class="join_input_s">
+                        <input type="text" name="postcode" class="input_join_s" placeholder="우편번호 입력">
+                    </div>
+                    <button type="submit" name="postcode_plz" class="btn_s">우편번호 찾기</button>
+                    <div class="join_input">
+                        <input type="text" name="adr" class="input_join" placeholder="주소"><br>
+                    </div>
+                    <div class="join_input">
+                        <input type="text" name="address" class="input_join" placeholder="상세주소">
+                    </div>
+
+                    <button type="submit" name="join_btn" class="btn">가입하기</button>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="footer">
+        <div class="footer_wrap"></div>
+    </footer>
+
+</div>
+</body>
+</html>
