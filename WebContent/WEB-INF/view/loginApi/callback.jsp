@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
 	if(${preUrl == null}){
-		location.replace("main.ns");
+		location.replace("/Project_2nd/main.ns");
 	}else{
 		location.replace('${preUrl}');
 	}

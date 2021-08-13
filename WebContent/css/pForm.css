@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+} */
+
+.input{
+	border: none;
+	border-bottom: 1px solid black;
+}
+
+/* --- --- */
+
+#wrap{
+	display: flex;
+	justify-content: center;
+	
+}
+
+#content{
+	width: 1000px;
+	height: 100%;
+	border: 1px solid black;
+}
+
+.title{
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+/* --- form begin --- */
+
+#form {
+	display: flex;
+	justify-content: center;
+	
+}
+
+.display{
+	display: inline-block;
+}
+
+#left{
+	margin: 30px;
+	width: 200px;
+	text-align: left;
+}
+
+.subtitle{
+	margin-bottom: 50px;
+}
+
+.txt{
+	margin: 15px 0;
+}
+
+.insert{
+	margin: 15px 0;
+}
+
+/* .next{
+	margin: 30px;
+	display: flex;
+	justify-content: center;
+} */
+
+.btn{
+	border: none;
+	background-color: #7FAD39;
+	width: 200px;
+	height: 50px;
+	margin: 15px 0;
+}

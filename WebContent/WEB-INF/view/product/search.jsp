@@ -6,6 +6,7 @@
 <html lang="zxx">
 
 <head>
+
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
@@ -14,6 +15,7 @@ $(document).ready(function() {
 	var id = '${sessionId}';
 	$wish = $('[data-wish]');
 	$shop = $('[data-shop]');
+	$my = $('[data-my]');
 	
 	$wish.on('click', function() {
 		var num = $(this).data("wish");
@@ -26,19 +28,27 @@ $(document).ready(function() {
 				data: { num: $(this).data("wish") },
 				success: function(result){
 					if(result == "0"){
-						alert("관심상품에서 삭제되었습니다.");
+						alert("관심상품 삭제 완료");
 					}
 					if(result == "1"){
-						alert("관심상품으로 등록되었습니다.");
+						alert("관심상품 등록 완료");
 					}
 				}
 			})
-		} 
+		}
 	});
 
 	$shop.on('click', function() {
 		var num = $(this).data("shop");
 		window.open("loading.ns?num="+num);
+	});
+	
+	$my.on('click', function() {
+		if(id == "") {
+			alert("로그인이 필요합니다.");
+		}else{
+			location.replace("/Project_2nd/mypage.ns");
+		}
 	});
 	
 });
@@ -88,7 +98,7 @@ $(document).ready(function() {
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <!-- <img src="img/language.png" alt=""> -->
-                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                <div><a data-my="" style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
                 <!-- <span class="arrow_carrot-down"></span>
                 <ul>
                     <li><a href="mypage.ns">내 관심상품</a></li>
@@ -153,7 +163,7 @@ $(document).ready(function() {
                             </div> -->
                             <div class="header__top__right__language">
                                 <!-- <img src="img/language.png" alt=""> -->
-                                <div><a href="/Project_2nd/mypage.ns"style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
+                                <div><a data-my="" style="color:#1C1C1C; cursor:pointer;">마이페이지</a></div>
                                 <!-- <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a data->내 관심상품</a></li>
