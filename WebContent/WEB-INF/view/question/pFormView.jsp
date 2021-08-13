@@ -19,7 +19,7 @@
 		
 		
 		<div id="form">
-			<form action = "/Project_2nd/question/pInsert.do" method = "post">
+			<form action = "/Project_2nd/test2.ns" method = "post">
 			<div id="left" class="display">
 				<div class="subtitle"><h3>다음 정보를 기입해주세요.</h3></div>
 				<div class="txt"><span>닉네임</span></div>

@@ -263,11 +263,12 @@ $(document).ready(function() {
     <!-- Hero Section End -->
     
     <!-- Blog Section Begin -->
-    <section class="from-blog spad">
+    <section class="from-blog spad" style="padding-top:20px; margin-bottom:50px;">
         <div class="container">
+        	<div class="section-title">
+            	<h2>공지사항</h2>
+            </div>
             
-            <h1>내용</h1>
-            <!-- 														여기에 넣으시면 됩니다 -->
             <table class="table table-striped">
 			<theader>
 			<tr>
