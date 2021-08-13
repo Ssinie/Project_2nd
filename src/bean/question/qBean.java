@@ -511,7 +511,7 @@ public class qBean {
 	    	conn.eval("data02 <- ikvList[ ,23]") ;
 	    	// 조지기. (머신러닝)
 	    	System.out.println("9번");
-	    	conn.eval("result <- knn(data01, ml, data02, k = 1, prob = TRUE)");
+	    	conn.eval("result <- knn(data01, ml, data02, k = 3, prob = TRUE)");
 	    	
 	    	System.out.println("10번");
 	    	

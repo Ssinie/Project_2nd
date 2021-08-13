@@ -17,7 +17,9 @@
 		${nick} 님에게 추천 드리는 영양제는...<br/>
 		<br/>
 		<c:forEach var = "dto" items = "${nameDto}" begin = "0" end = "9" step = "1">
-			<img src = "${dto.imgurl}"/><br/>
+			<a href = "${dto.url}">
+				<img src = "${dto.imgurl}"/><br/>
+			</a><br/>
 			${dto.name}<br/>
 		</c:forEach>
 		<br/>
