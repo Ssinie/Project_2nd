@@ -7,8 +7,15 @@
 		<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 		
 		<script language="JavaScript">
-        	setTimeout("location.href='qResult.do'",1000);
-        	
+        	setTimeout("pInfo()",1000);
+      		function pInfo(){
+      			nick = "${nick}";
+      			age = "${age}";
+      			weight = "${weight}";
+      			height = "${height}";
+      			gender = "${gender}";
+      			location.href = "qResult.do?nick=${nick}&age=${age}&weight=${weight}&height=${height}&gender=${gender}";
+      		}
       	</script>
 		
 		<!-- 
@@ -16,7 +23,7 @@
 			var url='qResult.do?contents=${contents}'
 			setTimeout("location.href='${url}'", 5000);
 		</script>
-		
+		setTimeout("location.href='qResult.do'",1000);
 		setTimeout("pInfo()",1000);
       		function pInfo(){
       			nick = "${nick}";

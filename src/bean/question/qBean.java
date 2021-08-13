@@ -234,6 +234,19 @@ public class qBean {
     	}
     	session.removeAttribute("contents");
     	model.addAttribute("nameDto",conResult);
+    	
+    	String pNick = request.getParameter("nick") ;
+        String pAge = request.getParameter("age") ;
+        String pWeight = request.getParameter("weight") ;
+        String pHeight = request.getParameter("height") ;
+        String pGender = request.getParameter("gender") ;
+        model.addAttribute("nick", pNick) ;
+        model.addAttribute("age", pAge) ;
+        model.addAttribute("weight", pWeight) ;
+        model.addAttribute("height", pHeight) ;
+        model.addAttribute("gender", pGender) ;
+        System.out.println(pGender);
+    	
     	return "/question/qResult";
     }
     
@@ -517,16 +530,21 @@ public class qBean {
     	String [] pValue = request.getParameterValues("contents");
     	session.setAttribute("contents", pValue);
 		
+    	String pNick = request.getParameter("nick") ;
+        String pAge = request.getParameter("age") ;
+        String pWeight = request.getParameter("weight") ;
+        String pHeight = request.getParameter("height") ;
+        String pGender = request.getParameter("gender") ;
+        model.addAttribute("nick", pNick) ;
+        model.addAttribute("age", pAge) ;
+        model.addAttribute("weight", pWeight) ;
+        model.addAttribute("height", pHeight) ;
+        model.addAttribute("gender", pGender) ;
+        System.out.println(pWeight);
+    	
 		return "/question/rLoading";
 	}
-    /*
-    @RequestMapping("aResult.do")
-    public String aResult(pDTO dto, Model model) throws Exception {
-    	pInsert(dto, model, null);
-    	model.addAttribute("aResult", service.aResult(dto));
-    	return "/question/qResult";
-    }
-    */
+
     //인선- 설문지 내용 리스트
     @RequestMapping("getBoardList.do")
     public String getBoardList(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest request, HttpServletResponse response) {

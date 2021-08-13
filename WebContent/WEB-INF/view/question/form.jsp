@@ -35,7 +35,7 @@
 
 <h1>설문조사.</h1>
 
-<form id = "form" name = "form" action = "/Project_2nd/question/rLoading.do" method = "post">
+<form action = "/Project_2nd/question/rLoading.do" method = "post">
 	
 	<c:forEach var = "question" items = "${qSelect}">
 		01. ${question.title}<br/>
