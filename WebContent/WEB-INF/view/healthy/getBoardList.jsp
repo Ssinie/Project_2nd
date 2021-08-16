@@ -294,7 +294,9 @@ $(document).ready(function() {
 					<tr>
 					   <td align="center">${board.num }</td>
 					   <c:if test="${board.writer eq 'naver' }"> 
-					      <td align="left"><a href="${board.content }">${board.title }</a></td>
+					   
+					      <td align="left"><a href="${board.content }" onclick="window.open(this.href, '_blank'); return false;">
+					      ${board.title }</a></td>
 					   </c:if>
 					   <c:if test="${board.writer ne 'naver' }">
 					      <td align="left"><a href="/Project_2nd/healthy/getBoard.ns?num=${board.num }">${board.title }</a></td>
