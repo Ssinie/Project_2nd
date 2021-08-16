@@ -44,6 +44,11 @@ public class BoardServiceImpl implements BoardService	{
 	}
 
 
+	public List<HealthyDTO> healthyBoardList(HealthyDTO dto) {
+		return healthyDAOMybatis.getBoardList(dto);
+	}
+
+
 	
 	
 

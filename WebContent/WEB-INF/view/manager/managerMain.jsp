@@ -31,7 +31,7 @@
 		<a href="/Project_2nd/manager/getManagerList.ns" target="iframe">관리자계정</a>
 		<a href="/Project_2nd/question/getBoardList.do" target="iframe">테스트질문</a>
 		<a href="/Project_2nd/question/getValueList.do" target="iframe">테스트값</a>
-		<a href="/Project_2nd/healthy/getBoardList.ns" target="iframe">건강정보</a>
+		<a href="/Project_2nd/healthy/healthyBoardList.ns" target="iframe">건강정보</a>
 		<a href="/Project_2nd/master/item.do" target="iframe">제품등록</a>
 		<a href="/Project_2nd/manager/board.do" target="iframe">공지사항</a>
 		<a href="/Project_2nd/itemfind.do" target="iframe">상품정보 등록</a>

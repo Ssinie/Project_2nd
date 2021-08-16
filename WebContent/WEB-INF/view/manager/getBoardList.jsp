@@ -21,11 +21,11 @@
 	<a href="managerLogin.ns">로그인</a>
 </c:if>
 /* --%>
-<c:if test="${mem != null}">
+<%-- <c:if test="${mem != null}">
 <c:if test="${mem.status == 99}">
 		<p>status가 99인 사람만 보임!</p>
 </c:if>
-</c:if>
+</c:if> --%>
 <c:if test="${mem != null }">
 	<p>${mem.id }님 반갑습니다.</p>
 	<input type="button" onclick='location.href="hello.ns"' value="홈"/>

@@ -17,5 +17,7 @@ public interface BoardService {
 	int count();
 	
 	List<HealthyDTO> listPage(Criteria cri);
+	
+	List<HealthyDTO> healthyBoardList(HealthyDTO dto);
 
 }

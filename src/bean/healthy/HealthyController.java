@@ -38,7 +38,7 @@ public class HealthyController {
 		boardService.insertBoard(dto);
 		System.out.println("입력"+ dto);
 		//return "/healthy/getBoardList";
-		return "redirect:/healthy/getBoardList.ns"; 
+		return "redirect:/healthy/healthyBoardList.ns"; 
 	}
 	
 	
@@ -52,14 +52,14 @@ public class HealthyController {
 	public String updateBoard(@ModelAttribute("board") HealthyDTO dto) {
 		boardService.updateBoard(dto);
 		//return "getBoardList.ns";
-		return "redirect:/healthy/getBoardList.ns";
+		return "redirect:/healthy/healthyBoardList.ns";
 	}
 	
 	@RequestMapping("deleteBoard.ns")
 	public String deleteBoard(HealthyDTO dto) {
 		boardService.deleteBoard(dto);
 		System.out.println("삭제버튼 눌름" + dto);
-		return "redirect:/healthy/getBoardList.ns";
+		return "redirect:/healthy/healthyBoardList.ns";
 	}
 	
 	@RequestMapping("getBoard.ns")
@@ -96,6 +96,17 @@ public class HealthyController {
 		return "/healthy/getBoardList";
 	}
 	
+	@RequestMapping("healthyBoardList.ns")
+	public String healthyBoardList(@ModelAttribute("cri") Criteria cri, Model model) {
+		List<HealthyDTO> list = boardService.listPage(cri);
+		model.addAttribute("boardList", list);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.count());
+		model.addAttribute("pageMaker", pageMaker);
+		return "/healthy/healthyBoardList";
+	}
 	
 	
 	

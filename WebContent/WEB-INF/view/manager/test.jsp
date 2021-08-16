@@ -23,7 +23,7 @@
         </ul>
     </li>
     
-    <li><a href="/Project_2nd/healthy/getBoardList.ns">건강정보</a>
+    <li><a href="/Project_2nd/healthy/healthyBoardList.ns">건강정보</a>
     </li>
     
     <li><a href="/Project_2nd/master/item.do">Item</a>
