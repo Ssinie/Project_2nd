@@ -51,7 +51,9 @@ $(function(){
 		<td align="center" colspan="3" class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="2"><input id="submit" type="submit" disabled="disabled" value="비밀번호 수정"/></td>
+		<td align="center" colspan="2">
+		<input id="submit" type="submit" disabled="disabled" value="비밀번호 수정"/>
+		<button type="button" onclick="history.go(-1)">취소</button></td>
 	</tr>
 	</table>
 	</c:if>

@@ -65,7 +65,9 @@
 <c:if test="${mem.id == manager.id }">
 <form action="exManager.ns" method="post">
 	<input name="id" type="hidden" value="${manager.id }" />
+	<c:if test="${mem.id ne 'admin' }">
 	<button type="submit">관리자 탈퇴</button>
+	</c:if>
 	<button type="button" onclick="location.href='managerlogout.ns'" >로그아웃</button>
 	<!-- <a href="managerlogout.ns">로그아웃</a>  -->
 </form>

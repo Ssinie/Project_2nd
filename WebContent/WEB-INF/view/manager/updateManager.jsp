@@ -57,8 +57,8 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-			<button type="submit">등록완료</button>
-			<button type="button" onclick="">취소</button>
+			<button type="submit">수정완료</button>
+			<button type="button" onclick="history.go(-1)">취소</button>
 		</td>
 	</tr>	
 </table>
