@@ -271,14 +271,6 @@ $(document).ready(function() {
         	<div class="section-title">
             	<h2>건강뉴스</h2>
             </div>
-				<c:if test="${mem != null }">
-				   <p>${mem.id }님 반갑습니다.</p>
-				   <input type="button" onclick='location.href="/Project_2nd/manager/hello.ns"' value="홈"/>
-				   <input type="button" onclick='location.href="/Project_2nd/healthy/insertBoardV.ns"' value="새 글"/>
-				   <input type="button" onclick='location.href="/Project_2nd/healthy/crawling.ns"' value="크롤링"/>
-				   <button type="button" onclick='location.href="/Project_2nd/healthy/deleteAll.ns"'>전체삭제</button>
-				   <input type="button" onclick='location.href="/Project_2nd/manager/managerlogout.ns"' value="로그아웃"/>   
-				</c:if>
 				<table class="table">
 				<theader>
 					<tr>
