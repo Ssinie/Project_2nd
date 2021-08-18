@@ -25,7 +25,7 @@
 
 <body>
 	
-	<a href="main.ns"><img src="https://colorlib.com/wp/wp-content/uploads/sites/2/colorlib-push-logo.png" alt="Colorlib logo"></a>
+	<a href="main.ns"><img src="img/logo.png" alt="Colorlib logo"></a>
 	<h1 style="text-align:center;">구매 페이지로 이동 중입니다.</h1>
 	<p style="text-align:center;"><strong>잠시만 기다려주세요.</strong></p>
 	<br>
