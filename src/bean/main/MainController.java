@@ -43,7 +43,6 @@ public class MainController {
 		List mainList = mainDAO.getMainPd();
 		model.addAttribute("mainList", mainList);
 		
-		// 건강뉴스
 		List healthyList = mainDAO.getHealthy();
 		System.out.println("healthyList === "+healthyList);
 		model.addAttribute("healthyList", healthyList);
